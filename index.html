@@ -36,7 +36,7 @@ body{background:var(--paper);color:var(--ink);font-family:"IBM Plex Mono",monosp
 .kw-wrap{display:flex;align-items:center;gap:0.5rem;padding-top:0.3rem;width:100%;}
 #kwSearch{flex:1;max-width:420px;background:#2a2a22;color:#e8e4dc;border:1px solid #444;font-family:"IBM Plex Mono",monospace;font-size:0.7rem;padding:0.35rem 0.7rem;border-radius:2px;outline:none;}
 #kwSearch:focus{border-color:var(--gold);}
-.tab-bar{background:var(--ink);padding:0 2rem;display:flex;gap:0;overflow-x:auto;border-bottom:1px solid #333;}
+.tab-bar{background:var(--ink);padding:0.4rem 2rem;display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid #333;}
 .tab-btn{background:transparent;color:#888;border:none;font-family:"IBM Plex Mono",monospace;font-size:0.62rem;text-transform:uppercase;letter-spacing:1.5px;padding:0.9rem 1rem;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;}
 .tab-btn:hover{color:var(--paper);}
 .tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
@@ -148,7 +148,7 @@ body{background:var(--paper);color:var(--ink);font-family:"IBM Plex Mono",monosp
 .kw-wrap{display:flex;align-items:center;gap:0.5rem;padding-top:0.3rem;width:100%;}
 #kwSearch{flex:1;max-width:420px;background:#2a2a22;color:#e8e4dc;border:1px solid #444;font-family:"IBM Plex Mono",monospace;font-size:0.7rem;padding:0.35rem 0.7rem;border-radius:2px;outline:none;}
 #kwSearch:focus{border-color:var(--gold);}
-.tab-bar{background:var(--ink);padding:0 2rem;display:flex;gap:0;overflow-x:auto;border-bottom:1px solid #333;}
+.tab-bar{background:var(--ink);padding:0.4rem 2rem;display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid #333;}
 .tab-btn{background:transparent;color:#888;border:none;font-family:"IBM Plex Mono",monospace;font-size:0.62rem;text-transform:uppercase;letter-spacing:1.5px;padding:0.9rem 1rem;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;}
 .tab-btn:hover{color:var(--paper);}
 .tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
@@ -220,7 +220,7 @@ main{padding:1.5rem 2rem;max-width:1400px;margin:0 auto;}
 .back-to-top{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--ink);color:var(--paper);border:none;width:44px;height:44px;border-radius:2px;font-size:1.2rem;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,0.3);}
 .back-to-top.visible{display:flex;}
 .back-to-top:hover{background:#333;}
-@media(max-width:700px){main{padding:1rem;}  .filter-bar{padding:0.6rem 1rem;} .tab-bar{padding:0 0.5rem;}}
+@media(max-width:700px){main{padding:1rem;}  .filter-bar{padding:0.6rem 1rem;} .tab-bar{padding:0.4rem 0.5rem;}}
 
 /* Pass 1 — GCSE-style A-Level grade boundaries */
 .gb-table-card{background:var(--card);border:1px solid var(--border);border-radius:3px;overflow:hidden;}
