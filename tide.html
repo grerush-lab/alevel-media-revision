@@ -17,6 +17,8 @@
     font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.55;}
   header{position:sticky;top:0;z-index:20;background:rgba(245,240,232,.94);backdrop-filter:blur(6px);
     border-bottom:1px solid var(--border);padding:.6rem 1.1rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
+  header .back-link{font-family:'IBM Plex Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:20px;padding:4px 10px;white-space:nowrap;}
+  header .back-link:hover{border-color:var(--gold);color:var(--gold);}
   header .brand{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.3px;}
   header .crumb{font-family:'IBM Plex Mono',monospace;font-size:.66rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);}
   #scoreChip{margin-left:auto;font-family:'IBM Plex Mono',monospace;background:#fff;border:1px solid var(--border);
@@ -98,6 +100,7 @@
 </head>
 <body>
 <header>
+  <a class="back-link" href="index.html#recaps" title="Back to Set Text Recaps hub">&#8592; Recaps Hub</a>
   <span class="brand">A Level Media</span>
   <span class="crumb">Component 1 · Section A · Advertising &amp; Marketing</span>
   <span id="scoreChip">Score: 0 / 0</span>
@@ -262,7 +265,12 @@
   <h2>Audience (Section B)</h2>
   <div class="card">
     <h3>Targeting &amp; positioning</h3>
-    <p>The target audience is the 1950s <b>housewife</b>. Producers <span class="keyword">encode hegemonic ideologies</span> of the era to normalise the content and suggest an aspirational lifestyle. Informal, direct language creates a personal relationship so the audience take a <b>preferred reading</b> — trusting the two women's positive endorsement in the comic-strip style.</p>
+    <p>The target audience is the 1950s <b>housewife</b> — likely newly married with a young family (clothing belonging to men and children on the washing line creates this connotation). Producers <span class="keyword">encode hegemonic ideologies</span> of the era to normalise the content and suggest an aspirational lifestyle. Informal, direct language creates a personal relationship so the audience take a <b>preferred reading</b> — trusting the two women's positive endorsement in the comic-strip style.</p>
+    <ul>
+      <li><span class="theory">Uses &amp; Gratifications</span>: the audience is constructed through women with whom they might <b>personally identify</b> — the comic-strip women "talking" about the product model a relatable, everyday scenario.</li>
+      <li>The endorsement from <b>Good Housekeeping Magazine</b> makes the magazine an <span class="keyword">Opinion Leader</span> for the target audience, reinforcing the repeated assertion that Tide is the market-leading product.</li>
+      <li>The <b>preferred reading</b> is carried by reassuring lexical fields — <i>"trust"</i>, <i>"truly safe"</i>, <i>"miracle"</i>, <i>"nothing like"</i> — signalling that despite being a "new" product, Tide solves the audience's domestic-chore needs.</li>
+    </ul>
     <p><b>Remember:</b> for Section B, Tide is studied for <b>Audiences only</b> — you are <u>not</u> examined on Tide's industry.</p>
   </div>
 
@@ -310,7 +318,11 @@
   <div class="card">
     <h3>Applying audience theory (Section B)</h3>
     <p><span class="theory">Stuart Hall — Reception</span>: the 1950s housewife takes the <b>preferred</b> reading (accepting the aspirational, hegemonic message); a modern feminist takes an <b>oppositional</b> reading, rejecting it.</p>
-    <p><span class="theory">George Gerbner — Cultivation</span>: repeated domestic imagery of this kind cultivates the belief that "a woman's place is the home".</p>
+    <ul>
+      <li>The <b>indirect mode of address</b> from the woman in the main image connotes that her relationship with the product is of prime importance — Tide has what she wants. This is the <span class="keyword">dominant/hegemonic encoding</span> of the advert's primary message, intended to be received by "you women".</li>
+      <li>The <b>direct mode of address</b> of the images top-right and bottom-left link to the imperative "Remember" and personal pronouns ("your wash", "you can buy") — pulling the reader directly into the ad's claims.</li>
+    </ul>
+    <p><span class="theory">George Gerbner — Cultivation</span>: repeated domestic imagery of this kind cultivates the belief that "a woman's place is the home". The advert's own boast that Tide "goes into more American homes than any other washday product" is exactly the kind of repeated message Gerbner argues shapes audiences' view of reality over time.</p>
     <button data-reveal>Reveal exam question</button>
     <div class="model"><b>Exam-style [12]:</b> "Explain how historical contexts influence audience interpretations of media products. Refer to the Tide advertisement you have studied to support your points." (Section B — roughly 1 mark ≈ 1 minute.)</div>
   </div>
@@ -352,6 +364,24 @@
         <button>Neale&#x27;s genre theory</button>
         <button>Barthes&#x27; enigma code</button>
       </div><div class="fb"></div></div>
+    <div class="q"><p class="qt">The comic-strip women &quot;talking&quot; about the product, letting the audience personally identify with them, best reflects…</p>
+      <div class="opts" data-answer="1">
+        <button>Gilroy&#x27;s post-colonial theory</button>
+        <button>Uses and Gratifications theory</button>
+        <button>Lévi-Strauss&#x27;s structuralism</button>
+      </div><div class="fb"></div></div>
+    <div class="q"><p class="qt">The endorsement from Good Housekeeping Magazine functions as…</p>
+      <div class="opts" data-answer="0">
+        <button>An Opinion Leader for the target audience</button>
+        <button>A binary opposition</button>
+        <button>An oppositional reading</button>
+      </div><div class="fb"></div></div>
+    <div class="q"><p class="qt">The woman in the main image using an &quot;indirect&quot; mode of address, according to Stuart Hall, carries…</p>
+      <div class="opts" data-answer="1">
+        <button>An oppositional reading only</button>
+        <button>The dominant/hegemonic encoding of the advert&#x27;s primary message</button>
+        <button>No meaning at all</button>
+      </div><div class="fb"></div></div>
   </div>  <div class="card">
     <h3>Sort it: Preferred or Oppositional reading of the Tide advert?</h3>
     <div data-sort data-labels="Preferred,Oppositional">
@@ -372,6 +402,8 @@
       <div class="pill"><b>Van Zoonen</b> — women = domestic, men = public</div>
       <div class="pill"><b>Gauntlett · bell hooks · Gilroy</b> — identity, feminism, postcolonial</div>
       <div class="pill"><b>Hegemony</b> — patriarchal ideology normalised</div>
+      <div class="pill">Uses &amp; Gratifications · Opinion Leader (Good Housekeeping)</div>
+      <div class="pill">Hall — indirect address = hegemonic encoding · direct address = imperative + pronouns</div>
       <div class="pill"><b>Section B</b>: Tide = Audience only (no Industry)</div>
       <div class="pill"><b>Audience categories</b> · demographics · A–E · VALS</div>
     </div>
