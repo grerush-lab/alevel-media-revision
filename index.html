@@ -382,7 +382,7 @@ main{padding:1.5rem 2rem;max-width:1400px;margin:0 auto;}
 .quiz-bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.5rem;margin-top:.75rem;}
 .quiz-bank-pill{background:#fff;border:1px solid var(--border);border-radius:2px;padding:.45rem .55rem;font-size:.68rem;line-height:1.35;cursor:pointer;}
 .quiz-bank-pill:hover{border-color:var(--gold);color:var(--gold);}
-.jr-quiz-link{display:inline-flex;align-items:center;gap:.35rem;margin-left:.35rem;font-family:'IBM Plex Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;background:var(--ink);color:var(--paper);border:none;border-radius:2px;padding:.25rem .45rem;cursor:pointer;}
+.jr-quiz-link{display:inline-flex;align-items:center;gap:.35rem;margin-left:.35rem;font-family:'IBM Plex Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;background:var(--ink);color:var(--paper);border:none;border-radius:2px;padding:.25rem .45rem;cursor:pointer;text-decoration:none;}
 .jr-quiz-link:hover{background:#333;}
 @media(max-width:900px){.quiz-shell{grid-template-columns:1fr}.quiz-panel{min-height:0}}
 
@@ -1900,10 +1900,23 @@ const JR_PRODUCTS = [
 const JR_TASKS = [
   {id:'learn_notes', group:'Learn', label:'Read notes'},
   {id:'learn_fact', group:'Learn', label:'Read fact sheet'},
+  {id:'learn_recap', group:'Learn', label:'Read set text recap'},
   {id:'recall_q1', group:'Recall', label:'Fact Sheet Quiz 1'},
   {id:'recall_q2', group:'Recall', label:'Fact Sheet Quiz 2'},
   {id:'apply_exam', group:'Apply', label:'Attempt at least one past question'}
 ];
+/* Recap pages that exist in the hub, keyed by journey product id. */
+const JR_RECAPS = {
+  c1a_tide:'tide.html', c1b_aud_tide:'tide.html',
+  c1a_superhuman:'superhuman.html', c1b_aud_superhuman:'superhuman.html',
+  c1a_kotv:'kiss-of-the-vampire.html',
+  c1a_formation:'music-videos.html',
+  c1a_riptide:'riptide.html',
+  c1a_times:'newspapers.html', c1b_ia_times:'newspapers.html',
+  c1a_mirror:'newspapers.html', c1b_ia_mirror:'newspapers.html',
+  c1b_ind_idb:'i-daniel-blake.html',
+  c2_mag_bigissue:'magazines.html'
+};
 function jrKey(id){return 'alevel_journey_'+id;}
 function jrState(id){try{return JSON.parse(localStorage.getItem(jrKey(id)))||{tasks:{},conf:0};}catch(e){return {tasks:{},conf:0};}}
 function jrSave(id,state){try{localStorage.setItem(jrKey(id),JSON.stringify(state));}catch(e){}}
@@ -1926,6 +1939,7 @@ function jrCard(p){
     var tasks=JR_TASKS.filter(function(t){return t.group===g;}).map(function(t){
       var extra='';
       if(t.group==='Recall') extra='<button type="button" class="jr-quiz-link" onclick="event.preventDefault();event.stopPropagation();openFactQuizFromJourney(\''+p.id+'\')">Open quiz</button>';
+      if(t.id==='learn_recap' && JR_RECAPS[p.id]) extra='<a class="jr-quiz-link" href="'+JR_RECAPS[p.id]+'" onclick="event.stopPropagation()">Open recap</a>';
       return '<label class="jr-task"><input type="checkbox" data-jr-task="'+t.id+'" onchange="jrToggleTask(\''+p.id+'\',\''+t.id+'\',this.checked)"><span>'+t.label+'</span>'+extra+'</label>';
     }).join('');
     return '<div class="jr-task-group"><div class="jr-task-head">'+g+'</div>'+tasks+'</div>';
