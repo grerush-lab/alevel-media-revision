@@ -83,6 +83,24 @@
   .binary .vs{color:var(--muted);font-size:.8rem}
   .binary .r{font-weight:700;color:var(--ind)}
 
+  /* Todorov steps + strand tracker */
+  .todorov{display:grid;gap:8px;margin:12px 0}
+  .tstep{display:grid;grid-template-columns:150px 1fr;gap:12px;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--ml);border-radius:8px;padding:9px 13px}
+  @media(max-width:560px){.tstep{grid-template-columns:1fr}}
+  .tstep .s{font-weight:800;color:var(--ml);font-size:.9rem}
+  .tstep .d{font-size:.92rem}
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .strands{width:100%;border-collapse:collapse;margin:10px 0;font-size:.92rem;min-width:560px}
+  .strands th,.strands td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  .strands th{background:var(--soft);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .strands td b{color:#2a2018}
+  .chip{display:inline-block;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:20px;white-space:nowrap}
+  .chip.done{background:#e3f5ea;color:#1f7a4d;border:1px solid #bfe6d0}
+  .chip.open{background:#fbeede;color:#b3781a;border:1px solid #eed9ad}
+  .pmcard{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:13px 15px;border-left:4px solid var(--ml)}
+  .pmcard h5{margin:0 0 .25em;font-size:1rem}
+  .pmcard .why{font-size:.88rem;margin:.35em 0 0}
+  .pmcard .why b{color:var(--ml)}
   /* character profile cards */
   .charwrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:12px}
   .charcard{background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06);display:flex;flex-direction:column}
@@ -145,6 +163,8 @@
   <div class="wrap">
     <a href="#facts">Set Product</a>
     <a href="#ml">Media Language</a>
+    <a href="#narrative">Narrative</a>
+    <a href="#postmodern">Postmodernism</a>
     <a href="#rep">Representation</a>
     <a href="#chars">Characters</a>
     <a href="#industry">Industry</a>
@@ -213,14 +233,74 @@
     </div>
     <p>Also <b>the Western</b> (Tommy's ride down Watery Lane; townsfolk hiding) and a literary nod to <b>T.S. Eliot's "The Waste Land"</b> — fragmentation echoing Tommy's post-war psyche.</p>
 
-    <h3>Narrative</h3>
-    <ul>
-      <li><b>Todorov:</b> the episode opens with an already-<b>disrupted</b> equilibrium (Tommy's stolen guns bring Campbell to Birmingham). Little is resolved — only the horse race — typical of long-form drama.</li>
-      <li><b>Flexi-narrative:</b> multiple interweaving arcs (the guns, Campbell, Grace the undercover barmaid, Danny's PTSD/"death", Ada &amp; Freddie) build richness; <b>open-ended</b> rather than closed.</li>
-      <li><b>Restricted &amp; unrestricted narration:</b> we largely follow Tommy, but we know more than the characters (Grace's true identity, Danny's staged death) — creating <b>enigma codes</b> (Barthes) and dramatic irony.</li>
-    </ul>
+  </div>
+</section>
 
-    <h3>Structuralism &amp; Postmodernism</h3>
+<!-- ===== NARRATIVE (TODOROV) ===== -->
+<section id="narrative" class="soft">
+  <div class="wrap">
+    <h2><span class="tag" style="background:var(--ml)">M</span> Narrative — Todorov &amp; the Story Strands</h2>
+    <p class="lead">Long-form TV drama uses a <b>flexi-narrative</b>: many arcs run at once, and most are left <b>open</b> to pull viewers into the next episode. Todorov's five stages apply to the <em>series</em> as a whole, while the set episode deliberately withholds closure.</p>
+
+    <h3>Todorov's five stages — applied to the season</h3>
+    <div class="todorov">
+      <div class="tstep"><div class="s">1 · Equilibrium</div><div class="d">The Shelbys run Small Heath through their betting shop and protection racket — a criminal "normality".</div></div>
+      <div class="tstep"><div class="s">2 · Disruption</div><div class="d">Tommy's men <b>mistakenly steal a crate of guns</b> from the BSA arms factory; the government sends Inspector Campbell to recover them.</div></div>
+      <div class="tstep"><div class="s">3 · Recognition</div><div class="d">The family realises the danger the guns bring — Campbell, the Crown, and would-be buyers (the IRA, communists) — and that they are now targets.</div></div>
+      <div class="tstep"><div class="s">4 · Attempt to repair</div><div class="d">Across the series Tommy manoeuvres: he <b>keeps the guns as leverage</b> and plays Campbell, Grace and rival Billy Kimber against each other.</div></div>
+      <div class="tstep"><div class="s">5 · New equilibrium</div><div class="d"><b>Deferred.</b> Episode 1 gives almost no closure — the point of long-form drama is that order is never fully restored.</div></div>
+    </div>
+
+    <h3>The story strands in Episode 1 — resolved vs unresolved</h3>
+    <p>This is the key skill: show that you can track the <b>multiple arcs</b> and say which the episode closes and which it leaves open.</p>
+    <div class="tablewrap">
+      <table class="strands">
+        <thead><tr><th>Strand</th><th>What happens in S1E1</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>The stolen guns</b> (BSA / IRA)</td>
+            <td>Tommy's men accidentally take a crate of guns from the arms factory. He hides the theft from Arthur and decides to <b>keep them</b> rather than hand them back — the "MacGuffin" that powers the whole series.</td>
+            <td><span class="chip open">✗ Unresolved</span></td>
+          </tr>
+          <tr>
+            <td><b>Inspector Campbell</b></td>
+            <td>Churchill sends Campbell from Belfast to recover the guns and crush Birmingham's gangs. He has Arthur beaten and tortured for information — establishing him as Tommy's antagonist.</td>
+            <td><span class="chip open">✗ Unresolved</span></td>
+          </tr>
+          <tr>
+            <td><b>Grace Burgess</b></td>
+            <td>A new barmaid charms the Garrison and catches Tommy's eye — but she is secretly an <b>undercover agent working for Campbell</b>. Romance <em>and</em> betrayal are set up.</td>
+            <td><span class="chip open">✗ Unresolved</span></td>
+          </tr>
+          <tr>
+            <td><b>Ada &amp; Freddie Thorne</b></td>
+            <td>Ada is secretly seeing Freddie — a communist agitator and Tommy's old war comrade. A forbidden romance and a political threat.</td>
+            <td><span class="chip open">✗ Unresolved</span></td>
+          </tr>
+          <tr>
+            <td><b>Danny "Whizz-Bang"</b></td>
+            <td>War-traumatised, Danny kills a man during a flashback to the trenches. Tommy stages a <b>fake execution</b> to spare his life and sends him to London.</td>
+            <td><span class="chip done">✓ Resolved in-episode</span></td>
+          </tr>
+          <tr>
+            <td><b>The fixed horse race</b></td>
+            <td>Tommy runs a betting/horse scheme that pays off — the one clear pay-off in the episode.</td>
+            <td><span class="chip done">✓ Resolved</span></td>
+          </tr>
+          <tr>
+            <td><b>Tommy &amp; Arthur</b></td>
+            <td>Arthur is nominally the eldest, but Tommy really leads — a simmering leadership tension.</td>
+            <td><span class="chip open">↔ Ongoing</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note key"><span class="h">The takeaway</span>Only <b>two</b> strands close (Danny and the horse race). Everything else — the guns, Campbell, Grace, Ada/Freddie — is left <b>open</b>, which is exactly how long-form drama hooks its audience.</div>
+
+    <h3>Narration &amp; enigma (Barthes)</h3>
+    <p>The episode mixes <b>restricted</b> narration (we're surprised, like the characters, that Tommy kept the guns) with <b>unrestricted</b> narration (we know Grace is an agent and that Danny's death is staged — Arthur doesn't). This dramatic irony and the unanswered questions are Barthes' <b>enigma codes</b>, rewarding the "active", intellectually-demanding viewing that long-form drama expects.</p>
+
+    <h3>Lévi-Strauss — the binary oppositions that drive it</h3>
     <div class="binary">
       <div class="l">law &amp; order</div><div class="vs">vs</div><div class="r">crime</div>
       <div class="l">Tommy</div><div class="vs">vs</div><div class="r">Campbell</div>
@@ -228,9 +308,61 @@
       <div class="l">industrialisation</div><div class="vs">vs</div><div class="r">nature</div>
       <div class="l">poverty</div><div class="vs">vs</div><div class="r">power</div>
     </div>
-    <div class="note tip"><span class="h">Baudrillard &amp; the postmodern reading</span>
-      Peaky Blinders can be read as postmodern through <b>anachronism</b> (contemporary music in 1919), <b>bricolage</b> and <b>pastiche</b> of gangster/western texts, <b>intertextuality</b>, and the <b>fragmented self</b> of Tommy. The stylised, mediated 1919 becomes a <b>hyper-reality / simulacrum</b> — "more real" than the history it depicts.</div>
-    <div class="note exam"><span class="h">Exam question seen in class</span>"How far can <em>Peaky Blinders</em> be defined as post-modern? [15]" — argue <b>both</b> sides: hybridity/pastiche/anachronism vs its rootedness in real history and social realism.</div>
+    <p>We watch to see which side "triumphs" — and the oppositions are complicated (we root for the <em>criminals</em> over the law), which is part of the show's appeal.</p>
+  </div>
+</section>
+
+<!-- ===== POSTMODERNISM (BAUDRILLARD) ===== -->
+<section id="postmodern">
+  <div class="wrap">
+    <h2><span class="tag" style="background:var(--ml)">M</span> Postmodernism — Baudrillard</h2>
+    <p class="lead">This is the trickiest area, so take it slowly. Postmodern texts <b>mix styles, times and references</b>, are <b>self-aware</b>, and blur the line between what's "real" and what's a media image.</p>
+
+    <div class="note key"><span class="h">The two words you must be able to use</span>
+      <b>Simulacrum</b> — a copy or image that has <em>no original</em> behind it. <b>Hyper-reality</b> — where media images come to feel <em>more real</em> (and more desirable) than reality itself. Baudrillard argues we are so surrounded by mediated images that we accept them <em>as</em> reality.</div>
+
+    <h3>Why Peaky Blinders can be read as postmodern — with examples</h3>
+    <div class="theorygrid">
+      <div class="pmcard">
+        <h5>1 · Anachronistic soundtrack</h5>
+        <p>Set in 1919, but scored with <b>modern rock</b> — Nick Cave's "Red Right Hand", plus Arctic Monkeys, The White Stripes, David Bowie, PJ Harvey.</p>
+        <p class="why"><b>Why postmodern:</b> it deliberately <b>collapses past and present</b>, rejecting a neat, linear version of history. The 1919 we see is a <em>remix</em> made for a modern audience, not a faithful reconstruction.</p>
+      </div>
+      <div class="pmcard">
+        <h5>2 · Pastiche &amp; bricolage</h5>
+        <p>The show is stitched together from <b>gangster</b> (The Godfather), <b>western</b> (Tommy's ride-in) and <b>period drama</b> styles.</p>
+        <p class="why"><b>Why postmodern:</b> it's a <b>collage of borrowed styles</b> — Lévi-Strauss's "debris" recombined as <em>bricolage</em> — rather than one original, self-contained style.</p>
+      </div>
+      <div class="pmcard">
+        <h5>3 · Intertextuality</h5>
+        <p>Deliberate nods to <b>The Godfather, The Untouchables, The Sopranos</b> and even <b>T.S. Eliot's "The Waste Land"</b>.</p>
+        <p class="why"><b>Why postmodern:</b> meaning depends on the audience <b>recognising other texts</b>. The show is a web of references rather than a closed, "original" world.</p>
+      </div>
+      <div class="pmcard">
+        <h5>4 · Hyper-reality &amp; the simulacrum</h5>
+        <p>The glossy, slow-motion, sharply-tailored 1919 — cinematic and glamorous — is far more seductive than the grim historical reality. Its look even reshaped real high-street fashion (the flat cap, the undercut).</p>
+        <p class="why"><b>Why postmodern:</b> the <b>mediated image feeds back into reality</b> — people copy a version of the 1920s that never actually existed. The <em>simulacrum</em> becomes "more real" than the history.</p>
+      </div>
+      <div class="pmcard">
+        <h5>5 · The fragmented self</h5>
+        <p>Tommy's psyche is shown through flashbacks, dream-like sequences and PTSD — a <b>non-linear, fractured</b> identity.</p>
+        <p class="why"><b>Why postmodern:</b> postmodernism sees identity as <b>unstable and fragmented</b>, not fixed — mirrored in the disjointed narrative structure.</p>
+      </div>
+      <div class="pmcard">
+        <h5>6 · Self-reflexivity &amp; "the Peaky universe"</h5>
+        <p>The brand has expanded into a self-aware "<b>Peaky Blinders universe</b>" — a festival, merchandise, a soundtrack, a film.</p>
+        <p class="why"><b>Why postmodern:</b> the text becomes <b>aware of itself as a spectacle and a commodity</b>, blurring the show and the brand.</p>
+      </div>
+      <div class="pmcard">
+        <h5>7 · Blurring high &amp; low culture</h5>
+        <p>Modernist poetry (Eliot) sits beside pulpy gangster violence and stadium rock.</p>
+        <p class="why"><b>Why postmodern:</b> postmodernism <b>dissolves the hierarchy</b> between "high art" and popular culture — they mix freely.</p>
+      </div>
+    </div>
+
+    <div class="note tip"><span class="h">Evaluate it — the other side</span>
+      A top answer doesn't just list postmodern features. Peaky Blinders is <em>also</em> rooted in <b>real history</b> (a genuine Birmingham gang), <b>documented WWI trauma</b>, and <b>social-realist</b> class politics — so it can equally be read as a serious historical drama. Whether it is "postmodern" depends on which reading you privilege.</div>
+    <div class="note exam"><span class="h">Exam question seen in class</span>"How far can <em>Peaky Blinders</em> be defined as post-modern? [15]" — plan it as: <b>define</b> postmodernism (simulacrum/hyper-reality) → <b>3–4 examples</b> above with "why" → <b>counter-argument</b> (history/realism) → <b>judgement</b>.</div>
   </div>
 </section>
 
