@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Film Industry — Black Panther</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#191622; --paper:#f5f0e8; --card:#fdf8f0; --border:#d8d0c0;
+    --muted:#7a7060; --gold:#b8860b; --accent:#5b2a86; --vib:#7c3aed; --vib2:#a78bfa;
+    --green:#2e7d32; --red:#b3261e; --amber:#b8860b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.55;}
+  header{position:sticky;top:0;z-index:20;background:rgba(245,240,232,.94);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--border);padding:.6rem 1.1rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
+  header .brand{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.3px;}
+  header .crumb{font-family:'IBM Plex Mono',monospace;font-size:.66rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);}
+  header .home{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-decoration:none;color:var(--accent);border:1px solid var(--border);border-radius:16px;padding:3px 10px;}
+  #scoreChip{margin-left:auto;font-family:'IBM Plex Mono',monospace;background:#fff;border:1px solid var(--border);
+    border-radius:20px;padding:5px 14px;font-size:.8rem;color:var(--gold);font-weight:600;}
+  .wrap{max-width:920px;margin:0 auto;padding:1.4rem 1.1rem 3rem;}
+  .hero{background:linear-gradient(135deg,#2b1244 0%,var(--accent) 55%,#7c3aed 130%);color:#fff;border-radius:14px;padding:1.1rem 1.2rem;margin-bottom:1.2rem;box-shadow:0 6px 24px rgba(45,20,80,.28);}
+  .hero h1{font-family:'Syne',sans-serif;font-weight:800;margin:.1rem 0 .3rem;font-size:1.55rem;line-height:1.15;}
+  .hero .meta{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:2px;opacity:.9;}
+  .hero p{margin:.6rem 0 0;font-size:.94rem;opacity:.96;}
+  h2{font-family:'Syne',sans-serif;font-weight:700;font-size:1.22rem;margin:1.9rem 0 .4rem;color:var(--ink);
+    border-left:5px solid var(--gold);padding-left:.6rem;}
+  h2.mk{border-left-color:var(--vib);}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.9rem 1.05rem;margin:.8rem 0;}
+  .card h3{font-family:'Syne',sans-serif;font-size:1.02rem;margin:.1rem 0 .5rem;color:var(--accent);}
+  .card p{margin:.4rem 0;font-size:.92rem;}
+  .card ul{margin:.3rem 0;padding-left:1.15rem;}
+  .card li{margin:.3rem 0;font-size:.9rem;}
+  .keyword{background:#efe4ff;border-bottom:1px solid var(--vib);padding:0 3px;border-radius:3px;font-weight:600;}
+  .theory{display:inline-block;background:#efe7f7;border:1px solid #cdb8e6;color:#6b21a8;border-radius:6px;
+    padding:1px 7px;font-size:.78rem;font-weight:600;margin:.1rem .1rem;}
+  /* quiz */
+  .quiz{background:#fbf6ec;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:12px;padding:.85rem 1.05rem;margin:1rem 0;}
+  .quiz h3{font-family:'Syne',sans-serif;font-size:1rem;margin:.1rem 0 .7rem;color:var(--gold);}
+  .q{margin:.7rem 0 1rem;}
+  .qt{font-weight:600;margin:0 0 .45rem;font-size:.93rem;}
+  .opts{display:flex;flex-direction:column;gap:.4rem;}
+  .opts button{text-align:left;font:inherit;font-size:.9rem;background:#fff;border:1px solid var(--border);
+    border-radius:8px;padding:.5rem .7rem;cursor:pointer;transition:all .15s;}
+  .opts button:hover:not(:disabled){border-color:var(--gold);background:#fffdf7;}
+  .opts button:disabled{cursor:default;opacity:.92;}
+  .opts button.correct{background:#e6f4ea;border-color:var(--green);color:#1b5e20;font-weight:600;}
+  .opts button.wrong{background:#fbe7e5;border-color:var(--red);color:#8c1d16;}
+  .fb{font-size:.85rem;margin-top:.35rem;min-height:1em;font-weight:600;}
+  .fb.ok{color:var(--green);} .fb.no{color:var(--red);}
+  /* sort */
+  [data-sort]{display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem;}
+  .sort-item{background:#fff;border:1px solid var(--border);border-radius:8px;padding:.5rem .7rem;font-size:.9rem;
+    display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap;}
+  .sort-item.done-ok{background:#e6f4ea;border-color:var(--green);}
+  .sort-item.done-no{background:#fbe7e5;border-color:var(--red);}
+  .sbtns{display:flex;gap:.35rem;flex-shrink:0;}
+  .sbtns button{font:inherit;font-size:.8rem;background:var(--vib);color:#fff;border:none;border-radius:6px;padding:.35rem .7rem;cursor:pointer;}
+  .sbtns button:hover{filter:brightness(1.08);}
+  .verdict{font-size:.85rem;font-weight:700;flex-shrink:0;}
+  /* reveal model */
+  [data-reveal]{font:inherit;font-size:.82rem;background:none;border:1px dashed var(--gold);color:var(--gold);
+    border-radius:6px;padding:.3rem .7rem;cursor:pointer;margin-top:.3rem;}
+  .model{display:none;margin-top:.5rem;padding:.6rem .8rem;background:#f3e9d2;border-radius:8px;font-size:.88rem;}
+  .model.show{display:block;}
+  /* final mission */
+  .mission{border:2px solid var(--gold);}
+  .pill-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.4rem;}
+  .pill{background:#fff;border:1px solid var(--border);border-radius:20px;padding:.35rem .7rem;font-size:.82rem;}
+  .pill b{color:var(--accent);}
+  footer{margin-top:1.6rem;padding-top:1rem;border-top:1px solid var(--border);color:var(--muted);font-size:.82rem;}
+  #finalScore{font-weight:600;color:var(--ink);margin-bottom:.5rem;font-size:.95rem;}
+  /* enhancement (Recall+) — light theme */
+  .rp-card{margin:1.4rem 0 0;background:#fff;border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:12px;padding:1rem 1.15rem;}
+  .rp-card h3{font-family:'Syne',sans-serif;margin:.1rem 0 .5rem;font-size:1.05rem;color:var(--gold);}
+  .rp-score{font-size:1.5rem;font-weight:800;margin:.2rem 0 .5rem;font-family:'Syne',sans-serif;}
+  .rp-sec{margin:.7rem 0 .2rem;font-weight:700;color:var(--accent);font-size:.9rem;}
+  .rp-wrong{margin:.35rem 0;padding:.5rem .7rem;background:#fbe7e5;border-left:3px solid var(--red);border-radius:6px;font-size:.9rem;line-height:1.4;}
+  .rp-wrong .rp-corr{display:block;margin-top:.25rem;color:#1b5e20;font-size:.85rem;font-weight:600;}
+  .rp-allright{color:#1b5e20;font-weight:700;}
+  .rp-shot{margin-top:.8rem;padding:.6rem .8rem;background:#f3e9d2;border:1px dashed var(--gold);border-radius:8px;font-size:.9rem;}
+  .rp-apply{display:inline-block;margin-top:.9rem;padding:.55rem 1rem;background:var(--gold);color:#fff;font-weight:700;text-decoration:none;border-radius:8px;font-size:.9rem;}
+  .rp-apply.alt{background:transparent;color:var(--gold);border:1px solid var(--gold);margin-left:.4rem;}
+  .rp-banner{margin:0 0 1rem;background:#fbf6ec;border:1px solid var(--gold);border-radius:10px;padding:.7rem 1rem;font-size:.9rem;color:var(--ink);}
+  .rp-banner b{color:var(--accent);}
+  /* ---- visuals ---- */
+  figure.viz{margin:.9rem 0;text-align:center}
+  figure.viz svg{max-width:100%;height:auto;border:1px solid var(--border);border-radius:10px;background:#fff;box-shadow:0 2px 10px rgba(60,40,80,.10)}
+  figure.viz figcaption{font-size:.76rem;color:var(--muted);margin-top:.35rem;font-family:'IBM Plex Mono',monospace;line-height:1.3}
+  .statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.6rem;margin:.6rem 0}
+  .stat{background:#fff;border:1px solid var(--border);border-radius:10px;padding:.7rem .6rem;text-align:center}
+  .stat .n{font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;color:var(--vib);line-height:1.1}
+  .stat .l{font-size:.74rem;color:var(--muted);margin-top:.25rem;font-family:'IBM Plex Mono',monospace}
+  /* timeline */
+  .tl{position:relative;margin:.6rem 0 .3rem;padding-left:1.4rem}
+  .tl::before{content:"";position:absolute;left:.42rem;top:.3rem;bottom:.3rem;width:3px;background:linear-gradient(var(--vib),var(--gold))}
+  .tl .ev{position:relative;margin:0 0 .85rem;padding:.2rem 0 .2rem .2rem}
+  .tl .ev::before{content:"";position:absolute;left:-1.18rem;top:.35rem;width:.7rem;height:.7rem;border-radius:50%;background:var(--vib);border:2px solid #fff;box-shadow:0 0 0 1px var(--vib)}
+  .tl .ev.gold::before{background:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+  .tl .dt{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:1px}
+  .tl .ev p{margin:.15rem 0 0;font-size:.9rem}
+  /* synergy grid */
+  .syn{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;margin:.6rem 0}
+  .syn .s{background:#fff;border:1px solid var(--border);border-top:4px solid var(--vib);border-radius:10px;padding:.65rem .7rem}
+  .syn .s h4{margin:.1rem 0 .3rem;font-family:'Syne',sans-serif;font-size:.92rem;color:var(--accent)}
+  .syn .s p{margin:0;font-size:.82rem;color:var(--ink)}
+  .syn .s .tgt{display:block;margin-top:.4rem;font-size:.72rem;font-family:'IBM Plex Mono',monospace;color:var(--muted)}
+  @media (max-width:560px){ .hero h1{font-size:1.3rem;} }
+</style>
+</head>
+<body>
+<header>
+  <span class="brand">A Level Media</span>
+  <span class="crumb">Component 1 · Section B · Film Industry</span>
+  <a class="home" href="index.html">← Hub</a>
+  <span id="scoreChip">Score: 0 / 0</span>
+</header>
+<div class="wrap">
+  <div class="hero">
+    <div class="meta">Component 1 · Section B — Media Industries (Industry only)</div>
+    <h1>Film Industry — Black Panther</h1>
+    <p>Ryan Coogler's 2018 Marvel blockbuster — the <b>global-franchise</b> half of your Section B pairing (the mirror image of <i>I, Daniel Blake</i>). Studied for <b>Media Industries</b>: conglomerate ownership, vertical integration, a landmark <b>360° marketing campaign</b>, distribution, regulation, Hesmondhalgh and Curran &amp; Seaton. Answer the quick-checks to build your score.</p>
+  </div>
+
+  <h2>The product &amp; context</h2>
+  <div class="card">
+    <h3>What is Black Panther?</h3>
+    <p>A 2018 <span class="keyword">high-budget Hollywood superhero blockbuster</span> (~<b>$200m</b> production budget), directed by <b>Ryan Coogler</b> and produced by <b>Marvel Studios</b>. It was the <b>17th film</b> in the <span class="keyword">Marvel Cinematic Universe (MCU)</span> — the highest-grossing film franchise in history. It follows <b>T'Challa</b> (Chadwick Boseman), who returns to the fictional African kingdom of <b>Wakanda</b> — a nation that escaped colonisation and achieved technological supremacy through the mineral <b>Vibranium</b> — to take the throne and face rival <b>Erik Killmonger</b> (Michael B. Jordan).</p>
+    <p>Studied for <b>Component 1, Section B</b> as a <b>Media Industries</b> set text (<i>Industry only</i> — you are not examined on its media language or audience response, but industry contexts such as marketing matter). Its deliberate pairing with <i>I, Daniel Blake</i> lets you compare a <b>global franchise blockbuster</b> against a <b>low-budget independent film</b>.</p>
+  </div>
+  <div class="card">
+    <h3>The character's long history (low risk for Marvel)</h3>
+    <ul>
+      <li>Black Panther / T'Challa first appeared in <b>Fantastic Four #52</b> (1966) — a <b>50-year-old, pre-sold property</b> with an established fanbase.</li>
+      <li>T'Challa and Wakanda were introduced to cinema audiences first in <b>Captain America: Civil War (2016)</b>, so the character arrived "pre-tested".</li>
+      <li>Every previous MCU film had been a hit — reducing financial risk (see <span class="theory">Hesmondhalgh</span> below).</li>
+    </ul>
+  </div>
+
+  <div class="quiz">
+    <h3>⚡ Quick check — The product</h3>
+    <div class="q"><p class="qt">Black Panther is studied for Component 1 Section B as a set text for…</p>
+      <div class="opts" data-answer="1">
+        <button>Audiences only</button>
+        <button>Media Industries (Industry only)</button>
+        <button>Media Language only</button>
+      </div><div class="fb"></div></div>
+    <div class="q"><p class="qt">Which best describes the film's scale and style?</p>
+      <div class="opts" data-answer="0">
+        <button>High-budget global franchise blockbuster (~$200m)</button>
+        <button>Low-budget British social realism</button>
+        <button>A no-budget student short</button>
+      </div><div class="fb"></div></div>
+    <div class="q"><p class="qt">Why is Black Panther a relatively LOW financial risk for Marvel, despite its Afrocentric subject?</p>
+      <div class="opts" data-answer="2">
+        <button>It had no stars attached</button>
+        <button>It was released with no marketing at all</button>
+        <button>50-year-old comic property, pre-tested in Civil War, part of a franchise with an unbroken hit record</button>
+      </div><div class="fb"></div></div>
+  </div>
+
+  <h2>Ownership, integration &amp; the franchise machine</h2>
+  <div class="card">
+    <h3>Conglomerate ownership &amp; vertical integration</h3>
+    <ul>
+      <li><b>Marvel Studios</b> has been a <span class="keyword">subsidiary of The Walt Disney Company</span> since Disney bought Marvel in <b>2008</b> — a classic <span class="keyword">conglomerate</span> structure.</li>
+      <li>Marvel <b>produced</b> the film and Disney <b>distributed</b> it — the same parent company controls production <em>and</em> distribution. This is textbook <span class="keyword">vertical integration</span>, which maximises profit and control of the release.</li>
+      <li>When Disney bought Marvel it agreed to <b>minimal creative interference</b> — a key point for the "does concentration limit creativity?" debate (Curran &amp; Seaton).</li>
+      <li><span class="keyword">Diversification</span>: Marvel historically sold character options (e.g. Spider-Man to Sony) and in 2013 signed a Netflix TV deal (Daredevil, Punisher) — spreading risk across cinema, TV and streaming. Black Panther was a character Marvel owned <b>fully</b>.</li>
+    </ul>
+    <figure class="viz">
+      <svg viewBox="0 0 620 210" role="img" aria-label="Ownership tree: Walt Disney Company owns Marvel Studios which produced and distributed Black Panther">
+        <rect x="220" y="12" width="180" height="42" rx="8" fill="#5b2a86"/>
+        <text x="310" y="33" text-anchor="middle" fill="#fff" font-family="Syne,sans-serif" font-weight="700" font-size="15">The Walt Disney Co.</text>
+        <text x="310" y="48" text-anchor="middle" fill="#e6d8ff" font-family="monospace" font-size="10">conglomerate (parent)</text>
+        <line x1="310" y1="54" x2="310" y2="82" stroke="#7c3aed" stroke-width="3"/>
+        <rect x="220" y="82" width="180" height="42" rx="8" fill="#7c3aed"/>
+        <text x="310" y="103" text-anchor="middle" fill="#fff" font-family="Syne,sans-serif" font-weight="700" font-size="15">Marvel Studios</text>
+        <text x="310" y="118" text-anchor="middle" fill="#efe4ff" font-family="monospace" font-size="10">subsidiary since 2008</text>
+        <line x1="310" y1="124" x2="310" y2="150" stroke="#7c3aed" stroke-width="3"/>
+        <line x1="150" y1="150" x2="470" y2="150" stroke="#7c3aed" stroke-width="3"/>
+        <line x1="150" y1="150" x2="150" y2="168" stroke="#7c3aed" stroke-width="3"/>
+        <line x1="470" y1="150" x2="470" y2="168" stroke="#7c3aed" stroke-width="3"/>
+        <rect x="60" y="168" width="180" height="34" rx="8" fill="#b8860b"/>
+        <text x="150" y="190" text-anchor="middle" fill="#fff" font-family="Syne,sans-serif" font-weight="700" font-size="13">PRODUCES the film</text>
+        <rect x="380" y="168" width="180" height="34" rx="8" fill="#b8860b"/>
+        <text x="470" y="190" text-anchor="middle" fill="#fff" font-family="Syne,sans-serif" font-weight="700" font-size="13">DISTRIBUTES the film</text>
+      </svg>
+      <figcaption>One parent company controls production AND distribution = vertical integration.</figcaption>
+    </figure>
+  </div>
+
+  <div class="quiz">
+    <h3>⚡ Quick check — Ownership</h3>
+    <div class="q"><p class="qt">Marvel Studios producing the film while parent Disney distributes it is an example of…</p>
+      <div class="opts" data-answer="1">
+        <button>Horizontal diversification only</button>
+        <button>Vertical integration</button>
+        <button>Public-service broadcasting</button>
+      </div><div class="fb"></div></div>
+    <div class="q"><p class="qt">Marvel Studios became a subsidiary of Disney in…</p>
+      <div class="opts" data-answer="1">
+        <button>1998</button>
+        <button>2008</button>
+        <button>2018</button>
+      </div><div class="fb"></div></div>
+  </div>
+
+  <h2>Contexts: history, culture &amp; politics</h2>
+  <div class="card">
+    <h3>Why the contexts matter</h3>
+    <ul>
+      <li><b>Historical:</b> European powers colonised and exploited Africa for centuries, branding its cultures "primitive". Wakanda is a deliberate counter-fantasy — an African nation that was <b>never colonised</b> and is the most advanced on Earth.</li>
+      <li><b>Cultural:</b> the superhero/sci-fi genre had been dominated by <b>white male leads</b>; Black cinema was largely social realism or "prestige" arthouse (e.g. <i>Moonlight</i>). Black Panther is a landmark of <span class="keyword">Afrofuturism</span> — imagining Black futures fusing African heritage with technology. The <b>#OscarsSoWhite</b> debate (2016) had spotlighted the lack of diversity.</li>
+      <li><b>Political:</b> released during <b>Black History Month</b>, amid <b>#BlackLivesMatter</b> and the shift from the Obama to the Trump administration. Killmonger's arc engages directly with the African-American experience and diaspora.</li>
+      <li>News media has long framed Africa as "the Dark Continent" (war, famine); the film consciously <b>subverts</b> that representation. This is why the marketing could sell it as a <b>cultural event</b>, not "just another superhero film".</li>
+    </ul>
+  </div>
+
+  <div class="quiz">
+    <h3>⚡ Quick check — Contexts</h3>
+    <div class="q"><p class="qt">The cultural movement fusing African heritage with science-fiction/technology, central to the film's identity, is called…</p>
+      <div class="opts" data-answer="1">
+        <button>Social realism</button>
+        <button>Afrofuturism</button>
+        <button>German Expressionism</button>
+      </div><div class="fb"></div></div>
+    <div class="q"><p class="qt">Releasing the film in February deliberately aligned it with…</p>
+      <div class="opts" data-answer="0">
+        <button>Black History Month, adding cultural gravitas</button>
+        <button>The summer blockbuster season</button>
+        <button>The Christmas family market</button>
+      </div><div class="fb"></div></div>
+  </div>
+
+  <h2 class="mk">★ The marketing campaign — a "cultural event"</h2>
+  <div class="card">
+    <h3>Disney's 360° strategy: "wherever you look, there's Black Panther"</h3>
+    <p>Disney used a <span class="keyword">360-degree consumer experience</span>: saturating every platform so the film became a <b>movement, not a release</b>. The guiding idea (marketing exec Asad Ayaz) was to <b>"super-serve Black moviegoers while also making it the broadest moviegoing event."</b> Crucially, diverse creatives were involved <b>at every step</b> — the film was <b>made</b> by, marketed by and starring Black talent, so the campaign had authenticity ("the best marketing for <i>Black Panther</i> was making <i>Black Panther</i>").</p>
+    <div class="statgrid">
+      <div class="stat"><div class="n">89M</div><div class="l">teaser views in first 24 hrs (YouTube)</div></div>
+      <div class="stat"><div class="n">35M</div><div class="l">tweets — most-tweeted film EVER (Mar 2018)</div></div>
+      <div class="stat"><div class="n">#1</div><div class="l">Kendrick Lamar album on Billboard 200</div></div>
+      <div class="stat"><div class="n">~$1M</div><div class="l">raised by #BlackPantherChallenge</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>How the campaign built up — timeline</h3>
+    <div class="tl">
+      <div class="ev gold"><span class="dt">Dec 2015</span><p><b>The conversation starts early.</b> Producer Kevin Feige teases the film's "geopolitical" significance in <i>Empire</i> — building anticipation years before release.</p></div>
+      <div class="ev"><span class="dt">2016</span><p><b>Prestige comic relaunch.</b> Marvel recruits public intellectual <b>Ta-Nehisi Coates</b> and artist <b>Brian Stelfreeze</b> for a new Black Panther comic — signalling seriousness and credibility.</p></div>
+      <div class="ev gold"><span class="dt">June 2017</span><p><b>First teaser drops during the NBA Finals</b> (on Disney's ABC). Within 24 hours it had <b>89 million YouTube views</b>. NBA viewership skews ~63% toward African-American males — precise targeting.</p></div>
+      <div class="ev"><span class="dt">July 2017</span><p><b>Comic-Con standing ovation.</b> Trailer footage earns a rare standing ovation — proof of pre-built hype.</p></div>
+      <div class="ev gold"><span class="dt">4 Feb 2018</span><p><b>Super Bowl spot "Long Live the King"</b> — a Lexus collaboration reaching a huge, diverse, non-fanboy audience.</p></div>
+      <div class="ev"><span class="dt">Feb 2018</span><p><b>"Welcome to Wakanda" at New York Fashion Week</b> + <b>Kendrick Lamar's <i>Black Panther: The Album</i></b> hits #1 on the Billboard 200.</p></div>
+      <div class="ev gold"><span class="dt">16 Feb 2018</span><p><b>Release</b> — during Black History Month. <b>#BlackPantherChallenge</b> crowdfunding sends tens of thousands of children to see it.</p></div>
+      <div class="ev"><span class="dt">Mid-Mar 2018</span><p><b>Most-tweeted film of all time</b> — 35 million tweets, overtaking <i>Star Wars: The Force Awakens</i>.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Synergy: partnerships that made it "more" than a superhero film</h3>
+    <p><span class="theory">Hesmondhalgh</span> — conglomerates work across many cultural industries. Disney built <span class="keyword">synergy</span> across cars, toys, music, fashion, sport and comics. Each deal reached a <b>different audience segment</b>, and together they made the film feel like a cultural moment.</p>
+    <div class="syn">
+      <div class="s"><h4>🚗 Lexus (cars)</h4><p>Product placement + "Long Live the King" Super Bowl ad and a tie-in comic, <i>Soul of a Machine</i>.</p><span class="tgt">→ older, affluent, non-fanboy adults</span></div>
+      <div class="s"><h4>🧸 Hasbro (toys)</h4><p>Action-figure line raising awareness and cementing children's excitement.</p><span class="tgt">→ children &amp; families</span></div>
+      <div class="s"><h4>🎧 Interscope / Kendrick Lamar (music)</h4><p><i>Black Panther: The Album</i> — a #1 Billboard record extending reach into hip-hop culture.</p><span class="tgt">→ younger music &amp; culture fans</span></div>
+      <div class="s"><h4>👗 NY Fashion Week (fashion)</h4><p>"Welcome to Wakanda" catwalk + magazine features; boosted demand for traditional African attire.</p><span class="tgt">→ women, fashion &amp; culture press</span></div>
+      <div class="s"><h4>🏀 NBA + Super Bowl (sport)</h4><p>Teaser in NBA Finals; ad in the Super Bowl — mass, diverse live audiences.</p><span class="tgt">→ broad + African-American males</span></div>
+      <div class="s"><h4>📖 Ta-Nehisi Coates (comics)</h4><p>Prestige comic relaunch adding intellectual and political credibility.</p><span class="tgt">→ readers, critics, the "serious" press</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Grassroots, social &amp; digital convergence</h3>
+    <ul>
+      <li><span class="keyword">Interactive / prosumer</span> audiences did marketing <b>for</b> Disney. Consultant <b>Frederick Joseph</b> started the <b>#BlackPantherChallenge</b> on GoFundMe to send underprivileged children to the cinema; it spread to <b>600+ campaigns</b> raising <b>~$1 million</b> and reaching <b>75,000+ children</b>. Celebrities (Octavia Spencer, Viola Davis, Brie Larson) amplified it.</li>
+      <li><b>Word of mouth &amp; reaction culture:</b> trailers, "reaction videos" and casting/plot chatter spread virally on <b>YouTube, Twitter and smartphones</b> — audiences as <b>active consumers</b> seeking out and sharing content.</li>
+      <li>The film harnessed genuine <b>political social-media energy</b> (Black History Month, representation debates) to become a <span class="keyword">cultural event</span> rather than a routine summer blockbuster.</li>
+      <li><b>Interactive homepage</b> on Marvel.com tied directly to social releases (character posters), building a convergent, shareable campaign.</li>
+    </ul>
+    <figure class="viz">
+      <svg viewBox="0 0 620 150" role="img" aria-label="Bar chart of teaser YouTube views in first 24 hours compared with tweet counts">
+        <text x="12" y="22" font-family="Syne,sans-serif" font-weight="700" font-size="13" fill="#191622">Digital reach</text>
+        <!-- axis -->
+        <line x1="150" y1="40" x2="150" y2="130" stroke="#d8d0c0" stroke-width="1"/>
+        <!-- bar 1: 89M teaser views -->
+        <text x="140" y="60" text-anchor="end" font-family="monospace" font-size="11" fill="#7a7060">Teaser 24h</text>
+        <rect x="150" y="48" width="418" height="20" rx="4" fill="#7c3aed"/>
+        <text x="574" y="63" text-anchor="end" font-family="Syne,sans-serif" font-weight="700" font-size="12" fill="#fff">89M views</text>
+        <!-- bar 2: 5M tweets pre-release -->
+        <text x="140" y="90" text-anchor="end" font-family="monospace" font-size="11" fill="#7a7060">Tweets (pre)</text>
+        <rect x="150" y="78" width="60" height="20" rx="4" fill="#a78bfa"/>
+        <text x="216" y="93" font-family="Syne,sans-serif" font-weight="700" font-size="12" fill="#5b2a86">5M</text>
+        <!-- bar 3: 35M tweets ever -->
+        <text x="140" y="120" text-anchor="end" font-family="monospace" font-size="11" fill="#7a7060">Tweets (total)</text>
+        <rect x="150" y="108" width="240" height="20" rx="4" fill="#b8860b"/>
+        <text x="396" y="123" font-family="Syne,sans-serif" font-weight="700" font-size="12" fill="#5b2a86">35M — most ever</text>
+      </svg>
+      <figcaption>Convergent, shareable content drove record-breaking organic reach.</figcaption>
+    </figure>
+  </div>
+
+  <div class="quiz">
+    <h3>⚡ Quick check — Marketing</h3>
+    <div class="q"><p class="qt">Disney's approach of saturating every platform so the film became a "cultural event" is described as a…</p>
+      <div class="opts" data-answer="1">
+        <button>Platform (limited) release</button>
+        <button>360-degree marketing campaign</button>
+        <button>Below-the-line-only campaign</button>
+      </div><div class="fb"></div></div>
+    <div class="q"><p class="qt">Why release the first teaser during the NBA Finals?</p>
+      <div class="opts" data-answer="0">
+        <button>Huge live audience that skews toward African-American males — precise targeting</button>
+        <button>NBA games are cheap and no one watches them</button>
+        <button>To reach only over-65s</button>
+      </div><div class="fb"></div></div>
+    <div class="q"><p class="qt">Deals with Lexus, Hasbro, Kendrick Lamar, NY Fashion Week and the NBA are best described as…</p>
+      <div class="opts" data-answer="2">
+        <button>Public-service obligations</button>
+        <button>Vertical integration</button>
+        <button>Synergy across cultural industries (Hesmondhalgh)</button>
+      </div><div class="fb"></div></div>
+    <div class="q"><p class="qt">The #BlackPantherChallenge, in which audiences crowdfunded tickets for children, shows audiences acting as…</p>
+      <div class="opts" data-answer="1">
+        <button>Passive consumers ignoring the film</button>
+        <button>Interactive prosumers doing viral marketing for the distributor</button>
+        <button>BBFC examiners</button>
+      </div><div class="fb"></div></div>
+  </div>
+
+  <h2>Audience &amp; market segmentation</h2>
+  <div class="card">
+    <h3>Super-serve one audience, broaden to all</h3>
+    <p>Disney used Nielsen research to challenge assumptions about the US mainstream: <b>53%</b> of Americans live in a multicultural/"blended" household and <b>67%</b> were enthusiastic about experiencing diverse cultures. The strategy centred on <span class="keyword">African-American moviegoers</span> but approached sub-groups differently (children via Hasbro; young women via fashion; men via sport), so <span class="keyword">word of mouth</span> reached everyone else. Like <i>Moana</i> or <i>Coco</i>, it is <span class="keyword">intercultural</span> — rooted in one culture but with universal themes.</p>
+    <figure class="viz">
+      <svg viewBox="0 0 620 220" role="img" aria-label="Doughnut chart of opening-weekend audience ethnicity: 37 percent African-American, 35 percent Caucasian, 18 percent Hispanic, 10 percent other">
+        <g transform="translate(110,110)">
+          <circle r="80" fill="none" stroke="#eee" stroke-width="34"/>
+          <circle r="80" fill="none" stroke="#7c3aed" stroke-width="34" stroke-dasharray="185.98 316.67" stroke-dashoffset="0" transform="rotate(-90)"/>
+          <circle r="80" fill="none" stroke="#b8860b" stroke-width="34" stroke-dasharray="175.93 326.72" stroke-dashoffset="-185.98" transform="rotate(-90)"/>
+          <circle r="80" fill="none" stroke="#5b2a86" stroke-width="34" stroke-dasharray="90.48 412.17" stroke-dashoffset="-361.91" transform="rotate(-90)"/>
+          <circle r="80" fill="none" stroke="#c9b9e6" stroke-width="34" stroke-dasharray="50.27 452.38" stroke-dashoffset="-452.39" transform="rotate(-90)"/>
+          <text x="0" y="-4" text-anchor="middle" font-family="Syne,sans-serif" font-weight="800" font-size="15" fill="#191622">Opening</text>
+          <text x="0" y="14" text-anchor="middle" font-family="monospace" font-size="10" fill="#7a7060">audience</text>
+        </g>
+        <g font-family="IBM Plex Mono,monospace" font-size="12">
+          <rect x="250" y="44" width="14" height="14" fill="#7c3aed"/><text x="272" y="56" fill="#191622">37% African-American</text>
+          <rect x="250" y="74" width="14" height="14" fill="#b8860b"/><text x="272" y="86" fill="#191622">35% Caucasian</text>
+          <rect x="250" y="104" width="14" height="14" fill="#5b2a86"/><text x="272" y="116" fill="#191622">18% Hispanic</text>
+          <rect x="250" y="134" width="14" height="14" fill="#c9b9e6"/><text x="272" y="146" fill="#191622">10% other</text>
+          <text x="250" y="182" fill="#5b2a86" font-weight="700">44% of opening-weekend tickets bought by women</text>
+        </g>
+      </svg>
+      <figcaption>Targeted at Black audiences, yet it opened to a broad, diverse crowd (ComScore).</figcaption>
+    </figure>
+  </div>
+
+  <div class="quiz">
+    <h3>⚡ Quick check — Audience</h3>
+    <div class="q"><p class="qt">The strategy of focusing hard on one audience so word of mouth then reaches others is called…</p>
+      <div class="opts" data-answer="0">
+        <button>Market segmentation / super-serving a target audience</button>
+        <button>Vertical integration</button>
+        <button>Deregulation</button>
+      </div><div class="fb"></div></div>
+    <div class="q"><p class="qt">A Disney product strongly rooted in one culture but with universal appeal to others is described as…</p>
+      <div class="opts" data-answer="1">
+        <button>Deregulated</button>
+        <button>Intercultural</button>
+        <button>Public-service</button>
+      </div><div class="fb"></div></div>
+  </div>
+
+  <h2>Regulation</h2>
+  <div class="card">
+    <h3>BBFC 12A (UK) / PG-13 (US)</h3>
+    <ul>
+      <li>In the UK, the <b>BBFC</b> (an independent, non-governmental body) classifies releases; local councils <b>can overrule</b> its decisions. Black Panther received a <span class="keyword">12A</span>.</li>
+      <li>Like most MCU films it has <b>little romance, no sex or nudity</b>; the violence is <b>fantastical (hard to imitate)</b> and framed by a strong moral code — hence the family-friendly rating.</li>
+      <li>It was <b>PG-13</b> in the US and rated similarly even in stricter territories (China, India). A wider certificate <b>maximises the potential audience</b> — a commercial as well as protective decision.</li>
+    </ul>
+  </div>
+
+  <div class="quiz">
+    <h3>⚡ Quick check — Regulation</h3>
+    <div class="q"><p class="qt">The UK theatrical certificate for Black Panther was…</p>
+      <div class="opts" data-answer="1">
+        <button>18</button>
+        <button>12A</button>
+        <button>U</button>
+      </div><div class="fb"></div></div>
+    <div class="q"><p class="qt">A key commercial reason to secure a 12A / PG-13 rather than a 15/18 is…</p>
+      <div class="opts" data-answer="0">
+        <button>A wider certificate maximises the potential audience</button>
+        <button>Lower ratings are legally required for Marvel</button>
+        <button>It reduces the marketing budget to zero</button>
+      </div><div class="fb"></div></div>
+  </div>
+
+  <h2>Distribution, circulation &amp; box office</h2>
+  <div class="card">
+    <h3>A record-breaking global release</h3>
+    <ul>
+      <li><b>Opening weekend:</b> ~<b>$242m</b> over the four-day Presidents' Day weekend — a record US opening at the time.</li>
+      <li><b>Worldwide gross:</b> over <b>$1.34 billion</b> (~$700m domestic), with roughly <b>48% earned outside the US</b> — vindicating the "risky" Afrocentric film globally.</li>
+      <li>Highest-grossing <b>solo superhero film</b> domestically and the highest-grossing film by a Black director.</li>
+      <li><b>Prestige:</b> at the 91st Academy Awards it earned <b>7 nominations including Best Picture</b> — the first superhero film ever nominated — and <b>won 3 Oscars</b> (Costume Design — Ruth E. Carter; Production Design — Hannah Beachler; Original Score — Ludwig Göransson): Marvel's first ever Oscars.</li>
+    </ul>
+    <figure class="viz">
+      <svg viewBox="0 0 620 150" role="img" aria-label="Bar chart comparing worldwide box office of I Daniel Blake and Black Panther">
+        <text x="12" y="22" font-family="Syne,sans-serif" font-weight="700" font-size="13" fill="#191622">Worldwide box office — blockbuster vs indie</text>
+        <line x1="170" y1="34" x2="170" y2="120" stroke="#d8d0c0" stroke-width="1"/>
+        <text x="160" y="60" text-anchor="end" font-family="monospace" font-size="11" fill="#7a7060">Black Panther</text>
+        <rect x="170" y="48" width="420" height="24" rx="4" fill="#7c3aed"/>
+        <text x="584" y="65" text-anchor="end" font-family="Syne,sans-serif" font-weight="700" font-size="12" fill="#fff">$1,347M</text>
+        <text x="160" y="102" text-anchor="end" font-family="monospace" font-size="11" fill="#7a7060">I, Daniel Blake</text>
+        <rect x="170" y="90" width="4" height="24" rx="1" fill="#b8860b"/>
+        <text x="182" y="107" font-family="Syne,sans-serif" font-weight="700" font-size="12" fill="#5b2a86">~$12.5M</text>
+        <text x="170" y="138" font-family="monospace" font-size="10" fill="#7a7060">Same axis: the indie bar is a sliver — that scale gap IS the industry contrast.</text>
+      </svg>
+      <figcaption>Budget ~$200m returned over $1.34bn — the economics of a franchise blockbuster.</figcaption>
+    </figure>
+  </div>
+
+  <div class="card">
+    <h3>Sort it: convention of a BLOCKBUSTER, or of an INDIE film (I, Daniel Blake)?</h3>
+    <div data-sort data-labels="Blockbuster,Indie">
+      <div class="sort-item" data-key="0"><span>~$200m budget; over $1.34bn worldwide gross</span></div>
+      <div class="sort-item" data-key="1"><span>~£3.5m budget; a slow "platform release" that widens cinema by cinema</span></div>
+      <div class="sort-item" data-key="0"><span>Vertical integration under a global conglomerate (Disney/Marvel)</span></div>
+      <div class="sort-item" data-key="1"><span>Funded partly by the BFI (National Lottery) and BBC Films</span></div>
+      <div class="sort-item" data-key="0"><span>360° synergy: cars, toys, a #1 album, fashion week, Super Bowl</span></div>
+      <div class="sort-item" data-key="1"><span>"Disruptive" grassroots marketing: projections on Parliament, clean graffiti</span></div>
+    </div>
+  </div>
+
+  <h2>Theory: profit, power &amp; the industry</h2>
+  <div class="card">
+    <h3>Hesmondhalgh — Cultural Industries</h3>
+    <p><span class="theory">Hesmondhalgh</span> argues cultural industries are <b>risky</b>, so conglomerates <b>minimise risk and maximise audiences</b> by using stars, franchises, formatting and cross-promotion.</p>
+    <ul>
+      <li><b>Risk minimised:</b> a 50-year-old property, pre-tested in <i>Civil War</i>, inside the never-failed MCU franchise — and marketed with a huge, synergistic campaign.</li>
+      <li><b>Working across industries:</b> the film generated profit through film, music (Kendrick #1 album), toys (Hasbro), cars (Lexus) and fashion — exactly Hesmondhalgh's picture of conglomerate reach.</li>
+      <li><b>The counter-argument:</b> an Afrocentric film with a mostly Black cast <em>was</em> seen by some as a commercial risk (especially outside the US/Africa) — so it shows both risk-taking <em>and</em> risk-management.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Curran &amp; Seaton — Media &amp; Power</h3>
+    <p><span class="theory">Curran &amp; Seaton</span> argue that control by a <b>few profit-driven conglomerates limits variety and creativity</b>.</p>
+    <ul>
+      <li><b>Challenge to the theory:</b> Black Panther is a celebrated, diverse, creatively distinctive product made <em>within</em> the biggest conglomerate of all — suggesting concentration doesn't <em>always</em> kill variety.</li>
+      <li><b>Complication:</b> the <b>Marvel-as-a-brand-inside-Disney</b> model (with agreed creative autonomy) is a more nuanced ownership pattern than Curran &amp; Seaton describe.</li>
+      <li><b>Support for the theory:</b> Marvel's dominance of the sci-fi/superhero genre arguably <b>squeezes out riskier independent films</b> in the same space.</li>
+    </ul>
+  </div>
+
+  <div class="quiz">
+    <h3>⚡ Quick check — Theory</h3>
+    <div class="q"><p class="qt">Using a 50-year-old character, a proven franchise and a huge synergistic campaign to reduce risk best illustrates…</p>
+      <div class="opts" data-answer="1">
+        <button>Curran &amp; Seaton on regulation</button>
+        <button>Hesmondhalgh — minimising risk / maximising audiences</button>
+        <button>Gerbner's cultivation theory</button>
+      </div><div class="fb"></div></div>
+    <div class="q"><p class="qt">Which point most clearly CHALLENGES Curran &amp; Seaton's claim that concentration limits variety?</p>
+      <div class="opts" data-answer="0">
+        <button>A diverse, creatively distinctive, critically acclaimed film emerged from the biggest conglomerate (Disney)</button>
+        <button>The film had no director</button>
+        <button>It was never marketed</button>
+      </div><div class="fb"></div></div>
+  </div>
+
+  <div class="card mission">
+    <h3>🎯 Final mission — the one-liners you must be able to drop</h3>
+    <div class="pill-row">
+      <div class="pill"><b>Ryan Coogler</b> · Marvel Studios · <b>17th MCU film</b> · ~$200m budget · Feb 2018</div>
+      <div class="pill"><b>Ownership</b>: Marvel = Disney subsidiary (2008) · produces + distributes = <b>vertical integration</b></div>
+      <div class="pill"><b>Low risk</b>: 50-yr-old comic · pre-tested in <i>Civil War</i> · unbroken MCU hit record</div>
+      <div class="pill"><b>360° campaign</b> · "super-serve Black moviegoers + broadest event"</div>
+      <div class="pill"><b>Synergy</b>: Lexus · Hasbro · Kendrick #1 album · NYFW "Welcome to Wakanda" · NBA/Super Bowl</div>
+      <div class="pill"><b>Teaser</b> in NBA Finals → <b>89M views/24h</b> · <b>35M tweets</b> = most-tweeted film ever</div>
+      <div class="pill"><b>#BlackPantherChallenge</b> · prosumers · ~$1m · 75,000+ kids · Black History Month release</div>
+      <div class="pill"><b>BBFC 12A</b> / PG-13 · wider cert = wider audience</div>
+      <div class="pill"><b>$242m</b> opening · <b>$1.34bn</b> worldwide (~48% overseas) · 7 Oscar noms (Best Picture) · <b>3 wins</b></div>
+      <div class="pill"><b>Hesmondhalgh</b> (risk/reward, synergy) · <b>Curran &amp; Seaton</b> (does concentration limit variety?)</div>
+      <div class="pill"><b>Contrast with I, Daniel Blake</b>: franchise vs indie · conglomerate vs BFI/BBC · synergy vs disruptive grassroots</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap" style="padding-top:0">
+    <div id="finalScore">Answer the quick-checks to build your score!</div>
+    <div>Black Panther (Marvel Studios / Walt Disney, 2018) · GCE A Level Media Studies · Component 1 Section B recap · Figures from ComScore, Box Office Mojo, Variety, Deadline &amp; the Academy</div>
+  </div>
+</footer>
+
+<script>(function(){
+  var score=0, total=0, answered=0;
+  var chip=document.getElementById('scoreChip');
+  var finalEl=document.getElementById('finalScore');
+  function updateChip(){
+    chip.textContent='Score: '+score+' / '+answered+(total?' ('+total+' total)':'');
+    if(answered===total && total>0){
+      var pct=Math.round(100*score/total);
+      var msg = pct===100 ? '🏆 Full marks! '+score+'/'+total+' — exam-ready on this text.'
+              : pct>=80 ? '🟢 Strong recall: '+score+'/'+total+' ('+pct+'%). Nearly there.'
+              : pct>=60 ? '🟡 Getting there: '+score+'/'+total+' ('+pct+'%). Revisit the sections you missed.'
+              : '🔴 Needs work: '+score+'/'+total+' ('+pct+'%). Work back through each section and retry.';
+      finalEl.textContent=msg;
+    } else {
+      finalEl.textContent='Progress: '+answered+' of '+total+' questions answered — score '+score+'.';
+    }
+  }
+  var optGroups=document.querySelectorAll('.opts[data-answer]');
+  total+=optGroups.length;
+  optGroups.forEach(function(g){
+    var ans=parseInt(g.dataset.answer,10);
+    var btns=g.querySelectorAll('button');
+    var fb=g.parentElement.querySelector('.fb');
+    btns.forEach(function(b,i){
+      b.addEventListener('click',function(){
+        if(g.dataset.done)return;
+        g.dataset.done='1'; answered++;
+        btns.forEach(function(x){x.disabled=true;});
+        btns[ans].classList.add('correct');
+        if(i===ans){ score++; fb.className='fb ok'; fb.textContent='✔ Correct!'; }
+        else { b.classList.add('wrong'); fb.className='fb no'; fb.textContent='✘ Not quite — the answer is highlighted in green.'; }
+        updateChip();
+      });
+    });
+  });
+  document.querySelectorAll('[data-sort]').forEach(function(zone){
+    var labels=zone.dataset.labels.split(',');
+    var items=zone.querySelectorAll('.sort-item');
+    total+=items.length;
+    items.forEach(function(it){
+      var key=parseInt(it.dataset.key,10);
+      var wrap=document.createElement('div'); wrap.className='sbtns';
+      labels.forEach(function(lab,i){
+        var b=document.createElement('button'); b.textContent=lab;
+        b.addEventListener('click',function(){
+          if(it.dataset.done)return;
+          it.dataset.done='1'; answered++;
+          var v=document.createElement('span'); v.className='verdict';
+          if(i===key){ score++; it.classList.add('done-ok'); v.textContent='✔'; v.style.color='var(--green)'; }
+          else { it.classList.add('done-no'); v.textContent='✘ '+labels[key]; v.style.color='var(--red)'; }
+          wrap.replaceWith(v);
+          updateChip();
+        });
+        wrap.appendChild(b);
+      });
+      it.appendChild(wrap);
+    });
+  });
+  document.querySelectorAll('[data-reveal]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var m=b.parentElement.querySelector('.model');
+      m.classList.toggle('show');
+      b.textContent=m.classList.contains('show')?'Hide model':'Reveal model';
+    });
+  });
+  updateChip();
+})();</script>
+<script>(function(){
+  var page=(location.pathname.split('/').pop()||'recap').replace(/\.html$/,'')||'recap';
+  var KEY='recapBest:'+page;
+  var total=0, answered=0, correctCount=0, done=false;
+  var records=[];
+  function sect(el){
+    var c=el.closest('.quiz,.card');
+    if(c){var h=c.querySelector('h3');if(h)return h.textContent.trim();}
+    var s=el.closest('section');
+    if(s){var h2=s.querySelector('h2');if(h2)return h2.textContent.trim();}
+    return document.title||'Recap';
+  }
+  function record(section,q,correct,ok){
+    answered++; if(ok){correctCount++;} else {records.push({section:section,q:q,correct:correct});}
+    if(answered>=total && total>0 && !done){done=true; finish();}
+  }
+  [].forEach.call(document.querySelectorAll('.opts[data-answer]'),function(g){
+    total++;
+    var qEl=g.closest('.q'), qt=qEl?qEl.querySelector('.qt'):null;
+    var qtext=qt?qt.textContent.trim():'';
+    var section=sect(g);
+    var obs=new MutationObserver(function(){
+      if(g.dataset.done && !g.dataset.rp){
+        g.dataset.rp='1'; obs.disconnect();
+        var wrong=g.querySelector('button.wrong');
+        var corrBtn=g.querySelector('button.correct');
+        record(section,qtext,corrBtn?corrBtn.textContent.trim():'',!wrong);
+      }
+    });
+    obs.observe(g,{attributes:true,attributeFilter:['data-done']});
+  });
+  [].forEach.call(document.querySelectorAll('.sort-item'),function(it){
+    total++;
+    var section=sect(it);
+    var span=it.querySelector('span'), qtext=span?span.textContent.trim():'';
+    var zone=it.closest('[data-sort]');
+    var labels=(zone&&zone.dataset.labels?zone.dataset.labels:'').split(',');
+    var correct=labels[parseInt(it.dataset.key,10)]||'';
+    var obs=new MutationObserver(function(){
+      var ok=it.classList.contains('done-ok'), no=it.classList.contains('done-no');
+      if((ok||no) && !it.dataset.rp){ it.dataset.rp='1'; obs.disconnect(); record(section,qtext,correct,ok); }
+    });
+    obs.observe(it,{attributes:true,attributeFilter:['class']});
+  });
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+  function finish(){
+    try{
+      var prev=JSON.parse(localStorage.getItem(KEY)||'null');
+      if(!prev||correctCount>prev.score){
+        localStorage.setItem(KEY,JSON.stringify({score:correctCount,total:total,ts:Date.now()}));
+      }
+    }catch(e){}
+    var bySec={}, order=[];
+    records.forEach(function(r){ if(!bySec[r.section]){bySec[r.section]=[];order.push(r.section);} bySec[r.section].push(r); });
+    var html='<h3>Your results — screenshot this for Google Classroom</h3>';
+    html+='<div class="rp-score">'+correctCount+' / '+total+' &nbsp;<span style="font-weight:400;font-size:.8rem;opacity:.75">'+esc(document.title)+'</span></div>';
+    if(records.length===0){
+      html+='<p class="rp-allright">Full marks — every question correct. Screenshot and upload as evidence.</p>';
+    } else {
+      html+='<p style="font-size:.9rem;opacity:.85">Retry these before the exam:</p>';
+      order.forEach(function(sec){
+        html+='<div class="rp-sec">'+esc(sec)+'</div>';
+        bySec[sec].forEach(function(r){
+          html+='<div class="rp-wrong">'+esc(r.q)+(r.correct?'<span class="rp-corr">Correct answer: '+esc(r.correct)+'</span>':'')+'</div>';
+        });
+      });
+    }
+    html+='<div class="rp-shot">📸 Screenshot this card and upload it to Google Classroom as your homework evidence.</div>';
+    html+='<div><a class="rp-apply" href="index.html#questions">Now do the Apply step → Exam Questions</a>'+
+          '<a class="rp-apply alt" href="index.html#pastq">Past Questions</a></div>';
+    var card=document.createElement('div'); card.className='rp-card'; card.id='rpResults'; card.innerHTML=html;
+    var footer=document.querySelector('footer');
+    if(footer&&footer.parentNode){ footer.parentNode.insertBefore(card,footer); } else { document.body.appendChild(card); }
+    card.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  try{
+    var best=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(best&&best.total){
+      var b=document.createElement('div'); b.className='rp-banner';
+      var miss=best.total-best.score;
+      b.innerHTML='👋 Welcome back — your best so far is <b>'+best.score+'/'+best.total+'</b>. '+
+        (miss>0?'Work through again and retry the '+miss+' you missed.':'Full marks last time — go for a clean run!');
+      var anchor=document.querySelector('.quiz,[data-quiz],main,section');
+      if(anchor&&anchor.parentNode){ anchor.parentNode.insertBefore(b,anchor); } else { document.body.insertBefore(b,document.body.firstChild); }
+    }
+  }catch(e){}
+})();</script>
+</body>
+</html>
