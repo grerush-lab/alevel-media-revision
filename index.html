@@ -710,7 +710,7 @@ main{padding:1.5rem 2rem;max-width:1400px;margin:0 auto;}
 </div>
 <div class="tab-section" id="tab-theorists">
   <p class="theo-intro">Each card covers a theorist's key argument, main concepts, and an example exam question. Use the filter buttons to focus by framework area. Click "Test yourself" on each card to reveal a model answer.</p>
-  <div class="theo-progress-panel"><div><div class="theo-ring" id="theoRing"><span id="theoPercent">0%</span></div></div><div class="theo-summary"><strong style="color:var(--ink);">Theorist confidence tracker</strong><br>Rate each theorist from 0–5 as you learn them. This is saved automatically in this browser and works like the GCSE confidence system.<br><span id="theoProgressText">0 / 14 theorists rated Secure or better.</span></div></div>
+  <div class="theo-progress-panel"><div><div class="theo-ring" id="theoRing"><span id="theoPercent">0%</span></div></div><div class="theo-summary"><strong style="color:var(--ink);">Theorist confidence tracker</strong><br>Rate each theorist from 0–5 as you learn them. This is saved automatically in this browser and works like the GCSE confidence system.<br><span id="theoProgressText">0 / 21 theorists rated Secure or better.</span></div></div>
   <div class="theo-filters" id="theoFilters">
     <button class="theo-filter-btn active" onclick="filterTheo('all',this)">All Theorists</button>
     <button class="theo-filter-btn" onclick="filterTheo('Media Language',this)">Media Language</button>
@@ -726,7 +726,7 @@ main{padding:1.5rem 2rem;max-width:1400px;margin:0 auto;}
   <div class="quiz-shell tq-shell">
     <aside class="quiz-side tq-side">
       <div class="quiz-title">🧪 Theorist Quiz</div>
-      <p class="quiz-sub">Choose exactly which theorists students want to practise. Select one theorist, a group, or all 19.</p>
+      <p class="quiz-sub">Choose exactly which theorists students want to practise. Select one theorist, a group, or all 21.</p>
       <div class="quiz-mini-label">Framework area</div>
       <select id="theoryQuizArea" class="quiz-picker" onchange="buildTheoryQuizChooser()">
         <option value="all">All framework areas</option>
@@ -747,7 +747,7 @@ main{padding:1.5rem 2rem;max-width:1400px;margin:0 auto;}
       <div class="theory-select-tools">
         <button class="mini-tool" onclick="selectVisibleTheorists(true)">Select visible</button>
         <button class="mini-tool" onclick="selectVisibleTheorists(false)">Clear visible</button>
-        <button class="mini-tool" onclick="selectAllTheorists(true)">All 19</button>
+        <button class="mini-tool" onclick="selectAllTheorists(true)">All 21</button>
         <button class="mini-tool" onclick="selectAllTheorists(false)">Clear all</button>
       </div>
       <div class="theory-choice-list" id="theoryChoiceList"></div>
@@ -1270,148 +1270,178 @@ const terms = [
 ];
 
 const theorists = [
-{name:"Roland Barthes",area:"Media Language",tag:"Semiotics",tagCol:"#1a3a1a",tagTxt:"#7dd68a",
-theory:"Semiotics & Narrative Codes",
-summary:"Barthes applied semiotic theory to mass media, arguing that signs produce meaning through denotation (literal meaning) and connotation (cultural associations). He also identified narrative codes operating in all texts.",
-keypoints:["Signs consist of a signifier (the form) and a signified (the concept it represents)","Denotation = literal meaning; Connotation = cultural meanings suggested","The myth: when connotations become naturalised — presented as common sense rather than ideological","Five narrative codes: enigma, action, symbolic, referential and semic","Anchorage: words that fix the meaning of an otherwise polysemic image"],
-examq:"Apply Barthes’ semiotic theory to this music video extract. How do signs create meaning?",
-quizq:"What is the difference between denotation and connotation according to Barthes?",
-quiza:"Denotation is the literal, surface-level meaning of a sign — what it actually shows. Connotation is the cultural meaning or associations attached to that sign — what it implies or suggests based on social and cultural context."},
+/* ================= MEDIA LANGUAGE ================= */
+{name:"Roland Barthes",area:"Media Language",tag:"Semiotics",spec:true,
+theory:"Semiotics",
+summary:"Eduqas named theorist — Media Language. Barthes argued that texts communicate their meanings through a process of signification, with signs working at the levels of denotation and connotation, and some constructed meanings becoming naturalised as ‘myth’.",
+keypoints:["The idea that texts communicate their meanings through a process of signification","The idea that signs can function at the level of denotation, which involves the ‘literal’ or common-sense meaning of the sign, and at the level of connotation, which involves the meanings associated with or suggested by the sign","The idea that constructed meanings can come to seem self-evident, achieving the status of myth through a process of naturalisation"],
+examq:"Apply Barthes’ theory of semiotics to this extract. How do signs create meaning through denotation and connotation? [Media Language]",
+quizq:"According to Barthes, how do signs communicate meaning?",
+quiza:"Texts communicate their meanings through a process of signification. Signs function at the level of denotation (the ‘literal’ or common-sense meaning) and at the level of connotation (the meanings associated with or suggested by the sign). Constructed meanings can come to seem self-evident, achieving the status of myth through a process of naturalisation."},
 
-{name:"Stuart Hall",area:"Representation",tag:"Representation",tagCol:"#1a1a3a",tagTxt:"#7da8e8",
-theory:"Encoding/Decoding & Representation",
-summary:"Hall argued that media producers encode preferred meanings into texts, but audiences actively decode them in three positions. Representation involves power — who gets to represent whom, and how.",
-keypoints:["Encoding: producers construct texts with preferred meanings through signs and codes","Preferred reading: the audience decodes as the producer intends","Negotiated reading: the audience partially accepts the preferred meaning but modifies it","Oppositional reading: the audience decodes in direct opposition to the preferred meaning","Representation is not a reflection of reality but a construction — involving selection and combination"],
-examq:"How far might audiences respond differently to representations in Peaky Blinders? Refer to Hall’s reception theory.",
-quizq:"What are Hall’s three decoding positions?",
-quiza:"Preferred reading: the audience decodes as the producer intended. Negotiated reading: the audience partially accepts the dominant meaning but modifies it based on their own experience. Oppositional reading: the audience decodes in direct opposition to the preferred meaning."},
+{name:"Tzvetan Todorov",area:"Media Language",tag:"Narratology",spec:true,
+theory:"Narratology",
+summary:"Eduqas named theorist — Media Language. Todorov argued that all narratives share a basic structure involving a movement from one state of equilibrium to another, separated by a period of disequilibrium.",
+keypoints:["The idea that all narratives share a basic structure that involves a movement from one state of equilibrium to another","The idea that these two states of equilibrium are separated by a period of imbalance or disequilibrium","The idea that the way in which narratives are resolved can have particular ideological significance"],
+examq:"Briefly explain Todorov’s theory of narratology, referring to a set product you have studied. [Media Language]",
+quizq:"What is Todorov’s theory of narratology?",
+quiza:"All narratives share a basic structure that involves a movement from one state of equilibrium to another. These two states of equilibrium are separated by a period of imbalance or disequilibrium. The way in which narratives are resolved can have particular ideological significance."},
 
-{name:"Levi-Strauss",area:"Media Language",tag:"Narrative",tagCol:"#2a1a0a",tagTxt:"#f5b56a",
-theory:"Binary Opposites",
-summary:"Levi-Strauss argued that human cultures organise meaning through binary opposites — pairs of contrasting concepts. These oppositions structure narratives and carry ideological meaning about social norms.",
-keypoints:["All cultures organise meaning through pairs of opposing concepts: good/evil, hero/villain","Binary opposites are the fundamental building blocks of narrative structure","The opposition is never neutral — one term is always privileged over the other","Resolution of binary opposites carries ideological meaning about what society values","Examples: nature/culture, normal/deviant, order/chaos, us/them"],
-examq:"How do binary opposites structure the representations in this extract?",
-quizq:"What does Levi-Strauss mean by binary opposites and why are they ideologically significant?",
-quiza:"Levi-Strauss argued that narratives are structured around pairs of opposing concepts (e.g. good vs evil). These are ideologically significant because one term is always privileged — the resolution naturalises social values about what is normal and desirable."},
+{name:"Steve Neale",area:"Media Language",tag:"Genre theory",spec:true,
+theory:"Genre theory",
+summary:"Eduqas named theorist — Media Language. Neale argued that genres are dominated by repetition but also marked by difference, variation and change, and that they exist within specific economic, institutional and industrial contexts.",
+keypoints:["The idea that genres may be dominated by repetition, but are also marked by difference, variation, and change","The idea that genres change, develop, and vary, as they borrow from and overlap with one another","The idea that genres exist within specific economic, institutional and industrial contexts"],
+examq:"How can Neale’s genre theory be applied to one set product you have studied? [Media Language]",
+quizq:"What is Neale’s genre theory?",
+quiza:"Genres may be dominated by repetition, but are also marked by difference, variation and change. Genres change, develop and vary as they borrow from and overlap with one another, and they exist within specific economic, institutional and industrial contexts."},
 
-{name:"Tzvetan Todorov",area:"Media Language",tag:"Narrative",tagCol:"#2a1a0a",tagTxt:"#f5b56a",
-theory:"Narratology — Three-Stage Narrative",
-summary:"Todorov argued all narratives follow a three-stage structure. The restoration of equilibrium at the end carries ideological meaning — it reveals what a society considers normal and desirable.",
-keypoints:["Stage 1: Equilibrium — a state of normality or balance","Stage 2: Disruption — the equilibrium is disturbed","Stage 3: New Equilibrium — order is restored, though often changed","The narrative journey reflects ideological values: what counts as disruption? What restores order?","Narratives are not neutral — they construct and reinforce social norms"],
-examq:"Briefly explain Todorov’s theory of narratology, referring to Peaky Blinders or The Bridge.",
-quizq:"What are the three stages of Todorov’s narrative theory?",
-quiza:"Equilibrium (initial state of normality), Disruption (the equilibrium is broken), and New Equilibrium (order is restored — though it may differ from the original). The restoration of order carries ideological meaning."},
+{name:"Claude Lévi-Strauss",area:"Media Language",tag:"Structuralism",spec:true,
+theory:"Structuralism",
+summary:"Eduqas named theorist — Media Language. Lévi-Strauss argued that texts are best understood through their underlying structure, and that meaning is dependent upon (and produced through) pairs of oppositions.",
+keypoints:["The idea that texts can best be understood through an examination of their underlying structure","The idea that meaning is dependent upon (and produced through) pairs of oppositions","The idea that the way in which these binary oppositions are resolved can have particular ideological significance"],
+examq:"How do binary oppositions structure the meanings in this extract? Apply Lévi-Strauss. [Media Language]",
+quizq:"What is Lévi-Strauss’s theory of structuralism?",
+quiza:"Texts can best be understood through an examination of their underlying structure. Meaning is dependent upon (and produced through) pairs of oppositions, and the way in which these binary oppositions are resolved can have particular ideological significance."},
 
-{name:"Vladimir Propp",area:"Media Language",tag:"Narrative",tagCol:"#2a1a0a",tagTxt:"#f5b56a",
-theory:"Character Typology in Narrative",
-summary:"Propp analysed folk tales and identified recurring character functions. He argued that narratives use a limited set of character types, each with a specific narrative role.",
-keypoints:["The Hero: who seeks something or reacts to the villain","The Villain: who creates conflict or disruption","The Princess: the prize sought by the hero — often gendered","The Donor: who gives the hero a tool or magical agent","The Helper: who assists the hero","The Dispatcher: who sends the hero on the quest","The False Hero: appears heroic but is revealed to be corrupt"],
-examq:"How far does the extract use Propp’s character types?",
-quizq:"Name four of Propp’s character types and their functions.",
-quiza:"Hero (seeks something/fights the villain), Villain (creates conflict), Princess (the reward — often passive), Donor (gives the hero a tool), Helper (assists the hero), Dispatcher (sends the hero on the quest), False Hero (appears heroic but is deceptive)."},
+{name:"Jean Baudrillard",area:"Media Language",tag:"Postmodernism",spec:true,
+theory:"Postmodernism",
+summary:"Eduqas named theorist — Media Language. Baudrillard argued that in postmodern culture the boundaries between the ‘real’ world and the world of the media have collapsed, immersing us in a world of simulacra and hyperreality.",
+keypoints:["The idea that in postmodern culture the boundaries between the ‘real’ world and the world of the media have collapsed and that it is no longer possible to distinguish between reality and simulation","The idea that in a postmodern age of simulacra we are immersed in a world of images which no longer refer to anything ‘real’","The idea that media images have come to seem more ‘real’ than the reality they supposedly represent (hyperreality)"],
+examq:"How useful is Baudrillard’s theory of postmodernism when analysing online media? [Media Language]",
+quizq:"What does Baudrillard mean by simulacra and hyperreality?",
+quiza:"In postmodern culture the boundaries between the ‘real’ world and the world of the media have collapsed, so it is no longer possible to distinguish reality from simulation. In an age of simulacra we are immersed in a world of images that no longer refer to anything ‘real’, and media images can come to seem more ‘real’ than the reality they supposedly represent (hyperreality)."},
 
-{name:"Laura Mulvey",area:"Representation",tag:"Representation",tagCol:"#1a1a3a",tagTxt:"#7da8e8",
-theory:"The Male Gaze",
-summary:"Mulvey argued that mainstream cinema is structured around a masculine, heterosexual viewpoint. The camera positions the audience to view female characters as objects of visual pleasure.",
-keypoints:["Cinema is structured around three looks: the camera, the male character, and the spectator","All three are aligned to produce a male, heterosexual viewing position","Women are coded as ‘to-be-looked-at-ness’ — appearance emphasised over agency","The male gaze objectifies women and reinforces patriarchal power structures","Applies beyond cinema: advertising, magazines and music videos all deploy the male gaze"],
-examq:"How far does this music video extract use or challenge the male gaze? Apply Mulvey.",
-quizq:"What does Mulvey mean by the male gaze?",
-quiza:"Mulvey argued that mainstream cinema structures viewing around a masculine, heterosexual perspective. The camera, male characters, and audience are all aligned to view women as objects of visual pleasure. Women are coded as ‘to-be-looked-at’ — their agency is subordinated to their appearance."},
+/* ================= REPRESENTATION ================= */
+{name:"Liesbet van Zoonen",area:"Representation",tag:"Feminist theory",spec:true,
+theory:"Feminist theory",
+summary:"Eduqas named theorist — Representation. Van Zoonen argued that gender is constructed through discourse and varies by cultural and historical context, and that the display of women’s bodies as objects to be looked at is a core element of western patriarchal culture.",
+keypoints:["The idea that gender is constructed through discourse, and that its meaning varies according to cultural and historical context","The idea that the display of women’s bodies as objects to be looked at is a core element of western patriarchal culture","The idea that in mainstream culture the visual and narrative codes that are used to construct the male body as spectacle differ from those used to objectify the female body"],
+examq:"How far do representations of gender in your set product conform to van Zoonen’s theory? [Representation]",
+quizq:"What is van Zoonen’s feminist theory?",
+quiza:"Gender is constructed through discourse, and its meaning varies according to cultural and historical context. The display of women’s bodies as objects to be looked at is a core element of western patriarchal culture, and the visual and narrative codes used to construct the male body as spectacle differ from those used to objectify the female body."},
 
-{name:"Liesbet van Zoonen",area:"Representation",tag:"Representation",tagCol:"#1a1a3a",tagTxt:"#7da8e8",
-theory:"Feminist Media Theory",
-summary:"Van Zoonen argued that media constructs gender as a performance shaped by patriarchal ideology. She analysed how media consistently reinforces gender hierarchies.",
-keypoints:["Gender is constructed not natural — media plays a key role","Media tends to represent femininity in relation to the domestic, emotional and private sphere","Masculinity is associated with the public, rational and active sphere","These representations naturalise gender inequality","Media representations of women are shaped by economic as well as patriarchal pressures"],
-examq:"How far do representations of gender in your set magazine conform to van Zoonen’s theory?",
-quizq:"What is van Zoonen’s main argument about gender in the media?",
-quiza:"Van Zoonen argued that gender is constructed through media representation, not natural. Media consistently associates femininity with the domestic and emotional sphere, and masculinity with the public and rational sphere — reinforcing gender inequality as though it were natural."},
+{name:"bell hooks",area:"Representation",tag:"Feminist theory",spec:true,
+theory:"Feminist theory",
+summary:"Eduqas named theorist — Representation. bell hooks argued that feminism is a struggle to end sexist/patriarchal oppression and the ideology of domination, and a political commitment rather than a lifestyle choice.",
+keypoints:["The idea that feminism is a struggle to end sexist/patriarchal oppression and the ideology of domination","The idea that feminism is a political commitment rather than a lifestyle choice","The idea that race and class as well as sex determine the extent to which individuals are exploited, discriminated against or oppressed"],
+examq:"How far do the representations in this product reinforce or challenge the concerns raised by bell hooks? [Representation]",
+quizq:"What is bell hooks’ feminist theory?",
+quiza:"Feminism is a struggle to end sexist/patriarchal oppression and the ideology of domination, and a political commitment rather than a lifestyle choice. Race and class as well as sex determine the extent to which individuals are exploited, discriminated against or oppressed."},
 
-{name:"bell hooks",area:"Representation",tag:"Representation",tagCol:"#1a1a3a",tagTxt:"#7da8e8",
-theory:"Race, Gender and the Oppositional Gaze",
-summary:"bell hooks argued that Black women have historically been rendered invisible in media, or represented in ways that reinforce racist and sexist hierarchies. She developed the concept of the oppositional gaze as a form of resistance.",
-keypoints:["Media representations of Black women have historically been limited, stereotypical or absent","The ‘oppositional gaze’: Black female spectators who critically analyse and resist mainstream representations","Intersectionality: race, gender and class intersect to shape representation","The dominant media gaze is white, male and heterosexual — others are rendered as Other","Media can be a site of both oppression AND resistance"],
-examq:"How far do the representations in this product reinforce or challenge the concerns raised by bell hooks?",
-quizq:"What does bell hooks mean by the oppositional gaze?",
-quiza:"The oppositional gaze is bell hooks’ concept of the critical viewing practice of marginalised audiences — particularly Black women — who resist the dominant (white, male, heterosexual) media gaze. Rather than internalising mainstream representations, they view critically from a position of resistance."},
+{name:"Judith Butler",area:"Representation",tag:"Gender performativity",spec:true,
+theory:"Theories of gender performativity",
+summary:"Eduqas named theorist — Representation. Butler argued that gender identity is performatively constructed by the very ‘expressions’ that are said to be its results — there is no gender identity behind the expressions of gender.",
+keypoints:["The idea that identity is performatively constructed by the very ‘expressions’ that are said to be its results (it is manufactured through a set of acts)","The idea that there is no gender identity behind the expressions of gender","The idea that performativity is not a singular act, but a repetition and a ritual"],
+examq:"How useful is Butler’s theory of gender performativity when analysing representations of gender in your set product? [Representation]",
+quizq:"What does Butler mean by gender performativity?",
+quiza:"Identity is performatively constructed by the very ‘expressions’ that are said to be its results — it is manufactured through a set of acts. There is no gender identity behind the expressions of gender, and performativity is not a singular act but a repetition and a ritual."},
 
-{name:"David Gauntlett",area:"Audience",tag:"Audience / Identity",tagCol:"#2a0a2a",tagTxt:"#d68ae8",
-theory:"Identity and Media — ‘Pick and Mix’",
-summary:"Gauntlett argued that contemporary media provides audiences with tools for constructing their identities. Unlike earlier theorists who saw media as imposing identity, Gauntlett emphasises audience agency.",
-keypoints:["The media provides ‘tools’ or resources for constructing and expressing identity","In the past, media tended to offer singular, fixed models of identity","Contemporary media offers diverse identities from which audiences can ‘pick and mix’","Identity construction is ongoing, reflexive and active — not fixed","Online media especially enables audiences to express and experiment with identity"],
-examq:"Briefly explain Gauntlett’s theory of identity. Refer to Zoe Sugg to support your response.",
-quizq:"What does Gauntlett mean when he says audiences ‘pick and mix’ identities from media?",
-quiza:"Gauntlett argues contemporary media provides a wide range of identity resources from which audiences actively select and combine elements to construct their own sense of self. Rather than passively receiving fixed identity models, audiences pick and mix — identity construction is ongoing and reflexive."},
+{name:"Paul Gilroy",area:"Representation",tag:"Ethnicity & postcolonial theory",spec:true,
+theory:"Ethnicity and postcolonial theory",
+summary:"Eduqas named theorist — Representation. Gilroy argued that colonial discourses continue to inform contemporary attitudes to race and ethnicity, and that civilisationism constructs racial hierarchies based on notions of otherness.",
+keypoints:["The idea that colonial discourses continue to inform contemporary attitudes to race and ethnicity in the postcolonial era","The idea that civilisationism constructs racial hierarchies and sets up binary oppositions based on notions of otherness"],
+examq:"How useful is Gilroy’s postcolonial theory when analysing representation in newspapers or online media? [Representation]",
+quizq:"What is Gilroy’s theory of ethnicity and postcolonialism?",
+quiza:"Colonial discourses continue to inform contemporary attitudes to race and ethnicity in the postcolonial era. Civilisationism constructs racial hierarchies and sets up binary oppositions based on notions of otherness."},
 
-{name:"George Gerbner",area:"Audience",tag:"Audience",tagCol:"#2a0a2a",tagTxt:"#d68ae8",
+{name:"Stuart Hall (Representation)",area:"Representation",tag:"Theories of representation",spec:true,
+theory:"Theories of representation",
+summary:"Eduqas named theorist — Representation. Hall argued that representation is the production of meaning through language, that the relationship between concepts and signs is governed by codes, and that stereotyping reduces people to a few simple characteristics.",
+keypoints:["The idea that representation is the production of meaning through language, with language defined in its broadest sense as a system of signs","The idea that the relationship between concepts and signs is governed by codes","The idea that stereotyping, as a form of representation, reduces people to a few simple characteristics or traits","The idea that stereotyping tends to occur where there are inequalities of power, as subordinate or excluded groups are constructed as different or ‘other’ (e.g. through ethnocentrism)"],
+examq:"How is representation constructed in your set product? Apply Hall’s theories of representation. [Representation]",
+quizq:"What is Hall’s theory of representation?",
+quiza:"Representation is the production of meaning through language (defined broadly as a system of signs), and the relationship between concepts and signs is governed by codes. Stereotyping, as a form of representation, reduces people to a few simple characteristics or traits and tends to occur where there are inequalities of power, as subordinate or excluded groups are constructed as different or ‘other’."},
+
+{name:"David Gauntlett",area:"Representation",tag:"Theories of identity",spec:true,
+theory:"Theories of identity",
+summary:"Eduqas named theorist — Representation. Gauntlett argued that the media provide us with ‘tools’ or resources that we use to construct our identities, and today offer a more diverse range of stars, icons and characters than in the past.",
+keypoints:["The idea that the media provide us with ‘tools’ or resources that we use to construct our identities","The idea that whilst in the past the media tended to convey singular, straightforward messages about ideal types of male and female identities, the media today offer us a more diverse range of stars, icons and characters from whom we may pick and mix different ideas"],
+examq:"Briefly explain Gauntlett’s theory of identity, referring to a set product you have studied. [Representation]",
+quizq:"What is Gauntlett’s theory of identity?",
+quiza:"The media provide us with ‘tools’ or resources that we use to construct our identities. Whilst in the past the media tended to convey singular, straightforward messages about ideal types of male and female identity, the media today offer a more diverse range of stars, icons and characters from whom we may pick and mix different ideas."},
+
+/* ================= MEDIA INDUSTRIES ================= */
+{name:"Curran and Seaton",area:"Industry",tag:"Power & media industries",spec:true,
+theory:"Power and Media Industries",
+summary:"Eduqas named theorist — Media Industries. Curran and Seaton argued that the media is controlled by a small number of companies driven by profit and power, and that media concentration limits variety, creativity and quality.",
+keypoints:["The idea that the media is controlled by a small number of companies primarily driven by the logic of profit and power","The idea that media concentration generally limits or inhibits variety, creativity and quality","The idea that more socially diverse patterns of ownership help to create the conditions for more varied and adventurous media productions"],
+examq:"To what extent does the production and distribution of your set product illustrate Curran and Seaton’s theory? [Media Industries]",
+quizq:"What is Curran and Seaton’s theory of power and media industries?",
+quiza:"The media is controlled by a small number of companies primarily driven by the logic of profit and power. Media concentration generally limits or inhibits variety, creativity and quality, whereas more socially diverse patterns of ownership help to create the conditions for more varied and adventurous media productions."},
+
+{name:"Sonia Livingstone and Peter Lunt",area:"Industry",tag:"Regulation",spec:true,
+theory:"Regulation",
+summary:"Eduqas named theorist — Media Industries. Livingstone and Lunt argued that UK regulation involves an underlying struggle between the interests of citizens (protection) and consumers (choice), and that the power of global corporations and digital convergence has placed traditional regulation at risk.",
+keypoints:["The idea that there is an underlying struggle in recent UK regulation policy between the need to further the interests of citizens (by offering protection from harmful or offensive material), and the need to further the interests of consumers (by ensuring choice, value for money, and market competition)","The idea that the increasing power of global media corporations, together with the rise of convergent media technologies and transformations in the production, distribution and marketing of digital media, have placed traditional approaches to media regulation at risk"],
+examq:"How useful is Livingstone and Lunt’s theory of regulation when analysing media industries? [Media Industries]",
+quizq:"What is Livingstone and Lunt’s theory of regulation?",
+quiza:"There is an underlying struggle in recent UK regulation policy between furthering the interests of citizens (protection from harmful or offensive material) and the interests of consumers (choice, value for money and market competition). The increasing power of global media corporations, convergent technologies and the transformation of digital media have placed traditional approaches to regulation at risk."},
+
+{name:"David Hesmondhalgh",area:"Industry",tag:"Cultural industries",spec:true,
+theory:"Cultural industries",
+summary:"Eduqas named theorist — Media Industries. Hesmondhalgh argued that cultural industry companies minimise risk and maximise audiences through integration and formatting, that the largest conglomerates operate across many cultural industries, and that the internet’s radical potential has been partly contained.",
+keypoints:["The idea that cultural industry companies try to minimise risk and maximise audiences through vertical and horizontal integration, and by formatting their cultural products (e.g. through the use of stars, genres, and serials)","The idea that the largest companies or conglomerates now operate across a number of different cultural industries","The idea that the radical potential of the internet has been contained to some extent by its partial incorporation into a large, profit-orientated set of cultural industries"],
+examq:"How far does Hesmondhalgh’s theory of cultural industries explain the production of your set product? [Media Industries]",
+quizq:"What is Hesmondhalgh’s theory of the cultural industries?",
+quiza:"Cultural industry companies try to minimise risk and maximise audiences through vertical and horizontal integration, and by formatting their cultural products (e.g. through stars, genres and serials). The largest conglomerates now operate across a number of different cultural industries, and the radical potential of the internet has been contained to some extent by its partial incorporation into a large, profit-orientated set of cultural industries."},
+
+/* ================= AUDIENCES ================= */
+{name:"Henry Jenkins",area:"Audience",tag:"Fandom",spec:true,
+theory:"Fandom",
+summary:"Eduqas named theorist — Audiences. Jenkins argued that fans are active participants in the construction and circulation of textual meanings, appropriating texts (‘textual poaching’) and forming a participatory culture.",
+keypoints:["The idea that fans are active participants in the construction and circulation of textual meanings","The idea that fans appropriate texts and read them in ways that are not fully authorised by the media producers (‘textual poaching’)","The idea that fans construct their social and cultural identities through borrowing and inflecting mass culture images, and are part of a participatory culture that has a vital social dimension"],
+examq:"How far does technology enable participatory fan culture around your set product? Apply Jenkins. [Audiences]",
+quizq:"What is Jenkins’ theory of fandom?",
+quiza:"Fans are active participants in the construction and circulation of textual meanings. They appropriate texts and read them in ways not fully authorised by producers (‘textual poaching’), and construct their social and cultural identities by borrowing and inflecting mass culture images as part of a participatory culture that has a vital social dimension."},
+
+{name:"Albert Bandura",area:"Audience",tag:"Media effects",spec:true,
+theory:"Media Effects",
+summary:"Eduqas named theorist — Audiences. Bandura argued that the media can implant ideas in the audience directly, that audiences acquire attitudes and behaviours through modelling, and that representations of transgressive behaviour can lead to imitation.",
+keypoints:["The idea that the media can implant ideas in the mind of the audience directly","The idea that audiences acquire attitudes, emotional responses and new styles of conduct through modelling","The idea that media representations of transgressive behaviour, such as violence or physical aggression, can lead audience members to imitate those forms of behaviour"],
+examq:"How far can Bandura’s media effects theory explain audience responses to media products? [Audiences]",
+quizq:"What is Bandura’s media effects theory?",
+quiza:"The media can implant ideas in the mind of the audience directly. Audiences acquire attitudes, emotional responses and new styles of conduct through modelling, and media representations of transgressive behaviour (such as violence or physical aggression) can lead audience members to imitate those forms of behaviour."},
+
+{name:"George Gerbner",area:"Audience",tag:"Cultivation theory",spec:true,
 theory:"Cultivation Theory",
-summary:"Gerbner argued that heavy, long-term exposure to media shapes audiences’ perception of social reality. Repeated exposure to narrow or distorted representations cultivates particular worldviews.",
-keypoints:["Heavy media consumers have their perception of reality shaped more by media than light viewers","Mean world syndrome: heavy consumers of violent media perceive the world as more dangerous","Cultivation is a long-term, cumulative process — not a single exposure","Mainstreaming: heavy media consumption pushes audiences toward dominant social values","Resonance: if media portrayal matches audience experience, the cultivation effect is amplified"],
-examq:"Briefly explain Gerbner’s cultivation theory. Refer to your set edition of Vogue to support your response.",
-quizq:"What is Gerbner’s cultivation theory and what is meant by ‘mean world syndrome’?",
-quiza:"Cultivation theory argues that long-term, heavy exposure to media shapes audiences’ perception of social reality. Mean world syndrome is the specific effect where heavy consumers of violent media come to perceive the world as more dangerous than it actually is — cultivated by repeated exposure."},
+summary:"Eduqas named theorist — Audiences. Gerbner argued that exposure to repeated patterns of representation over long periods of time can shape how people perceive the world, and that cultivation reinforces mainstream values.",
+keypoints:["The idea that exposure to repeated patterns of representation over long periods of time can shape and influence the way in which people perceive the world around them (i.e. cultivating particular views and opinions)","The idea that cultivation reinforces mainstream values (dominant ideologies)"],
+examq:"Briefly explain Gerbner’s cultivation theory, referring to a set product to support your response. [Audiences]",
+quizq:"What is Gerbner’s cultivation theory?",
+quiza:"Exposure to repeated patterns of representation over long periods of time can shape and influence the way in which people perceive the world around them, cultivating particular views and opinions. Cultivation reinforces mainstream values (dominant ideologies)."},
 
-{name:"Henry Jenkins",area:"Audience",tag:"Audience / Online",tagCol:"#2a0a2a",tagTxt:"#d68ae8",
-theory:"Participatory Culture & Transmedia Storytelling",
-summary:"Jenkins argued that digital media has transformed audiences from passive consumers into active participants. His theory of participatory culture describes how audiences create, share and engage with media content.",
-keypoints:["Participatory culture: digital audiences actively engage with, remix and create media content","The audience has become a prosumer — producing and consuming simultaneously","Transmedia storytelling: narratives unfold across multiple platforms, each contributing uniquely","Convergence culture: the flow of content across multiple media platforms","Fan communities create fan fiction, fan art, remix videos — reshaping narratives"],
-examq:"How far does technology impact on media language in online products? Apply Jenkins’ theory to Zoe Sugg.",
-quizq:"What does Jenkins mean by participatory culture?",
-quiza:"Participatory culture describes a media environment in which audiences are active participants — not passive consumers. They create, remix, share and engage with media content alongside producers. The distinction between producer and consumer has blurred — audiences are now prosumers who contribute to the creation and circulation of meaning."},
+{name:"Stuart Hall (Reception)",area:"Audience",tag:"Reception theory",spec:true,
+theory:"Reception Theory",
+summary:"Eduqas named theorist — Audiences. Hall argued that communication involves encoding by producers and decoding by audiences, and that there are three hypothetical positions from which messages may be decoded.",
+keypoints:["The idea that communication is a process involving encoding by producers and decoding by audiences","The idea that there are three hypothetical positions from which messages and meanings may be decoded","The dominant-hegemonic position: the encoder’s intended meaning (the preferred reading) is fully understood and accepted","The negotiated position: the legitimacy of the encoder’s message is acknowledged in general terms, although the message is adapted or negotiated to better fit the decoder’s own individual experiences or context","The oppositional position: the encoder’s message is understood, but the decoder disagrees with it, reading it in a contrary or oppositional way"],
+examq:"How far might audiences respond differently to representations in your set product? Refer to Hall’s reception theory. [Audiences]",
+quizq:"What are the three positions in Hall’s reception theory?",
+quiza:"Communication is a process involving encoding by producers and decoding by audiences. There are three hypothetical decoding positions: the dominant-hegemonic (the preferred reading is fully understood and accepted); the negotiated (the message’s legitimacy is acknowledged but adapted to fit the decoder’s context); and the oppositional (the message is understood, but the decoder disagrees, reading it in a contrary way)."},
 
-{name:"Clay Shirky",area:"Audience",tag:"Audience / Online",tagCol:"#2a0a2a",tagTxt:"#d68ae8",
-theory:"Cognitive Surplus",
-summary:"Shirky argued that digital technologies have given audiences the tools to organise and create without institutional support. He coined cognitive surplus to describe collective audience creativity.",
-keypoints:["Cognitive surplus: the collective free time and creativity of connected audiences, now available for media production","Digital tools have enabled amateurs to produce, share and organise content at scale","Shirky contrasts passive consumption (watching TV) with active creation (making and sharing online)","The internet enables collective action without institutional backing","Shirky’s theory is optimistic: he sees digital culture as democratising media production"],
-examq:"How far does digital technology enable audiences to become producers? Apply Shirky’s theory.",
-quizq:"What does Shirky mean by cognitive surplus?",
-quiza:"Cognitive surplus is Shirky’s concept for the collective free time and creative capacity of connected audiences. Previously absorbed by passive TV consumption, this surplus is now channelled into creating and sharing content online. Digital tools allow ordinary people to produce and publish media at scale without institutional support."},
+{name:"Clay Shirky",area:"Audience",tag:"‘End of audience’ theories",spec:true,
+theory:"‘End of audience’ theories",
+summary:"Eduqas named theorist — Audiences. Shirky argued that the Internet and digital technologies have profoundly changed the relations between media and individuals, so that audiences can no longer be seen as passive consumers.",
+keypoints:["The idea that the Internet and digital technologies have had a profound effect on the relations between media and individuals","The idea that the conceptualisation of audience members as passive consumers of mass media content is no longer tenable in the age of the Internet, as media consumers have now become producers who ‘speak back to’ the media in various ways, as well as creating and sharing content with one another"],
+examq:"How far do digital technologies enable audiences to become producers? Apply Shirky’s ‘end of audience’ theory. [Audiences]",
+quizq:"What is Shirky’s ‘end of audience’ theory?",
+quiza:"The Internet and digital technologies have had a profound effect on the relations between media and individuals. The idea of audience members as passive consumers of mass media content is no longer tenable in the age of the Internet, as media consumers have now become producers who ‘speak back to’ the media, as well as creating and sharing content with one another."},
 
-{name:"Curran and Seaton",area:"Industry",tag:"Industry",tagCol:"#0a2a0a",tagTxt:"#7dd68a",
-theory:"Power Without Responsibility",
-summary:"Curran and Seaton argued that media industries are dominated by a small number of powerful companies whose primary motivation is profit, not the public interest. This concentration of ownership threatens democracy.",
-keypoints:["Media industries are controlled by a small number of large corporations","Concentration of ownership reduces the range and diversity of media content","Commercial pressures prioritise profit over quality and public value","Media pluralism is essential to democracy — concentration threatens this","Public service broadcasting (BBC) exists to counter the limitations of the market","Regulation is necessary but often insufficient to prevent monopolistic tendencies"],
-examq:"To what extent does the production and distribution of Peaky Blinders illustrate Curran and Seaton’s theory?",
-quizq:"What is Curran and Seaton’s main concern about media ownership?",
-quiza:"Curran and Seaton argued that concentration of media ownership in the hands of a few powerful corporations is a threat to democracy and media plurality. They argued that commercial pressures lead to a reduction in the range and diversity of content, with profit prioritised over public value and quality."},
+/* ================= WIDER READING (NOT NAMED IN THE EDUQAS SPEC) ================= */
+{name:"Vladimir Propp",area:"Media Language",tag:"Narrative (wider reading)",spec:false,wider:true,
+theory:"Character types (wider reading)",
+summary:"NOT a named theorist in the Eduqas A Level specification — included as useful wider reading only. Propp analysed folk tales and identified recurring character functions (hero, villain, donor, helper, etc.). Use to support narrative analysis, but the named narrative theorists you must reference are Todorov and Lévi-Strauss.",
+keypoints:["Wider reading — not part of the Eduqas set theorist list; will not be named in the mark scheme","Propp identified recurring ‘character functions’ in narratives (e.g. hero, villain, donor, helper, dispatcher, princess, false hero)","Can support a point about narrative roles, but examiners credit the named theorists (Todorov, Lévi-Strauss) for narrative"],
+examq:"[Not a set theorist] You may use Propp’s character types to support wider narrative analysis, but reference Todorov/Lévi-Strauss for the named theory.",
+quizq:"Is Propp a named Eduqas theorist?",
+quiza:"No. Propp is not one of the named theorists in the Eduqas A Level specification — he is included here as wider reading. For narrative, the named theorists are Todorov (narratology) and Lévi-Strauss (structuralism)."},
 
-{name:"David Hesmondhalgh",area:"Industry",tag:"Industry",tagCol:"#0a2a0a",tagTxt:"#7dd68a",
-theory:"The Cultural Industries",
-summary:"Hesmondhalgh analysed the conditions under which cultural products are created. He argued that cultural industries exploit creative workers while relying on unpredictability — no one can guarantee a product will succeed.",
-keypoints:["Cultural industries have distinctive characteristics — products are uncertain and risky","High risk is managed through a star system and genre conventions — reducing uncertainty","Cultural workers are often exploited — paid less, credited less than their contribution warrants","Large companies dominate through vertical and horizontal integration","The internet has disrupted traditional cultural industry models","Cultural industries produce symbolic content — ideas, values and ways of seeing the world"],
-examq:"How far does Hesmondhalgh’s theory of cultural industries explain the production of your set TV programme?",
-quizq:"Why does Hesmondhalgh say cultural industries rely on stars and genre conventions?",
-quiza:"Hesmondhalgh argues that cultural products are inherently risky — no one can guarantee success. To manage this risk, cultural industries rely on star systems (attaching bankable names to projects) and genre conventions (producing what audiences have already shown they enjoy). These strategies reduce uncertainty by leveraging existing audience expectations."}
-
-,{name:"Steve Neale",area:"Media Language",tag:"Genre",tagCol:"#0c4a6e",tagTxt:"#38bdf8",
-theory:"Genre Theory",
-summary:"Genres are shaped by repetition and difference; audiences enjoy familiar conventions but producers need variation to keep genres fresh.",
-keypoints:["Genres depend on repetition of recognisable conventions.","Difference and variation are essential for keeping products fresh.","Producers use genre because it lowers risk and gives audiences familiar pleasures.","Hybrid genres combine conventions from more than one form."],
-examq:"How can Steve Neale's genre theory be applied to one set product you have studied?",
-quizq:"What is the key idea in Neale's genre theory?",quiza:"Genres rely on repetition and difference: familiar conventions are repeated but varied to create audience pleasure."}
-,{name:"Jean Baudrillard",area:"Media Language",tag:"Postmodernism",tagCol:"#4c1d95",tagTxt:"#c4b5fd",
-theory:"Postmodernism & Hyperreality",
-summary:"Baudrillard argues that in postmodern culture, representations can become more significant than reality itself, creating hyperreality and simulacra.",
-keypoints:["Media signs can become detached from reality.","Hyperreality is when representations feel more real than reality.","Simulacra are copies without a clear original.","Useful for analysing constructed identity, celebrity, branding and online personas."],
-examq:"How useful is Baudrillard's theory of postmodernism when analysing online media?",
-quizq:"What does Baudrillard mean by hyperreality?",quiza:"Hyperreality is when media representations feel more real or influential than reality itself."}
-,{name:"Paul Gilroy",area:"Representation",tag:"Postcolonialism",tagCol:"#7f1d1d",tagTxt:"#fca5a5",
-theory:"Postcolonial Theory",
-summary:"Gilroy argues that colonial histories continue to shape modern representations of race, ethnicity, nationhood and identity.",
-keypoints:["Representations are shaped by the legacy of empire and colonialism.","Media can construct racial and national identities through othering.","Postcolonial theory explores how power affects representation.","Useful for analysing ethnicity, migration, nationalism and diasporic identity."],
-examq:"How useful is Gilroy's postcolonial theory when analysing representation in newspapers or online media?",
-quizq:"What does Gilroy's postcolonial theory focus on?",quiza:"It focuses on how colonial histories continue to shape representations of race, ethnicity, nation and identity."}
-,{name:"Sonia Livingstone and Peter Lunt",area:"Industry",tag:"Regulation",tagCol:"#14532d",tagTxt:"#86efac",
-theory:"Regulation Theory",
-summary:"Livingstone and Lunt argue that media regulation is difficult because regulators must balance citizen protection with consumer choice in a changing digital media landscape.",
-keypoints:["Regulation balances protection and freedom/choice.","Digital media makes regulation more complicated.","Audiences are both citizens needing protection and consumers making choices.","Useful for industries, online media and debates about harm, power and control."],
-examq:"How useful is Livingstone and Lunt's theory of regulation when analysing media industries?",
-quizq:"What is the key tension in Livingstone and Lunt's regulation theory?",quiza:"Regulators must balance protecting citizens with allowing consumer choice and freedom in a changing media environment."}
-,{name:"Albert Bandura",area:"Audience",tag:"Media Effects",tagCol:"#7c2d12",tagTxt:"#fdba74",
-theory:"Media Effects Theory",
-summary:"Bandura's media effects approach suggests audiences may learn behaviour by observing models in media, especially when behaviour is rewarded or normalised.",
-keypoints:["Audiences can learn through observation and imitation.","Media may model behaviours, values or attitudes.","Effects are not automatic for every audience member.","Useful when evaluating concerns about violence, stereotypes or harmful influence."],
-examq:"How far can media effects theory explain audience responses to media products?",
-quizq:"What does Bandura's media effects theory suggest?",quiza:"Audiences may learn or imitate behaviours they observe in media, especially if those behaviours appear rewarded or normalised."}
+{name:"Laura Mulvey",area:"Representation",tag:"Gender (wider reading)",spec:false,wider:true,
+theory:"The male gaze (wider reading)",
+summary:"NOT a named theorist in the Eduqas A Level specification — included as useful wider reading only. Mulvey’s ‘male gaze’ is often taught alongside gender representation, but the named gender/representation theorists you must reference are van Zoonen, bell hooks and Judith Butler.",
+keypoints:["Wider reading — not part of the Eduqas set theorist list; will not be named in the mark scheme","Mulvey argued that mainstream visual media can position the spectator to view women as objects of a ‘male gaze’","Can support a point about gender representation, but examiners credit the named theorists (van Zoonen, bell hooks, Butler)"],
+examq:"[Not a set theorist] You may reference the ‘male gaze’ to support a point, but apply van Zoonen, bell hooks or Butler for the named gender theory.",
+quizq:"Is Mulvey a named Eduqas theorist?",
+quiza:"No. Mulvey is not one of the named theorists in the Eduqas A Level specification — she is included here as wider reading. For gender and representation, the named theorists are van Zoonen, bell hooks and Judith Butler."}
 ];
 
 var ratings = {};
@@ -1648,7 +1678,7 @@ function filterTerms() {
 function buildTheorists() {
   var html = '';
   theorists.forEach(function(t, i) {
-    var cols = {"Roland Barthes": ["linear-gradient(135deg,#0f0c29,#302b63,#24243e)", "#a78bfa", "#7c3aed"],"Stuart Hall": ["linear-gradient(135deg,#c0392b,#e74c3c,#f39c12)", "#fff", "#c0392b"],"Levi-Strauss": ["linear-gradient(135deg,#134e4a,#0d9488,#2dd4bf)", "#fff", "#0d9488"],"Tzvetan Todorov": ["linear-gradient(135deg,#92400e,#d97706,#fbbf24)", "#1a1a16", "#d97706"],"Vladimir Propp": ["linear-gradient(135deg,#1e1b4b,#4338ca,#818cf8)", "#fff", "#6366f1"],"Laura Mulvey": ["linear-gradient(135deg,#831843,#db2777,#f472b6)", "#fff", "#db2777"],"Liesbet van Zoonen": ["linear-gradient(135deg,#701a75,#a21caf,#e879f9)", "#fff", "#c026d3"],"bell hooks": ["linear-gradient(135deg,#78350f,#b45309,#fbbf24)", "#fff", "#f59e0b"],"David Gauntlett": ["linear-gradient(135deg,#064e3b,#059669,#34d399)", "#fff", "#10b981"],"George Gerbner": ["linear-gradient(135deg,#7f1d1d,#b91c1c,#f87171)", "#fff", "#ef4444"],"Henry Jenkins": ["linear-gradient(135deg,#0c4a6e,#0284c7,#38bdf8)", "#fff", "#0ea5e9"],"Clay Shirky": ["linear-gradient(135deg,#134e4a,#0f766e,#14b8a6)", "#fff", "#14b8a6"],"Curran and Seaton": ["linear-gradient(135deg,#1e293b,#334155,#64748b)", "#fff", "#94a3b8"],"David Hesmondhalgh": ["linear-gradient(135deg,#451a03,#92400e,#f97316)", "#fff", "#f97316"]};
+    var cols = {"Roland Barthes": ["linear-gradient(135deg,#0f0c29,#302b63,#24243e)", "#a78bfa", "#7c3aed"],"Stuart Hall (Representation)": ["linear-gradient(135deg,#c0392b,#e74c3c,#f39c12)", "#fff", "#c0392b"],"Stuart Hall (Reception)": ["linear-gradient(135deg,#7f1d1d,#c0392b,#e67e22)", "#fff", "#c0392b"],"Claude Lévi-Strauss": ["linear-gradient(135deg,#134e4a,#0d9488,#2dd4bf)", "#fff", "#0d9488"],"Tzvetan Todorov": ["linear-gradient(135deg,#92400e,#d97706,#fbbf24)", "#1a1a16", "#d97706"],"Steve Neale": ["linear-gradient(135deg,#0c4a6e,#0369a1,#38bdf8)", "#fff", "#0284c7"],"Jean Baudrillard": ["linear-gradient(135deg,#3b0764,#6d28d9,#a78bfa)", "#fff", "#7c3aed"],"Judith Butler": ["linear-gradient(135deg,#500724,#9d174d,#f472b6)", "#fff", "#be185d"],"Paul Gilroy": ["linear-gradient(135deg,#7f1d1d,#b91c1c,#fca5a5)", "#fff", "#dc2626"],"Vladimir Propp": ["linear-gradient(135deg,#334155,#475569,#94a3b8)", "#fff", "#64748b"],"Laura Mulvey": ["linear-gradient(135deg,#3f3f46,#52525b,#a1a1aa)", "#fff", "#71717a"],"Liesbet van Zoonen": ["linear-gradient(135deg,#701a75,#a21caf,#e879f9)", "#fff", "#c026d3"],"bell hooks": ["linear-gradient(135deg,#78350f,#b45309,#fbbf24)", "#fff", "#f59e0b"],"David Gauntlett": ["linear-gradient(135deg,#064e3b,#059669,#34d399)", "#fff", "#10b981"],"George Gerbner": ["linear-gradient(135deg,#7f1d1d,#b91c1c,#f87171)", "#fff", "#ef4444"],"Henry Jenkins": ["linear-gradient(135deg,#0c4a6e,#0284c7,#38bdf8)", "#fff", "#0ea5e9"],"Clay Shirky": ["linear-gradient(135deg,#134e4a,#0f766e,#14b8a6)", "#fff", "#14b8a6"],"Albert Bandura": ["linear-gradient(135deg,#7c2d12,#c2410c,#fdba74)", "#fff", "#ea580c"],"Curran and Seaton": ["linear-gradient(135deg,#1e293b,#334155,#64748b)", "#fff", "#94a3b8"],"Sonia Livingstone and Peter Lunt": ["linear-gradient(135deg,#14532d,#15803d,#86efac)", "#fff", "#16a34a"],"David Hesmondhalgh": ["linear-gradient(135deg,#451a03,#92400e,#f97316)", "#fff", "#f97316"]};
     var col = cols[t.name] || ["linear-gradient(135deg,#1a1a16,#333)", "#fff", "#b8860b"];
     var grad = col[0], txtCol = col[1], accent = col[2];
     var initial = t.name.split(' ').map(function(w){return w[0];}).join('').slice(0,2);
@@ -1662,7 +1692,7 @@ function buildTheorists() {
     html += '<div class="theo-front-theory" style="color:' + accent + ';">' + t.theory + '</div>';
     html += '</div>';
     html += '<div class="theo-front-bottom">';
-    html += '<div class="theo-front-area">' + t.area + '</div>';
+    html += '<div class="theo-front-area">' + t.area + (t.wider ? ' &middot; <span style="color:#c0392b;">wider reading</span>' : '') + '</div>';
     html += '<div class="theo-front-hint">tap to reveal &#8594;</div>';
     html += '</div></div>';
     // BACK
@@ -1670,6 +1700,8 @@ function buildTheorists() {
     html += '<div class="theo-back-name">' + t.name + '</div>';
     html += '<span class="theo-back-tag" style="background:' + accent + '22;color:' + accent + ';border:1px solid ' + accent + '44;">' + t.tag + '</span>';
     html += '</div><div class="theo-back-body">';
+    if(t.wider){ html += '<div style="background:#fbe7e5;border:1px solid #e5a3a3;color:#8c1d16;border-radius:6px;padding:5px 9px;font-size:0.68rem;font-weight:700;margin-bottom:0.7rem;line-height:1.35;">&#9888;&#65039; Wider reading &mdash; NOT a named theorist in the Eduqas specification</div>'; }
+    else if(t.spec){ html += '<div style="background:#e6f4ea;border:1px solid #9cccab;color:#1b5e20;border-radius:6px;padding:5px 9px;font-size:0.68rem;font-weight:700;margin-bottom:0.7rem;line-height:1.35;">&#10003; Eduqas named theorist &mdash; exam-board wording</div>'; }
     html += '<div class="theo-exam-pill">Exam question</div>';
     html += '<div style="font-size:0.78rem;font-style:italic;color:var(--ink);margin-bottom:0.8rem;line-height:1.5;">' + t.examq + '</div>';
     html += '<div class="theo-back-theory">' + t.theory + '</div>';
