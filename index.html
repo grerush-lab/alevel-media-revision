@@ -55,6 +55,12 @@ main{padding:1.5rem 2rem;max-width:1400px;margin:0 auto;}
 .q-badges{display:flex;gap:0.4rem;margin-bottom:0.35rem;flex-wrap:wrap;}
 .badge{font-family:"IBM Plex Mono",monospace;font-size:0.6rem;letter-spacing:1px;text-transform:uppercase;padding:0.12rem 0.5rem;border-radius:2px;white-space:nowrap;}
 .badge-year{background:var(--ink);color:var(--paper);}
+.badge-level{font-weight:700;letter-spacing:1px;}
+.badge-level.as{background:#b45309;color:#fff;}
+.badge-level.al{background:#1e3a5f;color:#fff;}
+.pq-row-level{display:inline-block;margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:.55rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:1px 5px;border-radius:2px;color:#fff;}
+.pq-row-level.as{background:#b45309;}
+.pq-row-level.al{background:#1e3a5f;}
 .badge-marks{background:var(--accent);color:white;}
 .badge-comp.c1{background:var(--c1col);color:white;}
 .badge-comp.c2{background:var(--c2col);color:white;}
@@ -473,7 +479,7 @@ main{padding:1.5rem 2rem;max-width:1400px;margin:0 auto;}
     <div class="site-title">A Level Media Studies</div>
     <div class="site-sub">Revision Hub &mdash; Eduqas AS &amp; A Level</div>
   </div>
-  <div class="site-meta"><div>AS &amp; A Level</div><div style="margin-top:3px;">2018&ndash;2025</div></div>
+  <div class="site-meta"><div>AS &amp; A Level</div><div style="margin-top:3px;">2018&ndash;2026</div></div>
 </header>
 <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
 <div class="rag-bar">
@@ -532,6 +538,11 @@ main{padding:1.5rem 2rem;max-width:1400px;margin:0 auto;}
 </div>
 <div class="filter-bar">
   <span class="filter-label">Filter by</span>
+  <select id="f-level" onchange="applyFilters()">
+    <option value="">All Levels</option>
+    <option value="AS">AS Level</option>
+    <option value="A Level">A Level</option>
+  </select>
   <select id="f-comp" onchange="applyFilters()">
     <option value="">All Components</option>
     <option value="1">Component 1</option>
@@ -564,6 +575,7 @@ main{padding:1.5rem 2rem;max-width:1400px;margin:0 auto;}
     <option value="2023">2023</option>
     <option value="2024">2024</option>
     <option value="2025">2025</option>
+    <option value="2026">2026</option>
   </select>
   <select id="f-marks" onchange="applyFilters()">
     <option value="">All Mark Tariffs</option>
@@ -577,18 +589,37 @@ main{padding:1.5rem 2rem;max-width:1400px;margin:0 auto;}
       <option value="Black Panther">Black Panther</option>
       <option value="No Time to Die">No Time to Die</option>
       <option value="Late Night Woman's Hour">Late Night Woman&apos;s Hour</option>
+      <option value="Daily Mirror">Daily Mirror</option>
+      <option value="Woman’s Hour">Woman&apos;s Hour</option>
+      <option value="HYHGP">Have You Heard George&apos;s Podcast?</option>
+      <option value="Assassin’s Creed">Assassin&apos;s Creed</option>
+    </optgroup>
+    <optgroup label="C1 Section A &mdash; Set products">
+      <option value="Formation">Formation</option>
+      <option value="Underdog">Underdog</option>
+      <option value="Tide">Tide</option>
     </optgroup>
     <optgroup label="C2 &mdash; Television">
       <option value="Peaky Blinders">Peaky Blinders</option>
       <option value="The Bridge">The Bridge</option>
+      <option value="Black Mirror">Black Mirror</option>
+      <option value="The Returned">The Returned</option>
+      <option value="Killing Eve">Killing Eve</option>
+      <option value="Tehran">Tehran</option>
     </optgroup>
     <optgroup label="C2 &mdash; Magazines">
       <option value="Big Issue">Big Issue</option>
       <option value="Vogue">Vogue</option>
+      <option value="Woman">Woman</option>
+      <option value="Woman’s Realm">Woman&apos;s Realm</option>
+      <option value="Adbusters">Adbusters</option>
+      <option value="Huck">Huck</option>
     </optgroup>
     <optgroup label="C2 &mdash; Online">
       <option value="Zoe Sugg">Zoe Sugg</option>
       <option value="Thiiird">Thiiird</option>
+      <option value="KSI">JJ Olatunji/KSI</option>
+      <option value="Attitude">Attitude</option>
     </optgroup>
   </select>
   <button class="btn-reset" onclick="resetFilters()">&#x2715; Reset</button>
@@ -802,6 +833,7 @@ main{padding:1.5rem 2rem;max-width:1400px;margin:0 auto;}
 <div class="tab-section" id="tab-pastq">
   <div class="pq-filters">
     <span class="filter-label" style="color:var(--muted);">View by:</span>
+    <select id="pqLevel" onchange="buildPastQ()"><option value="">All Levels</option><option value="AS">AS Level</option><option value="A Level">A Level</option></select>
     <select id="pqComp" onchange="buildPastQ()"><option value="">All Components</option><option value="1">Component 1</option><option value="2">Component 2</option></select>
     <select id="pqSec" onchange="buildPastQ()"><option value="">All Sections</option><option value="A">Section A</option><option value="B">Section B</option><option value="C">Section C</option></select>
     <select id="pqQnum" onchange="buildPastQ()">
@@ -818,6 +850,13 @@ main{padding:1.5rem 2rem;max-width:1400px;margin:0 auto;}
       <option value="Q5">Q5 Magazines extended</option>
       <option value="Q7a">Q7/8a Online theory</option>
       <option value="Q7b">Q7/8b Online extended</option>
+      <optgroup label="A Level paper (2026 on)">
+        <option value="Q3.4">Q3.4 C1 Contexts extended (A Level)</option>
+        <option value="Q1.1">Q1.1 TV audiences (A Level C2)</option>
+        <option value="Q1.2">Q1.2 TV representation (A Level C2)</option>
+        <option value="Q4.0">Q4.0 Magazines theory evaluation (A Level C2)</option>
+        <option value="Q7.0">Q7.0 Online extended (A Level C2)</option>
+      </optgroup>
     </select>
   </div>
   <div id="pastQList"></div>
@@ -1348,7 +1387,376 @@ question:"Explore how online media producers construct representations of themse
 must:["Must focus on self-representation construction","Must reference Zoe Sugg throughout"],
 points:["Colour palette and visual aesthetic are consistent across platforms — a deliberate branding choice","Mode of address: direct, conversational and confessional tone constructs a ‘best friend’ persona","Transition from YouTube beauty channel to mainstream celebrity (Girl Online book) was carefully managed","Brand partnerships with Zoella Beauty reinforce the lifestyle representation but also commercialise her persona","Content choices (lifestyle, motherhood, wellbeing) construct Zoella as aspirational but relatable","Apply Hall: the preferred reading of authenticity is encoded through production choices that appear natural"],
 levels:[[5,"13-15","Excellent, perceptive. Detailed."],[4,"10-12","Good."],[3,"7-9","Satisfactory."],[2,"4-6","Basic."],[1,"1-3","Minimal."]],
-tip:["Consider how EVERY platform choice contributes to self-representation","Apply Hall’s encoding/decoding and Gauntlett’s identity theory","Strong: considers what Zoella reveals AND what she conceals"]}
+tip:["Consider how EVERY platform choice contributes to self-representation","Apply Hall’s encoding/decoding and Gauntlett’s identity theory","Strong: considers what Zoella reveals AND what she conceals"]},
+
+// ═══ SUMMER 2026 — AS and A Level (labelled via level field) ═══
+{id:"as_c1_2026_q10",
+year:2026,
+level:"AS",
+comp:1,
+sec:"A",
+topic:"Representation",
+marks:25,
+qnum:"Q1.0",
+product:"Together (Chance the Rapper & DJ Premier, 2024) unseen extract + Formation or Underdog",
+texts:["Formation", "Underdog"],
+question:"<strong>[AS]</strong> Compare how representations in the music videos construct versions of reality. In your answer, you must consider: the similarities and differences in the representations; how far the representations relate to relevant media contexts. [25]",
+must:["the similarities and differences in the representations", "how far the representations relate to relevant media contexts"],
+points:["SIMILAR — camerawork: handheld archive footage in Together celebrates unity and connotes realism; Formation’s archive/handheld footage (‘That BEAT’, Hurricane Katrina aftermath) shows the impact of systemic injustice; Underdog’s urban establishing shots and fluid tracking anchor a realistic community.", "SIMILAR — location: ‘real’ domestic spaces in Together (parties, kitchens, barbeques, housing rallies, derelict houses); New Orleans settings in Formation reappropriate the plantation and swimming pool to confront racial history; Underdog’s streets and markets reflect Keys’ Hell’s Kitchen background.", "SIMILAR — costume and diverse subjects: hoodies/American iconography and Black Panther leather/berets (Together); white antebellum-style dresses, Blue Ivy, the boy dancing before armed police (Formation); hijabs, prom dresses, single mothers, teachers and ‘sons on the front line’ (Underdog).", "SIMILAR — mode of address: Chance, Beyoncé and Keys all use direct address to build trust, persona and a sense of shared reality.", "DIFFERENT — technical codes: Together’s found footage evokes nostalgic solidarity; Formation’s tracking shots of submerged houses and cars and dancers in formation explore systemic injustice; Underdog uses a constructed narrative, low-angle close-ups of hands reaching up and slow motion.", "DIFFERENT — written codes: on-screen lyrics in Together anchor ‘family’, ‘community’, ‘togetherness’; Formation has none, but pans across the ‘stop shooting us’ graffiti; Underdog has none, leaving images to carry meaning.", "DIFFERENT — food motif: Together’s aunty ‘cooked for 20 people a week’ and seasoning lyrics celebrate Black American culture; Formation’s ‘Red Lobster’/hot sauce lyrics; Underdog only the child with spilt cereal, connoting hardship.", "CONTEXTS — Together: Black Lives Matter, global inequality, Chicago housing justice, Black Panther rallies. Formation: Hurricane Katrina, police brutality, 2016 political zeitgeist. Underdog: director Wendy Morgan’s ‘space grounded in reality’, redefining the ‘underdog’, Keys’ own experience of inequality."],
+levels:[[5, "21-25", "Excellent, detailed application of the framework. Detailed comparisons. Judgements about contexts perceptive and fully supported."], [4, "16-20", "Good, accurate application. Reasonably detailed comparisons. Judgements logical and well supported."], [3, "11-15", "Satisfactory application. Comparisons may focus more on one product. Judgements reasonable."], [2, "6-10", "Basic application. Likely to focus mainly on one product. Judgements undeveloped."], [1, "1-5", "Minimal application; likely only one product; lacks judgements."]],
+tip:["AS PAPER — this 25-mark comparison is the AS Q1.0 (the A Level equivalent is 30 marks).", "Band 3+ requires comparison of the unseen extract AND your set video.", "Responses that miss either bullet are unlikely to get above Band 2.", "Engage explicitly with ‘how far’ representations relate to contexts.", "Hall is useful but naming theory isn’t required for top marks. Extended response: sustained line of reasoning."]},
+
+{id:"as_c1_2026_q20",
+year:2026,
+level:"AS",
+comp:1,
+sec:"A",
+topic:"Media Language",
+marks:10,
+qnum:"Q2.0",
+product:"Cadbury ‘Yours for 200 Years’ poster advertisement (2024) — unseen",
+texts:[],
+question:"<strong>[AS]</strong> Explore how media language communicates meaning in the advertisement. (Cadbury’s ‘Yours for 200 Years’ poster, 2024) [10]",
+must:[],
+points:["The decorative Cadbury signature logo is iconic, connoting professionalism and reputation the audience is positioned to trust.", "‘Glass and a half’ imagery pouring milk into the bar (centre frame) and into the ‘200’ connotes richness — and a ‘glass and a half’ of kindness and generosity in everyone.", "‘Yours for 200 Years (Since 1824)’ — direct address builds closeness with the brand and celebrates its long-standing reputation.", "‘Limited edition packs / in-store today’ in bold white typography grabs attention and creates urgency so audiences don’t miss out.", "Watercolour/acrylic painted style connotes nostalgia and timelessness, echoing the era of the original bar.", "Purple wrapper is iconographic of the brand; gold text signifies prestige.", "Mise-en-scène (brick wall, milk churns, robin on a stool, window onto bright countryside) links the brand to British agriculture and heritage.", "The dairy maid’s functional dress and apron connote tradition; her eyeline, like the audience’s, is directed to the product."],
+levels:[[5, "9-10", "Excellent, consistent, accurate application. Perceptive, detailed analysis, may be informed by theory."], [4, "7-8", "Good, accurate application. Logical, reasonably detailed analysis."], [3, "5-6", "Satisfactory application. Reasonable, straightforward analysis."], [2, "3-4", "Basic application. Undeveloped; tendency to describe."], [1, "1-2", "Minimal application. Superficial and generalised."]],
+tip:["AS PAPER — 10 marks (about 12 minutes).", "You don’t need to cover every element — focusing more on visual than written codes is fine.", "Semiotic terms (signifier, connotation, iconography, anchorage) strengthen analysis."]},
+
+{id:"as_c1_2026_q31",
+year:2026,
+level:"AS",
+comp:1,
+sec:"B",
+topic:"Industry",
+marks:1,
+qnum:"Q3.1",
+product:"Daily Mirror — ownership",
+texts:["Daily Mirror"],
+question:"<strong>[AS]</strong> Name the media organisation that owns the Daily Mirror. [1]",
+must:[],
+points:["Reach plc (also accept Reach / Reach Publications)"],
+levels:[],
+tip:["AS PAPER — 1 mark. Just the name."]},
+
+{id:"as_c1_2026_q32",
+year:2026,
+level:"AS",
+comp:1,
+sec:"B",
+topic:"Industry",
+marks:4,
+qnum:"Q3.2",
+product:"Print newspaper circulation",
+texts:["Daily Mirror"],
+question:"<strong>[AS]</strong> Briefly explain two factors that affect print newspaper circulation. [4]",
+must:[],
+points:["Technological developments — online media means audiences consume news differently and more conveniently.", "Cost — free papers like Metro have healthy circulation (doubled in 2021) while paid daily sales have fallen.", "Changing societal values — printing is costly and bad for the environment; younger audiences consume news differently or not at all.", "Controversies damaging trust — e.g. the News of the World phone-hacking scandal.", "Economic contexts — cost-of-living crisis makes papers seem unaffordable when news is free on TV or online."],
+levels:[["—", "1+1", "1 mark per valid factor stated (max 2)"], ["—", "1+1", "1 mark per valid explanation of that factor (max 2)"]],
+tip:["AS PAPER — 4 marks: name the factor (1) and explain it (1), twice."]},
+
+{id:"as_c1_2026_q33",
+year:2026,
+level:"AS",
+comp:1,
+sec:"B",
+topic:"Context",
+marks:10,
+qnum:"Q3.3",
+product:"Daily Mirror — political contexts (synoptic)",
+texts:["Daily Mirror"],
+question:"<strong>[AS]</strong> Explain how political contexts influence the newspaper industry. Refer to the Daily Mirror to support your points. [10]",
+must:[],
+points:["Established 1903; national red-top tabloid with a working-class readership and traditional left-wing stance.", "One of the only papers consistently supporting Labour; critical of Conservative handling of issues such as Covid, supportive of the new Labour government.", "News values, story selection and representations of social/political groups target a lower-middle/working-class readership.", "Editorials position the paper as the voice of ‘the British people’; the ‘Heart of Britain’ slogan; the title ‘holds a mirror’ up to society.", "Selection and cropping of unflattering images of opponents vs. dominant images of Labour leaders; emotive language; colloquial direct address.", "Mirror Online opinion pieces reinforce the left-wing agenda.", "SYNOPTIC — papers as opinion leaders shaping responses to events; Curran and Seaton: industry dominated by a few powerful companies, the Mirror a lone left voice in a right-wing press; Reach plc diversified into regional news."],
+levels:[[5, "9-10", "Excellent, detailed, accurate knowledge of how political contexts influence the industry. Detailed reference to the Mirror."], [4, "7-8", "Good, accurate knowledge. Reasonably detailed reference."], [3, "5-6", "Satisfactory knowledge, may lack development. Appropriate reference."], [2, "3-4", "Basic, limited knowledge. Limited reference."], [1, "1-2", "Minimal knowledge and reference."]],
+tip:["AS PAPER — 10-mark synoptic question: reward for drawing in Representation and Industries too.", "Ideally use examples from editions beyond the one you studied in class.", "Curran and Seaton fits well for top-band answers."]},
+
+{id:"as_c1_2026_q41",
+year:2026,
+level:"AS",
+comp:1,
+sec:"B",
+topic:"Audience",
+marks:2,
+qnum:"Q4.1",
+product:"Radio audiences",
+texts:[],
+question:"<strong>[AS]</strong> Identify two ways by which radio producers categorise audiences. [2]",
+must:[],
+points:["Mainstream", "Niche / specialised", "Demographics — age, gender, class, ethnicity, income, ABC1/C2DE", "Psychographics — lifestyle, taste, values, attitudes"],
+levels:[],
+tip:["AS PAPER — 2 marks, one per valid way."]},
+
+{id:"as_c1_2026_q42",
+year:2026,
+level:"AS",
+comp:1,
+sec:"B",
+topic:"Audience",
+marks:8,
+qnum:"Q4.2",
+product:"Woman’s Hour or Have You Heard George’s Podcast?",
+texts:["Woman’s Hour", "HYHGP"],
+question:"<strong>[AS]</strong> Explain how radio productions target audiences. Refer to at least one episode from either Woman’s Hour or Have You Heard George’s Podcast? to support your points. [8]",
+must:[],
+points:["Hosts/guests — WH: female presenters (Emma Barnett, Anita Rani) and guests address gender inequality; HYHGP?: George the Poet and guests offer intelligent discussion of social issues through drama, music and poetry for a specialised audience.", "Interactivity — WH invites responses on X, the website and social media, read out live; HYHGP? ‘Common Ground’ forum lets listeners answer discussion questions and share audio, video and art.", "PSB remit — WH appeals to a specialised female audience and supports Radio 4 diversity; HYHGP? uses ‘chapters’, specialised vocabulary and themes (e.g. ‘Flying the Flag’, ‘Sabrina’s Boy’) for a young, diverse audience after Ofcom’s 2017 diversity criticism.", "Technology — WH Daily podcast suits working listeners; HYHGP? on BBC Sounds across devices gives minority groups a voice and on-demand reach.", "Hall’s reception theory (preferred/negotiated/oppositional) may be applied."],
+levels:[[4, "7-8", "Excellent, detailed, accurate knowledge. Detailed reference to the set radio product."], [3, "5-6", "Good, accurate knowledge. Reasonably detailed reference."], [2, "3-4", "Satisfactory, may lack development. Appropriate reference."], [1, "1-2", "Basic, with inaccuracies. Limited reference."]],
+tip:["AS PAPER — 8 marks (about 10 minutes); 4 bands, not 5.", "Name specific episodes."]},
+
+{id:"al_c1_2026_q10",
+year:2026,
+level:"A Level",
+comp:1,
+sec:"A",
+topic:"Media Language",
+marks:15,
+qnum:"Q1.0",
+product:"Quarter Life Crisis (Baby Queen, 2023) — unseen music video extract",
+texts:[],
+question:"<strong>[A LEVEL]</strong> Explore how media language influences meaning in this music video extract. (Quarter Life Crisis, Baby Queen, 2023) [15]",
+must:[],
+points:["Purpose: construct the artist’s identity, establish genre and convey narrative.", "Technical codes: close-ups, establishing and POV shots; rapid editing and a range of shots/angles connote the ‘crisis’ and her dilemma; lighting shifts with her emotions.", "Visual codes: colour, costume, gesture, expression; binary oppositions of childhood vs adulthood; iconography of the childhood bedroom (teddy bear, letters on the door); a trapped setting reflecting turmoil.", "Mode of address: direct address positions the audience to share her crisis — a music video convention.", "Narrative: surreal and dreamlike, with multiple personas constructing her emotional state; the target audience identifies with her dilemma.", "Amplification of the lyrics creates meaning."],
+levels:[[5, "13-15", "Excellent, consistent, accurate application. Perceptive, detailed, likely theory-informed."], [4, "10-12", "Good, accurate application. Logical analysis."], [3, "7-9", "Satisfactory application. Reasonable, straightforward."], [2, "4-6", "Basic application. Undeveloped; tendency to describe."], [1, "1-3", "Minimal. Superficial and generalised."]],
+tip:["A LEVEL PAPER — 15 marks (the AS media language question is 10).", "Semiotics helps but isn’t required for top bands.", "Pick specific moments from each viewing."]},
+
+{id:"al_c1_2026_q20",
+year:2026,
+level:"A Level",
+comp:1,
+sec:"A",
+topic:"Representation",
+marks:30,
+qnum:"Q2.0",
+product:"The Mother film poster (2023) — unseen + Tide advertisement (1950s)",
+texts:["Tide"],
+question:"<strong>[A LEVEL]</strong> Compare how the representations in the film poster and the advertisement convey ideologies about gender. In your answer you must: consider the similarities and differences; make judgements and draw conclusions about how far the representations reinforce or challenge ideologies about gender; consider how the representations reflect social and cultural contexts. [30]",
+must:["similarities and differences in how the representations convey ideologies about gender", "judgements about how far they reinforce or challenge ideologies about gender", "how the representations reflect social and cultural contexts"],
+points:["SIMILAR — both centre women and reflect the time they were made; no men appear; each woman is in control of her domain (hostile snowscape vs the home).", "SIMILAR — both construct women as role models through clothing and iconography; both define women as mothers (the film’s title; Tide’s nurturing domestic role).", "The Mother: the gun, practical clothing and direct address construct strength in adversity plus a narrative enigma; she doesn’t need a man to achieve her goal.", "DIFFERENT — Tide’s idealised ‘happy housewife’ and ‘cult of homemaking’ (Friedan) may provoke oppositional readings today, and even from women who had worked in wartime roles.", "DIFFERENT — Tide’s bright colours, hyperbole and smiles sell a transformative wash and a female community; The Mother is isolated, muted and serious.", "JUDGEMENT — The Mother challenges stereotypes (not objectified, active protector) though some may see J.Lo’s image as still glamourised; Tide reinforces a restricted representation (van Zoonen), the apron and headscarf romanticising domesticity (Doris Day intertext).", "CONTEXTS — Tide reflects post-war America and the American Dream; The Mother reflects audience expectations of wider roles for women; ‘trad wives’ and the apron as fashion show shifting cultural views."],
+levels:[[5, "25-30", "Excellent application; perceptive, detailed; detailed comparisons; perceptive judgements; perceptive contexts."], [4, "19-24", "Good, accurate; logical; reasonably detailed comparisons; logical judgements and contexts."], [3, "13-18", "Satisfactory; comparisons may favour one product; straightforward judgements and contexts."], [2, "7-12", "Basic; likely focuses mainly on one product; undeveloped judgements."], [1, "1-6", "Minimal; likely one product only; lacks judgements."]],
+tip:["A LEVEL PAPER — 30 marks, three bullet points (AS equivalent is 25 marks, two bullets).", "Band 3+ requires comparison of both products.", "Engage explicitly with ‘how far’ reinforce vs challenge.", "Useful theory: van Zoonen, bell hooks, Hall, Friedan. Extended response — sustained line of reasoning."]},
+
+{id:"al_c1_2026_q31",
+year:2026,
+level:"A Level",
+comp:1,
+sec:"B",
+topic:"Industry",
+marks:2,
+qnum:"Q3.1",
+product:"Radio industry — specialised programmes",
+texts:["Woman’s Hour", "HYHGP"],
+question:"<strong>[A LEVEL]</strong> Briefly explain what is meant by a specialised radio programme. [2]",
+must:[],
+points:["Caters for a more niche audience and reflects the station’s profile, or focuses on a particular theme, topic or genre.", "Often PSB-produced, as licence-fee funding allows niche content.", "Examples: a genre/artist music show, Woman’s Hour, Have You Heard George’s Podcast?"],
+levels:[["—", "2", "Good, accurate explanation with exemplification/detail"], ["—", "1", "Basic or incomplete explanation, or an example only"]],
+tip:["A LEVEL PAPER — 2 marks: definition plus an example."]},
+
+{id:"al_c1_2026_q32",
+year:2026,
+level:"A Level",
+comp:1,
+sec:"B",
+topic:"Industry",
+marks:2,
+qnum:"Q3.2",
+product:"Radio industry — digital convergence",
+texts:[],
+question:"<strong>[A LEVEL]</strong> Briefly explain what you understand by digital convergence in the radio industry. [2]",
+must:[],
+points:["Different media platforms merging together.", "Audiences accessing radio content across platforms — podcasts, social media, e.g. BBC Sounds."],
+levels:[["—", "2", "Good, accurate explanation with exemplification/detail"], ["—", "1", "Basic, e.g. just ‘BBC Sounds’"]],
+tip:["A LEVEL PAPER — 2 marks: define it and exemplify it."]},
+
+{id:"al_c1_2026_q33",
+year:2026,
+level:"A Level",
+comp:1,
+sec:"B",
+topic:"Industry",
+marks:9,
+qnum:"Q3.3",
+product:"Woman’s Hour or Have You Heard George’s Podcast?",
+texts:["Woman’s Hour", "HYHGP"],
+question:"<strong>[A LEVEL]</strong> Explain the impact of technological changes on distribution in the radio industry. Refer to either Woman’s Hour or Have You Heard George’s Podcast? to support your points. [9]",
+must:[],
+points:["The FM-to-DAB switch gave flexibility in distribution and improved quality.", "Diverse platforms for programmes and podcasts broaden reach and have economic impact.", "BBC Sounds (2018) heralded convergence — live, on-demand and podcasts across devices.", "The schedule matters less as programmes are distributed digitally; audiences choose what and when.", "WH: back episodes, video and audio clips on the website; some argue the live format stays popular because social media enables participation.", "HYHGP?: the podcast format lets the BBC experiment with distribution and diverse content unsuited to mainstream radio."],
+levels:[[5, "8-9", "Excellent, detailed, accurate. Detailed reference to the set product."], [4, "6-7", "Good, accurate. Reasonably detailed reference."], [3, "4-5", "Satisfactory, may lack development. Straightforward reference."], [2, "2-3", "Basic. Partial reference."], [1, "1", "Minimal."]],
+tip:["A LEVEL PAPER — 9 marks.", "Focus on DISTRIBUTION impact, not just listing technologies."]},
+
+{id:"al_c1_2026_q34",
+year:2026,
+level:"A Level",
+comp:1,
+sec:"B",
+topic:"Context",
+marks:12,
+qnum:"Q3.4",
+product:"Woman’s Hour or HYHGP? — social and cultural contexts (synoptic)",
+texts:["Woman’s Hour", "HYHGP"],
+question:"<strong>[A LEVEL]</strong> Explain the ways in which social and cultural contexts may influence radio production. Refer to either Woman’s Hour or Have You Heard George’s Podcast? to support your points. [12]",
+must:[],
+points:["PSB remit: Radio 4 (speech-led) produces content documenting social and cultural change; less commercial pressure lets producers raise awareness of social issues.", "HYHGP?: a cultural shift at the BBC toward younger, more diverse audiences; the podcast format allows controversial, socially relevant content; addresses the BBC’s lack of diversity; a young Black British perspective; supports Curran and Seaton on diverse ownership enabling adventurous work.", "WH: long-running record of women’s changing place in society; the live show is a Radio 4 cornerstone; topics and guests respond to social, cultural and political issues, often challenging authority.", "WH: BBC Sounds convergence and multiple production models — short videos, bite-size clips, highlights podcasts, articles."],
+levels:[[4, "10-12", "Excellent, detailed, accurate; possible theory. Detailed reference."], [3, "7-9", "Good, accurate. Reasonably detailed reference."], [2, "4-6", "Satisfactory, may lack development. Straightforward reference."], [1, "1-3", "Basic. Partial reference."]],
+tip:["A LEVEL PAPER — 12-mark synoptic question; draw in Language, Representation and Audiences for the top band.", "Link context to PRODUCTION decisions, not just content."]},
+
+{id:"al_c1_2026_q41",
+year:2026,
+level:"A Level",
+comp:1,
+sec:"B",
+topic:"Audience",
+marks:10,
+qnum:"Q4.1",
+product:"Daily Mirror — targeting audiences",
+texts:["Daily Mirror"],
+question:"<strong>[A LEVEL]</strong> Explain how newspapers target specific audiences. Refer to the Daily Mirror to support your points. [10]",
+must:[],
+points:["Identify who the Mirror’s target audience is and what ‘targeting’ means.", "Front page / home page: headline style and central image appeal to a left-wing audience.", "Selection and presentation of content resonates with readers’ views; story choice, lexis and mode of address convey left-wing ideology.", "Use pages beyond the front — the editorial, social-issue features — and the website.", "Readers made to feel part of a community; the letters page shows acceptance of the preferred reading."],
+levels:[[5, "9-10", "Excellent, detailed, accurate; possible theory. Detailed reference."], [4, "7-8", "Good, accurate. Reasonably detailed reference."], [3, "5-6", "Satisfactory, may lack development. Straightforward reference."], [2, "3-4", "Basic; limited understanding of targeting. Partial reference."], [1, "1-2", "Minimal."]],
+tip:["A LEVEL PAPER — use the COMPLETE edition studied for Section B; only using the Section A pages is self-penalising.", "Explain HOW targeting works, not just who the audience is."]},
+
+{id:"al_c1_2026_q42",
+year:2026,
+level:"A Level",
+comp:1,
+sec:"B",
+topic:"Audience",
+marks:10,
+qnum:"Q4.2",
+product:"Assassin’s Creed — fans (Henry Jenkins)",
+texts:["Assassin’s Creed"],
+question:"<strong>[A LEVEL]</strong> Explain the importance of fans to the video games industry. Refer to Henry Jenkins’ fandom theory and the Assassin’s Creed video game you have studied. [10]",
+must:["Must apply Henry Jenkins’ fandom theory", "Must refer to the specific Assassin’s Creed game studied"],
+points:["Fans drive distribution, marketing and success, especially of new releases; social media and forums spread information.", "Jenkins: fans are active participants in constructing and circulating meanings — reviews, tips, gameplay videos, vlogs and blogs.", "An established core-gamer fan base forms a participatory culture with a vital social dimension.", "Ubisoft hosts a forum with community content and runs interactive fan events that aid global marketing; new releases create a ‘buzz’.", "The RPG’s co-operative missions build community; female and ethnically diverse characters have broadened the fan base."],
+levels:[[5, "9-10", "Excellent, detailed, accurate with reference to Jenkins. Detailed game reference."], [4, "7-8", "Good, some reference to Jenkins. Reasonably detailed reference."], [3, "5-6", "Satisfactory, may lack development. Straightforward reference."], [2, "3-4", "Basic; limited understanding of importance. Partial reference."], [1, "1-2", "Minimal."]],
+tip:["A LEVEL PAPER — 10 marks.", "Explain WHY fans matter to the industry, not just how they engage.", "Name the specific AC game you studied."]},
+
+{id:"as_c2_2026_tv",
+year:2026,
+level:"AS",
+comp:2,
+sec:"A",
+topic:"Television",
+marks:20,
+qnum:"Q1",
+product:"Peaky Blinders / Black Mirror / Killing Eve (Q1.0–3.0 options)",
+texts:["Peaky Blinders", "Black Mirror", "Killing Eve"],
+question:"<strong>[AS]</strong> Explore how the set episode of <em>Peaky Blinders / Black Mirror / Killing Eve</em> uses genre conventions. Refer to Steve Neale’s genre theory in your response. [20]",
+must:["Must refer to Steve Neale’s genre theory"],
+points:["NEALE (AO1): genres are dominated by repetition but also marked by difference, variation and change; they borrow from and echo other texts; they exist within economic, institutional and industrial contexts.", "PEAKY BLINDERS — repetition: crime (family loyalty, violence), western (Tommy on horseback, townspeople hiding, antihero), gangster (living room hiding a gambling den), period drama (post-WW1 Birmingham); stock characters Tommy and Aunt Polly.", "PEAKY BLINDERS — difference: hybridity; PTSD in Tommy and Danny Whizz-Bang; razor-blade caps; slow motion; hellish industrial Birmingham with a fire motif; themes of class, power and war; Irish folk mixed with modern electronic music.", "BLACK MIRROR — repetition: anthology, dystopia, sci-fi simulated 80s/90s reality, coming-of-age (first love, loss); iconography of advanced technology.", "BLACK MIRROR — difference: hybridity (satire, sci-fi romance); ordinary protagonists; a same-sex romance reflecting changing norms; a happy ending subverting expectations; nostalgic setting and 80s/90s soundtrack.", "KILLING EVE — repetition: spy/thriller tropes (murder, espionage, cat-and-mouse); rule-breaking agent vs ruthless assassin; weapons and international locations.", "KILLING EVE — difference: black-comedy hybridity satirising spy tropes; women replace male roles — bored MI5 officer Eve and flamboyant psychopath Villanelle (not a femme fatale); designer costume; career vs fulfilment; ironic pop soundtrack."],
+levels:[[5, "5 + 13-15", "AO1 excellent knowledge of Neale + AO2 perceptive, insightful analysis fully supported by the episode"], [4, "4 + 10-12", "AO1 good knowledge + AO2 coherent analysis, logically supported"], [3, "3 + 7-9", "AO1 satisfactory + AO2 reasonable, straightforward analysis"], [2, "2 + 4-6", "AO1 basic + AO2 undeveloped; tendency to describe"], [1, "1 + 1-3", "AO1 minimal + AO2 superficial, generalised"]],
+tip:["AS PAPER — one 20-mark question (A Level Section A is two 15-mark questions).", "Split mark scheme: 5 marks for Neale knowledge (AO1) + 15 for analysis (AO2).", "Top band: show conventions being challenged or subverted, not just listed.", "Band 3 tends to describe Neale rather than apply him."]},
+
+{id:"as_c2_2026_mags_a",
+year:2026,
+level:"AS",
+comp:2,
+sec:"B",
+topic:"Magazines",
+marks:5,
+qnum:"Q4.1",
+product:"Woman / Woman’s Realm / Vogue — conglomerate ownership (Q4.1 / 5.1 / 6.1)",
+texts:["Woman", "Woman’s Realm", "Vogue"],
+question:"<strong>[AS]</strong> Briefly explain what is meant by conglomerate ownership. Refer to <em>Woman / Woman’s Realm / Vogue</em> magazine in your response. [5]",
+must:[],
+points:["Conglomerates are large corporations owning multiple outlets across platforms and industries, wielding power over production and content; profit-driven (may inhibit variety); financially viable; vertical and horizontal integration.", "WOMAN — launched 1937 by Odhams Press; became part of IPC (merger of Odhams, Newnes, Fleetway); vertically and horizontally integrated, dominating the women’s weekly market.", "WOMAN’S REALM — published by IPC 1958–2001; IPC formed 1963 from Newnes, Odhams, Fleetway and the Mirror Group.", "VOGUE — Condé Nast (owned Vogue since 1909), bought in 1959 by US conglomerate Advance Publications; publishes many print and online titles internationally."],
+levels:[[5, "5", "Excellent; precisely explained, clearly exemplified with detail"], [4, "4", "Good; well explained and securely exemplified"], [3, "3", "Satisfactory; some minor inaccuracies"], [2, "2", "Basic or partial"], [1, "1", "Minimal"]],
+tip:["AS PAPER — 5 marks: a clear definition plus accurate ownership facts about your magazine."]},
+
+{id:"as_c2_2026_mags_b",
+year:2026,
+level:"AS",
+comp:2,
+sec:"B",
+topic:"Magazines",
+marks:15,
+qnum:"Q4.2",
+product:"Woman / Woman’s Realm / Vogue — patterns of ownership (Q4.2 / 5.2 / 6.2)",
+texts:["Woman", "Woman’s Realm", "Vogue"],
+question:"<strong>[AS]</strong> Explain the significance of patterns of ownership in the magazine industry. Refer to <em>Woman / Woman’s Realm / Vogue</em> to support your response. [15]",
+must:[],
+points:["Curran and Seaton: control by a few profit-driven companies limits variety, creativity and quality; diverse ownership enables adventurous work.", "1960s women’s magazine sales reached 12 million copies a week; mainstream titles uphold traditional gender ideology with limited sign of the era’s ‘cultural upheaval’.", "WOMAN — Mirror Group rationalised the overcrowded weekly market; Cecil King formed IPC in 1963; high-speed plants enabled weekly colour publishing (A Level Beauty, A Present for Your Kitchen); traditional values (Starting School, Made for Romance); friend-and-confidante address (Evelyn Home, Extra Special on Men).", "WOMAN’S REALM — same IPC context; domesticity and beauty (The Sunday Cook, Bottled Beauty, Atrixo); colour features and adverts (Australian Sultanas); about 1.2 million copies a week in 1960.", "VOGUE — Condé Nast (170+ titles) pioneered colour printing and the double-page spread (Revlon, Cutex, Imperial Leather); high production values allow traditional AND contemporary ideas (Picnics, Heatwave, Money); commercial interests shape content."],
+levels:[[5, "13-15", "Excellent, detailed, accurate; detailed reference to the set product."], [4, "10-12", "Good, accurate; reasonably detailed reference."], [3, "7-9", "Satisfactory; reasonable, straightforward reference."], [2, "4-6", "Basic, limited; undeveloped reference."], [1, "1-3", "Minimal; superficial."]],
+tip:["AS PAPER — 15 marks, AO1 only: textual analysis isn’t required, but you must refer to magazine content.", "Evaluate SIGNIFICANCE — what ownership meant for content, ideology and production.", "Curran and Seaton isn’t required but shows up in higher bands."]},
+
+{id:"as_c2_2026_online",
+year:2026,
+level:"AS",
+comp:2,
+sec:"C",
+topic:"Online",
+marks:20,
+qnum:"Q7b",
+product:"JJ Olatunji/KSI or Zoe Sugg (Q7.0 / 8.0)",
+texts:["KSI", "Zoe Sugg"],
+question:"<strong>[AS]</strong> To what extent are audiences actively involved in online media production? Refer to <em>JJ Olatunji/KSI</em> or <em>Zoe Sugg</em> in your response. [20]",
+must:["Must make judgements about ‘to what extent’"],
+points:["Web 2.0 interactivity; prosumers, content creators and digital natives; audience responses have become a convention (participatory culture).", "BUT creators encode preferred meanings through multimodality and act as gatekeepers — audience involvement may be limited or overstated.", "Clay Shirky’s ‘end of audience’ can be credited.", "KSI — Q&As, vlogs and live streams responding to fans; memes, fan art and critiques on Instagram/X; weekly YouTube reactions to top Reddit posts.", "ZOE SUGG — answers fan questions in vlogs (‘Bonus Boxing Day Behind the Scenes’); invites comments (‘Team Christmas Fun & 5 Million Subscribers!’); retweets fans and other YouTubers.", "Key debate: does the ability to comment really mark a fundamental shift in the audience’s role?"],
+levels:[[5, "17-20", "Excellent; perceptive analysis; perceptive, fully supported judgements."], [4, "13-16", "Good; well supported; logical judgements."], [3, "9-12", "Satisfactory; ‘to what extent’ may be implicit."], [2, "5-8", "Basic; tends to describe."], [1, "1-4", "Minimal; superficial."]],
+tip:["AS PAPER — 20 marks, AO2 judgement question (A Level Section C is 30 marks).", "Build a sustained argument with a clear verdict on HOW FAR.", "Theory is helpful but not required."]},
+
+{id:"al_c2_2026_tv_a",
+year:2026,
+level:"A Level",
+comp:2,
+sec:"A",
+topic:"Television",
+marks:15,
+qnum:"Q1.1",
+product:"Peaky Blinders / Black Mirror / Killing Eve — audiences (Q1.1 / 2.1 / 3.1)",
+texts:["Peaky Blinders", "Black Mirror", "Killing Eve"],
+question:"<strong>[A LEVEL]</strong> Explain why audiences may interpret television products in different ways. Refer to the set episode of <em>Peaky Blinders / Black Mirror / Killing Eve</em> in your response. [15]",
+must:[],
+points:["Why readings differ: demographics (gender, age, ethnicity, nationality); values, attitudes and beliefs; social/cultural/historical circumstances; personal experience; cultural capital.", "Theory: Hall’s reception theory (dominant-hegemonic, negotiated, oppositional); Jenkins — fans appropriate texts in unauthorised ways.", "PEAKY BLINDERS — shellshock/PTSD (Tommy, Danny Whizz-Bang) read differently by veterans; Birmingham audiences read regional representation differently; cultural capital about the interwar period.", "BLACK MIRROR — age/cultural capital around 80s intertexts (Pretty in Pink, Max Headroom, ‘Heaven is a Place on Earth’); same-sex marriage empowering for LGBTQ audiences; religious audiences may read Yorkie’s parents or the ‘afterlife’ differently.", "KILLING EVE — nationality shapes readings of Russian characters (Villanelle, Konstantin); female leads empowering for women; genre-literate viewers enjoy the playful spy-thriller references."],
+levels:[[5, "13-15", "Excellent; perceptive, critically informed reference to the episode."], [4, "10-12", "Good; logical, coherent reference."], [3, "7-9", "Satisfactory; reasonable, straightforward."], [2, "4-6", "Basic; undeveloped; may describe."], [1, "1-3", "Minimal; superficial."]],
+tip:["A LEVEL PAPER — Section A is two 15-mark questions (AS is one 20-marker).", "Use Hall’s positions with specific scenes.", "Link each audience factor to a concrete moment."]},
+
+{id:"al_c2_2026_tv_b",
+year:2026,
+level:"A Level",
+comp:2,
+sec:"A",
+topic:"Television",
+marks:15,
+qnum:"Q1.2",
+product:"The Bridge / The Returned / Tehran — gender (Q1.2 / 2.2 / 3.2)",
+texts:["The Bridge", "The Returned", "Tehran"],
+question:"<strong>[A LEVEL]</strong> Explore how the representations of gender in the set episode of <em>The Bridge / The Returned / Tehran</em> convey values, attitudes and beliefs. [15]",
+must:[],
+points:["Framework: ideological significance; reinforcing vs challenging stereotypes; patriarchal vs liberal, progressive or feminist values.", "Theory: Hall (representation as the production of meaning); van Zoonen (gender constructed through discourse); bell hooks (ending patriarchal domination); Gerbner (cultivation of dominant ideology).", "THE BRIDGE — Saga subverts gender stereotypes and patriarchal norms; feminist values; Helle Anker as gender activist and founder of a gender-neutral pre-school.", "THE RETURNED — Pierre as male authority (patriarchal); Claire and Julie in maternal, nurturing roles; Lena and Lucy and the male gaze — supported or challenged?", "TEHRAN — Tamar as an independent, brave, resourceful protagonist (feminist); Zhila’s predatory boss as a critique of patriarchy and violence against women; contrasting cultural attitudes to gender privileging liberal values."],
+levels:[[5, "13-15", "Excellent application; perceptive, insightful."], [4, "10-12", "Good; logical, secure."], [3, "7-9", "Satisfactory; reasonable."], [2, "4-6", "Basic; undeveloped; may describe."], [1, "1-3", "Minimal."]],
+tip:["A LEVEL PAPER — 15 marks, AO2 analysis.", "Focus on VALUES, ATTITUDES and BELIEFS, not just describing characters.", "van Zoonen and bell hooks suit this question."]},
+
+{id:"al_c2_2026_mags",
+year:2026,
+level:"A Level",
+comp:2,
+sec:"B",
+topic:"Magazines",
+marks:30,
+qnum:"Q4.0",
+product:"Woman+Adbusters / Woman’s Realm+Huck / Vogue+Big Issue — Lévi-Strauss (Q4.0 / 5.0 / 6.0)",
+texts:["Woman", "Adbusters", "Woman’s Realm", "Huck", "Vogue", "Big Issue"],
+question:"<strong>[A LEVEL]</strong> Lévi-Strauss’s theory of structuralism suggests that binary oppositions play a key role in conveying meanings. Evaluate this structuralist theory. Refer to the set editions of <em>Woman and Adbusters / Woman’s Realm and Huck / Vogue and The Big Issue</em> in your response. [30]",
+must:["Must EVALUATE the theory (strengths and limitations)", "Must refer to BOTH set magazines"],
+points:["Evaluate: how valid is meaning via binary oppositions? Does the theory overlook active audiences, or social, cultural and historical context? Is it reductive? Compare alternatives — post-structuralism, Hall’s reception theory, fandom.", "WOMAN + ADBUSTERS — men vs women (‘Extra Special on Men’, Hitchcock article); Breeze soap and ‘A Level Beauty?’; context the theory misses (problem page, WRAC advert); Adbusters’ anti-consumerism via the Norman Gall quote vs Zuchetti ‘HIM’ advert; Louboutin culture jam — consumer culture vs poverty.", "WOMAN’S REALM + HUCK — men vs women (Atrixo advert, ‘Sunday Cook’); East vs West (Gor-Ray advert); Huck as counterculture ‘paddling against the flow’; female Kurdish fighters vs ISIS (‘Ocalan’s Angels’); ‘Beyond Binary: Gender Stories’ challenges binarism itself.", "VOGUE + BIG ISSUE — Cutex ‘Bare Essentials’; cultures in opposition (‘Picnics Probable and Improbable’, ‘Heatwave Holiday’); context the theory misses (‘Money: Questions and Answers’); the Big Issue manifesto — ‘a hand up, not a handout’; before vs after in ‘Vendor Success Stories: Moving On’."],
+levels:[[5, "13-15 + 13-15", "AO1 excellent, critically informed + AO2 insightful, thorough evaluation, fully supported"], [4, "10-12 + 10-12", "AO1 good, logical + AO2 logical evaluation, well supported"], [3, "7-9 + 7-9", "AO1 satisfactory + AO2 may apply rather than evaluate"], [2, "4-6 + 4-6", "AO1 basic + AO2 description displaces evaluation"], [1, "1-3 + 1-3", "AO1 minimal + AO2 minimal evaluation"]],
+tip:["A LEVEL PAPER — 30 marks: AO1 (15) + AO2 evaluate theory (15). AS has no theory-evaluation question.", "Only discussing ONE magazine caps you at Band 3.", "EVALUATE, don’t just apply: where do binaries work, and where do they fail?", "Extended response — sustained line of reasoning."]},
+
+{id:"al_c2_2026_online",
+year:2026,
+level:"A Level",
+comp:2,
+sec:"C",
+topic:"Online",
+marks:30,
+qnum:"Q7.0",
+product:"Group 1 (KSI or Zoe Sugg) + Group 2 (Thiiird or Attitude)",
+texts:["KSI", "Zoe Sugg", "Thiiird", "Attitude"],
+question:"<strong>[A LEVEL]</strong> ‘The main purpose of online media products is to make a profit.’ To what extent do you agree with this statement about the influence of economic contexts on online media products? Refer to one product from Group 1 (JJ Olatunji/KSI or Zoe Sugg) and one product from Group 2 (the Thiiird website or the Attitude website). [30]",
+must:["One Group 1 product AND one Group 2 product", "Must make judgements — any substantiated conclusion is acceptable"],
+points:["Economic factors: monetised vlogs; advertising, sponsorship and brand deals; the YouTube Partner Program; tailoring content to deliver audiences to advertisers. Counter-purposes: identity, shared experience, connection, activism.", "Hesmondhalgh: the internet’s radical potential contained by profit-driven cultural industries. Curran and Seaton: profit and power logic vs more varied production.", "KSI — merchandise; advertorials (JD Sports, Gfuel); but free of shareholder pressures faced by large firms.", "ZOE SUGG — beauty tutorials and picks designed to sell; advertorials (Asos); relative freedom from corporate pressure.", "THIIIRD — brand partnerships and sponsored content vs representation and belonging for people of colour, queer, trans and non-binary audiences; postcolonial and intersectional articles suggest a political purpose.", "ATTITUDE — celebrity and pop-culture content suggests commercial aims vs LGBTQ+ representation and campaigning against homophobia and injustice."],
+levels:[[5, "13-15 + 13-15", "AO1 excellent knowledge of economic contexts + AO2 perceptive, fully supported judgements"], [4, "10-12 + 10-12", "AO1 good, logical + AO2 logical, well-supported judgements"], [3, "7-9 + 7-9", "AO1 generally sound + AO2 reasonable, straightforward"], [2, "4-6 + 4-6", "AO1 basic + AO2 undeveloped judgements"], [1, "1-3 + 1-3", "AO1 minimal + AO2 superficial"]],
+tip:["A LEVEL PAPER — 30 marks (AS Section C is 20).", "Only ONE product caps you at Band 3.", "You don’t have to agree: ‘true of some but not all’ is fine if substantiated.", "Hesmondhalgh and Curran and Seaton are the natural theories here."]}
 ];
 
 const terms = [
@@ -1628,6 +2036,7 @@ function buildQuestions() {
     html += '<div class="q-header"><div class="q-left-stripe ' + stripeClass(q.comp,q.sec) + '"></div>';
     html += '<div class="q-meta"><div class="q-badges">';
     html += '<span class="badge badge-year">' + q.year + '</span>';
+    if (q.level) html += '<span class="badge badge-level ' + (q.level==='AS'?'as':'al') + '">' + (q.level==='AS'?'AS Level':'A Level') + '</span>';
     html += '<span class="badge badge-comp ' + cc + '">Component ' + q.comp + '</span>';
     html += '<span class="badge badge-sec ' + sc + '">Section ' + q.sec + '</span>';
     html += '<span class="badge badge-marks">' + q.marks + ' mark' + (q.marks!==1?'s':'') + '</span>';
@@ -1681,6 +2090,7 @@ function toggleTip(btn) {
 }
 
 function applyFilters() {
+  var lvlEl = document.getElementById('f-level'); var lvl = lvlEl ? lvlEl.value : '';
   var comp = document.getElementById('f-comp').value;
   var sec = document.getElementById('f-sec').value;
   var topic = document.getElementById('f-topic').value;
@@ -1696,10 +2106,10 @@ function applyFilters() {
     var textMatch = !text || (q.texts && q.texts.some(function(t){ return t === text; }));
     var kwMatch = true;
     if (kw) {
-      var hay = [q.question||'',q.product||'',q.topic||'',q.qnum||''].join(' ').toLowerCase();
+      var hay = [q.question||'',q.product||'',q.topic||'',q.qnum||'',q.level||''].join(' ').toLowerCase();
       kwMatch = hay.indexOf(kw) > -1;
     }
-    var match = (!comp || String(q.comp) === comp) &&
+    var match = (!lvl || q.level === lvl) && (!comp || String(q.comp) === comp) &&
       (!sec || q.sec === sec) && (!topic || q.topic === topic) &&
       (!year || String(q.year) === year) && (!marks || marksBucket(q.marks) === marks) &&
       textMatch && kwMatch;
@@ -1713,7 +2123,7 @@ function applyFilters() {
 }
 
 function resetFilters() {
-  ['f-comp','f-sec','f-topic','f-year','f-marks','f-text'].forEach(function(id){ document.getElementById(id).value=''; });
+  ['f-level','f-comp','f-sec','f-topic','f-year','f-marks','f-text'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
   var kw = document.getElementById('kwSearch'); if (kw) kw.value='';
   applyFilters();
 }
@@ -1722,7 +2132,10 @@ function buildPastQ() {
   var comp = document.getElementById('pqComp').value;
   var sec = document.getElementById('pqSec').value;
   var qnum = document.getElementById('pqQnum').value;
+  var lvlEl = document.getElementById('pqLevel'); var lvl = lvlEl ? lvlEl.value : '';
+  function lvTag(q){ return q.level ? '<div class="pq-row-level '+(q.level==='AS'?'as':'al')+'">'+(q.level==='AS'?'AS':'A Level')+'</div>' : ''; }
   var filtered = questions.filter(function(q) {
+    if (lvl && q.level !== lvl) return false;
     if (comp && String(q.comp) !== comp) return false;
     if (sec && q.sec !== sec) return false;
     if (qnum && q.qnum !== qnum && !(qnum==='Q4.2c2' && q.qnum==='Q4.2')) return false;
@@ -1744,19 +2157,19 @@ function buildPastQ() {
       html+='<div class="pq-group"><div class="pq-group-head">Component 1 &mdash; '+label+'</div>';
       if (isY) {
         var ym={};
-        qs.forEach(function(q){ var yr=String(q.year); if(!ym[yr])ym[yr]=[]; ym[yr].push(q); });
-        Object.keys(ym).sort(function(a,b){return yv({year:a})-yv({year:b});}).forEach(function(yr,yi){
+        qs.forEach(function(q){ var yr=String(q.year)+(q.level?' · '+(q.level==='AS'?'AS Level':'A Level'):''); if(!ym[yr])ym[yr]=[]; ym[yr].push(q); });
+        Object.keys(ym).sort(function(a,b){return (yv({year:a})-yv({year:b})) || (a<b?-1:a>b?1:0);}).forEach(function(yr,yi){
           var yqs=ym[yr].sort(function(a,b){return a.qnum<b.qnum?-1:1;});
           html+='<div class="pq-year-head" style="margin-top:'+(yi===0?'0':'0.8rem')+';">'+yr+'</div>';
           yqs.forEach(function(q,idx){
             var bb=idx===yqs.length-1?'1px solid var(--border)':'none';
-            html+='<div style="display:grid;grid-template-columns:90px 1fr;border:1px solid var(--border);border-bottom:'+bb+';background:var(--card);"><div class="pq-row-left"><div class="pq-row-year">'+q.qnum+'</div><div class="pq-row-marks">'+q.marks+'m</div></div><div class="pq-row-right"><div class="pq-row-q">'+q.question+'</div></div></div>';
+            html+='<div style="display:grid;grid-template-columns:90px 1fr;border:1px solid var(--border);border-bottom:'+bb+';background:var(--card);"><div class="pq-row-left"><div class="pq-row-year">'+q.qnum+'</div><div class="pq-row-marks">'+q.marks+'m</div>'+lvTag(q)+'</div><div class="pq-row-right"><div class="pq-row-q">'+q.question+'</div></div></div>';
           });
         });
       } else {
         qs.sort(function(a,b){return yv(a)-yv(b);}).forEach(function(q,idx){
           var bb=idx===qs.length-1?'1px solid var(--border)':'none';
-          html+='<div class="pq-row" style="border-bottom:'+bb+';"><div class="pq-row-left"><div class="pq-row-year">'+q.year+'</div><div class="pq-row-marks">'+q.marks+'m</div></div><div class="pq-row-right"><div class="pq-row-q">'+q.question+'</div></div></div>';
+          html+='<div class="pq-row" style="border-bottom:'+bb+';"><div class="pq-row-left"><div class="pq-row-year">'+q.year+'</div><div class="pq-row-marks">'+q.marks+'m</div>'+lvTag(q)+'</div><div class="pq-row-right"><div class="pq-row-q">'+q.question+'</div></div></div>';
         });
       }
       html+='</div>';
@@ -1770,7 +2183,7 @@ function buildPastQ() {
       html+='<div class="pq-group"><div class="pq-group-head">Component 2 &mdash; '+base+'</div>';
       qs.forEach(function(q,idx){
         var bb=idx===qs.length-1?'1px solid var(--border)':'none';
-        html+='<div class="pq-row" style="border-bottom:'+bb+';"><div class="pq-row-left"><div class="pq-row-year">'+q.year+'</div><div class="pq-row-marks">'+q.marks+'m</div></div><div class="pq-row-right"><div class="pq-row-topic">'+q.topic+'</div><div class="pq-row-q">'+q.question+'</div></div></div>';
+        html+='<div class="pq-row" style="border-bottom:'+bb+';"><div class="pq-row-left"><div class="pq-row-year">'+q.year+'</div><div class="pq-row-marks">'+q.marks+'m</div>'+lvTag(q)+'</div><div class="pq-row-right"><div class="pq-row-topic">'+q.topic+'</div><div class="pq-row-q">'+q.question+'</div></div></div>';
       });
       html+='</div>';
     });
