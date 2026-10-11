@@ -633,6 +633,7 @@ main{padding:1.5rem 2rem;max-width:1400px;margin:0 auto;}
 <div class="tab-bar">
   <button class="tab-btn active" onclick="switchTab('questions',this)">&#x1F4DD; Questions</button>
   <button class="tab-btn" onclick="switchTab('recaps',this)">&#x1F3AC; Set Text Recaps</button>
+  <button class="tab-btn" onclick="switchTab('annotated',this)">🖍️ Annotated Set Texts</button>
   <button class="tab-btn" onclick="switchTab('pastq',this)">&#x1F4DC; Past Questions</button>
   <button class="tab-btn" onclick="switchTab('terms',this)">&#x1F0CF; Key Terms</button>
   <button class="tab-btn" onclick="switchTab('theorists',this)">&#x1F9E0; Theorists</button>
@@ -1041,6 +1042,19 @@ main{padding:1.5rem 2rem;max-width:1400px;margin:0 auto;}
   </section>
   <section class="jr-panel jr-map-panel"><div class="jr-panel-head">Confidence map</div><div class="jr-heat-map" id="jrHeatMap"></div></section>
   <section class="jr-sections" id="jrSections"></section>
+</div>
+
+<!-- ANNOTATED SET TEXTS TAB -->
+<div class="tab-section" id="tab-annotated">
+  <div style="display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:flex-end;justify-content:space-between;margin-bottom:.9rem;">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);">Component 1 · Section A · Media Language &amp; Representation</div>
+      <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;line-height:1.15;margin-top:.2rem;">🖍️ Annotated Set Texts</div>
+      <p style="font-size:.88rem;color:var(--muted);max-width:70ch;margin-top:.35rem;">All seven Section A set products (Tide, Super. Human., Kiss of the Vampire, Formation, Riptide, The Times, Daily Mirror) with evidence labelled where you can see it. Filter by area or theory, test yourself, or print a revision sheet.</p>
+    </div>
+    <a href="annotated-set-texts.html" target="_blank" rel="noopener" style="font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--ink);border:1.5px solid var(--ink);border-radius:2px;padding:.45rem .7rem;text-decoration:none;white-space:nowrap;">Open full screen ↗</a>
+  </div>
+  <iframe id="annFrame" title="Annotated set texts" data-src="annotated-set-texts.html" loading="lazy" style="width:100%;min-height:80vh;border:1px solid var(--border);background:#f5f0e8;display:block;"></iframe>
 </div>
 
 <div class="tab-section" id="tab-factsquiz">
@@ -2349,6 +2363,13 @@ function switchTab(name, btn) {
   if (name==='theorists') { buildTheorists(); }
   if (name==='theoryquiz') { buildTheoryQuizHistory(); }
   if (name==='factsquiz') { initFactQuizUI(); }
+  if (name==='annotated') {
+    var af=document.getElementById('annFrame');
+    if (af && !af.getAttribute('src')) {
+      af.onload=function(){ try{ var d=af.contentDocument; var fit=function(){ af.style.height=(d.documentElement.scrollHeight+4)+'px'; }; fit(); new ResizeObserver(fit).observe(d.body); }catch(e){} };
+      af.setAttribute('src', af.getAttribute('data-src'));
+    }
+  }
 }
 
 function toggleGuide() {
