@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Super. Human. — Guided Lessons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1a16; --paper:#f5f0e8; --card:#fdf8f0; --border:#d8d0c0;
+    --muted:#6f6656; --gold:#b8860b; --gold-d:#8a6408; --accent:#c0392b;
+    --green:#2e7d32; --red:#b3261e; --purple:#6b21a8;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.55;}
+  header{position:sticky;top:0;z-index:30;background:rgba(245,240,232,.95);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--border);padding:.6rem 1.1rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
+  header .back-link{font-family:'IBM Plex Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:20px;padding:4px 10px;white-space:nowrap;}
+  header .back-link:hover{border-color:var(--gold);color:var(--gold-d);}
+  header .brand{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;}
+  header .crumb{font-family:'IBM Plex Mono',monospace;font-size:.66rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);}
+  .chips{margin-left:auto;display:flex;gap:.4rem;flex-wrap:wrap}
+  .chip{font-family:'IBM Plex Mono',monospace;background:#fff;border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:.78rem;color:var(--gold-d);font-weight:600;white-space:nowrap}
+  .layout{max-width:1220px;margin:0 auto;display:grid;grid-template-columns:290px minmax(0,1fr);gap:1.6rem;padding:1.2rem 1.1rem 3rem;}
+  /* map */
+  nav.map{position:sticky;top:64px;align-self:start;max-height:calc(100vh - 80px);overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:.8rem .7rem 1rem;}
+  .map-prog{height:6px;background:#eadfca;border-radius:4px;overflow:hidden;margin:.2rem .3rem .8rem}
+  .map-prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .3s}
+  .map h4{font-family:'IBM Plex Mono',monospace;font-size:.66rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin:.9rem .3rem .35rem}
+  .map h4:first-of-type{margin-top:.2rem}
+  .map button{display:flex;gap:.5rem;align-items:flex-start;width:100%;text-align:left;font:inherit;font-size:.86rem;background:none;border:0;border-radius:8px;padding:.38rem .45rem;cursor:pointer;color:var(--ink);line-height:1.3}
+  .map button:hover{background:#f1e7d3}
+  .map button.on{background:var(--ink);color:var(--paper)}
+  .map .tick{flex:none;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);display:grid;place-items:center;font-size:.7rem;margin-top:1px;background:#fff;color:#fff}
+  .map button.done .tick{background:var(--green);border-color:var(--green)}
+  .map button.on .tick{border-color:var(--gold)}
+  .map .notes-btn{margin-top:.9rem;justify-content:center;border:1px dashed var(--gold);color:var(--gold-d);font-weight:600}
+  .map-toggle{display:none}
+  /* main */
+  main{min-width:0}
+  .hero{background:var(--accent);color:#fff;border-radius:14px;padding:1.1rem 1.3rem;margin-bottom:1.1rem;}
+  .hero .meta{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:2px;opacity:.92;}
+  .hero h1{font-family:'Syne',sans-serif;font-weight:800;margin:.15rem 0 .35rem;font-size:1.6rem;line-height:1.15;}
+  .hero p{margin:.35rem 0 0;font-size:.94rem}
+  .hero a{color:#fff;font-weight:700}
+  .step-head{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;margin:.2rem 0 .3rem}
+  .step-kick{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:700}
+  h2.step-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.65rem;line-height:1.15;margin:.1rem 0 .7rem}
+  .walt{background:#fff;border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:10px;padding:.55rem .8rem;font-size:.9rem;margin:.4rem 0 1rem}
+  .walt b{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-d);margin-right:.4rem}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.95rem 1.1rem;margin:.9rem 0;}
+  .card h3{font-family:'Syne',sans-serif;font-size:1.05rem;margin:.1rem 0 .5rem;color:var(--accent);}
+  .card p{margin:.45rem 0;font-size:.95rem}
+  .card ul,.card ol{margin:.35rem 0;padding-left:1.2rem}.card li{margin:.3rem 0;font-size:.94rem}
+  .kw{background:#f3e9d2;border-bottom:1px solid var(--gold);padding:0 3px;border-radius:3px;font-weight:600}
+  .theory{display:inline-block;background:#efe7f7;border:1px solid #cdb8e6;color:var(--purple);border-radius:6px;padding:1px 7px;font-size:.8rem;font-weight:600}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem;margin:.6rem 0}
+  .mini{background:#fff;border:1px solid var(--border);border-top:4px solid var(--gold);border-radius:10px;padding:.7rem .85rem}
+  .mini h4{font-family:'Syne',sans-serif;margin:.05rem 0 .3rem;font-size:.98rem}
+  .mini p{margin:.2rem 0;font-size:.9rem}
+  .tip{background:#fff7e0;border:1px solid #ecd28b;border-radius:10px;padding:.6rem .85rem;font-size:.9rem;margin:.8rem 0}
+  .tip b{color:var(--gold-d)}
+  figure.shot{margin:.7rem 0;text-align:center}
+  figure.shot img,.row img,.gal img{cursor:zoom-in}
+  figure.shot img{max-width:100%;height:auto;border:1px solid var(--border);border-radius:10px;box-shadow:0 2px 10px rgba(60,40,10,.1)}
+  figure.shot.narrow img{max-width:420px;width:100%}
+  figcaption{font-size:.76rem;color:var(--muted);margin-top:.35rem;font-family:'IBM Plex Mono',monospace;line-height:1.35}
+  .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.6rem;margin:.7rem 0}
+  .row figure{margin:0;text-align:center}
+  .row img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;border:1px solid var(--border)}
+  .row.tall img{aspect-ratio:auto;max-height:300px;object-fit:contain;background:#fff}
+  .gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.45rem;margin:.6rem 0}
+  .gal figure{margin:0}
+  .gal img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px;border:1px solid var(--border);display:block}
+  .gal figcaption{font-size:.66rem;margin-top:.15rem}
+  .video{position:relative;aspect-ratio:16/9;background:#111;border-radius:12px;overflow:hidden;margin:.7rem 0;display:grid;place-items:center}
+  .video button{font:inherit;font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;background:var(--accent);color:#fff;border:0;border-radius:30px;padding:.75rem 1.4rem;cursor:pointer}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video .vsub{position:absolute;bottom:.7rem;left:0;right:0;text-align:center;color:#cfc6b6;font-family:'IBM Plex Mono',monospace;font-size:.72rem}
+  /* activities */
+  .act{background:#fbf6ec;border:1px solid var(--border);border-left:5px solid var(--accent);border-radius:12px;padding:.9rem 1.05rem;margin:1rem 0}
+  .act>h3{font-family:'Syne',sans-serif;font-size:1rem;margin:.05rem 0 .55rem;color:var(--accent);display:flex;gap:.45rem;align-items:center}
+  .act>h3 .tag{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;background:var(--accent);color:#fff;border-radius:4px;padding:2px 6px}
+  .act .prompt{font-size:.93rem;margin:.1rem 0 .6rem}
+  .q{margin:.6rem 0 1rem}.qt{font-weight:600;margin:0 0 .45rem;font-size:.94rem}
+  .q img.qimg{display:block;max-width:360px;width:100%;border-radius:8px;border:1px solid var(--border);margin:.2rem 0 .5rem}
+  .opts{display:flex;flex-direction:column;gap:.4rem}
+  .opts button{text-align:left;font:inherit;font-size:.91rem;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.5rem .7rem;cursor:pointer}
+  .opts button:hover:not(:disabled){border-color:var(--gold);background:#fffdf7}
+  .opts button:disabled{cursor:default}
+  .ok{background:#e6f4ea!important;border-color:var(--green)!important;color:#1b5e20}
+  .no{background:#fbe7e5!important;border-color:var(--red)!important;color:#8c1d16}
+  .fb{font-size:.86rem;margin-top:.35rem;font-weight:600}
+  .fb.y{color:var(--green)}.fb.n{color:var(--red)}
+  .sitem{background:#fff;border:1px solid var(--border);border-radius:8px;padding:.5rem .7rem;margin:.4rem 0;display:flex;gap:.6rem;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:.91rem}
+  .sbtns{display:flex;gap:.3rem;flex-wrap:wrap}
+  .sbtns button{font:inherit;font-size:.78rem;background:var(--ink);color:#fff;border:0;border-radius:6px;padding:.35rem .6rem;cursor:pointer}
+  .sbtns button:hover{background:var(--accent)}
+  .verdict{font-size:.82rem;font-weight:700}
+  .mrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:.6rem;align-items:center;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.5rem .7rem;margin:.4rem 0;font-size:.91rem}
+  .mrow img{width:100%;max-width:220px;border-radius:6px;display:block}
+  select{font:inherit;font-size:.88rem;padding:.35rem .4rem;border:1px solid var(--border);border-radius:6px;background:#fff;max-width:100%}
+  .gaps{font-size:.95rem;line-height:2.1;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.6rem .8rem}
+  .gaps select{padding:.15rem .3rem}
+  textarea{width:100%;font:inherit;font-size:.92rem;border:1px solid var(--border);border-radius:8px;padding:.55rem .7rem;background:#fff;resize:vertical;line-height:1.45}
+  textarea:focus,select:focus{outline:2px solid var(--gold);outline-offset:1px}
+  .wlabel{font-weight:600;font-size:.92rem;margin:.7rem 0 .3rem}
+  .saved{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--muted)}
+  .reveal-btn{font:inherit;font-size:.84rem;background:none;border:1px dashed var(--gold);color:var(--gold-d);border-radius:6px;padding:.35rem .75rem;cursor:pointer;margin-top:.45rem}
+  .model{display:none;margin-top:.55rem;padding:.7rem .85rem;background:#f3e9d2;border-radius:8px;font-size:.92rem}
+  .model.show{display:block}.model p{margin:.35rem 0}.model ul{margin:.3rem 0;padding-left:1.15rem}
+  .scale{display:flex;gap:.35rem;flex-wrap:wrap;margin:.4rem 0 .5rem}
+  .scale button{flex:1 1 90px;font:inherit;font-size:.8rem;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.45rem .4rem;cursor:pointer}
+  .scale button.sel{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .statement{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;background:#fff;border-left:5px solid var(--purple);padding:.6rem .8rem;border-radius:0 8px 8px 0;margin:.3rem 0 .6rem}
+  .stepnav{display:flex;justify-content:space-between;gap:.6rem;margin:1.6rem 0 .5rem;flex-wrap:wrap}
+  .stepnav button{font:inherit;font-weight:700;border-radius:10px;padding:.7rem 1.1rem;cursor:pointer;font-size:.95rem}
+  .prev{background:#fff;border:1px solid var(--border);color:var(--ink)}
+  .next{background:var(--ink);border:0;color:var(--paper);margin-left:auto}
+  .next:hover{background:var(--accent)}
+  .lesson-end{background:var(--ink);color:var(--paper);border-radius:14px;padding:1rem 1.2rem;margin:1.2rem 0}
+  .lesson-end h3{font-family:'Syne',sans-serif;margin:.1rem 0 .3rem;color:#e9c46a}
+  .res-big{font-family:'Syne',sans-serif;font-weight:800;font-size:2.4rem;color:var(--gold-d);line-height:1}
+  .miss{background:#fbe7e5;border-left:3px solid var(--red);border-radius:6px;padding:.45rem .7rem;margin:.35rem 0;font-size:.9rem}
+  .btn{display:inline-block;font:inherit;font-weight:700;font-size:.9rem;background:var(--gold);color:#fff;border:0;border-radius:8px;padding:.55rem 1rem;text-decoration:none;cursor:pointer;margin:.3rem .3rem 0 0}
+  .btn.alt{background:#fff;color:var(--gold-d);border:1px solid var(--gold)}
+  .lb{position:fixed;inset:0;background:rgba(10,8,6,.88);z-index:60;display:grid;place-items:center;padding:16px;cursor:zoom-out}
+  .lb img{max-width:100%;max-height:88vh;border-radius:6px}
+  .lb p{color:#eee;font-family:'IBM Plex Mono',monospace;font-size:.8rem;text-align:center;margin:.5rem 0 0}
+  @media (max-width:980px){
+    .layout{grid-template-columns:minmax(0,1fr);gap:.8rem}
+    nav.map{position:static;max-height:none;display:none}
+    nav.map.open{display:block}
+    .map-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;font:inherit;font-weight:700;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.65rem .9rem;cursor:pointer}
+  }
+  @media (max-width:560px){
+    h2.step-title{font-size:1.3rem}.hero h1{font-size:1.3rem}
+    .mrow{grid-template-columns:minmax(0,1fr)}
+    header .crumb{display:none}
+  }
+  @media print{header,nav.map,.map-toggle,.stepnav,.video{display:none!important}.layout{display:block}.model{display:block}}
+</style>
+</head>
+<body>
+<header>
+  <a class="back-link" href="index.html#recaps" title="Back to Set Text Recaps hub">&#8592; Recaps Hub</a>
+  <span class="brand">A Level Media</span>
+  <span class="crumb">Component 1 · Advertising &amp; Marketing · Guided lessons</span>
+  <span class="chips"><span class="chip" id="progChip">Step 1 / 1</span><span class="chip" id="scoreChip">Score: 0 / 0</span></span>
+</header>
+
+<div class="layout">
+  <div>
+    <button class="map-toggle" id="mapToggle" aria-expanded="false">&#9776; Lesson map <span id="mapToggleNote" class="saved"></span></button>
+    <nav class="map" id="map" aria-label="Lesson map"></nav>
+  </div>
+  <main id="main">
+    <div class="hero">
+      <div class="meta">Set text · Super. Human. (Channel 4, 2021) · 3 guided lessons</div>
+      <h1>Super. Human. — the full lessons, step by step</h1>
+      <p>Everything we cover in class, in order: read each part, try the activities, then check against the model answers. Your notes save on this device and you can download them at the end. Want the quick version? Open the <a href="superhuman.html">Super. Human. recap</a>.</p>
+    </div>
+    <div id="step" aria-live="polite"></div>
+  </main>
+</div>
+
+<script>
+/* ───────── content ───────── */
+const A='superhuman_assets/';
+const S=n=>A+'shot'+String(n).padStart(2,'0')+'.jpg';
+const YT={advert:'OjIP9EFbcWY',c2012:'tuAPPeRg3Nw',c2016:'IocLkk3aYlk',hall:'U7RO60SkDbw'};
+
+const LESSONS=['Lesson 1 · Context & media language','Lesson 2 · Theory & representation','Lesson 3 · Audiences'];
+
+const STEPS=[
+/* ═════════ LESSON 1 ═════════ */
+{id:'start',L:0,title:'Start here: what you need to know',walt:'To analyse the set text: Super. Human. charity advert.',blocks:[
+ {t:'text',h:`<h3>Where Super. Human. fits in the exam</h3>
+ <p>The Super. Human. advert is studied for <b>Component 1</b>:</p>
+ <ul><li><b>Section A:</b> a focus on <span class="kw">media language</span> and <span class="kw">representation</span>, including comparison to an <b>unseen text</b>.</li>
+ <li><b>Section B:</b> a focus on <span class="kw">audiences</span> (but <b>not</b> industries).</li>
+ <li>You may also be asked a <b>synoptic</b> question, where you also consider the <b>social and cultural contexts</b> of the advert.</li></ul>`},
+ {t:'img',src:A+'factsheet.jpg',cap:'Homework from class: read the Super. Human. factsheet',narrow:1},
+ {t:'sort',id:'exam',title:'Which part of the exam?',prompt:'Tap where each topic would be tested for Super. Human.',b:['Section A','Section B','Not for this text'],items:[
+  ['How camera shots create meaning in the advert',0],['How disability is represented',0],['Comparing the advert with an unseen advert',0],
+  ['Who the target audience is and why it appeals to them',1],['Applying Hall’s reception theory to audience responses',1],['Channel 4’s ownership, funding and regulation',2]]}
+]},
+{id:'superhumans',L:0,title:'Can we regard these athletes as super humans?',walt:'To analyse the set text: Super. Human. charity advert.',blocks:[
+ {t:'row',imgs:[[A+'athletes-flags.jpg','Paralympians at Tokyo 2020'],[S(18),'From the advert'],[S(27),'From the advert']]},
+ {t:'text',h:`<p>The advertisement you will be studying is <b>Super. Human.</b>, created to promote the <b>2020 Paralympic Games</b> (held in Tokyo in 2021). It was made by <b>Bradford Young</b>, the Oscar-nominated cinematographer, who in 2017 became the first African American cinematographer to be nominated, for his work on the film <i>Arrival</i>.</p>`},
+ {t:'write',id:'w_showcase',p:'Look at the images. What do you think Channel 4 wanted to showcase? Can we regard these athletes as “super humans”?',rows:4,model:`<p>It explores the <b>sacrifices made and the trials endured</b> by Paralympic athletes in preparation for the Tokyo Paralympic Games. It <b>breaks the tropes we assume about disability</b>, builds awareness, and gives a <b>fresh, unique look</b> that combats <b>compassion fatigue</b>.</p>`}
+]},
+{id:'context',L:0,title:'Product context and background',walt:'To analyse the set text: Super. Human. charity advert.',blocks:[
+ {t:'row',tall:1,imgs:[[A+'logo-4creative.jpg','4Creative (Channel 4)'],[A+'logo-tokyo.jpg','Tokyo 2020 Paralympic Games'],[A+'logo-production.jpg','Serial Pictures · Somesuch']]},
+ {t:'text',h:`<h3>An audio-visual advert</h3>
+ <p>It was devised and created by Channel 4’s in-house creative agency, <span class="kw">4Creative</span>, and produced by <b>Serial Pictures</b> and <b>Somesuch</b>, a global production company.</p>
+ <p>The trailer is the <b>third campaign</b> for the Paralympics undertaken by Channel 4, who were <b>broadcasting the event</b>, and was part of a <b>bigger campaign</b> including posters and social media.</p>
+ <p>The advertisement explores the <b>sacrifices made and the trials endured</b> by Paralympic athletes in preparation for the 2020 Tokyo Paralympic Games.</p>`},
+ {t:'mcq',id:'ctx',title:'Quick check',items:[
+  {q:'Who devised and created Super. Human.?',o:['4Creative, Channel 4’s in-house agency','The BBC’s in-house creative team, BBC Creative','The International Paralympic Committee','Bradford Young’s own film studio'],a:0,f:'4Creative devised it; Serial Pictures and Somesuch produced it.'},
+  {q:'Which of Channel 4’s Paralympic campaigns was this?',o:['Its first','Its second','Its third','Its fourth'],a:2,f:'Super. Human. is Channel 4’s third Paralympics campaign (after 2012 and 2016).'},
+  {q:'Why did Channel 4 make the campaign?',o:['It was broadcasting the Games','It was selling Paralympic tickets','It was raising money for a charity','A sponsor paid for a film'],a:0,f:'Channel 4 broadcast the event; the trailer was part of a bigger campaign with posters and social media.'}]}
+]},
+{id:'vatl',L:0,title:'Quick recap: media language (V.A.T.L.)',walt:'To analyse the set text: Super. Human. charity advert.',blocks:[
+ {t:'text',h:`<p>Every media product is created from a <b>combination of choices made by a producer</b>. <span class="kw">Media language</span> is the collective term for this process, where certain elements are selected to feature in a media product to convey a certain message, idea or meaning.</p>
+ <p>These choices are also called <span class="kw">codes</span>. They can include elements such as the way a camera is positioned or the wording of a headline, to communicate ideas to the audience.</p>
+ <div class="grid2"><div class="mini"><h4>V · Visual</h4><p>Mise-en-scène: costume, props, setting, expression, gesture, colour.</p></div><div class="mini"><h4>A · Audio</h4><p>Soundtrack, sound effects, voice-over, silence.</p></div><div class="mini"><h4>T · Technical</h4><p>Camera shots, angles, movement and editing.</p></div><div class="mini"><h4>L · Language</h4><p>Written codes: titles, on-screen graphics, slogans.</p></div></div>
+ <div class="tip"><b>Remember:</b> the media is no accident. Every product has been <b>purposefully constructed</b> to convey its message.</div>`},
+ {t:'sort',id:'vatl',title:'V, A, T or L?',prompt:'Which type of code is each example from Super. Human.?',b:['Visual','Audio','Technical','Language'],items:[
+  ['Ellie Simmonds’ swimming cap and goggles',0],['Domestic settings, like the kitchen and the café',0],['The soundtrack “So You Want to Be a Boxer”',1],['Grunts, groans and the alarm clock',1],
+  ['A low-angle shot of a swimmer',2],['Slow motion during the cycling crash',2],['The graphic “To be a Paralympian…”',3],['The title “SUPER. HUMAN.”',3]]},
+ {t:'write',id:'w_ml',p:'Make it concise: explain “media language” in one sentence of your own.',rows:2,model:`<p>Media language is the way specific elements of a media product communicate meanings to audiences, through the use of <b>visual, audio, written and technical codes</b>.</p>`}
+]},
+{id:'charity',L:0,title:'Charity advert conventions and compassion fatigue',walt:'To analyse the set text: Super. Human. charity advert.',blocks:[
+ {t:'img',src:A+'charity-conventions.jpg',cap:'Typical conventions of a charity advert'},
+ {t:'text',h:`<h3>Codes and conventions</h3>
+ <p>All advertisements employ a recognisable list of conventions. Some also have a set of conventions specific to their <b>sub-genre</b>, such as charity adverts.</p>
+ <p>Charity advertisements are designed to <b>raise awareness</b> of issues and events. Their aim is to have an <b>immediate impact</b> on the audience to make them take notice, so they need to be <b>memorable and hard-hitting</b>. Some adverts rely on audiences feeling <b>guilty</b>.</p>
+ <h3>Compassion fatigue</h3>
+ <p><span class="kw">Compassion fatigue</span> can be caused by a long advertisement with multiple examples of suffering, or by too many adverts in a short time frame. Too much guilt can be <b>counterproductive</b>: audiences stop wanting to donate or interact, because of the constant, invasive feelings of guilt and pity.</p>
+ <div class="tip"><b>In class</b> we compared charity adverts for Save the Children, WaterAid and Barnardo’s, and watched WaterAid’s “Claudia” advert, to see how some charity adverts now take a different approach to combat compassion fatigue.</div>`},
+ {t:'gaps',id:'cf',title:'Fill the gaps',text:'Charity adverts aim to have an [[immediate|delayed|accidental]] impact, so they are memorable and [[hard-hitting|light-hearted|subtle]]. Some rely on audiences feeling [[guilty|bored|proud]]. Too much of this can cause [[compassion fatigue|brand loyalty|audience growth]], which is [[counterproductive|essential|harmless]]: audiences stop wanting to donate.'},
+ {t:'write',id:'w_conv',p:'Based on charity adverts you know (Save the Children, WaterAid, Barnardo’s), list the TYPICAL codes and conventions of charity adverts.',rows:4,model:`<ul><li>Emotive images of suffering, often close-ups of faces</li><li>A voice-over with a serious mode of address</li><li>A focus on the specific problem or disability</li><li>Hard-hitting or shocking images to make an immediate impact</li><li>Making the audience feel guilt and pity</li><li>A call to action: donate, text, sign up</li><li>Charity logo and branding</li></ul>`},
+ {t:'write',id:'w_ext',p:'Extension: how might these conventions cause compassion fatigue?',rows:3,model:`<p>Seeing the same suffering and guilt-based appeals again and again can make audiences <b>numb or resentful</b>, so they switch off instead of engaging. Producers of this sub-genre are aware of this, so they look for a <b>different, more positive and upbeat perspective</b>.</p>`}
+]},
+{id:'watch',L:0,title:'Watch it: what sets Super. Human. apart?',walt:'To analyse the set text: Super. Human. charity advert.',blocks:[
+ {t:'video',id:YT.advert,label:'Watch Super. Human. (Channel 4)'},
+ {t:'text',h:`<p>The producers of this sub-genre are very aware of <span class="kw">compassion fatigue</span>, so they often aim to make advertisements that offer a <b>different perspective</b> on the issue or event, usually one that is <b>more positive and upbeat</b>.</p>`},
+ {t:'img',src:A+'bugsy.jpg',cap:'Bugsy Malone (1976)',narrow:1},
+ {t:'reveal',label:'What is Bugsy Malone?',h:`<p><i>Bugsy Malone</i> is a 1976 musical film, a gangster story in which all the characters are played by <b>children</b>. The advert’s soundtrack, <b>“So You Want to Be a Boxer”</b>, is a song from it.</p>`},
+ {t:'sort',id:'apart',title:'Uses or challenges the conventions?',prompt:'For each feature of Super. Human., decide whether it uses or challenges the conventions of charity adverts.',b:['Uses','Challenges'],items:[
+  ['A voice-over and dramatic music at the very start',0],['Raising awareness of an event and a social group',0],['Close-up shots of expressions to engage the audience',0],
+  ['A sudden switch to the alarm clock and the realities of daily life',1],['An upbeat, stirring soundtrack from Bugsy Malone',1],['No voice-over moralising about the plight of disabled people',1],
+  ['Humour: the hamster on the wheel and the “puke bucket”',1],['Athletes shown as high performers, not victims to be pitied',1]]}
+]},
+{id:'visual',L:0,title:'Codes in depth 1: visual codes',walt:'To critically analyse how codes and conventions are used to create meaning in the Super. Human. advert.',blocks:[
+ {t:'text',h:`<p>In class you worked in pairs on one area of media language (visual, audio or technical) and made a factsheet to feed back. Here you do <b>all three</b>, one per step. Use the guidance sheet and the screenshots.</p>`},
+ {t:'img',src:A+'codes-guide.jpg',cap:'Guidance sheet: analysing codes and conventions'},
+ {t:'gallery',title:'Screenshots to use',shots:[[15,'Pool: establishing shot'],[17,'Goggles'],[18,'Medals'],[19,'Eyes'],[27,'Gym'],[13,'Weights room'],[8,'At home'],[9,'Breakfast'],[39,'Giving birth'],[51,'Outside the café'],[53,'Café entrance'],[60,'Celebration']]},
+ {t:'write',id:'w_v1',p:'How do the iconography and settings relate to the athlete and the sport? Look at Ellie Simmonds putting on her goggles in the pool, or training in the gym. What connotations does the mise-en-scène create?',rows:3},
+ {t:'write',id:'w_v2',p:'How are these settings juxtaposed with domestic scenes of everyday life as a disabled person? What does this suggest about them?',rows:3},
+ {t:'write',id:'w_v3',p:'How do the actors’ expressions and gestures communicate frustration, competition and celebration? What does this visually highlight?',rows:3},
+ {t:'reveal',label:'Show the model answer (Group 1: visual codes)',h:`<p>Visual codes also communicate meanings. The <b>iconography and settings</b> are related to the athlete and the sport, for example Ellie Simmonds putting on her goggles in the pool, or training in the gym. But these settings are <b>juxtaposed with domestic scenes of everyday life</b> as a disabled person, suggesting the <b>normality</b> of their situation. <b>Gestures</b> communicate frustration, competition and celebration, visually highlighting the <b>result of the hard work</b>.</p>`,imgs:[[S(17),'Ellie Simmonds'],[S(30),'Birthday call'],[S(60),'Celebration']]}
+]},
+{id:'audio',L:0,title:'Codes in depth 2: audio codes',walt:'To critically analyse how codes and conventions are used to create meaning in the Super. Human. advert.',blocks:[
+ {t:'img',src:A+'bugsy-boxers.jpg',cap:'“So You Want to Be a Boxer”, from Bugsy Malone',narrow:1},
+ {t:'tip',h:'<b>Listen again</b> to the advert with headphones. Write down two or three lines of the lyrics that stand out to you: you will use them below.'},
+ {t:'write',id:'w_a1',p:'The producers offer a different perspective through audio. What does the choice of soundtrack, “So You Want to Be a Boxer” from Bugsy Malone, communicate about the disabled athletes? Use the lines you noted.',rows:3},
+ {t:'write',id:'w_a2',p:'How does the audio give the advertisement a positive feel?',rows:2},
+ {t:'write',id:'w_a3',p:'Typical conventions, a voice-over and dramatic music, appear at the start but rapidly change to the alarm and the realities of daily life. Why? Find more examples.',rows:3},
+ {t:'write',id:'w_a4',p:'Sound effects: what do the grunts, groans and tape being applied emphasise about the athletes and their training?',rows:2},
+ {t:'reveal',label:'Show the model answer (Group 2: audio codes)',h:`<p>The producers are very aware of compassion fatigue, so the campaign changes its approach through the <b>choice of music</b>. The soundtrack, “So You Want to Be a Boxer” from Bugsy Malone, communicates <b>struggle and hard work paying off</b>, and gives the advert an upbeat, positive feel.</p><p>The <b>more typical conventions</b>, a voice-over and dramatic music, appear at the start of the advertisement but <b>rapidly change to the alarm and the realities of daily life</b>.</p><p><b>Sound effects underscore the music</b>, emphasising the battle of training, including grunts, groans and tape being applied.</p>`}
+]},
+{id:'technical',L:0,title:'Codes in depth 3: technical codes',walt:'To critically analyse how codes and conventions are used to create meaning in the Super. Human. advert.',blocks:[
+ {t:'text',h:`<p>Advertisements have a <b>limited amount of time</b> to convey their message, so they rely on technical codes and editing to do this rapidly.</p>`},
+ {t:'mcq',id:'ellie',title:'Read the Ellie Simmonds sequence',items:[
+  {img:S(15),q:'What type of shot is this, and what does it show?',o:['Establishing shot: alone in the pool','Close-up: her concentration before the race','Low angle: power','Point-of-view shot: the crowd'],a:0,f:'An establishing shot shows her alone in the pool.'},
+  {img:S(17),q:'What type of shot is this?',o:['Extreme long shot','Close-up of putting on her goggles','Aerial shot','Over-the-shoulder shot from the coach’s view'],a:1,f:'A close-up of her putting on her swimming goggles.'},
+  {img:S(18),q:'What does a low-angle shot like this connote?',o:['Weakness and vulnerability','Power','Confusion','Loneliness'],a:1,f:'A low-angle shot creates power.'},
+  {img:S(19),q:'What does this extreme close-up of her eyes connote?',o:['Boredom','Fear of losing','Concentration','Sadness'],a:2,f:'An extreme close-up of her eyes connotes concentration.'}]},
+ {t:'row',imgs:[[S(41),'Track cycling'],[S(42),'The crash'],[S(46),'After the crash']]},
+ {t:'write',id:'w_t1',p:'How does the advert use close-up shots of expressions to engage the audience and portray aspects of disability? What connotations are created?',rows:3},
+ {t:'write',id:'w_t2',p:'What does slow motion, combined with muting the sound, do in the cycling track crash?',rows:2},
+ {t:'write',id:'w_t3',p:'How do the lyrics anchor the key message of the advert?',rows:2},
+ {t:'reveal',label:'Show the model answer (Group 3: technical codes)',h:`<p>Advertisements have a limited amount of time to convey their message and so rely on technical codes and editing to do this rapidly. This advertisement uses <b>close-up shots of expressions</b> to engage the audience and to portray aspects of disability in a <b>non-victim way</b>, emphasising that this is part of their lives.</p><p>For example, a range of shots convey the <b>strength and determination</b> of the swimmer Ellie Simmonds, cutting between an <b>establishing shot</b> showing her alone in the pool, a <b>close-up</b> of her putting on her goggles, a <b>low-angle shot</b> creating power and an <b>extreme close-up</b> of her eyes connoting concentration. <b>Slow motion</b> is also used to show the cycling track crash, combined with <b>muting the sound</b> for a more dramatic effect.</p>`}
+]},
+{id:'narrative',L:0,title:'Narrative',walt:'To critically analyse how narrative is used to create meaning in the Super. Human. advert.',blocks:[
+ {t:'text',h:`<p>The narrative follows the lives of the Paralympians and their <b>battles through training</b>.</p>`},
+ {t:'row',imgs:[[S(29),'His daughter’s birthday'],[S(30),'Singing on the phone'],[S(31),'Training on the bike']]},
+ {t:'text',h:`<p>The sequence where the athlete tries to sing “Happy Birthday” to his daughter on a mobile phone while training on a bike reinforces the <b>clash between the sport and the family</b>, and further establishes the athletes as <b>real people</b>.</p>`},
+ {t:'row',imgs:[[S(55),'The dream sequence'],[S(61),'Channel 4 news clip'],[S(62),'Falling “over the edge”']]},
+ {t:'text',h:`<p>There are also more <b>stylised sequences</b>. The <b>dream sequence</b> reappears later and is edited with a <b>Channel 4 news clip announcing the postponement</b> of the Games. The impact is shown as the athletes fall “over the edge”.</p>`},
+ {t:'row',imgs:[[S(37),'The hamster on the wheel'],[S(38),'The “puke bucket”'],[S(45),'Animated sequence']]},
+ {t:'text',h:`<p>The advert also uses <b>humour</b> to convey information: the hamster on the wheel and the “puke bucket” are recognisable <b>visual signifiers of struggle</b>. The <b>animated sequences</b> insert aspects of the comic into what is a gruelling regime.</p>`},
+ {t:'mcq',id:'narr',title:'Quick check',items:[
+  {q:'What does the “Happy Birthday” phone call sequence reinforce?',o:['The clash between sport and family','That the athlete has given up his sport','That the Games had been cancelled','How much the athletes earn'],a:0,f:'It shows the clash between sport and family and establishes the athletes as real people.'},
+  {q:'What is the dream sequence edited with later in the advert?',o:['Archive footage of the London 2012 opening ceremony','A Channel 4 news clip on the postponement','An interview with Ellie Simmonds','A Toyota advert'],a:1,f:'It is edited with a Channel 4 news clip announcing the postponement, and the athletes fall “over the edge”.'},
+  {q:'What do the hamster wheel and the “puke bucket” do?',o:['Mock the athletes','Act as humorous signifiers of struggle','Show the athletes’ pets and hobbies outside of sport','Advertise a sponsor'],a:1,f:'They are recognisable visual signifiers of struggle that bring humour.'}]},
+ {t:'end',h:'<h3>End of Lesson 1</h3><p>You have covered the context, media language and narrative. Next: applying theory, and representation.</p>'}
+]},
+/* ═════════ LESSON 2 ═════════ */
+{id:'theory',L:1,title:'Applying theory to media language',walt:'To analyse the set text using theory: Super. Human. charity advert.',blocks:[
+ {t:'text',h:`<p>There are two areas of theory to consider for media language:</p>
+ <div class="grid2"><div class="mini"><h4>Roland Barthes</h4><p><span class="theory">Semiotics</span> and the narrative codes.</p></div><div class="mini"><h4>Claude Lévi-Strauss</h4><p><span class="theory">Structuralism</span>: the structure of oppositions.</p></div></div>
+ <div class="tip"><b>Exam tip:</b> name the theorist, explain the idea in a sentence, then apply it to a specific moment in the advert.</div>`}
+]},
+{id:'semiotics',L:1,title:'Barthes: semiotics, clothing is a sign',walt:'To analyse the set text using theory: Super. Human. charity advert.',blocks:[
+ {t:'row',imgs:[[S(41),'Track cyclist’s kit'],[S(17),'Swimming costume'],[S(39),'Hospital clothing'],[S(53),'Casual clothes at the café']]},
+ {t:'text',h:`<p><span class="kw">Semiotics</span> is the study of signs and what they mean. Clothing is used to <b>rapidly place the athletes within their sport</b>: the track cyclist’s clothing or the swimming costumes. These <b>contrast with the athletes in their everyday life</b>, such as the hospital clothing when the woman is giving birth, or casual clothing when the wheelchair user tries to access the café.</p>
+ <p>These signs serve to illustrate aspects of the lives of the people, and <b>create realism</b>.</p>`},
+ {t:'match',id:'signs',title:'Sign to meaning',prompt:'Match each sign to what it tells the audience.',pairs:[
+  ['The track cyclist’s kit','An elite athlete in their sport'],['Hospital clothing while giving birth','An ordinary life event outside sport'],['Casual clothes at the café door','Everyday life as a disabled person'],['The contrast between the two kinds of clothing','These are real people with real lives: realism']]}
+]},
+{id:'enigma',L:1,title:'Barthes: the five codes and the enigma code',walt:'To analyse the set text using theory: Super. Human. charity advert.',blocks:[
+ {t:'text',h:`<p>Barthes devised a theory for analysing any narrative in terms of the <b>five codes</b> it uses. One of the most important is the <span class="kw">hermeneutic code</span>, better known as the <b>enigma code</b>: the idea that the text will present us with <b>mysteries or unanswered questions</b>. These keep us engaged because we want to find out the answers.</p>
+ <div class="grid2"><div class="mini" style="border-top-color:var(--accent)"><h4>Hermeneutic (enigma)</h4><p>Mysteries and unanswered questions.</p></div><div class="mini"><h4>Proairetic (action)</h4><p>Actions that signal something is about to happen.</p></div><div class="mini"><h4>Semantic</h4><p>Connotations attached to people, places and objects.</p></div><div class="mini"><h4>Symbolic</h4><p>Deeper meanings, often built on opposites.</p></div><div class="mini"><h4>Cultural</h4><p>References to knowledge we share outside the text.</p></div></div>`},
+ {t:'row',imgs:[[S(1),'Opening'],[S(2),'Opening'],[S(3),'Opening'],[S(4),'Opening']]},
+ {t:'write',id:'w_enigma',p:'The opening of the advert is a good example of the enigma code. Watch it again: write down two questions it makes you ask. When do you get the answers?',rows:3,model:`<p>Use the exam phrasing: “The opening creates an <b>enigma code (Barthes)</b> because… [the questions it raises]. This keeps the audience <b>engaged</b>, because they want to find out the answers.”</p>`},
+ {t:'mcq',id:'codes',title:'Name the code',items:[
+  {q:'A dark, mysterious opening makes us ask who the athlete is. Which code?',o:['Hermeneutic (enigma)','Proairetic (action)','Cultural (referential)','Symbolic (deeper meanings)'],a:0,f:'Unanswered questions = the hermeneutic, or enigma, code.'},
+  {q:'A cyclist leans into a corner at speed, and we sense a crash is coming. Which code?',o:['Semantic (connotations)','Proairetic (action)','Hermeneutic (enigma)','Cultural (referential)'],a:1,f:'Actions that signal something is about to happen = the proairetic code.'},
+  {q:'The Bugsy Malone song relies on knowledge we share from outside the advert. Which code?',o:['Symbolic (deeper meanings)','Proairetic (action)','Cultural (referential)','Hermeneutic (enigma)'],a:2,f:'References to shared knowledge outside the text = the cultural code.'}]}
+]},
+{id:'structuralism',L:1,title:'Lévi-Strauss: structuralism and binary oppositions',walt:'To analyse the set text using theory: Super. Human. charity advert.',blocks:[
+ {t:'text',h:`<ul><li>Texts can be best understood through an examination of their <b>underlying structure</b>.</li><li>Meaning is dependent upon, and produced through, <span class="kw">pairs of oppositions</span>.</li><li>The way these <b>binary oppositions are resolved</b> can have particular <b>ideological significance</b>.</li></ul>`},
+ {t:'row',imgs:[[S(33),'Gruelling training'],[S(60),'Celebration'],[S(55),'Dreamlike'],[S(7),'Reality']]},
+ {t:'match',id:'binaries',title:'Build the binary oppositions',prompt:'Match each element of the advert with its opposite.',pairs:[
+  ['Images of gruelling training regimes','Celebratory images when success is achieved'],['Dreamlike sequences: dramatic images, music, rich colour','Reality: ambient lighting, the strident alarm clock'],['Animated and archive footage','Real-life actions'],['“There’s got to be something wrong with you”','The positive images of the athletes']]},
+ {t:'img',src:S(71),cap:'The on-screen graphic',narrow:1},
+ {t:'text',h:`<p>The on-screen graphic <b>“To be a Paralympian there’s got to be something wrong with you”</b> creates a <span class="kw">conceptual binary opposition</span> between <b>audience perception</b> of Paralympic athletes and the <b>reality</b>. It challenges how language is used, set against the reality of the positive images. It is this opposition the audience is encouraged to <b>reflect upon</b>.</p>
+ <p>“The juxtaposition between being a Paralympic athlete at the peak of your powers and being unable to get in a cafe for a drink is pretty shocking. And tells the story in a very simple way.”</p>`},
+ {t:'write',id:'w_binary',p:'Apply Lévi-Strauss: how do the binary oppositions create meaning in the advertisement? Use two examples.',rows:4,model:`<p>Training is contrasted with celebration, so success is shown as <b>earned through struggle</b>. Dream is contrasted with reality, so the athletes are both “super” and “human”. Animation and archive footage, set against real-life actions, add <b>humour</b> and reinforce the narrative. The graphic sets audience perception against reality, encouraging the audience to <b>question their assumptions</b> about disability.</p>`},
+ {t:'row',imgs:[[S(50),'The café'],[S(53),'Unable to get in']]}
+]},
+{id:'villain',L:1,title:'Representation of disability: the disabled villain trope',walt:'Why the disabled villain trope is so offensive.',blocks:[
+ {t:'row',tall:1,imgs:[[A+'villain-hook.jpg','Captain Hook'],[A+'villain-scar.jpg','Scar'],[A+'villain-voldemort.jpg','Voldemort'],[A+'villain-joker.jpg','The Joker'],[A+'villains-bond.jpg','Bond villains']]},
+ {t:'text',h:`<p>Film has a long history of giving <b>villains a visible disability or difference</b>, linking disability with evil, danger or otherness. In class we watched a video on why the disabled villain trope is so offensive.</p>`},
+ {t:'scale',id:'s_dominant',s:'“Dominant groups in society largely control what is produced and as a result, minority groups tend to be marginalised, creating an unrealistic view of the contemporary world.”',p:'To what extent is this statement true? Explain using examples.'}
+]},
+{id:'campaigns',L:1,title:'Starter read and the earlier campaigns',walt:'To analyse representations in the advert and be able to apply relevant theories.',blocks:[
+ {t:'img',src:A+'article.jpg',cap:'Starter read: “They’ve nailed it again”',narrow:1},
+ {t:'text',h:`<p>Super. Human. is the <b>third</b> of Channel 4’s advertising campaigns for the Paralympic Games. Watch the two earlier campaigns.</p>`},
+ {t:'video',id:YT.c2012,label:'Watch the 2012 campaign'},
+ {t:'video',id:YT.c2016,label:'Watch the 2016 campaign'},
+ {t:'scale',id:'s_shock',s:'“In the past, the most successful campaigns tended to employ shock tactics to elicit a response from the audience. Some campaigns have been hard-hitting as they were not selling a product, but trying to reach the audience on an emotional level to raise their awareness of an issue or event.”',p:'To what extent do you agree with this statement in relation to the Super. Humans campaigns?'}
+]},
+{id:'representation',L:1,title:'What is representation? How is it constructed?',walt:'To analyse representations in the advert and be able to apply relevant theories.',blocks:[
+ {t:'text',h:`<p>Representation is literally a <b>re-presentation</b> of something, whether people, places or events. Everything we experience in the media is a representation, because it has been <b>deliberately constructed</b>. Choices have been made about how things are presented: what a character looks like, says and how they behave are all planned to create a particular impact on the audience, and to convey particular ideas, messages and <b>ideologies</b>.</p>
+ <h3>Constructions of representations in Super. Human.</h3>
+ <p>Choices have been made by the producers to create representations that <b>challenge accepted ideas</b> regarding disability, and disabled athletes in particular.</p>
+ <p>The advertisement actively avoids negative stereotypical representations of Paralympians as <b>victims to be pitied</b>, or <b>heroes, “superhumans”, to be viewed in awe</b>. Instead, the representations create a realistic, <span class="kw">“blood and guts”</span> feel. They cover both genders and give a different view of the world of disability to that of “having something wrong with you”.</p>
+ <p>The narratives are centred around <b>real people</b>, but through re-presentation, a representation of reality is constructed, focusing on the <b>challenges the athletes face</b>. The filming, editing and audio codes combine to raise awareness and create positive representations of the Paralympians as <b>athletes first</b>, rather than disabled people “doing their best”.</p>
+ <p>The producers aimed to avoid the stereotype of disabled athletes having to <b>“overcome” their disability</b> to achieve success, instead celebrating them as <b>high-performance athletes</b> in their own right.</p>`},
+ {t:'gaps',id:'rep',title:'Fill the gaps',text:'The advert avoids showing Paralympians as victims to be [[pitied|admired|ignored]], or as heroes to be viewed in [[awe|anger|silence]]. Instead it creates a realistic, “[[blood and guts|fairytale|black and white]]” feel, presenting them as [[athletes first|celebrities first|patients first]]. It avoids the stereotype that disabled athletes must [[overcome|accept|hide]] their disability to succeed.'}
+]},
+{id:'athlete',L:1,title:'Follow one athlete',walt:'To analyse representations in the advert and be able to apply relevant theories.',blocks:[
+ {t:'text',h:`<p>Using the screenshots, pick <b>one athlete</b> and follow their representation through the advert.</p>`},
+ {t:'gallery',title:'Choose your athlete',shots:[[15,'Swimmer'],[17,'Swimmer'],[19,'Swimmer'],[10,'Prosthetic leg'],[12,'Prosthetic leg'],[29,'Cyclist dad'],[31,'Cyclist dad'],[41,'Track cyclist'],[46,'Track cyclist'],[39,'Mother'],[51,'Wheelchair user'],[53,'Wheelchair user'],[22,'Boccia'],[65,'Boccia'],[26,'Wheelchair basketball'],[73,'Athlete']]},
+ {t:'write',id:'w_ath_who',p:'Which athlete did you choose? Which screenshots show them?',rows:1},
+ {t:'write',id:'w_ath1',p:'How does their representation avoid negative stereotypes of Paralympians as victims to be pitied?',rows:3},
+ {t:'write',id:'w_ath2',p:'How does it create a realistic, “blood and guts” feel?',rows:3},
+ {t:'write',id:'w_ath3',p:'How does it give a different view of disability from “having something wrong with you”?',rows:3},
+ {t:'write',id:'w_ath4',p:'What challenges do they face?',rows:2}
+]},
+{id:'hall',L:1,title:'Representation theory: Stuart Hall',walt:'To analyse representations in the advert and be able to apply relevant theories.',blocks:[
+ {t:'text',h:`<p>Understanding and applying theories is something you are marked on in the exam. For each theory: <b>sum it up</b> in a couple of sentences, then make <b>notes on how it applies</b> to Super. Human.</p>`},
+ {t:'img',src:A+'hall-card.jpg',cap:'Stuart Hall: representation theory',narrow:1},
+ {t:'text',h:`<p>For Hall, a key concept within representation is <span class="kw">stereotyping</span>: a form of representation that reduces groups of people (defined by gender, age, ethnicity, social class and so on) to a <b>few simple characteristics or traits</b>.</p>
+ <p>Hall argues that stereotyping tends to occur where there are <b>inequalities of power</b> in society, and the less powerful (subordinate or excluded) groups are looked down on, and their representations are constructed as <b>different or “other”</b>.</p>
+ <h3>Applied to Super. Human.</h3>
+ <p>According to Hall, meanings are communicated through <b>signs</b>. This is very true of advertising, where easily recognisable signs rapidly communicate meaning in a short space of time; for example, expressions of <b>endurance and struggle</b> are easily recognised and understood.</p>
+ <p>The advertisement goes some way to address Hall’s assertions that stereotyping occurs when there are inequalities of power, and that excluded groups, such as the disabled, are constructed as different. The focus is on the athletes as <b>ordinary sportsmen and women</b> striving to achieve a goal. The athletes are <b>three-dimensional and distinct</b> from each other, so the advertisement <b>avoids simplifying</b> their representations.</p>`},
+ {t:'mcq',id:'hallq',title:'Quick check',items:[
+  {q:'According to Hall, when does stereotyping tend to occur?',o:['Where there are inequalities of power','When adverts are made on very small budgets','Only in comedy and drama','When audiences are very young'],a:0,f:'Stereotyping occurs where there are inequalities of power; less powerful groups are constructed as “other”.'},
+  {q:'How does Super. Human. avoid simplifying the athletes?',o:['It shows only one athlete','They are three-dimensional and distinct','It uses a narrator to explain each of their stories','It hides their disabilities'],a:1,f:'The athletes are three-dimensional and distinct from each other.'}]},
+ {t:'write',id:'w_hall',p:'Find three examples from the advert to support your application of Hall’s theory.',rows:4}
+]},
+{id:'gauntlett',L:1,title:'Representation theory: David Gauntlett',walt:'To analyse representations in the advert and be able to apply relevant theories.',blocks:[
+ {t:'text',h:`<p><span class="theory">Gauntlett: identity</span> In addressing an <b>under-represented social group</b>, the advertisement gives <b>visible recognition</b> to those with disabilities, and allows disabled people to <b>see themselves represented positively</b> in the media.</p>
+ <p>Super. Human. offers audiences a more <b>diverse and inclusive range of identities</b>, and broadens general understanding of what it means to be disabled, as an athlete and in everyday life.</p>
+ <p><b>However</b>, many would argue that the Paralympics in itself is <b>not enough to redress the balance</b>, and indeed many disabilities are not featured in the Games.</p>`},
+ {t:'mcq',id:'gq',title:'Quick check',items:[
+  {q:'How does Super. Human. fit Gauntlett’s ideas about identity?',o:['It offers a more diverse, inclusive range of identities','It shows one fixed identity shared by all disabled people','It avoids showing any identities at all','It only targets people who already play sport'],a:0,f:'It gives visible recognition to an under-represented group and broadens understanding of disability.'}]},
+ {t:'write',id:'w_gaunt',p:'Evaluate: is the advert enough to change how disability is represented? Give one point for and one against.',rows:3,model:`<p><b>For:</b> it gives visible recognition and lets disabled people see themselves represented positively, as athletes and in everyday life. <b>Against:</b> the Paralympics alone is not enough to redress the balance, and many disabilities are not featured in the Games.</p>`}
+]},
+{id:'homework',L:1,title:'Homework: 15-mark media language question',walt:'Apply what you have learned to an unseen advert.',blocks:[
+ {t:'img',src:A+'homework-ad.jpg',cap:'The homework advert (watch it on Google Classroom)',narrow:1},
+ {t:'statement',h:'Explore how this advert uses media language to create meaning. [15]'},
+ {t:'text',h:`<h3>Writing frame</h3><ul><li>Open with the advert’s purpose and a clear argument.</li><li>Visual codes: mise-en-scène, with specific examples and connotations.</li><li>Audio codes: soundtrack, sound effects, voice-over or silence.</li><li>Technical codes: shots, angles, editing, with effects.</li><li>Narrative and theory: Barthes (enigma, semiotics) or Lévi-Strauss (binary oppositions).</li><li>Conclude: how the codes combine to create meaning.</li></ul>`},
+ {t:'write',id:'w_hw',p:'Plan or draft your answer here (you can download it with your notes at the end).',rows:8},
+ {t:'end',h:'<h3>End of Lesson 2</h3><p>You have covered theory and representation. Next: audiences.</p>'}
+]},
+/* ═════════ LESSON 3 ═════════ */
+{id:'audiences',L:2,title:'Who is the advert for?',walt:'To analyse how the advert targets and appeals to audiences.',blocks:[
+ {t:'img',src:S(51),cap:'From the advert',narrow:1},
+ {t:'text',h:`<p>The target audience is a <b>relatively broad demographic</b>, including:</p><ul><li><b>Channel 4 viewers</b>, who largely fall into the <b>16–34</b> age bracket</li><li><b>Fans of sport</b></li><li>Those who want to see <b>more inclusive representations</b> of social groups, of which they may be a member, from a channel whose remit states that it “appeals to the tastes and interests of a culturally diverse society” (Ofcom)</li></ul>`},
+ {t:'write',id:'w_aud1',p:'What examples from the advert might appeal to 16–34-year-olds?',rows:2},
+ {t:'write',id:'w_aud2',p:'…to Channel 4 viewers?',rows:2},
+ {t:'write',id:'w_aud3',p:'…to fans of sport?',rows:2},
+ {t:'write',id:'w_aud4',p:'…to Reformers (people who want to improve society)?',rows:2,model:`<ul><li><b>16–34s:</b> humour and animation, a fast pace, real and relatable lives.</li><li><b>Channel 4 viewers:</b> an inclusive, diverse brand that gives a voice to under-represented groups.</li><li><b>Sport fans:</b> gruelling training, competition, the track crash, celebration.</li><li><b>Reformers:</b> the café that cannot be accessed; the graphic that challenges misconceptions of disability.</li></ul>`}
+]},
+{id:'reach',L:2,title:'How the advert reaches its audience',walt:'To analyse how the advert targets and appeals to audiences.',blocks:[
+ {t:'cards',items:[
+  ['Personalisation','It deals with real, human stories: the day-to-day struggles of being an athlete in training and disabled. Individual narratives encourage the audience to <b>identify</b> with the athletes.'],
+  ['Technical codes','Lots of close-ups, some uncomfortable, such as the popping of the blister. Unfamiliar views, like attaching a prosthetic blade, hold attention. Editing cuts between gruelling routines and cartoon moments, lightening the mood through <b>humour</b>.'],
+  ['Audio codes','“So You Want to Be a Boxer” from Bugsy Malone: an upbeat, stirring tune with connotations of struggle and hard work paying off. Older audiences will know the film. Heavy breathing and grunting are juxtaposed with everyday sounds, such as a woman in childbirth and a baby crying.'],
+  ['Unique selling point','“Showing” the athletes’ stories: no voice-over and no graphics moralising on the plight of the disabled. The closing words, “To be a Paralympian there’s got to be something wrong with you”, encourage the audience to examine their own misconceptions.']]},
+ {t:'row',imgs:[[S(49),'Uncomfortable close-up'],[S(12),'A prosthetic blade'],[S(40),'Everyday sounds'],[S(71),'The closing words']]},
+ {t:'text',h:`<h3>Was it successful?</h3><p>Channel 4’s Paralympic coverage was viewed by <b>20 million people</b>, a third of the UK population, <b>22%</b> of whom were 16–34. The marketing campaign reached <b>81%</b> of the UK population. The Games attracted <b>2.6 million viewers</b>, Channel 4’s biggest weekly share of TV viewing since 2016 and its largest daytime share since 2012.</p>`},
+ {t:'mcq',id:'stats',title:'Make notes: the numbers',items:[
+  {q:'How many people watched Channel 4’s Paralympic coverage?',o:['2 million','20 million','81 million','200,000'],a:1,f:'20 million people: a third of the UK population.'},
+  {q:'What share of the UK population did the marketing campaign reach?',o:['22%','33%','54%','81%'],a:3,f:'The campaign reached 81% of the UK population.'},
+  {q:'What is the advert’s unique selling point?',o:['A celebrity voice-over explaining each disability','“Showing” the athletes’ stories','A free giveaway','Its very short length'],a:1,f:'No voice-over or moralising graphics: it shows the athletes’ stories.'}]}
+]},
+{id:'reception',L:2,title:'Audience theory: Hall’s reception theory',walt:'To apply reception theory to Super. Human.',blocks:[
+ {t:'text',h:`<p>How we relate to a media text is known as <span class="kw">positioning</span>. Producers use images and sound to make us feel and think a particular way: they want us to take a particular <b>position</b>. In a typical charity advert we are positioned as people who care about the terrible situation, feel appalled and want to help.</p>
+ <p>Stuart Hall theorised three types of position (readings) an audience might take:</p>
+ <div class="grid2"><div class="mini"><h4>1 · Preferred</h4><p>The view most people are likely to agree on: the audience accepts the intended ideologies, messages and values without questioning them.</p></div><div class="mini"><h4>2 · Negotiated</h4><p>The audience accepts some, but not all, of the intended meanings, and has their own interpretations.</p></div><div class="mini"><h4>3 · Oppositional</h4><p>The audience rejects the intended meaning and has a totally different interpretation.</p></div></div>
+ <p><span class="kw">Hegemony</span>: where certain ideas are dominant and people accept them without really questioning them. For example, we have lived under the hegemony of a <b>patriarchal ideology</b> for many years, where men being dominant has been accepted as “just the way things are”.</p>`},
+ {t:'row',tall:1,imgs:[[A+'mind-your-language.jpg','Mind Your Language (1977)'],[A+'mind-your-language-cast.jpg','The cast']]},
+ {t:'text',h:`<h3>Example: Mind Your Language</h3><ul><li><b>Preferred:</b> the audience is positioned to find it funny, laughing at stereotyped characters from other countries. The laughter track helps position us.</li><li><b>Negotiated:</b> finding some of it funny but some of it offensive.</li><li><b>Oppositional:</b> finding it offensive and patronising towards people from other cultures, who should be treated with respect.</li></ul>`},
+ {t:'sort',id:'readings',title:'Which reading?',prompt:'Classify each audience response to Super. Human.',b:['Preferred','Negotiated','Oppositional'],items:[
+  ['“It made me want to watch the Paralympics and back the athletes.”',0],['“The athletes are inspiring and the music is uplifting.”',0],
+  ['“I liked the message, but I’m not really interested in sport.”',1],['“Good to see positive representation, though it made me rethink disability more than sport.”',1],
+  ['“I don’t watch Channel 4 and I’m not interested in what it stands for.”',2],['“I found it too uncomfortable and dismissed the message.”',2]]},
+ {t:'write',id:'w_wateraid',p:'Look again at the WaterAid advert from class: what is the preferred (dominant, hegemonic) reading? How has it been constructed (handheld camera, indirect mode of address, the narrative, naming the character)?',rows:4}
+]},
+{id:'apply-reception',L:2,title:'Apply reception theory to Super. Human.',walt:'To apply reception theory to Super. Human.',blocks:[
+ {t:'text',h:`<p>Many factors could affect whether the audience takes the <b>dominant, negotiated or oppositional</b> reading: <b>age, beliefs, culture, gender, life experience</b> and even <b>mood</b> at the time of viewing.</p>`},
+ {t:'video',id:YT.hall,label:'Watch: reception theory explained'},
+ {t:'write',id:'w_pref',p:'Preferred reading: what does Channel 4, the encoder, want the audience to accept?',rows:3},
+ {t:'write',id:'w_neg',p:'Negotiated reading: who might partly accept it, and why?',rows:3},
+ {t:'write',id:'w_opp',p:'Oppositional reading: who might reject it, and why?',rows:3,model:`<ul><li><b>Preferred:</b> the upbeat soundtrack, personalisation and positive representations of the event and the athletes as both “Super” and “Human” encourage the audience to accept the intended meaning of Channel 4, the encoder. The use of real people creates a preferred reading that the audience should invest in their narratives and then watch the Paralympic Games.</li><li><b>Negotiated:</b> some audiences acknowledge the encoder’s position but feel distanced from the sporting theme. They may still be open to the positive approach and examine their misconceptions about disabled people and their lives more generally.</li><li><b>Oppositional:</b> may come from those who are not supporters of Channel 4 and its ethos of giving voice to the under-represented: perhaps older, not regular Channel 4 viewers, or not interested in sport of any kind.</li></ul>`}
+]},
+{id:'gerbner',L:2,title:'Audience theory: Gerbner’s cultivation theory',walt:'To apply cultivation theory to Super. Human.',blocks:[
+ {t:'text',h:`<p>Cultivation theory suggests that <b>heavy television exposure</b> has a significant influence on our perception of the real world. The more we see a version of reality depicted on screen, the more we believe it is an <b>accurate reflection of society</b>.</p>
+ <p>For example, if we watch lots of crime shows and news reports of public disorder, we may begin to worry about violence in our own neighbourhoods. Or, if you watched films set in American high schools, you would be forgiven for believing that American teenagers all look as if they are in their twenties.</p>
+ <p>With radio and television becoming more accessible, academics and politicians wanted to explore the media’s impact on the public; the hypodermic needle theory and the two-step flow model helped further this understanding. In <b>1973</b>, George Gerbner, a professor of communication, defined three areas of research:</p>`},
+ {t:'match',id:'gerb',title:'Gerbner’s three areas of research',prompt:'Match each area to what it studies.',pairs:[
+  ['Institutional process analysis','The power relations between the mass media and other organisations'],['Message systems analysis','How often important symbols appear in media texts'],['Cultivation analysis','How common images shape the audience’s attitudes and beliefs']]},
+ {t:'sort',id:'cult',title:'Reinforce or challenge?',prompt:'Does each point show Super. Human. reinforcing or challenging cultivation theory?',b:['Reinforces','Challenges'],items:[
+  ['Audiences have got used to repeated charity-advert conventions, like a serious voice-over',0],['Repetition may leave audiences somewhat “immune” to the purpose of awareness adverts',0],
+  ['It offers a refreshing, more realistic perception of what it means to be disabled',1],['It challenges common preconceptions and mainstream values',1]]},
+ {t:'write',id:'w_gerb',p:'How does the advert challenge or reinforce this theory? Write a short paragraph.',rows:4,model:`<p>Audiences may have become used to the conventions of this sub-genre, such as a focus on the specific disability with a serious voice-over, so through repetition they accept this view of the world and may be somewhat <b>“immune”</b> to its purpose. <b>Alternatively</b>, the advert challenges Gerbner: after viewing adverts that give a voice to under-represented groups, audiences may <b>question their assumptions</b>, and Super. Human. offers a <b>refreshing and more realistic</b> perception of disability that challenges common preconceptions and mainstream values.</p>`}
+]},
+{id:'finish',L:2,title:'Finish: your results and notes',blocks:[{t:'results'}]}
+];
+
+/* ───────── engine ───────── */
+const KEY='sh-lessons-v1';
+let ST={cur:0,done:{},res:{},notes:{},scale:{}};
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)ST=Object.assign(ST,s)}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const $=s=>document.querySelector(s);
+const hashIdx=()=>{const h=(location.hash||'').slice(1);const i=STEPS.findIndex(s=>s.id===h);return i};
+
+function score(){let c=0,n=0;Object.values(ST.res).forEach(r=>{n++;if(r.c)c++});return [c,n]}
+function chips(){const [c,n]=score();$('#scoreChip').textContent='Score: '+c+' / '+n;
+  const d=STEPS.filter(s=>ST.done[s.id]).length;$('#progChip').textContent='Step '+(ST.cur+1)+' / '+STEPS.length+' · '+d+' done';}
+
+function renderMap(){
+  let h='<div class="map-prog"><i style="width:'+(100*STEPS.filter(s=>ST.done[s.id]).length/STEPS.length)+'%"></i></div>';
+  LESSONS.forEach((L,li)=>{h+='<h4>'+esc(L)+'</h4>';STEPS.forEach((s,i)=>{if(s.L!==li)return;
+    h+='<button type="button" data-go="'+i+'" class="'+(i===ST.cur?'on ':'')+(ST.done[s.id]?'done':'')+'"><span class="tick">'+(ST.done[s.id]?'✓':'')+'</span><span>'+esc(s.title)+'</span></button>'})});
+  h+='<button type="button" class="notes-btn" data-notes>⬇ Download my notes</button>';
+  $('#map').innerHTML=h;
+  $('#map').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{go(+b.dataset.go);if(innerWidth<=980){$('#map').classList.remove('open');$('#mapToggle').setAttribute('aria-expanded','false')}});
+  $('#map').querySelector('[data-notes]').onclick=downloadNotes;
+}
+
+function imgFig(src,cap,cls){return '<figure class="shot'+(cls?' '+cls:'')+'"><img src="'+src+'" alt="'+esc(cap||'')+'" loading="lazy">'+(cap?'<figcaption>'+esc(cap)+'</figcaption>':'')+'</figure>'}
+function row(imgs,tall){return '<div class="row'+(tall?' tall':'')+'">'+imgs.map(([s,c])=>'<figure><img src="'+s+'" alt="'+esc(c)+'" loading="lazy"><figcaption>'+esc(c)+'</figcaption></figure>').join('')+'</div>'}
+
+function block(b,si){
+  switch(b.t){
+  case 'text':return '<div class="card">'+b.h+'</div>';
+  case 'tip':return '<div class="tip">'+b.h+'</div>';
+  case 'statement':return '<div class="statement">'+b.h+'</div>';
+  case 'img':return imgFig(b.src,b.cap,b.narrow?'narrow':'');
+  case 'row':return row(b.imgs,b.tall);
+  case 'gallery':return '<div class="card"><h3>'+esc(b.title)+'</h3><p class="saved">Tap a screenshot to enlarge it.</p><div class="gal">'+b.shots.map(([n,c])=>'<figure><img src="'+S(n)+'" alt="'+esc(c)+'" loading="lazy"><figcaption>'+esc(c)+'</figcaption></figure>').join('')+'</div></div>';
+  case 'video':return '<div class="video" data-yt="'+b.id+'"><button type="button">▶ '+esc(b.label)+'</button><span class="vsub">Opens the video from YouTube</span></div>';
+  case 'end':return '<div class="lesson-end">'+b.h+'</div>';
+  case 'cards':return '<div class="grid2">'+b.items.map(([t,h])=>'<div class="mini"><h4>'+esc(t)+'</h4><p>'+h+'</p></div>').join('')+'</div>';
+  case 'reveal':return '<div class="act" style="border-left-color:var(--gold)"><button type="button" class="reveal-btn" data-reveal>'+esc(b.label)+'</button><div class="model">'+b.h+(b.imgs?row(b.imgs):'')+'</div></div>';
+  case 'mcq':return '<div class="act" data-mcq="'+b.id+'"><h3><span class="tag">Quiz</span>'+esc(b.title||'Quick check')+'</h3>'+b.items.map((it,i)=>{const id=b.id+'_'+i,r=ST.res[id];
+     const opts=shuf(it.o.map((o,k)=>({o,k})));
+     return '<div class="q" data-q="'+id+'">'+(it.img?'<img class="qimg" src="'+it.img+'" alt="" loading="lazy">':'')+'<p class="qt">'+esc(it.q)+'</p><div class="opts">'+opts.map(x=>{let cls='';if(r){if(x.k===it.a)cls='ok';else if(x.o===r.v)cls='no'}return '<button type="button" data-k="'+x.k+'" class="'+cls+'"'+(r?' disabled':'')+'>'+esc(x.o)+'</button>'}).join('')+'</div><div class="fb'+(r?(r.c?' y':' n'):'')+'">'+(r?(r.c?'✓ Correct. ':'✗ Not quite. ')+esc(it.f):'')+'</div></div>'}).join('')+'</div>';
+  case 'sort':return '<div class="act"><h3><span class="tag">Sort</span>'+esc(b.title)+'</h3><p class="prompt">'+esc(b.prompt)+'</p>'+b.items.map((it,i)=>{const id=b.id+'_'+i,r=ST.res[id];
+     return '<div class="sitem'+(r?(r.c?' ok':' no'):'')+'" data-s="'+id+'"><span>'+esc(it[0])+'</span>'+(r?'<span class="verdict">'+(r.c?'✓ ':'✗ → ')+esc(b.b[it[1]])+'</span>':'<span class="sbtns">'+b.b.map((bb,k)=>'<button type="button" data-k="'+k+'">'+esc(bb)+'</button>').join('')+'</span>')+'</div>'}).join('')+'</div>';
+  case 'match':{const rights=shuf(b.pairs.map(p=>p[1]));return '<div class="act"><h3><span class="tag">Match</span>'+esc(b.title)+'</h3><p class="prompt">'+esc(b.prompt)+'</p>'+b.pairs.map((p,i)=>{const id=b.id+'_'+i,r=ST.res[id];
+     return '<div class="mrow'+(r?(r.c?' ok':' no'):'')+'" data-m="'+id+'"><span><b>'+esc(p[0])+'</b></span><span>'+(r?(r.c?'✓ ':'✗ ')+esc(p[1]):'<select aria-label="Match for '+esc(p[0])+'"><option value="">Choose…</option>'+rights.map(x=>'<option>'+esc(x)+'</option>').join('')+'</select>')+'</span></div>'}).join('')+'</div>'}
+  case 'gaps':{let n=0;const html=b.text.replace(/\[\[(.+?)\]\]/g,(m,g)=>{const parts=g.split('|'),id=b.id+'_'+(n++),r=ST.res[id];
+     if(r)return '<b class="'+(r.c?'fb y':'fb n')+'">'+(r.c?'':'✗ ')+esc(parts[0])+'</b>';
+     return '<select data-g="'+id+'" data-a="'+esc(parts[0])+'"><option value="">…</option>'+shuf(parts).map(x=>'<option>'+esc(x)+'</option>').join('')+'</select>'});
+     return '<div class="act"><h3><span class="tag">Gaps</span>'+esc(b.title)+'</h3><div class="gaps">'+html+'</div></div>'}
+  case 'write':return '<div class="act" style="border-left-color:var(--ink)"><p class="wlabel">✎ '+esc(b.p)+'</p><textarea data-w="'+b.id+'" rows="'+(b.rows||3)+'" placeholder="Write your answer…">'+esc(ST.notes[b.id]||'')+'</textarea><span class="saved" data-saved="'+b.id+'">'+(ST.notes[b.id]?'Saved on this device':'')+'</span>'+(b.model?'<br><button type="button" class="reveal-btn" data-reveal>Show the model answer</button><div class="model">'+b.model+'</div>':'')+'</div>';
+  case 'scale':{const v=ST.scale[b.id];const L=['Strongly disagree','Disagree','Not sure','Agree','Strongly agree'];
+     return '<div class="act"><h3><span class="tag">Debate</span>Where do you stand?</h3><div class="statement">'+esc(b.s)+'</div><div class="scale" data-scale="'+b.id+'">'+L.map((l,k)=>'<button type="button" data-k="'+k+'" class="'+(v===k?'sel':'')+'">'+l+'</button>').join('')+'</div><p class="wlabel">✎ '+esc(b.p)+'</p><textarea data-w="'+b.id+'_why" rows="3" placeholder="Explain your view with examples…">'+esc(ST.notes[b.id+'_why']||'')+'</textarea></div>'}
+  case 'results':return resultsHTML();
+  }return '';
+}
+
+function resultsHTML(){
+  const [c,n]=score(),done=STEPS.filter(s=>ST.done[s.id]).length,wrote=Object.values(ST.notes).filter(x=>x&&x.trim()).length;
+  let miss='';STEPS.forEach(s=>s.blocks.forEach(b=>{
+    if(b.t==='mcq')b.items.forEach((it,i)=>{const r=ST.res[b.id+'_'+i];if(r&&!r.c)miss+='<div class="miss"><b>'+esc(it.q)+'</b><br>✓ '+esc(it.o[it.a])+'</div>'});
+    if(b.t==='sort')b.items.forEach((it,i)=>{const r=ST.res[b.id+'_'+i];if(r&&!r.c)miss+='<div class="miss"><b>'+esc(it[0])+'</b><br>✓ '+esc(b.b[it[1]])+'</div>'});
+    if(b.t==='match')b.pairs.forEach((p,i)=>{const r=ST.res[b.id+'_'+i];if(r&&!r.c)miss+='<div class="miss"><b>'+esc(p[0])+'</b><br>✓ '+esc(p[1])+'</div>'})}));
+  return '<div class="card" style="border:2px solid var(--gold)"><h3>Your Super. Human. results</h3><div class="res-big">'+c+' / '+n+'</div><p>Quiz, sort and match answers correct · '+done+' of '+STEPS.length+' steps complete · '+wrote+' written answers saved.</p><div class="tip"><b>Screenshot this card</b> and post it on Google Classroom.</div>'
+   +(miss?'<h3>Look at these again</h3>'+miss:(n?'<p style="color:var(--green);font-weight:700">Everything you attempted is correct.</p>':''))
+   +'<p><button type="button" class="btn" data-notes>⬇ Download my notes</button><a class="btn alt" href="superhuman.html">Open the Super. Human. recap</a><a class="btn alt" href="index.html#questions">Now do the Apply step → Exam Questions</a></p>'
+   +'<p class="saved"><button type="button" class="reveal-btn" data-reset>Start again (clears this page’s answers)</button></p></div>';
+}
+
+function go(i){ST.cur=Math.max(0,Math.min(STEPS.length-1,i));save();
+  try{history.replaceState(null,'','#'+STEPS[ST.cur].id)}catch(e){}
+  render();window.scrollTo({top:0,behavior:'smooth'});}
+
+function render(){
+  const s=STEPS[ST.cur];
+  let h='<div class="step-head"><span class="step-kick">'+esc(LESSONS[s.L])+' · Step '+(STEPS.filter(x=>x.L===s.L).indexOf(s)+1)+' of '+STEPS.filter(x=>x.L===s.L).length+'</span></div><h2 class="step-title">'+esc(s.title)+'</h2>';
+  if(s.walt)h+='<div class="walt"><b>WALT</b>'+esc(s.walt)+'</div>';
+  h+=s.blocks.map(b=>block(b)).join('');
+  h+='<div class="stepnav">'+(ST.cur>0?'<button type="button" class="prev" data-prev>← Previous</button>':'')+(ST.cur<STEPS.length-1?'<button type="button" class="next" data-next>'+(ST.done[s.id]?'Next step →':'Done · next step →')+'</button>':'')+'</div>';
+  $('#step').innerHTML=h;document.querySelector('.hero').style.display=ST.cur===0?'':'none';bind();renderMap();chips();
+}
+
+function mark(id,c,v){ST.res[id]={c,v};save();chips()}
+function bind(){
+  const root=$('#step');
+  root.querySelectorAll('[data-prev]').forEach(b=>b.onclick=()=>go(ST.cur-1));
+  root.querySelectorAll('[data-next]').forEach(b=>b.onclick=()=>{ST.done[STEPS[ST.cur].id]=1;go(ST.cur+1)});
+  root.querySelectorAll('[data-reveal]').forEach(b=>b.onclick=()=>{const m=b.nextElementSibling;m.classList.toggle('show');b.textContent=m.classList.contains('show')?'Hide ▲':b.dataset.label});
+  root.querySelectorAll('[data-reveal]').forEach(b=>b.dataset.label=b.textContent);
+  root.querySelectorAll('.video').forEach(v=>v.querySelector('button').onclick=()=>{v.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+v.dataset.yt+'?autoplay=1&rel=0" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'});
+  // mcq
+  root.querySelectorAll('[data-q]').forEach(q=>{const [bid,i]=splitId(q.dataset.q);const it=findBlock(bid).items[i];
+    q.querySelectorAll('button').forEach(btn=>btn.onclick=()=>{const k=+btn.dataset.k,c=k===it.a;
+      q.querySelectorAll('button').forEach(x=>{x.disabled=true;if(+x.dataset.k===it.a)x.classList.add('ok')});if(!c)btn.classList.add('no');
+      const fb=q.querySelector('.fb');fb.className='fb '+(c?'y':'n');fb.textContent=(c?'✓ Correct. ':'✗ Not quite. ')+it.f;mark(q.dataset.q,c,it.o[k])})});
+  // sort
+  root.querySelectorAll('[data-s]').forEach(row=>{const [bid,i]=splitId(row.dataset.s);const b=findBlock(bid),it=b.items[i];
+    row.querySelectorAll('.sbtns button').forEach(btn=>btn.onclick=()=>{const k=+btn.dataset.k,c=k===it[1];
+      row.classList.add(c?'ok':'no');row.querySelector('.sbtns').outerHTML='<span class="verdict">'+(c?'✓ ':'✗ → ')+esc(b.b[it[1]])+'</span>';mark(row.dataset.s,c,k)})});
+  // match
+  root.querySelectorAll('[data-m]').forEach(row=>{const [bid,i]=splitId(row.dataset.m);const p=findBlock(bid).pairs[i];const sel=row.querySelector('select');if(!sel)return;
+    sel.onchange=()=>{if(!sel.value)return;const c=sel.value===p[1];row.classList.add(c?'ok':'no');sel.parentNode.innerHTML=(c?'✓ ':'✗ ')+esc(p[1]);mark(row.dataset.m,c,sel.value)}});
+  // gaps
+  root.querySelectorAll('[data-g]').forEach(sel=>sel.onchange=()=>{if(!sel.value)return;const c=sel.value===sel.dataset.a;const b=document.createElement('b');b.className='fb '+(c?'y':'n');b.textContent=(c?'':'✗ ')+sel.dataset.a;mark(sel.dataset.g,c,sel.value);sel.replaceWith(b)});
+  // writing
+  root.querySelectorAll('textarea[data-w]').forEach(t=>{let tm;t.oninput=()=>{ST.notes[t.dataset.w]=t.value;clearTimeout(tm);tm=setTimeout(()=>{save();const s=root.querySelector('[data-saved="'+t.dataset.w+'"]');if(s)s.textContent='Saved on this device'},400)}});
+  root.querySelectorAll('[data-scale]').forEach(sc=>sc.querySelectorAll('button').forEach(b=>b.onclick=()=>{ST.scale[sc.dataset.scale]=+b.dataset.k;save();sc.querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b))}));
+  root.querySelectorAll('[data-notes]').forEach(b=>b.onclick=downloadNotes);
+  root.querySelectorAll('[data-reset]').forEach(b=>b.onclick=()=>{if(confirm('Clear all your answers and notes on this page?')){ST={cur:0,done:{},res:{},notes:{},scale:{}};save();go(0)}});
+  // lightbox
+  root.querySelectorAll('figure img, img.qimg').forEach(im=>im.onclick=()=>{const d=document.createElement('div');d.className='lb';d.innerHTML='<div><img src="'+im.src+'" alt=""><p>'+esc(im.alt||'')+' · tap to close</p></div>';d.onclick=()=>d.remove();document.body.appendChild(d)});
+}
+function splitId(id){const k=id.lastIndexOf('_');return [id.slice(0,k),+id.slice(k+1)]}
+function findBlock(id){for(const s of STEPS)for(const b of s.blocks)if(b.id===id)return b}
+
+function downloadNotes(){
+  const L=['SUPER. HUMAN. — MY LESSON NOTES','A Level Media Studies · Component 1','',''];
+  const SC=['Strongly disagree','Disagree','Not sure','Agree','Strongly agree'];
+  STEPS.forEach(s=>{const parts=[];s.blocks.forEach(b=>{
+    if(b.t==='write'&&ST.notes[b.id]&&ST.notes[b.id].trim())parts.push('Q: '+b.p+'\n'+ST.notes[b.id].trim());
+    if(b.t==='scale'&&(ST.scale[b.id]!=null||ST.notes[b.id+'_why']))parts.push('Statement: '+b.s+'\nMy view: '+(ST.scale[b.id]!=null?SC[ST.scale[b.id]]:'—')+'\n'+(ST.notes[b.id+'_why']||'').trim())});
+    if(parts.length)L.push('== '+LESSONS[s.L]+' · '+s.title+' ==','',parts.join('\n\n'),'','')});
+  if(L.length<=4)L.push('(No written answers yet.)');
+  const blob=new Blob([L.join('\n')],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='superhuman-notes.txt';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+}
+
+$('#mapToggle').onclick=()=>{const m=$('#map');m.classList.toggle('open');$('#mapToggle').setAttribute('aria-expanded',m.classList.contains('open'))};
+window.addEventListener('hashchange',()=>{const i=hashIdx();if(i>=0&&i!==ST.cur){ST.cur=i;save();render()}});
+{const i=hashIdx();if(i>=0)ST.cur=i;}
+if(ST.cur>=STEPS.length)ST.cur=0;
+render();
+</script>
+</body>
+</html>
