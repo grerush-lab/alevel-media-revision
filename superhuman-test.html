@@ -147,7 +147,7 @@
   <div class="hero">
     <div class="meta">Set text · Super. Human. (Channel 4, 2021) · End of unit test</div>
     <h1>Super. Human. — how much have you taken in?</h1>
-    <p>This checks everything from the three <a href="superhuman-lessons.html">guided lessons</a>. Work through all four parts <b>without your notes</b>. Each auto-marked question gives you <b>one attempt</b>, so think before you tap. Part 4 is a full exam-style comparison against an unseen advert. Your answers save on this device.</p>
+    <p>This checks everything from the three <a href="superhuman-lessons.html">guided lessons</a>. Work through all three parts <b>without your notes</b>. Each auto-marked question gives you <b>one attempt</b>, so think before you tap. Your answers save on this device.</p>
     <div class="namebox"><label for="sname">Your name</label><input id="sname" autocomplete="off" placeholder="First name and surname"></div>
   </div>
 
@@ -165,68 +165,6 @@
 /* ───────── content ───────── */
 const A='superhuman_assets/';
 const S=n=>A+'shot'+String(n).padStart(2,'0')+'.jpg';
-
-const UNSEEN_SVG=`<svg viewBox="0 0 600 820" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Unseen print advert: a black and white high-angle photograph of a small boy alone in a wheelchair, facing a tall window, with children playing outside. Headline: Tommy can only watch.">
-<defs>
- <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .22"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
- <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a4a4a"/><stop offset="1" stop-color="#2c2c2c"/></linearGradient>
- <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b5b5b"/><stop offset="1" stop-color="#1f1f1f"/></linearGradient>
- <linearGradient id="win" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9d9d9"/><stop offset="1" stop-color="#a9a9a9"/></linearGradient>
- <radialGradient id="pool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#9a9a9a" stop-opacity=".55"/><stop offset="1" stop-color="#9a9a9a" stop-opacity="0"/></radialGradient>
- <clipPath id="photo"><rect x="30" y="30" width="540" height="470"/></clipPath>
-</defs>
-<rect width="600" height="820" fill="#f4f1ea"/>
-<g clip-path="url(#photo)" filter="url(#grain)">
- <rect x="30" y="30" width="540" height="190" fill="url(#wall)"/>
- <polygon points="30,220 570,220 570,500 30,500" fill="url(#floor)"/>
- <g stroke="#6a6a6a" stroke-width="1.2" opacity=".55">
-  <line x1="300" y1="220" x2="-120" y2="500"/><line x1="300" y1="220" x2="60" y2="500"/><line x1="300" y1="220" x2="220" y2="500"/>
-  <line x1="300" y1="220" x2="380" y2="500"/><line x1="300" y1="220" x2="540" y2="500"/><line x1="300" y1="220" x2="720" y2="500"/>
-  <line x1="30" y1="262" x2="570" y2="262"/><line x1="30" y1="318" x2="570" y2="318"/><line x1="30" y1="395" x2="570" y2="395"/>
- </g>
- <rect x="330" y="55" width="200" height="160" fill="url(#win)"/>
- <g fill="#7a7a7a"><rect x="330" y="160" width="200" height="55"/></g>
- <g fill="#4d4d4d">
-  <circle cx="368" cy="150" r="7"/><path d="M362 157 l12 0 l4 18 l6 14 l-5 2 l-7 -12 l-6 12 l-5 -2 l4 -14z"/><path d="M362 162 l-10 8 l3 3 l9 -6z"/><path d="M374 162 l10 -6 l2 4 l-10 6z"/>
-  <circle cx="440" cy="142" r="7"/><path d="M434 149 l12 0 l3 19 l9 12 l-4 3 l-9 -11 l-5 13 l-5 -1 l2 -16z"/><path d="M434 154 l-11 -5 l-1 4 l11 6z"/><path d="M446 154 l11 6 l-2 4 l-10 -5z"/>
-  <circle cx="497" cy="152" r="6"/><path d="M492 158 l10 0 l3 16 l4 13 l-4 1 l-5 -11 l-4 11 l-4 -1 l2 -13z"/>
-  <circle cx="408" cy="186" r="9" fill="#e8e8e8" stroke="#4d4d4d" stroke-width="2"/>
- </g>
- <g stroke="#ffffff" stroke-width="1" opacity=".35"><line x1="345" y1="60" x2="340" y2="95"/><line x1="380" y1="70" x2="375" y2="110"/><line x1="420" y1="58" x2="415" y2="90"/><line x1="470" y1="75" x2="465" y2="115"/><line x1="510" y1="62" x2="505" y2="98"/><line x1="395" y1="118" x2="391" y2="140"/><line x1="485" y1="120" x2="481" y2="148"/></g>
- <g stroke="#3a3a3a" stroke-width="7" fill="none"><rect x="330" y="55" width="200" height="160"/><line x1="430" y1="55" x2="430" y2="215"/><line x1="330" y1="135" x2="530" y2="135"/></g>
- <polygon points="330,215 530,215 600,500 290,500" fill="#cfcfcf" opacity=".18"/>
- <ellipse cx="250" cy="395" rx="95" ry="36" fill="url(#pool)"/>
- <g>
-  <ellipse cx="246" cy="400" rx="58" ry="17" fill="#121212" opacity=".55"/>
-  <ellipse cx="200" cy="380" rx="14" ry="30" fill="none" stroke="#151515" stroke-width="5" transform="rotate(-18 200 380)"/>
-  <ellipse cx="290" cy="372" rx="14" ry="30" fill="none" stroke="#151515" stroke-width="5" transform="rotate(-18 290 372)"/>
-  <path d="M205 358 L290 346 L296 372 L210 386 Z" fill="#2a2a2a"/>
-  <path d="M212 352 L222 318 L282 310 L288 344 Z" fill="#1e1e1e"/>
-  <path d="M226 334 C228 312 236 300 252 298 C268 296 278 306 280 326 L282 346 L230 352 Z" fill="#5c5c5c"/>
-  <path d="M232 338 C225 345 222 352 226 356" stroke="#5c5c5c" stroke-width="7" fill="none" stroke-linecap="round"/>
-  <path d="M276 330 C282 340 283 348 278 352" stroke="#5c5c5c" stroke-width="7" fill="none" stroke-linecap="round"/>
-  <ellipse cx="254" cy="290" rx="17" ry="15" fill="#3b3b3b"/>
-  <path d="M238 284 C242 272 266 270 271 284" fill="#2a2a2a"/>
-  <circle cx="200" cy="380" r="4" fill="#151515"/><circle cx="290" cy="372" r="4" fill="#151515"/>
-  <path d="M286 342 L300 336" stroke="#151515" stroke-width="4"/>
- </g>
- <rect x="30" y="30" width="540" height="470" fill="none" stroke="#000" stroke-opacity=".25" stroke-width="40"/>
-</g>
-<text x="300" y="568" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="46" font-weight="700" fill="#111">Tommy can only watch.</text>
-<g font-family="Georgia,'Times New Roman',serif" font-size="15.5" fill="#222" text-anchor="middle">
- <text x="300" y="604">Every afternoon, Tommy sits by the window while the other children play.</text>
- <text x="300" y="625">He will never kick a ball. He will never run in the park.</text>
- <text x="300" y="646">Without your help, his world will stay this small.</text>
- <text x="300" y="676" font-weight="700" font-size="17">Just £3 a month can bring hope to children like Tommy.</text>
-</g>
-<line x1="40" y1="700" x2="560" y2="700" stroke="#222" stroke-dasharray="6 5"/>
-<text x="44" y="726" font-family="Georgia,serif" font-size="14" fill="#222">✂  YES, I want to help Tommy. I enclose £______ . Please give today.</text>
-<text x="44" y="750" font-family="Georgia,serif" font-size="12" fill="#555">Name ................................................  Address ..............................................................</text>
-<g transform="translate(300 790)" text-anchor="middle">
- <text y="0" font-family="Georgia,serif" font-size="20" font-weight="700" letter-spacing="2" fill="#111">THE HARTWELL TRUST</text>
- <text y="18" font-family="Georgia,serif" font-size="12" font-style="italic" fill="#444">Caring for handicapped children since 1952</text>
-</g>
-</svg>`;
 
 /* Part definitions. q types: mcq, sort, match, write, plan, essay */
 const PARTS=[
@@ -296,7 +234,7 @@ const PARTS=[
   {q:'Which of Gerbner’s areas studies how common images shape the audience’s attitudes and beliefs?',o:['Institutional process analysis','Message systems analysis','Cultivation analysis','Reception analysis'],a:2,f:'Cultivation analysis. Super. Human. can be argued to challenge cultivated ideas of disability by offering a more realistic perception.'}
  ]}
 ]},
-{id:'p3',kick:'Part 3',title:'Representation',intro:'The heart of the comparison question. These cover the areas you are most likely to be asked about: disability, gender, the athletes and the event, plus the contexts that explain them.',blocks:[
+{id:'p3',kick:'Part 3',title:'Representation',intro:'The heart of the representation comparison question in the exam. These cover the areas you are most likely to be asked about: disability, gender, the athletes and the event, plus the contexts that explain them.',blocks:[
  {t:'mcq',id:'p3a',title:'Representation of disability',items:[
   {q:'Which two stereotypes of Paralympians does the advert actively avoid?',o:['Lazy and unhealthy people who avoid exercise','Victims to be pitied, and “superhumans” viewed in awe','Villains, and comic relief characters to laugh at','Celebrities, and influencers chasing fame'],a:1,f:'It avoids both extremes and creates a realistic, “blood and guts” feel instead.'},
   {q:'What does it mean that the advert represents the Paralympians as “athletes first”?',o:['They are shown only competing in races, never at home with family','They are elite athletes, not disabled people “doing their best”','Their disabilities are hidden from view so the audience focuses on sport','Only the athletes who have already won medals are shown in the advert'],a:1,f:'The producers aimed to avoid the stereotype that disabled athletes must “overcome” their disability to succeed.'},
@@ -338,31 +276,6 @@ const PARTS=[
  {t:'write',id:'p3w1',title:'Short answer',p:'Explain how disability is represented in Super. Human. Use two specific examples from the advert and one theorist.',rows:5,min:30,model:`<p>Disability is represented as one part of the athletes’ lives, not the thing that defines them. A close-up of Ellie Simmonds putting on her goggles, then a low angle and an ECU of her eyes, represent her with power and concentration: an athlete first. The café sequence juxtaposes an elite athlete with a step she cannot get past, suggesting the barriers come from society. This goes some way to address <b>Hall</b>’s point that less powerful groups are constructed as “other”: the athletes are three-dimensional and distinct.</p>`},
  {t:'write',id:'p3w2',title:'Short answer',p:'How does the advert represent gender? Give two examples.',rows:4,min:25,model:`<p>Both genders are represented as elite athletes. Ellie Simmonds is shown with power (low angle, medals) and focus (ECU), in functional kit, not sexualised or passive. Including a woman giving birth among the athletes’ stories represents her as both mother and athlete, a more diverse identity (<b>Gauntlett</b>). Male athletes are shown in pain and in family roles (the birthday call), not only as tough and dominant.</p>`},
  {t:'write',id:'p3w3',title:'Short answer: evaluate',p:'How far does Super. Human. offer a positive representation of disabled people? Give one point for and one point against, then a judgement.',rows:5,min:30,model:`<p><b>For:</b> it avoids pity, shows realistic, three-dimensional people with ordinary lives, and gives an under-represented group visible recognition (Gauntlett). <b>Against:</b> the “super” framing could suggest disabled people are only valued when extraordinary, and many disabilities are not shown. <b>Judgement:</b> largely positive and a clear challenge to charity-advert conventions, but limited in the range of disability it can represent.</p>`}
-]},
-{id:'p4',kick:'Part 4',title:'Comparison with an unseen advert',intro:'This is the exam skill: compare the representations in Super. Human. with an unseen advert in the same form. Study the unseen first.',blocks:[
- {t:'unseen'},
- {t:'mcq',id:'p4a',title:'Read the unseen',items:[
-  {q:'What does the high-angle shot looking down on Tommy connote?',o:['Power and confidence','Vulnerability and powerlessness','Speed and action','Celebration and joy'],a:1,f:'The opposite of the low angles used on Ellie Simmonds.'},
-  {q:'How does the headline “Tommy can only watch.” represent him?',o:['As active and independent','As a young athlete in training','As defined by what he cannot do','As a hero to be admired by others'],a:2,f:'“Only”, “never” and “this small” define him by lack: a victim to be pitied.'},
-  {q:'How is the reader positioned by the unseen?',o:['To laugh at Tommy','To admire Tommy’s skill','To question their own assumptions','To feel pity and guilt, and donate'],a:3,f:'A classic charity-advert appeal, with a call to action (“Please give today”).'},
-  {q:'Which context best explains the unseen’s representation of disability?',o:['Channel 4’s remit to target a young 16–34 audience','The 1980s, when disability was seen as personal tragedy','The Covid-19 pandemic and the postponement of events','The rise of social media campaigns and influencers'],a:1,f:'Charities relied on pity to raise money. Note the language too: “handicapped” was common then and is now seen as outdated.'}
- ]},
- {t:'sort',id:'p4b',title:'Similarity or difference?',prompt:'Compare the unseen with Super. Human.',b:['Similarity','Difference'],items:[
-  ['Both aim to raise awareness of disabled people',0,'Same broad purpose, but very different methods.'],
-  ['Both show a disabled person facing a barrier (the window, the café step)',0,'But the meaning differs: the unseen frames the barrier as Tommy’s fate; Super. Human. frames it as society’s failure.'],
-  ['One shows a passive, isolated child; the other shows active adult athletes',1,'Victim versus “athletes first”.'],
-  ['One uses guilt and pity; the other avoids pity and uses humour',1,'Super. Human. responds to compassion fatigue.'],
-  ['One speaks for the disabled person; the other has no moralising voice-over',1,'Tommy is described by the charity; the athletes’ lives are shown.'],
-  ['Both end by addressing the audience directly in words',0,'“Please give today” versus “…something wrong with you”: one asks for money, the other challenges our perceptions.']
- ]},
- {t:'plan',id:'p4c',title:'Plan your comparison',rows:[
-  ['How the disabled person is represented','Tommy is…','The athletes are…'],
-  ['Media language that constructs it (shots, mise-en-scène, language)','High angle, B&W…','Low angle, ECU, humour…'],
-  ['How the audience is positioned','',''],
-  ['Social and cultural context','1980s…','2021, Channel 4…'],
-  ['Theory (Hall, Gauntlett, Lévi-Strauss)','','']
- ]},
- {t:'essay',id:'p4d'}
 ]}
 ];
 
@@ -415,72 +328,12 @@ function render(){
         h+=`<div class="act"><h3><span class="tag w">Written</span>${esc(B.title)}</h3><p class="wlabel">${esc(B.p)}</p><textarea rows="${B.rows}" data-w="${B.id}">${esc(ST.w[B.id]||'')}</textarea>
         <div class="wmeta"><span class="saved" data-wc="${B.id}"></span><button class="reveal-btn" data-reveal="${B.id}" data-min="${B.min}">Show the model answer</button></div><div class="model" id="m_${B.id}">${B.model}</div></div>`;
       }
-      if(B.t==='unseen'){
-        h+=`<div class="card"><span class="label-chip">Unseen text · practice</span><div class="unseen"><div>${UNSEEN_SVG}</div><div class="notes">
-        <h3>Print charity advert, 1987</h3>
-        <p><b>This advert was made up for this test</b> so you can practise on something you have never seen, as in the exam. The charity is fictional.</p>
-        <p><b>The image:</b> a black-and-white, grainy photograph taken from a high angle. A small boy sits alone in a wheelchair in a large, empty room, his back to us, facing a tall window. It is raining. Outside, other children run and play football.</p>
-        <p><b>Headline:</b> “Tommy can only watch.”</p>
-        <p><b>Copy:</b> “Every afternoon, Tommy sits by the window while the other children play. He will never kick a ball. He will never run in the park. Without your help, his world will stay this small. Just £3 a month can bring hope to children like Tommy.”</p>
-        <p><b>Coupon:</b> “YES, I want to help Tommy. I enclose £___. Please give today.”</p>
-        <p><b>Logo and strapline:</b> The Hartwell Trust: “Caring for handicapped children since 1952”.</p>
-        </div></div></div>`;
-      }
-      if(B.t==='plan'){
-        h+=`<div class="act"><h3><span class="tag w">Plan</span>${esc(B.title)}</h3><p class="prompt">Spend about 5 minutes. Short notes, not sentences. Each row is a point you can compare.</p><table class="plan"><thead><tr><th>Focus</th><th>Unseen (Hartwell Trust)</th><th>Super. Human.</th></tr></thead><tbody>`;
-        B.rows.forEach((r,i)=>{
-          h+=`<tr><td>${esc(r[0])}</td><td data-h="Unseen"><textarea rows="3" data-w="${B.id}_${i}_u" placeholder="${esc(r[1])}">${esc(ST.w[B.id+'_'+i+'_u']||'')}</textarea></td><td data-h="Super. Human."><textarea rows="3" data-w="${B.id}_${i}_s" placeholder="${esc(r[2])}">${esc(ST.w[B.id+'_'+i+'_s']||'')}</textarea></td></tr>`;});
-        h+=`</tbody></table></div>`;
-      }
-      if(B.t==='essay')h+=essayHTML(B.id);
     });
     h+=`</section>`;
   });
   nav+=`<a href="#results">Results</a>`;
   $('#partnav').innerHTML=nav;$('#parts').innerHTML=h;
   restore();update();
-}
-
-function essayHTML(id){
-  const checks=['I compared throughout, using “whereas”, “similarly”, “in contrast”, not two separate halves',
-    'I analysed specific media language from BOTH adverts (shots, mise-en-scène, language, audio)',
-    'I explained what the representations suggest, not just what is shown',
-    'I used at least one theorist accurately (Hall, Gauntlett, Lévi-Strauss)',
-    'I explained how social and cultural contexts influence BOTH representations',
-    'I made a clear judgement and drew a conclusion'];
-  return `<div class="act" style="border-left-color:var(--purple)"><h3><span class="tag w">Exam question</span>Extended response</h3>
-  <div class="statement">Compare the representations of disabled people in the Hartwell Trust advert and Super. Human. [30]<ul><li>the similarities and differences in the representations</li><li>the influence of social and cultural contexts on the representations</li><li>make judgements and draw conclusions about how far each advert challenges stereotypes</li></ul></div>
-  <div class="tip"><b>Timing:</b> about 45 minutes in the exam. Aim for 600+ words. Open with a clear argument; build 4–5 comparative paragraphs from your plan; finish with a judgement.</div>
-  <textarea rows="18" data-w="${id}" placeholder="Start with your argument…">${esc(ST.w[id]||'')}</textarea>
-  <div class="wmeta"><span class="saved" data-wc="${id}"></span></div>
-  <h3 style="font-family:Syne,sans-serif;font-size:.98rem;margin:1rem 0 .3rem">Check your answer</h3>
-  <div class="checks">${checks.map((c,i)=>`<label><input type="checkbox" data-chk="${i}" ${ST.chk[i]?'checked':''}> <span>${esc(c)}</span></label>`).join('')}</div>
-  <div style="margin-top:.6rem"><button class="reveal-btn" data-reveal="${id}" data-min="150">Show indicative content and levels (write 150+ words first)</button></div>
-  <div class="model" id="m_${id}">
-   <h4>Similarities</h4><ul>
-    <li>Both raise awareness of disabled people and address the audience directly in words at the end.</li>
-    <li>Both show a disabled person facing a barrier and use an individual story (personalisation) to engage the audience.</li></ul>
-   <h4>Differences in the representations</h4><ul>
-    <li><b>Unseen:</b> Tommy is passive, isolated and voiceless: a victim to be pitied. High angle, black and white, the empty room and rain connote vulnerability and sadness. The copy defines him by lack (“only”, “never”, “this small”); he is spoken for by the charity. Disability is a personal tragedy; the barrier is his body.</li>
-    <li><b>Super. Human.:</b> athletes first: active, powerful, three-dimensional adults of both genders. Low angles and ECUs (Ellie Simmonds) connote power and focus; realistic “blood and guts” training, humour and ordinary lives (birthday call, giving birth). The café step places the barrier in society. No moralising voice-over: the stories are shown, not told.</li>
-    <li><b>Positioning:</b> the unseen positions the reader to feel pity and guilt and donate; Super. Human. positions the viewer to admire, laugh with and question their own assumptions (the closing graphic sets perception against reality: Lévi-Strauss).</li></ul>
-   <h4>Theory</h4><ul>
-    <li><b>Hall:</b> the unseen constructs disabled people as “other” and less powerful; Super. Human. goes some way to address this.</li>
-    <li><b>Gauntlett:</b> Super. Human. offers a more diverse range of identities; the unseen offers one narrow identity.</li></ul>
-   <h4>Contexts</h4><ul>
-    <li><b>1980s:</b> disability widely seen as a personal tragedy; charities relied on pity and guilt to raise money; language such as “handicapped” was common.</li>
-    <li><b>2021:</b> compassion fatigue led producers to avoid guilt; Channel 4’s remit to serve a culturally diverse society; the legacy of the 2012 and 2016 campaigns; the Covid postponement added to the struggle; film’s history of the disabled villain trope.</li></ul>
-   <h4>Judgement</h4><ul>
-    <li>Super. Human. clearly challenges the stereotypes the unseen reinforces, reflecting changing social attitudes. Strong answers also evaluate its limits: the “super” framing, and the narrow range of disabilities shown.</li></ul>
-   <h4>Levels (summary)</h4><ul>
-    <li><b>Level 5 (25–30):</b> excellent, sustained comparison; perceptive analysis of both; contexts and theory used to explain; well-supported judgements.</li>
-    <li><b>Level 4 (19–24):</b> good, mostly sustained comparison; clear analysis; contexts relevant and explained.</li>
-    <li><b>Level 3 (13–18):</b> satisfactory; some comparison; some analysis with examples; contexts partly linked.</li>
-    <li><b>Level 2 (7–12):</b> basic; mostly description, two halves rather than comparison; little context.</li>
-    <li><b>Level 1 (1–6):</b> minimal; a few relevant points.</li></ul>
-   <p style="margin-top:.7rem"><b>Your honest level:</b></p>
-   <div class="levels">${[1,2,3,4,5].map(n=>`<button data-lvl="${n}" class="${ST.lvl===n?'sel':''}">Level ${n}</button>`).join('')}</div>
-  </div></div>`;
 }
 
 /* restore answered state */
@@ -536,14 +389,12 @@ function bind(){
       if(w<min){t.textContent=`Write at least ${min} words first (you have ${w})`;return;}
       ST.w['_rev_'+id]=1;save();$('#m_'+id).classList.add('show');
     }
-    else if(t.dataset.lvl){ST.lvl=+t.dataset.lvl;save();document.querySelectorAll('[data-lvl]').forEach(b=>b.classList.toggle('sel',+b.dataset.lvl===ST.lvl));update();}
     else if(t.id==='dlBtn')download();
     else if(t.id==='resetBtn'){if(confirm('Clear all your answers and start again?')){ST={name:ST.name,a:{},w:{},lvl:null,chk:{}};save();render();window.scrollTo(0,0);}}
   });
   document.addEventListener('input',e=>{
     const t=e.target;
-    if(t.dataset.w!==undefined){ST.w[t.dataset.w]=t.value;save();wc(t.dataset.w);if(t.dataset.w==='p4d')update();}
-    if(t.dataset.chk!==undefined){ST.chk[t.dataset.chk]=t.checked;save();update();}
+    if(t.dataset.w!==undefined){ST.w[t.dataset.w]=t.value;save();wc(t.dataset.w);}
     if(t.id==='sname'){ST.name=t.value;save();update();}
   });
 }
@@ -561,7 +412,6 @@ function results(){
   const right=ITEMS.filter(x=>correct(x.k)).length,tot=ITEMS.length,answered=ITEMS.filter(x=>x.k in ST.a).length;
   const pct=tot?Math.round(right/tot*100):0;
   const parts=PARTS.map((P,pi)=>{const its=ITEMS.filter(x=>x.p===pi);const r=its.filter(x=>correct(x.k)).length;return {t:P.kick+': '+P.title.split(':')[0],r,n:its.length};});
-  const ew=words(ST.w.p4d),chk=Object.values(ST.chk).filter(Boolean).length;
   const writes=['p3w1','p3w2','p3w3'].filter(k=>words(ST.w[k])>=15).length;
   let verdict=answered<tot?`Keep going: ${tot-answered} auto-marked questions still to answer.`:
     pct>=85?'Excellent recall and understanding. Focus now on timed comparison writing.':
@@ -573,7 +423,7 @@ function results(){
   $('#resCard').innerHTML=`<div class="res"><h3>Super. Human. — end of unit test</h3><div class="res-name">${esc(ST.name||'Add your name at the top')} · ${new Date().toLocaleDateString('en-GB')}</div>
    <div class="res-big">${right} / ${tot}</div><div>${pct}% of the auto-marked questions</div>
    <div class="res-grid">${parts.map(p=>`<div>${esc(p.t)}<b>${p.r} / ${p.n}</b><div class="bar"><i style="width:${p.n?p.r/p.n*100:0}%"></i></div></div>`).join('')}
-   <div>Short answers written<b>${writes} / 3</b></div><div>Exam answer<b>${ew} words</b>${ST.lvl?`Self-assessed: Level ${ST.lvl}`:'Not self-assessed yet'} · checklist ${chk}/6</div></div>
+   <div>Short answers written<b>${writes} / 3</b></div></div>
    <p class="verdict">${verdict}${repNote}</p></div>
    ${missed.length?`<div class="card"><h3>Questions to revisit (${missed.length})</h3>${missed.map(m=>`<div class="miss">${esc(m.label)}<br><b>Answer:</b> ${esc(m.ans)}</div>`).join('')}</div>`:''}
    <button class="btn" id="dlBtn">Download my written answers</button><a class="btn alt" href="superhuman-lessons.html">Back to the guided lessons</a><button class="btn danger" id="resetBtn">Start again</button>`;
@@ -583,8 +433,6 @@ function download(){
   const right=ITEMS.filter(x=>correct(x.k)).length;t+=`Auto-marked score: ${right} / ${ITEMS.length}\n\n`;
   PARTS.forEach(P=>P.blocks.forEach(B=>{
     if(B.t==='write')t+=`--- ${B.p}\n${ST.w[B.id]||'(blank)'}\n\n`;
-    if(B.t==='plan'){t+=`--- COMPARISON PLAN\n`;B.rows.forEach((r,i)=>{t+=`${r[0]}\n  Unseen: ${ST.w[B.id+'_'+i+'_u']||''}\n  Super. Human.: ${ST.w[B.id+'_'+i+'_s']||''}\n`;});t+='\n';}
-    if(B.t==='essay')t+=`--- EXAM QUESTION: Compare the representations of disabled people in the Hartwell Trust advert and Super. Human. [30]\n${ST.w[B.id]||'(blank)'}\n\nSelf-assessed level: ${ST.lvl||'-'}\n`;
   }));
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/plain'}));
   a.download='SuperHuman-test-'+(ST.name||'answers').replace(/\W+/g,'-')+'.txt';document.body.appendChild(a);a.click();a.remove();
