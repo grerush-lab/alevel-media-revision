@@ -158,7 +158,7 @@
   </div>
   <main id="main">
     <div class="hero">
-      <div class="meta">Set text · Kiss of the Vampire (Hammer, 1963) · 5 guided lessons</div>
+      <div class="meta">Set text · Kiss of the Vampire (Hammer, 1963) · 7 guided lessons</div>
       <h1>Kiss of the Vampire — the full lessons, step by step</h1>
       <p>Everything we cover in class, in order: read each part, try the activities, then check against the model answers. Your notes save on this device and you can download them at the end. Want the quick version? Open the <a href="kiss-of-the-vampire.html">Kiss of the Vampire recap</a>.</p>
     </div>
@@ -170,9 +170,9 @@
 /* ───────── content ───────── */
 const A='kotv_assets/';
 const S=n=>A+n+'.jpg';
-const YT={suspiria:'dYNqV-u5MEI',lovewitch:'no1ja_T19kc',context:'yH1EOGR3DlI',dracula:'ZTbY0BgIRMk',mummy:'nTnkLTRR6v8'};
+const YT={suspiria:'dYNqV-u5MEI',lovewitch:'no1ja_T19kc',context:'yH1EOGR3DlI',dracula:'ZTbY0BgIRMk',mummy:'nTnkLTRR6v8',frankenstein:'QxNVNGydx5U'};
 
-const LESSONS=['Lesson 1 · Film poster conventions & Hammer','Lesson 2 · Context & genre','Lesson 3 · Media language & theory','Lesson 4 · Representation','Lesson 5 · Comparison & exam practice'];
+const LESSONS=['Lesson 1 · Film poster conventions & Hammer','Lessons 2–4 · Context, genre & poster creation','Lesson 5 · Media language & representation','Lesson 6 · Comparative texts','Lesson 7 · End of unit assessment'];
 
 const STEPS=[
 /* ═════════ LESSON 1 ═════════ */
@@ -183,7 +183,8 @@ const STEPS=[
  <ul><li>The focus areas are <span class="kw">media language</span> and <span class="kw">representation</span>, plus the <span class="kw">media contexts</span> (historical, social, cultural) of the poster.</li>
  <li>There is <b>no Section B</b> (industries and audiences) study for this product.</li>
  <li>In the exam, you could be asked to <b>compare</b> it with an <b>unseen</b> product, such as another film poster or an advert.</li></ul>
- <p>We study it alongside <b>Tide</b> and <b>Super. Human.</b>: three products from very different times, so context matters.</p>`},
+ <p>We study it alongside <b>Tide</b> and <b>Super. Human.</b>: three products from very different times, so context matters.</p>
+ <h3>How this unit runs</h3><ul><li><b>Lesson 1:</b> film poster conventions and Hammer</li><li><b>Lessons 2 to 4:</b> context, genre, and re-designing the poster</li><li><b>Lesson 5:</b> media language and representation analysis</li><li><b>Lesson 6:</b> comparative texts presentation</li><li><b>Lesson 7:</b> end of unit assessment</li></ul>`},
  {t:'sort',id:'exam',title:'Is it on the exam for this text?',prompt:'Tap whether each topic would be tested for Kiss of the Vampire.',b:['Yes: Section A','No: not for this text'],items:[
   ['How the title typography creates meaning',0],['How women are represented in the poster',0],['How the 1960s context is reflected in the poster',0],['Comparing the poster with an unseen film poster',0],
   ['Who owns Hammer Films today and how it is funded',1],['How audiences interact with the film online',1]]},
@@ -202,6 +203,10 @@ const STEPS=[
  <div class="mini"><h4>Reviews and quotes</h4><p>Star ratings and critics’ praise to reassure the audience.</p></div>
  <div class="mini"><h4>Release date and rating</h4><p>When to see it, and who it is suitable for.</p></div>
  <div class="mini"><h4>Auteur reference</h4><p>“From the director of…”, using a past success to sell the film.</p></div></div>`},
+ {t:'text',h:`<h3>How a poster is made</h3><p>These are some of the concept designs for <i>Se7en</i> (1995): each one shows an idea that was suggested, and the last is what the studio finally went with (which director David Fincher <b>still</b> wasn’t happy with!).</p>`},
+ {t:'row',imgs:[[S('int-se7en-1'),'Concept'],[S('int-se7en-2'),'Concept'],[S('int-se7en-3'),'Concept'],[S('int-se7en-4'),'Concept']]},
+ {t:'img',src:S('int-se7en-final'),cap:'The final Se7en poster',narrow:1},
+ {t:'write',id:'w_se7en',p:'Why do you think the studio chose the final version over the concepts? What does it offer an audience that they don’t?',rows:3,model:`<p>The final poster shows the <b>stars</b> (Brad Pitt and Morgan Freeman), whose names and faces sell the film to a mass audience. The concepts are artistic and mysterious, but they don’t tell the audience who is in it or clearly signal the <b>genre</b>. The final version still keeps an enigma: the list of the seven deadly sins hints at the narrative.</p>`},
  {t:'write',id:'w_conv',p:'In pairs, or on your own: write down the features you think every film poster needs, and why. For example: Title — so the audience can recognise and remember the film’s name.',rows:4,model:`<ul><li><b>Title:</b> the audience can recognise and remember the film. Its typography signals genre.</li><li><b>Main image:</b> shows the stars, characters or a key moment, so the audience can predict the story.</li><li><b>Star billing:</b> fans of the stars will want to see it.</li><li><b>Tagline:</b> creates an enigma or hints at the narrative.</li><li><b>Logo:</b> the studio’s reputation reassures the audience.</li><li><b>Billing block:</b> credits the people who made it, a legal and industry convention.</li><li><b>Release date and rating:</b> tells the audience when, and whether it suits them.</li></ul>`},
  {t:'match',id:'conv',title:'Find it on Kiss of the Vampire',prompt:'Match each convention to how it appears on the set poster.',pairs:[
   ['Title and typography','Large, cracked, “wooden” capitals, with blood dripping from the V'],
@@ -210,7 +215,11 @@ const STEPS=[
   ['Institution logo','The Universal Release roundel, bottom right'],
   ['Billing block','“Screenplay by John Elder · Directed by Don Sharp…”'],
   ['Tagline','There isn’t one: an unusual choice']]},
- {t:'row',imgs:[[S('title'),'Title and typography'],[S('billing'),'Star billing'],[S('credits'),'Billing block and logo']]}
+ {t:'row',imgs:[[S('title'),'Title and typography'],[S('billing'),'Star billing'],[S('credits'),'Billing block and logo']]},
+ {t:'row',tall:1,imgs:[[S('int-no-country'),'No Country for Old Men'],[S('int-winters-bone'),'Winter’s Bone']]},
+ {t:'write',id:'w_annotate',p:'Deconstruct one of these two posters: label the title and typography, tagline, billing block, main image, star billing, logos, reviews, release date and any auteur reference.',rows:5,model:`<ul><li><b>No Country for Old Men:</b> stars billed above the title (Tommy Lee Jones, Javier Bardem, Josh Brolin); a review quote, “An instant classic!”; an <b>auteur reference</b> to the Coen Brothers; the tagline “There are no clean getaways”; a desolate landscape and dark, earthy palette signalling a crime thriller / neo-Western.</li><li><b>Winter’s Bone:</b> festival laurels and review quotes; a cold blue-grey palette; Jennifer Lawrence alone in a bleak, wintry setting, connoting isolation and threat; a small, understated title for an independent drama-thriller.</li></ul>`},
+ {t:'img',src:S('int-legend'),cap:'Legend (2015): look carefully at the stars'},
+ {t:'reveal',label:'What is clever about the reviews on the Legend poster?',h:`<p>The poster is covered in five-star reviews, but one review in the middle (from the Guardian) was a <b>poor</b> two-star one. By placing it among all the other stars, the designers made it <b>look</b> as if more stars were behind it. Reviews are a powerful convention, and they can be used selectively.</p>`}
 ]},
 {id:'genre-posters',L:0,title:'How can you tell the genre from a poster?',walt:'To understand and analyse how film posters are targeted to specific audience members.',blocks:[
  {t:'text',h:`<p>Audiences recognise a genre from a poster through <span class="kw">mise-en-scène</span> (costume, props, setting, expression, colour) and <span class="kw">technical codes</span> (lighting, composition, typography). These choices also <b>target</b> the poster at particular audiences, who already know and enjoy the genre.</p>`},
@@ -221,9 +230,13 @@ const STEPS=[
  <p><b>Question:</b> How can an audience understand the genre of a film by looking at a film poster? Pick <b>two</b> codes and conventions. <i>Extension: link key terms to audience and genre.</i></p>
  <p class="saved">Writing frame: <i>Through the use of mise-en-scène and technical codes, the audience is made aware of the genre of the film. For example, the poster for ‘<b>title</b>’ is associated with the genre <b>…</b>. As the <b>…</b>, suggests <b>…</b>. Additionally, the <b>…</b></i></p>`},
  {t:'write',id:'w_pee',p:'Write your PEE paragraph about the Kiss of the Vampire poster.',rows:6,model:`<p>Through the use of mise-en-scène and technical codes, the audience is made aware of the genre of the film. For example, the poster for ‘Kiss of the Vampire’ is associated with the <b>horror</b> genre, specifically the Gothic vampire sub-genre. As the <b>red bats and the blood dripping from the “V” of the title</b> suggest, the film will be violent and dangerous, and the blood connotes the vampire’s thirst. Additionally, the <b>castle silhouetted against a full moon</b> and the <b>low-key, high-contrast lighting</b> are iconography the audience will recognise from earlier vampire films, so fans of the genre know exactly what pleasures to expect.</p>`}
+,
+ {t:'img',src:S('int-hard-candy'),cap:'Uber-challenge: Hard Candy (2005)',narrow:1},
+ {t:'write',id:'w_candy',p:'Uber-challenge: what genre do you think this is, and what might the story be about? Look at the colour, the prop, the setting, the title and the quote.',rows:4,model:`<p>It’s a <b>drama/thriller</b>: a teenage girl plays a game of cat and mouse with a predatory man. Things to notice:</p><ul><li>The <b>juxtaposition</b> of innocence and a violent trap. Is she <b>caught</b> in the trap, or is she <b>setting</b> one herself?</li><li>The red hood: an <b>intertextual</b> reference to Little Red Riding Hood. What else does red connote?</li><li>Her bag is unusually big for a small girl. Why?</li><li>A minimalist design and blank background: is the setting important?</li><li>We can’t see her face: <b>she</b> is the enigma. Her posture is relaxed, as if waiting for someone.</li><li>The title: sweets are childlike, but this is <b>hard</b> candy (“candy from a baby”), confirming the idea of a trap.</li><li>No star names: why? And what does the quote reveal?</li></ul>`}
 ]},
 {id:'hammer',L:0,title:'Who were Hammer Films?',walt:'To explore how Kiss of the Vampire fits within its industry context.',blocks:[
- {t:'row',imgs:[[S('hammer-dracula'),'A Hammer Dracula poster: Christopher Lee, blood and bold type'],[S('horror-iconography'),'Hammer’s style: saturated colour, the scream, the “blood-show”']]},
+ {t:'img',src:S('int-hammer-logo'),cap:'A Hammer Film Production',narrow:1},
+ {t:'row',imgs:[[S('int-hammer-double'),'A Hammer double bill: The Evil of Frankenstein and Nightmare'],[S('horror-iconography'),'Vampire Circus: “the greatest blood-show on earth!”'],[S('hammer-dracula'),'Taste the Blood of Dracula']]},
  {t:'text',h:`<p><span class="kw">Hammer Film Productions</span> was founded in <b>November 1934</b> in London, and is one of the oldest film companies in the world.</p>
  <ul><li>Hammer is <b>synonymous with British horror</b>, after defining the genre with classics such as <i>The Curse of Frankenstein</i> (1957), <i>Dracula</i> (1958) and <i>The Mummy</i> (1959), which spawned many sequels.</li>
  <li>In its most successful years, Hammer <b>dominated</b> the horror market, with worldwide distribution, partly thanks to partnerships with major US studios such as <b>Universal</b> and Warner Bros.</li>
@@ -237,18 +250,26 @@ const STEPS=[
   {q:'When and where was Hammer founded?',o:['1934, in London','1958, in Hollywood','1963, in Bristol','1920, in New York'],a:0,f:'Hammer was founded in November 1934, in London.'},
   {q:'Why did Hammer enjoy worldwide success?',o:['Partnerships with major US studios for distribution','It only made films for television','It was owned by the BBC','It made films in black and white only'],a:0,f:'US partners such as Universal and Warner Bros gave Hammer worldwide distribution.'},
   {q:'What is Hammer best known for?',o:['British Gothic horror','Musicals','Westerns','Children’s cartoons'],a:0,f:'Hammer is synonymous with British horror: Dracula, Frankenstein, The Mummy.'}]},
- {t:'end',h:'<h3>End of Lesson 1</h3><p>You know the conventions of film posters and who Hammer were. Next: the 1960s context and genre theory.</p>'}
+ {t:'end',h:'<h3>End of Lesson 1</h3><p>You know the conventions of film posters and who Hammer were. Next: the context of the poster, genre theory and your own re-design.</p>'}
 ]},
 
-/* ═════════ LESSON 2 ═════════ */
+/* ═════════ LESSONS 2–4 ═════════ */
 {id:'starter-genre',L:1,title:'Starter: how is genre established?',walt:'To explore the context of the horror genre in the 1960s.',blocks:[
  {t:'video',id:YT.suspiria,label:'Watch the opening scene of Suspiria'},
  {t:'write',id:'w_suspiria',p:'Make three bullet points about how genre is established in the opening.',rows:4,model:`<ul><li><b>Setting and weather:</b> a stormy night, isolation and darkness signal danger.</li><li><b>Colour and lighting:</b> saturated reds and blues with harsh shadow create unease.</li><li><b>Sound:</b> an unsettling, loud soundtrack builds tension before anything happens.</li><li><b>Character:</b> a young woman alone and vulnerable, a conventional horror victim.</li></ul>`},
  {t:'text',h:`<h3>Success criteria</h3><ul><li>I can explore the context of the horror genre in the 1960s.</li><li>I can explore how Kiss of the Vampire fits within its industry and historical context.</li></ul>`}
 ]},
+{id:'order',L:1,title:'Order the posters: oldest to newest',walt:'To explore the context of the horror genre in the 1960s.',blocks:[
+ {t:'text',h:`<p>Horror posters have changed a lot over time. Look at these six posters and put them in order, from <b>oldest</b> to <b>newest</b>. Use the clues: the type of image, colour, typography and how much text there is.</p>`},
+ {t:'row',tall:1,imgs:[[S('ord-it'),'Poster A'],[S('poster'),'Poster B'],[S('ord-silence'),'Poster C']]},
+ {t:'row',tall:1,imgs:[[S('ord-invisible-man'),'Poster D'],[S('ord-lost-boys'),'Poster E'],[S('ord-evil-dead'),'Poster F']]},
+ {t:'match',id:'ord',title:'Which year?',prompt:'Match each poster to its year: 1933, 1963, 1983, 1987, 1991 or 2017.',pairs:[
+  ['Poster A','2017'],['Poster B','1963'],['Poster C','1991'],['Poster D','1933'],['Poster E','1987'],['Poster F','1983']]},
+ {t:'reveal',label:'Show the correct order',h:`<ol><li><b>1933:</b> The Invisible Man (Universal)</li><li><b>1963:</b> Kiss of the Vampire</li><li><b>1983:</b> The Evil Dead (UK release)</li><li><b>1987:</b> The Lost Boys</li><li><b>1991:</b> The Silence of the Lambs</li><li><b>2017:</b> It</li></ol><p>Notice the move from <b>painted illustration</b> with lots of figures and text, to <b>photography</b>, a single striking image and minimal text.</p>`}
+]},
 {id:'decade',L:1,title:'What makes it look like the 1960s?',walt:'To explore the context of the horror genre in the 1960s.',blocks:[
  {t:'img',src:S('poster'),cap:'Look closely: what clues suggest the 1960s?',narrow:1},
- {t:'write',id:'w_clues',p:'This poster is from the 1960s. What clues suggest this decade?',rows:4,model:`<ul><li>A <b>painted illustration</b> instead of a photograph: colour photography and printing were expensive and slow, and illustration gave artists freedom to show the themes expressively.</li><li>The <b>“In Eastman Color”</b> box: colour was still a selling point, as many films were black and white.</li><li><b>Costume and hair:</b> the women’s styles and the full-skirted dresses.</li><li>A <b>busy composition</b> with lots of figures and no tagline.</li><li>A <b>billing block</b> of names across the bottom in a style typical of the era.</li></ul>`},
+ {t:'write',id:'w_clues',p:'List three points that show this poster is from the 1960s. What clues suggest this decade?',rows:4,model:`<ul><li>A <b>painted illustration</b> instead of a photograph: colour photography and printing were expensive and slow, and illustration gave artists freedom to show the themes expressively.</li><li>The <b>“In Eastman Color”</b> box: colour was still a selling point, as many films were black and white.</li><li><b>Costume and hair:</b> the women’s styles and the full-skirted dresses.</li><li>A <b>busy composition</b> with lots of figures and no tagline.</li><li>A <b>billing block</b> of names across the bottom in a style typical of the era.</li></ul>`},
  {t:'video',id:YT.lovewitch,label:'Watch the trailer for The Love Witch'},
  {t:'reveal',label:'What decade was The Love Witch made in?',h:`<p><i>The Love Witch</i> was released in <b>2016</b>. It deliberately <b>pays homage</b> to 1960s horror: it was shot on 35mm film with saturated Technicolor-style colours, period costumes and set design, and theatrical acting. This shows how recognisable the 1960s horror “look” still is, a form of <span class="kw">intertextuality</span>.</p>`},
  {t:'mcq',id:'illus',title:'Quick check',items:[
@@ -261,9 +282,11 @@ const STEPS=[
  <li>It was produced by <span class="kw">Hammer Film Productions</span> and distributed by <b>J. Arthur Rank</b> and <b>Universal</b>.</li>
  <li>It was intended as a sequel to Hammer’s <i>Dracula</i> (1958), but the script <b>never mentions Stoker’s character</b>. This was perhaps to avoid comparisons with <b>Christopher Lee</b>, who starred in the original and did not appear in this film.</li>
  <li>By 1963, Hammer had also had success with <i>The Mummy</i> and <i>Frankenstein</i> franchises. Universal, the US distributor, had its own early success with monster movies in the 1930s.</li></ul>`},
+ {t:'video',id:YT.frankenstein,label:'Watch the trailer for Hammer’s The Curse of Frankenstein (1957)'},
  {t:'gaps',id:'pc',title:'Fill the gaps',text:'Kiss of the Vampire was produced by [[Hammer|Universal|Rank]] and distributed by Rank and [[Universal|Warner Bros|Paramount]]. It was directed by [[Don Sharp|Christopher Lee|John Elder]] in [[1963|1958|1973]]. It never names [[Dracula|Frankenstein|the Mummy]], perhaps to avoid comparison with [[Christopher Lee|Clifford Evans|Peter Cushing]].'}
 ]},
 {id:'historical',L:1,title:'Historical, social and political context',walt:'To explore how Kiss of the Vampire fits within its historical context.',blocks:[
+ {t:'row',imgs:[[S('ctx-beatles'),'Beatlemania'],[S('ctx-sixties'),'The swinging sixties'],[S('ctx-jfk'),'President John F. Kennedy']]},
  {t:'text',h:`<h3>1963: what was happening?</h3>
  <div class="grid2">
  <div class="mini"><h4>Culture</h4><p>The early stages of <b>Beatlemania</b>; the “swinging sixties”; <i>Doctor Who</i> began; Marvel Comics was booming.</p></div>
@@ -272,6 +295,7 @@ const STEPS=[
  <div class="mini"><h4>Sexual revolution</h4><p>The <b>contraceptive pill</b> was introduced in 1960 (on the NHS from 1961), the start of women’s sexual liberation.</p></div></div>
  <p>More women than ever were entering paid work, and 1960s feminists were campaigning for <b>equal pay</b>, an <b>end to sexual harassment</b> and more equality between men and women.</p>
  <div class="tip"><b>Key idea:</b> horror reflects the <b>fears of society</b> at the time it was made.</div>`},
+ {t:'img',src:S('ctx-fears'),cap:'Horror reflects societal fears: 28 Days Later (2002) and the fear of a pandemic'},
  {t:'write',id:'w_fears',p:'Could any of this historical context be relevant to horror films released at the time? Which fears might a 1960s vampire film reflect?',rows:4,model:`<ul><li><b>Fear of change in gender roles:</b> as women gained sexual and economic freedom, a powerful, predatory female vampire could reflect “male fears” of women challenging male dominance.</li><li><b>Fear of sexuality:</b> the vampire’s “kiss” mixes desire and danger, at a time of sexual revolution.</li><li><b>Fear of the outsider and of invasion:</b> Cold War anxieties about being taken over and corrupted.</li><li><b>Fear of sudden death and loss of control:</b> JFK’s assassination shocked the world.</li></ul>`},
  {t:'sort',id:'ctx',title:'Which type of context?',prompt:'Sort each fact into the type of context it belongs to.',b:['Historical / political','Social','Cultural'],items:[
   ['The assassination of JFK',0],['The Cuban Missile Crisis and Cold War fears',0],
@@ -281,7 +305,8 @@ const STEPS=[
 ]},
 {id:'cultural',L:1,title:'Cultural context: 1960s monster-movie posters',walt:'To explore the context of the horror genre in the 1960s.',blocks:[
  {t:'text',h:`<p>A 1960s audience would be familiar with the codes and conventions of <b>“monster movie”</b> posters: the composition, the fonts, and the representation of “the monster” and its (usually <b>female</b>) victims. Look at other horror posters from the era: <i>The Evil of Frankenstein</i> (1964), <i>Blood from the Mummy’s Tomb</i> (1971), and Hammer’s Dracula films.</p>`},
- {t:'row',imgs:[[S('hammer-dracula'),'Hammer Dracula'],[S('horror-iconography'),'Vampire Circus'],[S('poster'),'Kiss of the Vampire']]},
+ {t:'row',tall:1,imgs:[[S('era-creature'),'Creature from the Black Lagoon (1954)'],[S('era-gorgon'),'The Gorgon (1964)'],[S('era-mummys-tomb'),'Blood from the Mummy’s Tomb (1971)']]},
+ {t:'row',imgs:[[S('era-dracula-quad'),'Dracula (1958)'],[S('int-evil-frank-quad'),'The Evil of Frankenstein (1964)'],[S('poster'),'Kiss of the Vampire (1963)']]},
  {t:'write',id:'w_monster',p:'Write a list of possible conventions of 1960s horror and monster-movie posters. What do they have in common?',rows:5,model:`<ul><li>A <b>painted</b>, dramatic main image rather than a photograph.</li><li>The <b>monster</b> large and dominant in the frame, often looming over a victim.</li><li>A <b>screaming or fainting young woman</b>, sexualised with revealing clothing.</li><li>Saturated <b>red</b> for blood against dark, gloomy backgrounds.</li><li>Huge, often <b>jagged or dripping title</b> typography.</li><li>Gothic <b>iconography</b>: castles, the moon, bats, graveyards, fog.</li><li>Sensational <b>taglines</b> and colour process boasts.</li></ul>`},
  {t:'gaps',id:'mm',title:'Fill the gaps',text:'A “monster movie” is a sub-genre of [[horror|comedy|romance]] where the main antagonist is a single, [[inhuman|heroic|ordinary]] monster. In the vampire sub-genre, vampires are driven by a thirst for [[blood|money|power]] and are often defeated with a wooden [[stake|sword|cross]] through the heart, or by [[sunlight|water|fire]].'}
 ]},
@@ -297,10 +322,22 @@ const STEPS=[
  {t:'write',id:'w_neale1',p:'1. How does the poster meet audiences’ expectations of 1960s horror (repetition)?',rows:3},
  {t:'write',id:'w_neale2',p:'2. How does it sit within the social and cultural context of the time?',rows:3},
  {t:'write',id:'w_neale3',p:'3. What does it offer audiences that is new (difference)?',rows:3,model:`<p>Applying Neale, the poster <b>repeats</b> the symbolism of Hammer and Universal horror and the wider monster and vampire genres: the bats, castle, moon, cape, blood and chiaroscuro lighting satisfy the generic spectator’s expectations. It sits in its context through the painted style and a 1960s audience’s shared knowledge of monster-movie posters. It adds <b>difference</b> through the <b>connoted power of the female vampire</b>, the implied <b>romantic narrative</b> of the “kiss”, and the selling point of <b>colour</b>, the difference that Neale calls “essential to the economy of the genre”.</p>`},
- {t:'end',h:'<h3>End of Lesson 2</h3><p>You can explain the context and apply Neale. Next: media language in detail, with Barthes and Lévi-Strauss.</p>'}
+ {t:'text',h:`<h3>Repetition and difference: how have horror posters changed and stayed the same?</h3><p>Compare Kiss of the Vampire with these modern horror posters.</p>`},
+ {t:'row',tall:1,imgs:[[S('neale-saw'),'Saw (2004)'],[S('neale-it-follows'),'It Follows (2014)'],[S('neale-house'),'House at the End of the Street (2012)']]},
+ {t:'write',id:'w_rd',p:'Choose one modern poster. Explain how media language creates meaning, and how it positions audiences, compared with Kiss of the Vampire. Apply a relevant theorist.',rows:6,model:`<p><b>Saw</b> keeps the genre’s <b>repetition</b> of threat and the body (a severed hand), but the <b>difference</b> is striking: a minimalist white background, a photograph not a painting, and almost no text. Where Kiss of the Vampire shows everything (monsters, victims, castle, bats), Saw shows almost nothing, creating a stronger <b>enigma</b> (Barthes’ hermeneutic code). A 1960s audience was positioned as a fan of the spectacle; a 2000s audience is positioned to be disturbed by what is <b>not</b> shown. Applying Neale, the genre has evolved, but the familiar pleasure of fear remains.</p>`}
+]},
+{id:'redesign',L:1,title:'Re-design Kiss of the Vampire for today',walt:'To apply knowledge of codes, conventions and genre by creating a poster.',blocks:[
+ {t:'text',h:`<h3>Homework and lessons 3 to 4</h3>
+ <p>Imagine Kiss of the Vampire was being <b>re-made for a modern audience</b>. Re-design the film poster for a contemporary audience.</p>
+ <ul><li>Take <b>photographs of yourself</b> (and friends) for the main image, and hand-sketch an outline of your design.</li>
+ <li>You will use a <b>tutorial</b> in class to help you build it.</li></ul>
+ <div class="tip"><b>Your poster must include:</b> the original title with a new tagline; at least one main image (original, and different from the images on the DVD or Blu-ray cover); an element of narrative, such as an enigma; a release date, billing block and production company logo; and details of awards or quotes from critics.</div>`},
+ {t:'row',tall:1,imgs:[[S('poster'),'The 1963 original'],[S('neale-it-follows'),'Ideas: a modern, minimalist horror look'],[S('neale-house'),'Ideas: one star, one striking image']]},
+ {t:'write',id:'w_plan',p:'Plan your re-design. Who is your modern audience? Which conventions will you repeat, and what will you change (Neale’s repetition and difference)? How will you represent gender: will you keep, update or reverse the original representations?',rows:6},
+ {t:'end',h:'<h3>End of Lessons 2 to 4</h3><p>You can explain the context, apply Neale, and you have planned your re-design. Next: a full media language and representation analysis.</p>'}
 ]},
 
-/* ═════════ LESSON 3 ═════════ */
+/* ═════════ LESSON 5 ═════════ */
 {id:'vatl',L:2,title:'Recap: what is media language?',walt:'To analyse the use of media language on the Kiss of the Vampire poster.',blocks:[
  {t:'text',h:`<p><span class="kw">Media language</span> is how a product communicates meaning through the choices its producers make. For a <b>print</b> product like a poster, focus on:</p>
  <div class="grid2">
@@ -365,17 +402,16 @@ const STEPS=[
  {t:'write',id:'w_step1',p:'Step 1 · Media language: annotate the visual codes, technical codes and language of the poster.',rows:5},
  {t:'write',id:'w_step2a',p:'Step 2a · How is the political and social context reflected in the poster, and the fears of society?',rows:4},
  {t:'write',id:'w_step2b',p:'Step 2b · How does Neale’s genre theory fit the poster? Use your wider knowledge of monster-movie conventions.',rows:4},
+ {t:'reveal',label:'Show possible notes you could have made',h:`<ul><li>The film, in both title and script, <b>avoids any reference to Dracula</b>.</li><li>In terms of Neale, the design includes many <b>signifiers of the Gothic vampire film</b>: bats, a remote castle, a full moon and low-key, high-contrast chiaroscuro lighting.</li><li>The <b>“wooden”</b> font and bloodied <b>“fang”</b> reflect vampire lore: feeding on blood, and the stake through the heart.</li><li>The blood is also a reminder of how Hammer had <b>reinvented</b> the genre.</li><li>The <b>Eastman Color</b> banner tells audiences the film is in vibrant, saturated colour when many films were still black and white. The American spelling shows Hammer’s international success: this is a poster for the <b>US market</b>, the most lucrative in the world.</li><li>The <b>Universal</b> logo shows the US distributor, and offers cine-literate audiences a call-back to Universal’s own horror franchises, <i>Frankenstein</i> (Whale, 1931) and Lugosi’s <i>Dracula</i>.</li><li>The <b>non-photo-real</b> key art shows the technological limitations of the early 1960s.</li></ul>`},
  {t:'reveal',label:'Show a model paragraph',h:`<p>Applying Neale, the bats, castle, full moon and chiaroscuro lighting satisfy the audience’s generic expectations of 1960s Gothic horror (<b>repetition</b>), while the Eastman Color banner and Hammer’s saturated style provide the <b>difference</b> that is “essential to the economy of the genre”. Barthes’ <b>hermeneutic code</b> is created by the relationship between the two vampires, emphasised by the “kiss” of the title, and by the unknown fate of their victims. The Universal logo works as a <b>referential code</b>, rewarding cine-literate audiences with a call-back to Universal’s own Frankenstein and Dracula. Together, these choices position the audience as knowing horror fans who will enjoy the familiar pleasures of the genre, with a twist.</p>`},
- {t:'end',h:'<h3>End of Lesson 3</h3><p>You have analysed media language with Barthes, Lévi-Strauss and Neale. Next: representation.</p>'}
+ {t:'end',h:'<h3>Halfway through Lesson 5</h3><p>You have analysed media language with Barthes, Lévi-Strauss and Neale. Next: representation.</p>'}
 ]},
-
-/* ═════════ LESSON 4 ═════════ */
-{id:'starter-rep',L:3,title:'Starter: what changed for women in the 1960s?',walt:'To explore issues of representation in the Kiss of the Vampire poster.',blocks:[
+{id:'starter-rep',L:2,title:'Starter: what changed for women in the 1960s?',walt:'To explore issues of representation in the Kiss of the Vampire poster.',blocks:[
  {t:'write',id:'w_starter',p:'What were the social changes of the 1960s that relate to the Kiss of the Vampire poster? Discuss, then write them down.',rows:3,model:`<p>The start of <b>women’s sexual liberation</b>, helped by the <b>contraceptive pill</b> (1960). More women entering <b>paid work</b>. Feminists campaigning for <b>equal pay</b> (US legislation in 1963), an <b>end to sexual harassment</b> and greater equality. This means the poster can be read as showing both <b>older</b> stereotypes of women as passive victims, and more modern <b>“male fears”</b> of women challenging male dominance.</p>`},
  {t:'text',h:`<h3>Success criteria</h3><ul><li>I can analyse the use of media language on the poster.</li><li>I can analyse issues of representation in the poster.</li></ul>
  <p>Remember: the poster has <b>no protagonists</b>, only vampire <b>antagonists</b> and their <b>victims</b>.</p>`}
 ]},
-{id:'selection',L:3,title:'Gender: selection and combination',walt:'To explore issues of representation in the Kiss of the Vampire poster.',blocks:[
+{id:'selection',L:2,title:'Gender: selection and combination',walt:'To explore issues of representation in the Kiss of the Vampire poster.',blocks:[
  {t:'row',tall:1,imgs:[[S('left-pair'),'The left pair'],[S('right-pair'),'The right pair']]},
  {t:'cards',items:[
   ['Dress codes','Both women wear <b>pale dresses</b> of light material, which reinforce their femininity by highlighting the curves of their bodies and revealing the flesh of their upper chests and arms: <b>vulnerability</b> and <b>sexualisation</b>.'],
@@ -387,7 +423,7 @@ const STEPS=[
   ['The dark-haired woman standing over a kneeling man',1],['The man’s exposed throat and head thrown back',1],['The male vampire’s defensive, fearful gesture',1]]},
  {t:'gallery',title:'Look closer',shots:[['blonde-victim','Passive victim'],['male-vampire','The male vampire'],['female-vampire','The female vampire'],['kneeling-man','The male “victim”']]}
 ]},
-{id:'rep-theory',L:3,title:'Representation theory',walt:'To apply representation theory to the poster.',blocks:[
+{id:'rep-theory',L:2,title:'Representation theory',walt:'To apply representation theory to the poster.',blocks:[
  {t:'text',h:`<p>For each theory: <b>sum it up</b>, then make <b>notes on how it applies</b> to Kiss of the Vampire.</p>`},
  {t:'cards',items:[
   ['Stuart Hall · Representation','Representation is the production of meaning through language and signs, using a <b>“shared conceptual road map”</b>. The castle, bats, the vampire’s cape and dripping blood are part of this map, giving meaning to the “world” of the poster. The audience is encouraged to <b>decode</b> this familiar generic iconography. Hall also argues stereotypes reduce people to a few characteristics, often where there is an <b>inequality of power</b>.'],
@@ -401,7 +437,7 @@ const STEPS=[
   ['The women’s bodies are displayed for a male viewer','Laura Mulvey']]},
  {t:'write',id:'w_rep',p:'Add representation theory to your annotations. Choose two theorists and apply each to a specific detail of the poster.',rows:5}
 ]},
-{id:'audience-resp',L:3,title:'How would audiences respond?',walt:'To consider historical and contemporary audience readings of the poster.',blocks:[
+{id:'audience-resp',L:2,title:'How would audiences respond?',walt:'To consider historical and contemporary audience readings of the poster.',blocks:[
  {t:'text',h:`<p>How would audiences respond to and interpret the media language and representations? Consider <b>historical</b> (1963) and <b>contemporary</b> audiences, using Hall’s <span class="theory">Reception theory</span> and Gerbner’s <span class="theory">Cultivation theory</span>.</p>
  <ul><li><b>Hall:</b> audiences may take a <b>preferred</b>, <b>negotiated</b> or <b>oppositional</b> reading.</li>
  <li><b>Gerbner:</b> repeated exposure to the same representations, such as the sexualised female victim, can <b>cultivate</b> attitudes over time.</li></ul>`},
@@ -412,15 +448,74 @@ const STEPS=[
   ['A 1960s woman who sees the female vampire as a thrilling, powerful figure',1]]},
  {t:'write',id:'w_cult',p:'How might Gerbner’s cultivation theory apply to the many 1960s horror posters showing sexualised female victims?',rows:3,model:`<p>Because the image of the <b>helpless, sexualised woman</b> was repeated across so many monster-movie posters, audiences exposed to them could come to see women’s vulnerability, and their role as objects of male desire, as <b>natural</b>. Kiss of the Vampire partly reinforces this through the left pair, but also offers an alternative through the female vampire.</p>`}
 ]},
-{id:'contexts-para',L:3,title:'How far do the representations relate to context?',walt:'To make judgements about representation and context.',blocks:[
+{id:'contexts-para',L:2,title:'How far do the representations relate to context?',walt:'To make judgements about representation and context.',blocks:[
  {t:'statement',h:'How far do the representations in Kiss of the Vampire relate to relevant media contexts?'},
  {t:'text',h:`<h3>Build your paragraph</h3><ul><li><b>Point:</b> the poster encodes two competing representations of women.</li><li><b>Evidence:</b> the passive blonde victim and the dominant female vampire.</li><li><b>Context:</b> 1960s women’s liberation, the pill, equal pay campaigns.</li><li><b>“How far”:</b> judge the balance. Is the subversion stronger, or the stereotype?</li><li><b>Theory:</b> van Zoonen or Gauntlett.</li></ul>`},
- {t:'write',id:'w_howfar',p:'Write your paragraph independently.',rows:7,model:`<p>The representations relate <b>to a large extent</b> to their 1960s context, though in contradictory ways. The blonde woman, unconscious and held by one arm, reflects <b>older stereotypes</b> of women as passive victims of men, and her revealing dress reflects a male-dominated industry’s use of female sexuality to sell films. However, the dark-haired vampire, baring her teeth and dominating a kneeling man, reflects the <b>social changes</b> of the early 1960s: the contraceptive pill, women entering paid work and campaigns for equal pay. She can be read as an expression of <b>“male fears”</b> of women challenging male dominance. Applying <b>van Zoonen</b>, her “co-antagonist” role may contribute to social change, but the passive victim reinforces traditional roles, so the poster reflects a society <b>in transition</b> rather than one that had changed.</p>`},
- {t:'end',h:'<h3>End of Lesson 4</h3><p>Homework: the Kiss of the Vampire recap questions (in the class folder). Next: comparison and exam practice.</p>'}
+ {t:'reveal',label:'Show possible notes you could have made',h:`<ul><li>The heightened emotion and body language of the four characters was at one with Hammer’s <b>USP</b>: the edgy, subversive “rock and roll” of cinema, compared with restrained, realist mainstream British film.</li><li>The <b>period costumes</b> quickly establish the era of the action.</li><li>There are <b>no protagonists</b>: only vampire antagonists and sacrificial prey.</li><li>The male vampire’s <b>one-handed grip</b> shows his strength. The victim’s tight-fitting costume and exposed flesh offer <b>male gaze</b> pleasures and conform to the sexist norms of the time.</li><li>The male vampire <b>recoils</b> from the more powerful female antagonist. Sexualised by her costume, it seems she is the one about to deliver the promised “kiss”: the <b>binary opposite</b> of earlier women in horror, who were usually prey.</li><li>In the 1960s, women began to seek greater equality and, as <b>bell hooks</b> discusses, to mobilise to achieve it.</li><li>Her representation is <b>contradictory</b>: sexualised and on display, yet central to the narrative.</li><li>Her passive male victim, head tipped back and effectively faceless, is an <b>everyman</b> threatened, like the male vampire, by the “danger” of the newly empowered woman.</li><li>Hammer refers to female empowerment to attract female audiences, but in a way that exposes <b>male fears</b>: feminism is presented as a threat to patriarchal power.</li><li>The poster shows the <b>shifting norms</b> of a time of rapid change: Gothic horror was changing to reflect the social realities of when the films were made, not the era in which they were set.</li></ul>`},
+ {t:'write',id:'w_howfar',p:'Independently, write a 5-minute paragraph.',rows:7,model:`<p>The representations relate <b>to a large extent</b> to their 1960s context, though in contradictory ways. The blonde woman, unconscious and held by one arm, reflects <b>older stereotypes</b> of women as passive victims of men, and her revealing dress reflects a male-dominated industry’s use of female sexuality to sell films. However, the dark-haired vampire, baring her teeth and dominating a kneeling man, reflects the <b>social changes</b> of the early 1960s: the contraceptive pill, women entering paid work and campaigns for equal pay. She can be read as an expression of <b>“male fears”</b> of women challenging male dominance. Applying <b>van Zoonen</b>, her “co-antagonist” role may contribute to social change, but the passive victim reinforces traditional roles, so the poster reflects a society <b>in transition</b> rather than one that had changed.</p>`},
+ {t:'end',h:'<h3>Nearly there</h3><p>One more step in Lesson 5: an exam-style question on the set product.</p>'}
+]},
+{id:'exam-rep',L:2,title:'Exam-style question: gender and genre',walt:'To answer an extended question on representation.',blocks:[
+ {t:'statement',h:'Discuss the choices that have been made about representations of gender and genre in the Kiss of the Vampire film poster. [15]'},
+ {t:'text',h:`<p>In your answer, you must consider:</p><ul><li>how gender and genre are represented through processes of <b>selection and combination</b></li><li><b>reasons</b> for the choices made in the representation of gender</li><li><b>how far</b> the representations relate to relevant contexts.</li></ul>
+ <p class="saved">In the real exam, you would also be given an <b>unseen</b> text to compare. For now, start with the set product.</p>`},
+ {t:'write',id:'w_exam',p:'Write your answer (aim for 25 to 30 minutes).',rows:12},
+ {t:'reveal',label:'Show the indicative content',h:`<ul><li><b>Selection and combination:</b> pale, revealing dresses; the passive blonde victim held by one arm; the dominant dark-haired vampire with a kneeling man; the fearful male vampire; Gothic iconography of bats, castle and moon.</li><li><b>Genre:</b> the vampire and monster-movie conventions (repetition), plus the difference of a powerful female vampire and the romantic “kiss” (Neale).</li><li><b>Reasons:</b> to appeal to a 1960s audience through spectacle and sexuality; the male gaze of a male-dominated industry; the marketing value of a new twist.</li><li><b>Context:</b> women’s liberation, the pill (1960), equal pay legislation in the US (1963): older stereotypes and new “male fears” both encoded.</li><li><b>How far:</b> a judgement that the poster reflects a society in transition. The subversion is real, but contained within a horror narrative where the powerful woman is a monster.</li><li><b>Theory:</b> Hall (stereotypes, shared conceptual map), van Zoonen (co-antagonist and social change), Gauntlett (role models), Mulvey.</li></ul>
+ <p><b>Top band (13 to 15):</b> excellent, detailed analysis; perceptive judgements about how far representations relate to contexts, fully supported by specific detail from the poster.</p>`},
+ {t:'end',h:'<h3>End of Lesson 5</h3><p>Homework: the Kiss of the Vampire recap questions (in the class folder). Next: comparative texts.</p>'}
 ]},
 
-/* ═════════ LESSON 5 ═════════ */
-{id:'recap-q',L:4,title:'Recap questions',walt:'To secure knowledge of the set product.',blocks:[
+/* ═════════ LESSON 6 ═════════ */
+{id:'comparative',L:3,title:'Presentation task: a comparative horror poster',walt:'To compare the set poster with another horror poster, applying theory.',blocks:[
+ {t:'text',h:`<h3>Presentation task</h3>
+ <p>In small groups, create a detailed presentation of a <b>comparative horror poster</b> that is either:</p>
+ <ul><li><b>Historical</b>, or</li><li><b>Contemporary</b> (but using different horror codes and conventions).</li></ul>
+ <p>Discuss:</p><ul><li>how <b>media language</b> has been used to create meaning</li><li>how <b>representations</b> position audiences</li><li>and apply any relevant <b>media language and representation theorists</b> for advertising and marketing.</li></ul>
+ <p>You have this lesson and the next to make a <b>compelling</b> presentation. Use all your notes, your factsheet and your textbook (pages 66 to 67).</p>`},
+ {t:'cards',items:[
+  ['Media language theories','Semiotics (Barthes) · Genre theory (Neale) · Structuralism (Lévi-Strauss)'],
+  ['Representation theories','Representation (Hall) · Identity (Gauntlett) · Feminist theories (van Zoonen and bell hooks) · Ethnicity and postcolonial theory (Gilroy)']]}
+]},
+{id:'modern',L:3,title:'Option 1: a modern comparison',walt:'To compare the set poster with another horror poster, applying theory.',blocks:[
+ {t:'row',tall:1,imgs:[[S('cmp-cordelia'),'Cordelia (2019)'],[S('cmp-annabelle'),'Annabelle: Creation (2017)'],[S('cmp-vampire-academy'),'Vampire Academy (2014)']]},
+ {t:'tip',h:'<b>Cordelia:</b> watch the trailer for reference before you analyse the poster. Search “Cordelia 2019 trailer”.'},
+ {t:'sort',id:'mod',title:'Similar or different to Kiss of the Vampire?',prompt:'For each feature of the modern posters, decide whether it is similar to or different from Kiss of the Vampire.',b:['Similar','Different'],items:[
+  ['Cordelia: a man and a woman in an intimate embrace, mixing romance and horror',0],['Annabelle: a dark, gloomy palette and a house at night',0],['Vampire Academy: photography instead of a painted illustration',1],['Vampire Academy: young women standing confidently at the front, in control',1],['Annabelle: a lone child as the source of fear',1],['All three: the title as a major element of the design',0]]},
+ {t:'write',id:'w_modern',p:'Pick one modern poster. How do its media language and representations compare with Kiss of the Vampire? Which theorist best explains the difference?',rows:6,model:`<p><b>Vampire Academy</b> keeps the vampire sub-genre (repetition) but the difference is huge. It uses <b>photography</b> and a bright, pink and black palette with a jokey tagline (“They suck at school”), mixing horror with <b>teen comedy</b>. Its young women stand at the front, <b>confident and in control</b>, with the men behind them. Where Kiss of the Vampire shows one powerful woman as a monster to be feared, here female power is <b>normalised and celebrated</b>. Applying <b>Gauntlett</b>, it offers a teenage female audience role models; applying <b>van Zoonen</b>, it reflects how far ideas about gender have changed since 1963, though the women are still glamorised and on display.</p>`}
+]},
+{id:'historical-cmp',L:3,title:'Option 2: a historical comparison',walt:'To compare the set poster with another horror poster, applying theory.',blocks:[
+ {t:'row',tall:1,imgs:[[S('cmp-mummys-tomb'),'Blood from the Mummy’s Tomb (1971)'],[S('cmp-evil-frankenstein'),'The Evil of Frankenstein (1964)']]},
+ {t:'match',id:'hist',title:'Spot the conventions',prompt:'Match each feature to the historical poster it comes from.',pairs:[
+  ['A sexualised woman in a low-cut costume, beside a severed hand','Blood from the Mummy’s Tomb'],
+  ['“SHOCK… SHOCK… SHOCK!!!” in comic-book lettering','The Evil of Frankenstein'],
+  ['Star billing for Peter Cushing beside the main image','The Evil of Frankenstein'],
+  ['A tagline about a hand that “beckons from an open grave”','Blood from the Mummy’s Tomb']]},
+ {t:'write',id:'w_hist',p:'Pick one historical poster. What does it repeat from Kiss of the Vampire, and what is different? How are women represented?',rows:6,model:`<p><b>Blood from the Mummy’s Tomb</b> (Hammer, 1971) repeats the <b>painted</b> style, saturated reds, a sensational tagline and Gothic iconography. Like Kiss of the Vampire, a woman is central and <b>sexualised</b>: her low-cut costume reveals her body for the <b>male gaze</b> (Mulvey). But by 1971 the representation is even more <b>explicit</b>, reflecting looser censorship and the sexual revolution. Where Kiss of the Vampire balances a passive victim with a powerful vampire, this poster makes the woman both <b>object</b> and <b>threat</b>, the mummy’s reincarnation, so the “male fear” of female power is still present (van Zoonen, bell hooks).</p>`}
+]},
+{id:'plan-pres',L:3,title:'Plan your presentation',walt:'To compare the set poster with another horror poster, applying theory.',blocks:[
+ {t:'cards',items:[
+  ['Slide 1 · The posters','Both posters, the films’ release dates, producers and genre.'],
+  ['Slide 2 · Media language','Title, typography, colour, image, composition: similarities and differences.'],
+  ['Slide 3 · Genre','Neale’s repetition and difference: what has stayed the same, what has changed?'],
+  ['Slide 4 · Representation','Gender, victims and monsters: conform or subvert?'],
+  ['Slide 5 · Context','How each poster reflects the time it was made.'],
+  ['Slide 6 · Theory and audience','Barthes, Lévi-Strauss, Hall, van Zoonen, Gauntlett; preferred and oppositional readings.']]},
+ {t:'write',id:'w_compare',p:'Plan your comparison: which poster has your group chosen, and what are the three biggest differences from Kiss of the Vampire?',rows:5},
+ {t:'tip',h:'<b>Previous student example:</b> ask your teacher for the example presentation in the class folder.'}
+]},
+{id:'masculinity',L:3,title:'Wider reading: masculinity in ads, 1960s vs today',walt:'To compare how representations reflect their historical contexts.',blocks:[
+ {t:'text',h:`<p>A MediaMag article by Helen Dugdale compares two adverts that show how far representations of gender have changed since the 1960s:</p>
+ <div class="grid2">
+ <div class="mini"><h4>Score Liquid Hair Groom (1967)</h4><p>A grinning man dressed as a hunter, held aloft on a tiger-skin by five women in sexualised costume who look up at him adoringly. The tagline “Get what you’ve always wanted” and copy about a “masculine scent”, “made by men”, celebrate <b>masculine supremacy</b> and a <b>patriarchal</b> society.</p></div>
+ <div class="mini"><h4>Maybelline “That Boss Life” (2017)</h4><p>Beauty vlogger Manny Gutierrez, Maybelline’s first male ambassador, with Shayla Mitchell. An upbeat, youthful mode of address (“Lash like a boss”) applauds the <b>breakdown of hyper-masculine culture</b> and challenges who wears make-up.</p></div></div>
+ <p>Using <b>Hall</b>: a dominant reading of the Score advert accepts that buying it brings power, control and sex appeal; an <b>oppositional</b> reading sees its macho ideas as damaging to men and presenting women as passive and decorative.</p>`},
+ {t:'write',id:'w_masc',p:'What links can you make between the Score advert (1967) and Kiss of the Vampire (1963)? Think about how women are positioned and what that says about the 1960s.',rows:4,model:`<p>Both products are from a <b>patriarchal</b> 1960s industry and use women’s bodies to sell: the Score women and the blonde victim are <b>decorative and sexualised</b>, there to be looked at (Mulvey). But Kiss of the Vampire is more <b>contradictory</b>: its female vampire takes power over a man, perhaps reflecting <b>anxieties</b> about women’s liberation that the Score advert simply ignores. Both show how representations are shaped by the <b>historical context</b> in which they were made.</p>`}
+,
+ {t:'end',h:'<h3>End of Lesson 6</h3><p>Finish your presentation. Next: the end of unit assessment.</p>'}
+]},
+
+/* ═════════ LESSON 7 ═════════ */
+{id:'recap-q',L:4,title:'Warm-up: recap quiz',walt:'To secure knowledge of the set product.',blocks:[
  {t:'mcq',id:'rq',title:'Recap quiz',items:[
   {q:'Who directed Kiss of the Vampire?',o:['Don Sharp','Christopher Lee','Clifford Evans','John Elder'],a:0,f:'Don Sharp directed it; John Elder wrote the screenplay.'},
   {q:'What is “Gothic horror” in cinema?',o:['Films drawing strongly on Gothic literature, in both look and themes','Any horror film set in the present day','Horror films made in Germany','Comedies that parody horror'],a:0,f:'Gothic horror draws on Gothic literature aesthetically and thematically.'},
@@ -429,42 +524,23 @@ const STEPS=[
   {q:'Which social factor might explain the representation of the female vampire?',o:['The women’s liberation movement and second-wave feminism','The invention of television','The end of the Second World War','The launch of the internet'],a:0,f:'Women’s liberation may have influenced the poster, or it may express “male fear” of it.'}]},
  {t:'tip',h:'<b>Extension:</b> compare the poster with the poster for <i>What We Do in the Shadows</i>, a parody of classic vampire films. What is similar and different, given the different genre and time period?'}
 ]},
-{id:'masculinity',L:4,title:'Context comparison: masculinity in ads, 1960s vs today',walt:'To compare how representations reflect their historical contexts.',blocks:[
- {t:'text',h:`<p>A MediaMag article by Helen Dugdale compares two adverts that show how far representations of gender have changed since the 1960s:</p>
- <div class="grid2">
- <div class="mini"><h4>Score Liquid Hair Groom (1967)</h4><p>A grinning man dressed as a hunter, held aloft on a tiger-skin by five women in sexualised costume who look up at him adoringly. The tagline “Get what you’ve always wanted” and copy about a “masculine scent”, “made by men”, celebrate <b>masculine supremacy</b> and a <b>patriarchal</b> society.</p></div>
- <div class="mini"><h4>Maybelline “That Boss Life” (2017)</h4><p>Beauty vlogger Manny Gutierrez, Maybelline’s first male ambassador, with Shayla Mitchell. An upbeat, youthful mode of address (“Lash like a boss”) applauds the <b>breakdown of hyper-masculine culture</b> and challenges who wears make-up.</p></div></div>
- <p>Using <b>Hall</b>: a dominant reading of the Score advert accepts that buying it brings power, control and sex appeal; an <b>oppositional</b> reading sees its macho ideas as damaging to men and presenting women as passive and decorative.</p>`},
- {t:'write',id:'w_masc',p:'What links can you make between the Score advert (1967) and Kiss of the Vampire (1963)? Think about how women are positioned and what that says about the 1960s.',rows:4,model:`<p>Both products are from a <b>patriarchal</b> 1960s industry and use women’s bodies to sell: the Score women and the blonde victim are <b>decorative and sexualised</b>, there to be looked at (Mulvey). But Kiss of the Vampire is more <b>contradictory</b>: its female vampire takes power over a man, perhaps reflecting <b>anxieties</b> about women’s liberation that the Score advert simply ignores. Both show how representations are shaped by the <b>historical context</b> in which they were made.</p>`}
-]},
-{id:'comparative',L:4,title:'Comparative texts presentation',walt:'To compare the set poster with another horror poster.',blocks:[
- {t:'text',h:`<h3>Presentation task</h3>
- <p>Create a detailed presentation comparing Kiss of the Vampire with another horror poster that is either:</p>
- <ul><li><b>Historical</b> (for example <i>The Evil of Frankenstein</i>, 1964, or <i>Blood from the Mummy’s Tomb</i>, 1971), or</li>
- <li><b>Contemporary</b>, but using different codes and conventions (for example <i>Let Me In</i>, 2010, or <i>What We Do in the Shadows</i>, 2014).</li></ul>
- <p>Discuss how <b>media language</b> creates meaning and how <b>representations</b> position audiences. Apply relevant media language and representation theorists. Use all your notes, your factsheet and your textbook (pages 66 to 67).</p>`},
- {t:'cards',items:[
-  ['Slide 1 · The posters','Both posters, the films’ release dates, producers and genre.'],
-  ['Slide 2 · Media language','Title, typography, colour, image, composition: similarities and differences.'],
-  ['Slide 3 · Genre','Neale’s repetition and difference: what has stayed the same, what has changed?'],
-  ['Slide 4 · Representation','Gender, victims and monsters: conform or subvert?'],
-  ['Slide 5 · Context','How each poster reflects the time it was made.'],
-  ['Slide 6 · Theory and audience','Barthes, Lévi-Strauss, Hall, van Zoonen, Gauntlett; preferred and oppositional readings.']]},
- {t:'write',id:'w_compare',p:'Plan your comparison: which poster have you chosen, and what are the three biggest differences from Kiss of the Vampire?',rows:5}
-]},
 {id:'exam-ml',L:4,title:'Exam practice: media language',walt:'To apply media language analysis to an unseen film poster.',blocks:[
  {t:'statement',h:'Question 2 is based on an unseen film poster for Let Me In, released in 2010. Explore how codes and conventions create meaning in this film poster. [15]'},
  {t:'tip',h:'<b>Find the poster:</b> your teacher will show you the <i>Let Me In</i> (2010) poster, or search for it online. Spend 5 minutes annotating before you write.'},
  {t:'text',h:`<h3>Writing frame</h3><ul><li>Open with the genre and purpose of the poster.</li><li>Visual codes: the main image, costume, expression, setting, with connotations.</li><li>Technical codes: colour, lighting, composition.</li><li>Language: title, typography, tagline, billing.</li><li>Theory: Barthes (enigma, semantic codes), Neale (repetition and difference), Lévi-Strauss.</li><li>Conclude: how the codes combine to create meaning and appeal to the audience.</li></ul>`},
  {t:'write',id:'w_letmein',p:'Plan or draft your answer here.',rows:8}
 ]},
-{id:'exam-rep',L:4,title:'Exam practice: representation',walt:'To answer an extended question on representation.',blocks:[
- {t:'statement',h:'Discuss the choices that have been made about representations of gender and genre in the Kiss of the Vampire film poster. [15]'},
- {t:'text',h:`<p>In your answer, you must consider:</p><ul><li>how gender and genre are represented through processes of <b>selection and combination</b></li><li><b>reasons</b> for the choices made in the representation of gender</li><li><b>how far</b> the representations relate to relevant contexts.</li></ul>
- <p class="saved">In the real exam, you would also be given an <b>unseen</b> text to compare. For now, start with the set product.</p>`},
- {t:'write',id:'w_exam',p:'Write your answer (aim for 25 to 30 minutes).',rows:12},
- {t:'reveal',label:'Show the indicative content',h:`<ul><li><b>Selection and combination:</b> pale, revealing dresses; the passive blonde victim held by one arm; the dominant dark-haired vampire with a kneeling man; the fearful male vampire; Gothic iconography of bats, castle and moon.</li><li><b>Genre:</b> the vampire and monster-movie conventions (repetition), plus the difference of a powerful female vampire and the romantic “kiss” (Neale).</li><li><b>Reasons:</b> to appeal to a 1960s audience through spectacle and sexuality; the male gaze of a male-dominated industry; the marketing value of a new twist.</li><li><b>Context:</b> women’s liberation, the pill (1960), equal pay legislation in the US (1963): older stereotypes and new “male fears” both encoded.</li><li><b>How far:</b> a judgement that the poster reflects a society in transition. The subversion is real, but contained within a horror narrative where the powerful woman is a monster.</li><li><b>Theory:</b> Hall (stereotypes, shared conceptual map), van Zoonen (co-antagonist and social change), Gauntlett (role models), Mulvey.</li></ul>
- <p><b>Top band (13 to 15):</b> excellent, detailed analysis; perceptive judgements about how far representations relate to contexts, fully supported by specific detail from the poster.</p>`},
+{id:'end-unit',L:4,title:'End of unit question: representation',walt:'To compare representations in the set product and an unseen product, under timed conditions.',blocks:[
+ {t:'text',h:`<p>In the exam, Section A asks you to compare a set product with an <b>unseen</b> product. Treat this poster as your unseen text.</p>
+ <div class="tip"><b>Timing:</b> 10 minutes analysing the unseen and making notes, then 30 minutes writing your response.</div>`},
+ {t:'img',src:S('cmp-vampire-academy'),cap:'Unseen practice text: Vampire Academy (2014)',narrow:1},
+ {t:'statement',h:'Compare the representations of gender in the Vampire Academy film poster and the Kiss of the Vampire film poster. [30]'},
+ {t:'text',h:`<p>In your answer, you must consider:</p><ul><li>the <b>similarities and differences</b> in the representations of gender</li><li>how the representations convey <b>values and attitudes</b></li><li><b>how far</b> the representations reflect their historical and cultural contexts.</li></ul>`},
+ {t:'write',id:'w_unseen_notes',p:'10 minutes: annotate the unseen poster. What do you notice about the women, the men, the colour, the tagline and the genre?',rows:5},
+ {t:'write',id:'w_eou',p:'30 minutes: write your response.',rows:14},
+ {t:'reveal',label:'Show the indicative content (read it after you have written your answer)',h:`<ul><li><b>Similarities:</b> both are vampire posters that place <b>women at the centre</b> and use their bodies and glamour to sell the film; both mix horror with another genre (romance in “Kiss”; teen comedy in “They suck at school”).</li><li><b>Differences:</b> Kiss of the Vampire splits women into a passive victim and a monstrous, powerful vampire; Vampire Academy shows young women as <b>confident, in control and in a group</b>, with men behind them. Painted illustration versus photography; dark Gothic palette versus bright pink and black.</li><li><b>Values and attitudes:</b> in 1963, female power is presented as a <b>threat</b> to men (“male fears”); in 2014, it is <b>normalised</b> and aspirational for a teenage female audience, though the women are still glamorised and on display.</li><li><b>Contexts, “how far”:</b> 1960s women’s liberation, the pill and equal pay campaigns, against a 2010s context of young adult franchises (Twilight, The Hunger Games) with female leads. Both reflect their time, but neither fully escapes the <b>male gaze</b>.</li><li><b>Theory:</b> Hall (stereotypes), van Zoonen (gender as constructed; changing over time), Gauntlett (role models and fluid identities), bell hooks, Mulvey.</li></ul>
+ <p><b>Top band:</b> excellent, detailed analysis of both posters; detailed, appropriate comparisons; perceptive judgements about how far the representations relate to their contexts, fully supported by specific detail.</p>`},
+ {t:'tip',h:'<b>Peer assess:</b> swap with a partner. Use the indicative content and the mark scheme to give each other a band and one target.'},
  {t:'end',h:'<h3>End of the unit</h3><p>Well done. Screenshot your results card on the next step and post it on Google Classroom.</p>'}
 ]},
 {id:'results',L:4,title:'Your results',walt:'',blocks:[
@@ -472,7 +548,7 @@ const STEPS=[
 ];
 
 /* ───────── engine ───────── */
-const KEY='kotv-lessons-v1';
+const KEY='kotv-lessons-v2';
 let ST={cur:0,done:{},res:{},notes:{},scale:{}};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)ST=Object.assign(ST,s)}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}};
