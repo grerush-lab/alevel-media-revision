@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kiss of the Vampire — Guided Lessons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1a16; --paper:#f5f0e8; --card:#fdf8f0; --border:#d8d0c0;
+    --muted:#6f6656; --gold:#b8860b; --gold-d:#8a6408; --accent:#c0392b;
+    --green:#2e7d32; --red:#b3261e; --purple:#6b21a8;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.55;}
+  header{position:sticky;top:0;z-index:30;background:rgba(245,240,232,.95);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--border);padding:.6rem 1.1rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
+  header .back-link{font-family:'IBM Plex Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:20px;padding:4px 10px;white-space:nowrap;}
+  header .back-link:hover{border-color:var(--gold);color:var(--gold-d);}
+  header .brand{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;}
+  header .crumb{font-family:'IBM Plex Mono',monospace;font-size:.66rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);}
+  .chips{margin-left:auto;display:flex;gap:.4rem;flex-wrap:wrap}
+  .chip{font-family:'IBM Plex Mono',monospace;background:#fff;border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:.78rem;color:var(--gold-d);font-weight:600;white-space:nowrap}
+  .layout{max-width:1220px;margin:0 auto;display:grid;grid-template-columns:290px minmax(0,1fr);gap:1.6rem;padding:1.2rem 1.1rem 3rem;}
+  /* map */
+  nav.map{position:sticky;top:64px;align-self:start;max-height:calc(100vh - 80px);overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:.8rem .7rem 1rem;}
+  .map-prog{height:6px;background:#eadfca;border-radius:4px;overflow:hidden;margin:.2rem .3rem .8rem}
+  .map-prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .3s}
+  .map h4{font-family:'IBM Plex Mono',monospace;font-size:.66rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin:.9rem .3rem .35rem}
+  .map h4:first-of-type{margin-top:.2rem}
+  .map button{display:flex;gap:.5rem;align-items:flex-start;width:100%;text-align:left;font:inherit;font-size:.86rem;background:none;border:0;border-radius:8px;padding:.38rem .45rem;cursor:pointer;color:var(--ink);line-height:1.3}
+  .map button:hover{background:#f1e7d3}
+  .map button.on{background:var(--ink);color:var(--paper)}
+  .map .tick{flex:none;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);display:grid;place-items:center;font-size:.7rem;margin-top:1px;background:#fff;color:#fff}
+  .map button.done .tick{background:var(--green);border-color:var(--green)}
+  .map button.on .tick{border-color:var(--gold)}
+  .map .notes-btn{margin-top:.9rem;justify-content:center;border:1px dashed var(--gold);color:var(--gold-d);font-weight:600}
+  .map-toggle{display:none}
+  /* main */
+  main{min-width:0}
+  .hero{background:var(--accent);color:#fff;border-radius:14px;padding:1.1rem 1.3rem;margin-bottom:1.1rem;}
+  .hero .meta{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:2px;opacity:.92;}
+  .hero h1{font-family:'Syne',sans-serif;font-weight:800;margin:.15rem 0 .35rem;font-size:1.6rem;line-height:1.15;}
+  .hero p{margin:.35rem 0 0;font-size:.94rem}
+  .hero a{color:#fff;font-weight:700}
+  .step-head{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;margin:.2rem 0 .3rem}
+  .step-kick{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:700}
+  h2.step-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.65rem;line-height:1.15;margin:.1rem 0 .7rem}
+  .walt{background:#fff;border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:10px;padding:.55rem .8rem;font-size:.9rem;margin:.4rem 0 1rem}
+  .walt b{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-d);margin-right:.4rem}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.95rem 1.1rem;margin:.9rem 0;}
+  .card h3{font-family:'Syne',sans-serif;font-size:1.05rem;margin:.1rem 0 .5rem;color:var(--accent);}
+  .card p{margin:.45rem 0;font-size:.95rem}
+  .card ul,.card ol{margin:.35rem 0;padding-left:1.2rem}.card li{margin:.3rem 0;font-size:.94rem}
+  .kw{background:#f3e9d2;border-bottom:1px solid var(--gold);padding:0 3px;border-radius:3px;font-weight:600}
+  .theory{display:inline-block;background:#efe7f7;border:1px solid #cdb8e6;color:var(--purple);border-radius:6px;padding:1px 7px;font-size:.8rem;font-weight:600}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem;margin:.6rem 0}
+  .mini{background:#fff;border:1px solid var(--border);border-top:4px solid var(--gold);border-radius:10px;padding:.7rem .85rem}
+  .mini h4{font-family:'Syne',sans-serif;margin:.05rem 0 .3rem;font-size:.98rem}
+  .mini p{margin:.2rem 0;font-size:.9rem}
+  .tip{background:#fff7e0;border:1px solid #ecd28b;border-radius:10px;padding:.6rem .85rem;font-size:.9rem;margin:.8rem 0}
+  .tip b{color:var(--gold-d)}
+  figure.shot{margin:.7rem 0;text-align:center}
+  figure.shot img,.row img,.gal img{cursor:zoom-in}
+  figure.shot img{max-width:100%;height:auto;border:1px solid var(--border);border-radius:10px;box-shadow:0 2px 10px rgba(60,40,10,.1)}
+  figure.shot.narrow img{max-width:420px;width:100%}
+  figcaption{font-size:.76rem;color:var(--muted);margin-top:.35rem;font-family:'IBM Plex Mono',monospace;line-height:1.35}
+  .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.6rem;margin:.7rem 0}
+  .row figure{margin:0;text-align:center}
+  .row img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;border:1px solid var(--border)}
+  .row.tall img{aspect-ratio:auto;max-height:300px;object-fit:contain;background:#fff}
+  .gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.45rem;margin:.6rem 0}
+  .gal figure{margin:0}
+  .gal img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px;border:1px solid var(--border);display:block}
+  .gal figcaption{font-size:.66rem;margin-top:.15rem}
+  .video{position:relative;aspect-ratio:16/9;background:#111;border-radius:12px;overflow:hidden;margin:.7rem 0;display:grid;place-items:center}
+  .video button{font:inherit;font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;background:var(--accent);color:#fff;border:0;border-radius:30px;padding:.75rem 1.4rem;cursor:pointer}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video .vsub{position:absolute;bottom:.7rem;left:0;right:0;text-align:center;color:#cfc6b6;font-family:'IBM Plex Mono',monospace;font-size:.72rem}
+  /* activities */
+  .act{background:#fbf6ec;border:1px solid var(--border);border-left:5px solid var(--accent);border-radius:12px;padding:.9rem 1.05rem;margin:1rem 0}
+  .act>h3{font-family:'Syne',sans-serif;font-size:1rem;margin:.05rem 0 .55rem;color:var(--accent);display:flex;gap:.45rem;align-items:center}
+  .act>h3 .tag{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;background:var(--accent);color:#fff;border-radius:4px;padding:2px 6px}
+  .act .prompt{font-size:.93rem;margin:.1rem 0 .6rem}
+  .q{margin:.6rem 0 1rem}.qt{font-weight:600;margin:0 0 .45rem;font-size:.94rem}
+  .q img.qimg{display:block;max-width:360px;width:100%;border-radius:8px;border:1px solid var(--border);margin:.2rem 0 .5rem}
+  .opts{display:flex;flex-direction:column;gap:.4rem}
+  .opts button{text-align:left;font:inherit;font-size:.91rem;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.5rem .7rem;cursor:pointer}
+  .opts button:hover:not(:disabled){border-color:var(--gold);background:#fffdf7}
+  .opts button:disabled{cursor:default}
+  .ok{background:#e6f4ea!important;border-color:var(--green)!important;color:#1b5e20}
+  .no{background:#fbe7e5!important;border-color:var(--red)!important;color:#8c1d16}
+  .fb{font-size:.86rem;margin-top:.35rem;font-weight:600}
+  .fb.y{color:var(--green)}.fb.n{color:var(--red)}
+  .sitem{background:#fff;border:1px solid var(--border);border-radius:8px;padding:.5rem .7rem;margin:.4rem 0;display:flex;gap:.6rem;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:.91rem}
+  .sbtns{display:flex;gap:.3rem;flex-wrap:wrap}
+  .sbtns button{font:inherit;font-size:.78rem;background:var(--ink);color:#fff;border:0;border-radius:6px;padding:.35rem .6rem;cursor:pointer}
+  .sbtns button:hover{background:var(--accent)}
+  .verdict{font-size:.82rem;font-weight:700}
+  .mrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:.6rem;align-items:center;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.5rem .7rem;margin:.4rem 0;font-size:.91rem}
+  .mrow img{width:100%;max-width:220px;border-radius:6px;display:block}
+  select{font:inherit;font-size:.88rem;padding:.35rem .4rem;border:1px solid var(--border);border-radius:6px;background:#fff;max-width:100%}
+  .gaps{font-size:.95rem;line-height:2.1;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.6rem .8rem}
+  .gaps select{padding:.15rem .3rem}
+  textarea{width:100%;font:inherit;font-size:.92rem;border:1px solid var(--border);border-radius:8px;padding:.55rem .7rem;background:#fff;resize:vertical;line-height:1.45}
+  textarea:focus,select:focus{outline:2px solid var(--gold);outline-offset:1px}
+  .wlabel{font-weight:600;font-size:.92rem;margin:.7rem 0 .3rem}
+  .saved{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--muted)}
+  .reveal-btn{font:inherit;font-size:.84rem;background:none;border:1px dashed var(--gold);color:var(--gold-d);border-radius:6px;padding:.35rem .75rem;cursor:pointer;margin-top:.45rem}
+  .model{display:none;margin-top:.55rem;padding:.7rem .85rem;background:#f3e9d2;border-radius:8px;font-size:.92rem}
+  .model.show{display:block}.model p{margin:.35rem 0}.model ul{margin:.3rem 0;padding-left:1.15rem}
+  .scale{display:flex;gap:.35rem;flex-wrap:wrap;margin:.4rem 0 .5rem}
+  .scale button{flex:1 1 90px;font:inherit;font-size:.8rem;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.45rem .4rem;cursor:pointer}
+  .scale button.sel{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .statement{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;background:#fff;border-left:5px solid var(--purple);padding:.6rem .8rem;border-radius:0 8px 8px 0;margin:.3rem 0 .6rem}
+  .stepnav{display:flex;justify-content:space-between;gap:.6rem;margin:1.6rem 0 .5rem;flex-wrap:wrap}
+  .stepnav button{font:inherit;font-weight:700;border-radius:10px;padding:.7rem 1.1rem;cursor:pointer;font-size:.95rem}
+  .prev{background:#fff;border:1px solid var(--border);color:var(--ink)}
+  .next{background:var(--ink);border:0;color:var(--paper);margin-left:auto}
+  .next:hover{background:var(--accent)}
+  .lesson-end{background:var(--ink);color:var(--paper);border-radius:14px;padding:1rem 1.2rem;margin:1.2rem 0}
+  .lesson-end h3{font-family:'Syne',sans-serif;margin:.1rem 0 .3rem;color:#e9c46a}
+  .res-big{font-family:'Syne',sans-serif;font-weight:800;font-size:2.4rem;color:var(--gold-d);line-height:1}
+  .miss{background:#fbe7e5;border-left:3px solid var(--red);border-radius:6px;padding:.45rem .7rem;margin:.35rem 0;font-size:.9rem}
+  .btn{display:inline-block;font:inherit;font-weight:700;font-size:.9rem;background:var(--gold);color:#fff;border:0;border-radius:8px;padding:.55rem 1rem;text-decoration:none;cursor:pointer;margin:.3rem .3rem 0 0}
+  .btn.alt{background:#fff;color:var(--gold-d);border:1px solid var(--gold)}
+  .lb{position:fixed;inset:0;background:rgba(10,8,6,.88);z-index:60;display:grid;place-items:center;padding:16px;cursor:zoom-out}
+  .lb img{max-width:100%;max-height:88vh;border-radius:6px}
+  .lb p{color:#eee;font-family:'IBM Plex Mono',monospace;font-size:.8rem;text-align:center;margin:.5rem 0 0}
+  @media (max-width:980px){
+    .layout{grid-template-columns:minmax(0,1fr);gap:.8rem}
+    nav.map{position:static;max-height:none;display:none}
+    nav.map.open{display:block}
+    .map-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;font:inherit;font-weight:700;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.65rem .9rem;cursor:pointer}
+  }
+  @media (max-width:560px){
+    h2.step-title{font-size:1.3rem}.hero h1{font-size:1.3rem}
+    .mrow{grid-template-columns:minmax(0,1fr)}
+    header .crumb{display:none}
+  }
+  @media print{header,nav.map,.map-toggle,.stepnav,.video{display:none!important}.layout{display:block}.model{display:block}}
+</style>
+</head>
+<body>
+<header>
+  <a class="back-link" href="index.html#recaps" title="Back to Set Text Recaps hub">&#8592; Recaps Hub</a>
+  <span class="brand">A Level Media</span>
+  <span class="crumb">Component 1 · Advertising &amp; Marketing · Guided lessons</span>
+  <span class="chips"><span class="chip" id="progChip">Step 1 / 1</span><span class="chip" id="scoreChip">Score: 0 / 0</span></span>
+</header>
+
+<div class="layout">
+  <div>
+    <button class="map-toggle" id="mapToggle" aria-expanded="false">&#9776; Lesson map <span id="mapToggleNote" class="saved"></span></button>
+    <nav class="map" id="map" aria-label="Lesson map"></nav>
+  </div>
+  <main id="main">
+    <div class="hero">
+      <div class="meta">Set text · Kiss of the Vampire (Hammer, 1963) · 5 guided lessons</div>
+      <h1>Kiss of the Vampire — the full lessons, step by step</h1>
+      <p>Everything we cover in class, in order: read each part, try the activities, then check against the model answers. Your notes save on this device and you can download them at the end. Want the quick version? Open the <a href="kiss-of-the-vampire.html">Kiss of the Vampire recap</a>.</p>
+    </div>
+    <div id="step" aria-live="polite"></div>
+  </main>
+</div>
+
+<script>
+/* ───────── content ───────── */
+const A='kotv_assets/';
+const S=n=>A+n+'.jpg';
+const YT={suspiria:'dYNqV-u5MEI',lovewitch:'no1ja_T19kc',context:'yH1EOGR3DlI',dracula:'ZTbY0BgIRMk',mummy:'nTnkLTRR6v8'};
+
+const LESSONS=['Lesson 1 · Film poster conventions & Hammer','Lesson 2 · Context & genre','Lesson 3 · Media language & theory','Lesson 4 · Representation','Lesson 5 · Comparison & exam practice'];
+
+const STEPS=[
+/* ═════════ LESSON 1 ═════════ */
+{id:'start',L:0,title:'Start here: what you need to know',walt:'To recognise and explain key conventions used in film posters to specify a genre.',blocks:[
+ {t:'img',src:S('poster'),cap:'The set product: Kiss of the Vampire film poster (1963)',narrow:1},
+ {t:'text',h:`<h3>Where Kiss of the Vampire fits in the exam</h3>
+ <p>The Kiss of the Vampire poster is studied for <b>Component 1, Section A: Advertising and marketing</b>.</p>
+ <ul><li>The focus areas are <span class="kw">media language</span> and <span class="kw">representation</span>, plus the <span class="kw">media contexts</span> (historical, social, cultural) of the poster.</li>
+ <li>There is <b>no Section B</b> (industries and audiences) study for this product.</li>
+ <li>In the exam, you could be asked to <b>compare</b> it with an <b>unseen</b> product, such as another film poster or an advert.</li></ul>
+ <p>We study it alongside <b>Tide</b> and <b>Super. Human.</b>: three products from very different times, so context matters.</p>`},
+ {t:'sort',id:'exam',title:'Is it on the exam for this text?',prompt:'Tap whether each topic would be tested for Kiss of the Vampire.',b:['Yes: Section A','No: not for this text'],items:[
+  ['How the title typography creates meaning',0],['How women are represented in the poster',0],['How the 1960s context is reflected in the poster',0],['Comparing the poster with an unseen film poster',0],
+  ['Who owns Hammer Films today and how it is funded',1],['How audiences interact with the film online',1]]},
+ {t:'tip',h:'<b>Homework from class:</b> in your pre-reading book, read pages 14 to 17 on Hammer Films. Your <a href="factsheets/full/Kiss%20of%20Vampire.pdf" target="_blank" rel="noopener">Kiss of the Vampire factsheet</a> is also on the hub.'}
+]},
+{id:'conventions',L:0,title:'Codes and conventions of film posters',walt:'To recognise and explain key conventions used in film posters to specify a genre.',blocks:[
+ {t:'text',h:`<p>Film posters are a form of <b>marketing</b>. They have a very short time to tell an audience the <b>genre</b>, the <b>stars</b> and the <b>tone</b> of a film, and to make them want to see it. Studios often go through many versions of a poster before choosing the final one.</p>
+ <h3>The conventions to look for</h3>
+ <div class="grid2">
+ <div class="mini"><h4>Title and typography</h4><p>The audience must recognise and remember the film’s name. The font often signals the genre.</p></div>
+ <div class="mini"><h4>Main focal image</h4><p>The central image: usually the stars, a key moment or a symbol of the story.</p></div>
+ <div class="mini"><h4>Tagline / slogan</h4><p>A short line that hints at the story or sets an enigma.</p></div>
+ <div class="mini"><h4>Star billing</h4><p>Star names, usually in order of fame, to attract fans.</p></div>
+ <div class="mini"><h4>Billing block</h4><p>The small print: director, producer, writer, studio.</p></div>
+ <div class="mini"><h4>Institution logo</h4><p>The studio or distributor, which can signal quality or genre.</p></div>
+ <div class="mini"><h4>Reviews and quotes</h4><p>Star ratings and critics’ praise to reassure the audience.</p></div>
+ <div class="mini"><h4>Release date and rating</h4><p>When to see it, and who it is suitable for.</p></div>
+ <div class="mini"><h4>Auteur reference</h4><p>“From the director of…”, using a past success to sell the film.</p></div></div>`},
+ {t:'write',id:'w_conv',p:'In pairs, or on your own: write down the features you think every film poster needs, and why. For example: Title — so the audience can recognise and remember the film’s name.',rows:4,model:`<ul><li><b>Title:</b> the audience can recognise and remember the film. Its typography signals genre.</li><li><b>Main image:</b> shows the stars, characters or a key moment, so the audience can predict the story.</li><li><b>Star billing:</b> fans of the stars will want to see it.</li><li><b>Tagline:</b> creates an enigma or hints at the narrative.</li><li><b>Logo:</b> the studio’s reputation reassures the audience.</li><li><b>Billing block:</b> credits the people who made it, a legal and industry convention.</li><li><b>Release date and rating:</b> tells the audience when, and whether it suits them.</li></ul>`},
+ {t:'match',id:'conv',title:'Find it on Kiss of the Vampire',prompt:'Match each convention to how it appears on the set poster.',pairs:[
+  ['Title and typography','Large, cracked, “wooden” capitals, with blood dripping from the V'],
+  ['Main focal image','A painted scene of two vampires and their two victims'],
+  ['Star billing','Clifford Evans, Noel Willman, Edward de Souza, Jennifer Daniel, Barry Warren'],
+  ['Institution logo','The Universal Release roundel, bottom right'],
+  ['Billing block','“Screenplay by John Elder · Directed by Don Sharp…”'],
+  ['Tagline','There isn’t one: an unusual choice']]},
+ {t:'row',imgs:[[S('title'),'Title and typography'],[S('billing'),'Star billing'],[S('credits'),'Billing block and logo']]}
+]},
+{id:'genre-posters',L:0,title:'How can you tell the genre from a poster?',walt:'To understand and analyse how film posters are targeted to specific audience members.',blocks:[
+ {t:'text',h:`<p>Audiences recognise a genre from a poster through <span class="kw">mise-en-scène</span> (costume, props, setting, expression, colour) and <span class="kw">technical codes</span> (lighting, composition, typography). These choices also <b>target</b> the poster at particular audiences, who already know and enjoy the genre.</p>`},
+ {t:'sort',id:'genre',title:'Which genre does each sign suggest?',prompt:'Decide which genre each sign most strongly suggests.',b:['Horror','Romance','Action'],items:[
+  ['Blood dripping from the title lettering',0],['Bats against a full moon',0],['A couple gazing into each other’s eyes, soft lighting',1],['A pastel colour palette and a handwritten font',1],
+  ['An explosion behind a running hero',2],['A hero holding a gun in a low-angle shot',2]]},
+ {t:'text',h:`<h3>Write a PEE paragraph</h3>
+ <p><b>Question:</b> How can an audience understand the genre of a film by looking at a film poster? Pick <b>two</b> codes and conventions. <i>Extension: link key terms to audience and genre.</i></p>
+ <p class="saved">Writing frame: <i>Through the use of mise-en-scène and technical codes, the audience is made aware of the genre of the film. For example, the poster for ‘<b>title</b>’ is associated with the genre <b>…</b>. As the <b>…</b>, suggests <b>…</b>. Additionally, the <b>…</b></i></p>`},
+ {t:'write',id:'w_pee',p:'Write your PEE paragraph about the Kiss of the Vampire poster.',rows:6,model:`<p>Through the use of mise-en-scène and technical codes, the audience is made aware of the genre of the film. For example, the poster for ‘Kiss of the Vampire’ is associated with the <b>horror</b> genre, specifically the Gothic vampire sub-genre. As the <b>red bats and the blood dripping from the “V” of the title</b> suggest, the film will be violent and dangerous, and the blood connotes the vampire’s thirst. Additionally, the <b>castle silhouetted against a full moon</b> and the <b>low-key, high-contrast lighting</b> are iconography the audience will recognise from earlier vampire films, so fans of the genre know exactly what pleasures to expect.</p>`}
+]},
+{id:'hammer',L:0,title:'Who were Hammer Films?',walt:'To explore how Kiss of the Vampire fits within its industry context.',blocks:[
+ {t:'row',imgs:[[S('hammer-dracula'),'A Hammer Dracula poster: Christopher Lee, blood and bold type'],[S('horror-iconography'),'Hammer’s style: saturated colour, the scream, the “blood-show”']]},
+ {t:'text',h:`<p><span class="kw">Hammer Film Productions</span> was founded in <b>November 1934</b> in London, and is one of the oldest film companies in the world.</p>
+ <ul><li>Hammer is <b>synonymous with British horror</b>, after defining the genre with classics such as <i>The Curse of Frankenstein</i> (1957), <i>Dracula</i> (1958) and <i>The Mummy</i> (1959), which spawned many sequels.</li>
+ <li>In its most successful years, Hammer <b>dominated</b> the horror market, with worldwide distribution, partly thanks to partnerships with major US studios such as <b>Universal</b> and Warner Bros.</li>
+ <li>Hammer had the rights to remake Universal’s classic “monster movies”.</li>
+ <li>It has a back catalogue of nearly <b>300</b> titles, and has been paid homage to in films from <i>Frankenweenie</i> to <i>Jurassic Park</i>.</li>
+ <li>Its films from the late 1950s to the mid-1970s are known as <b>“Hammer Horror”</b>: stylish, Gothic and in vivid colour.</li></ul>`},
+ {t:'video',id:YT.dracula,label:'Watch the trailer for Hammer’s Dracula (1958)'},
+ {t:'video',id:YT.mummy,label:'Watch the trailer for Hammer’s The Mummy (1959)'},
+ {t:'write',id:'w_hammer',p:'Homework from class: find out key information about Hammer Horror. List at least five films, describe the style of their posters, say what type of films they were, and add any other interesting information.',rows:6,model:`<ul><li><b>Films:</b> The Curse of Frankenstein (1957), Dracula (1958), The Mummy (1959), The Curse of the Werewolf (1961), Kiss of the Vampire (1963), The Evil of Frankenstein (1964), Taste the Blood of Dracula (1970), Blood from the Mummy’s Tomb (1971).</li><li><b>Poster style:</b> painted, not photographic; saturated reds; large dramatic titles; screaming, sexualised female victims; the monster dominant in the frame; star names prominent.</li><li><b>Type of film:</b> Gothic horror, often period-set, with more blood and sexuality than the Universal films of the 1930s.</li><li><b>Other:</b> Christopher Lee and Peter Cushing were its biggest stars; Hammer won the Queen’s Award for Industry in 1968 for its export earnings.</li></ul>`},
+ {t:'mcq',id:'hammer',title:'Quick check',items:[
+  {q:'When and where was Hammer founded?',o:['1934, in London','1958, in Hollywood','1963, in Bristol','1920, in New York'],a:0,f:'Hammer was founded in November 1934, in London.'},
+  {q:'Why did Hammer enjoy worldwide success?',o:['Partnerships with major US studios for distribution','It only made films for television','It was owned by the BBC','It made films in black and white only'],a:0,f:'US partners such as Universal and Warner Bros gave Hammer worldwide distribution.'},
+  {q:'What is Hammer best known for?',o:['British Gothic horror','Musicals','Westerns','Children’s cartoons'],a:0,f:'Hammer is synonymous with British horror: Dracula, Frankenstein, The Mummy.'}]},
+ {t:'end',h:'<h3>End of Lesson 1</h3><p>You know the conventions of film posters and who Hammer were. Next: the 1960s context and genre theory.</p>'}
+]},
+
+/* ═════════ LESSON 2 ═════════ */
+{id:'starter-genre',L:1,title:'Starter: how is genre established?',walt:'To explore the context of the horror genre in the 1960s.',blocks:[
+ {t:'video',id:YT.suspiria,label:'Watch the opening scene of Suspiria'},
+ {t:'write',id:'w_suspiria',p:'Make three bullet points about how genre is established in the opening.',rows:4,model:`<ul><li><b>Setting and weather:</b> a stormy night, isolation and darkness signal danger.</li><li><b>Colour and lighting:</b> saturated reds and blues with harsh shadow create unease.</li><li><b>Sound:</b> an unsettling, loud soundtrack builds tension before anything happens.</li><li><b>Character:</b> a young woman alone and vulnerable, a conventional horror victim.</li></ul>`},
+ {t:'text',h:`<h3>Success criteria</h3><ul><li>I can explore the context of the horror genre in the 1960s.</li><li>I can explore how Kiss of the Vampire fits within its industry and historical context.</li></ul>`}
+]},
+{id:'decade',L:1,title:'What makes it look like the 1960s?',walt:'To explore the context of the horror genre in the 1960s.',blocks:[
+ {t:'img',src:S('poster'),cap:'Look closely: what clues suggest the 1960s?',narrow:1},
+ {t:'write',id:'w_clues',p:'This poster is from the 1960s. What clues suggest this decade?',rows:4,model:`<ul><li>A <b>painted illustration</b> instead of a photograph: colour photography and printing were expensive and slow, and illustration gave artists freedom to show the themes expressively.</li><li>The <b>“In Eastman Color”</b> box: colour was still a selling point, as many films were black and white.</li><li><b>Costume and hair:</b> the women’s styles and the full-skirted dresses.</li><li>A <b>busy composition</b> with lots of figures and no tagline.</li><li>A <b>billing block</b> of names across the bottom in a style typical of the era.</li></ul>`},
+ {t:'video',id:YT.lovewitch,label:'Watch the trailer for The Love Witch'},
+ {t:'reveal',label:'What decade was The Love Witch made in?',h:`<p><i>The Love Witch</i> was released in <b>2016</b>. It deliberately <b>pays homage</b> to 1960s horror: it was shot on 35mm film with saturated Technicolor-style colours, period costumes and set design, and theatrical acting. This shows how recognisable the 1960s horror “look” still is, a form of <span class="kw">intertextuality</span>.</p>`},
+ {t:'mcq',id:'illus',title:'Quick check',items:[
+  {q:'Why did the poster use a painted illustration rather than a photograph?',o:['Colour photography and printing were expensive and slow, and illustration was more expressive','Photographs of the actors were not allowed','Hammer only employed painters','Photography had not been invented'],a:0,f:'Colour film photography needed developing and was costly; illustration also gave creative freedom.'},
+  {q:'How important were posters in the 1960s compared with trailers?',o:['Posters were still the main way to reach a wide audience','Trailers on TV had replaced posters','Posters were banned','Neither was used'],a:0,f:'Trailers had only just started appearing on TV (for example Psycho, 1960), so posters were still the main marketing tool.'}]}
+]},
+{id:'product-context',L:1,title:'Product context',walt:'To explore how Kiss of the Vampire fits within its industry and historical context.',blocks:[
+ {t:'video',id:YT.context,label:'Watch: Kiss of the Vampire (Sharp, 1963), product context'},
+ {t:'text',h:`<ul><li><i>Kiss of the Vampire</i> was directed by <b>Don Sharp</b> and released on <b>11 September 1963</b>.</li>
+ <li>It was produced by <span class="kw">Hammer Film Productions</span> and distributed by <b>J. Arthur Rank</b> and <b>Universal</b>.</li>
+ <li>It was intended as a sequel to Hammer’s <i>Dracula</i> (1958), but the script <b>never mentions Stoker’s character</b>. This was perhaps to avoid comparisons with <b>Christopher Lee</b>, who starred in the original and did not appear in this film.</li>
+ <li>By 1963, Hammer had also had success with <i>The Mummy</i> and <i>Frankenstein</i> franchises. Universal, the US distributor, had its own early success with monster movies in the 1930s.</li></ul>`},
+ {t:'gaps',id:'pc',title:'Fill the gaps',text:'Kiss of the Vampire was produced by [[Hammer|Universal|Rank]] and distributed by Rank and [[Universal|Warner Bros|Paramount]]. It was directed by [[Don Sharp|Christopher Lee|John Elder]] in [[1963|1958|1973]]. It never names [[Dracula|Frankenstein|the Mummy]], perhaps to avoid comparison with [[Christopher Lee|Clifford Evans|Peter Cushing]].'}
+]},
+{id:'historical',L:1,title:'Historical, social and political context',walt:'To explore how Kiss of the Vampire fits within its historical context.',blocks:[
+ {t:'text',h:`<h3>1963: what was happening?</h3>
+ <div class="grid2">
+ <div class="mini"><h4>Culture</h4><p>The early stages of <b>Beatlemania</b>; the “swinging sixties”; <i>Doctor Who</i> began; Marvel Comics was booming.</p></div>
+ <div class="mini"><h4>Politics</h4><p>The <b>assassination of JFK</b>; Cold War fears after the Cuban Missile Crisis (1962).</p></div>
+ <div class="mini"><h4>Women</h4><p>The Soviet Union sent the <b>first woman into space</b>, Valentina Tereshkova. The US passed <b>equal pay</b> legislation in 1963.</p></div>
+ <div class="mini"><h4>Sexual revolution</h4><p>The <b>contraceptive pill</b> was introduced in 1960 (on the NHS from 1961), the start of women’s sexual liberation.</p></div></div>
+ <p>More women than ever were entering paid work, and 1960s feminists were campaigning for <b>equal pay</b>, an <b>end to sexual harassment</b> and more equality between men and women.</p>
+ <div class="tip"><b>Key idea:</b> horror reflects the <b>fears of society</b> at the time it was made.</div>`},
+ {t:'write',id:'w_fears',p:'Could any of this historical context be relevant to horror films released at the time? Which fears might a 1960s vampire film reflect?',rows:4,model:`<ul><li><b>Fear of change in gender roles:</b> as women gained sexual and economic freedom, a powerful, predatory female vampire could reflect “male fears” of women challenging male dominance.</li><li><b>Fear of sexuality:</b> the vampire’s “kiss” mixes desire and danger, at a time of sexual revolution.</li><li><b>Fear of the outsider and of invasion:</b> Cold War anxieties about being taken over and corrupted.</li><li><b>Fear of sudden death and loss of control:</b> JFK’s assassination shocked the world.</li></ul>`},
+ {t:'sort',id:'ctx',title:'Which type of context?',prompt:'Sort each fact into the type of context it belongs to.',b:['Historical / political','Social','Cultural'],items:[
+  ['The assassination of JFK',0],['The Cuban Missile Crisis and Cold War fears',0],
+  ['Women entering paid work in greater numbers',1],['The contraceptive pill and the sexual revolution',1],
+  ['Beatlemania and the swinging sixties',2],['Audiences familiar with monster-movie posters',2]]},
+ {t:'scale',id:'s_fears',s:'“Horror reflects the fears of the society that produces it.”',p:'To what extent do you agree? Use Kiss of the Vampire and any other horror film you know.'}
+]},
+{id:'cultural',L:1,title:'Cultural context: 1960s monster-movie posters',walt:'To explore the context of the horror genre in the 1960s.',blocks:[
+ {t:'text',h:`<p>A 1960s audience would be familiar with the codes and conventions of <b>“monster movie”</b> posters: the composition, the fonts, and the representation of “the monster” and its (usually <b>female</b>) victims. Look at other horror posters from the era: <i>The Evil of Frankenstein</i> (1964), <i>Blood from the Mummy’s Tomb</i> (1971), and Hammer’s Dracula films.</p>`},
+ {t:'row',imgs:[[S('hammer-dracula'),'Hammer Dracula'],[S('horror-iconography'),'Vampire Circus'],[S('poster'),'Kiss of the Vampire']]},
+ {t:'write',id:'w_monster',p:'Write a list of possible conventions of 1960s horror and monster-movie posters. What do they have in common?',rows:5,model:`<ul><li>A <b>painted</b>, dramatic main image rather than a photograph.</li><li>The <b>monster</b> large and dominant in the frame, often looming over a victim.</li><li>A <b>screaming or fainting young woman</b>, sexualised with revealing clothing.</li><li>Saturated <b>red</b> for blood against dark, gloomy backgrounds.</li><li>Huge, often <b>jagged or dripping title</b> typography.</li><li>Gothic <b>iconography</b>: castles, the moon, bats, graveyards, fog.</li><li>Sensational <b>taglines</b> and colour process boasts.</li></ul>`},
+ {t:'gaps',id:'mm',title:'Fill the gaps',text:'A “monster movie” is a sub-genre of [[horror|comedy|romance]] where the main antagonist is a single, [[inhuman|heroic|ordinary]] monster. In the vampire sub-genre, vampires are driven by a thirst for [[blood|money|power]] and are often defeated with a wooden [[stake|sword|cross]] through the heart, or by [[sunlight|water|fire]].'}
+]},
+{id:'neale',L:1,title:'Theory alert: Steve Neale and genre',walt:'To apply genre theory to Kiss of the Vampire.',blocks:[
+ {t:'text',h:`<p><span class="theory">Steve Neale · Genre theory</span></p>
+ <p>Neale argues that <b>“genres are instances of repetition and difference”</b>, and that <b>“difference is absolutely essential to the economy of the genre”</b>. Audiences enjoy the familiar, but they also want something new.</p>
+ <div class="grid2">
+ <div class="mini"><h4>Why genre matters to audiences</h4><p>They choose texts by genre and have <b>expectations</b> that allow pleasure and prediction. They become “generic spectators” with a generic memory, so they can enjoy clichés but also appreciate variation.</p></div>
+ <div class="mini"><h4>Why genre matters to producers</h4><p><b>Standardised production</b> cuts costs. The target audience is already identified, which cuts <b>economic risk</b> and makes marketing easier.</p></div></div>`},
+ {t:'sort',id:'rd',title:'Repetition or difference?',prompt:'Is each feature of the poster a repetition of the genre, or a difference from it?',b:['Repetition','Difference'],items:[
+  ['Bats, a castle and a full moon',0],['A caped male vampire with blood on his mouth',0],['A fainting female victim in a pale dress',0],['Low-key, high-contrast lighting',0],
+  ['A powerful female vampire dominating a kneeling man',1],['“In Eastman Color”: a horror story in vivid colour',1],['The romantic word “Kiss” in a horror title',1]]},
+ {t:'write',id:'w_neale1',p:'1. How does the poster meet audiences’ expectations of 1960s horror (repetition)?',rows:3},
+ {t:'write',id:'w_neale2',p:'2. How does it sit within the social and cultural context of the time?',rows:3},
+ {t:'write',id:'w_neale3',p:'3. What does it offer audiences that is new (difference)?',rows:3,model:`<p>Applying Neale, the poster <b>repeats</b> the symbolism of Hammer and Universal horror and the wider monster and vampire genres: the bats, castle, moon, cape, blood and chiaroscuro lighting satisfy the generic spectator’s expectations. It sits in its context through the painted style and a 1960s audience’s shared knowledge of monster-movie posters. It adds <b>difference</b> through the <b>connoted power of the female vampire</b>, the implied <b>romantic narrative</b> of the “kiss”, and the selling point of <b>colour</b>, the difference that Neale calls “essential to the economy of the genre”.</p>`},
+ {t:'end',h:'<h3>End of Lesson 2</h3><p>You can explain the context and apply Neale. Next: media language in detail, with Barthes and Lévi-Strauss.</p>'}
+]},
+
+/* ═════════ LESSON 3 ═════════ */
+{id:'vatl',L:2,title:'Recap: what is media language?',walt:'To analyse the use of media language on the Kiss of the Vampire poster.',blocks:[
+ {t:'text',h:`<p><span class="kw">Media language</span> is how a product communicates meaning through the choices its producers make. For a <b>print</b> product like a poster, focus on:</p>
+ <div class="grid2">
+ <div class="mini"><h4>Visual codes</h4><p>Mise-en-scène: costume, props, setting, expression, gesture, colour, iconography.</p></div>
+ <div class="mini"><h4>Technical codes (print)</h4><p>Colour, graphics, lighting, layout and design, composition, the type of image.</p></div>
+ <div class="mini"><h4>Language</h4><p>Typography, title, star names, mode of address.</p></div>
+ <div class="mini"><h4>Mode of address</h4><p>How the poster “speaks” to its audience: direct or indirect, sensational or serious.</p></div></div>`},
+ {t:'sort',id:'codes',title:'Visual, technical or language?',prompt:'Which type of code is each example from the poster?',b:['Visual','Technical','Language'],items:[
+  ['The male vampire’s black cape',0],['The women’s pale, light dresses',0],['The kneeling man’s exposed throat',0],
+  ['Low-key, high-contrast lighting',1],['A gloomy grey, black and brown palette with red highlights',1],['Rule of thirds and a Z-line layout',1],
+  ['The cracked, serif title font',2],['“In Eastman Color”',2]]}
+]},
+{id:'deconstruct',L:2,title:'Deconstruct the poster',walt:'To analyse the use of media language on the Kiss of the Vampire poster.',blocks:[
+ {t:'img',src:S('poster'),cap:'Tap to enlarge, then work through each detail below',narrow:1},
+ {t:'gallery',title:'Details to analyse',shots:[['title','Title'],['fang','The “V” as a fang'],['bats','Bats'],['moon-castle','Moon and castle'],['left-pair','Left pair'],['right-pair','Right pair'],['eastman','Eastman Color'],['billing','Star billing']]},
+ {t:'cards',items:[
+  ['Typography','Large, capitalised <b>serif</b> font with a “wooden” texture: connotations of the coffin, or the stake that kills a vampire. Sharp, angular serifs connote violence. The cracked look makes it seem ancient and decaying. The tip of the <b>“V” drips blood</b>, like a fang.'],
+  ['Colour','A gloomy grey, black and brown palette reinforces the dark, scary conventions. <b>Red</b> highlights draw the eye to the bats, the vampire and the blood: the key signifiers of the genre.'],
+  ['Painted image','An illustration, highly conventional of the period, which links to the poster for Christopher Lee’s <i>Dracula</i>. But it is in <b>colour</b>, anchored by “In Eastman Color”, which connotes a modern telling of an old story.'],
+  ['Composition','The <b>rule of thirds</b> places the figures and skyline; the castle and moon sit on the golden ratio; a <b>Z-line</b> takes the eye from the title, through the figures, to the billing. A large amount of space is given to the title.'],
+  ['Lighting','<b>Low-key</b> lighting with stark shadows and harsh highlights connotes conflict, fear and tension.'],
+  ['Billing','Stars are listed in order of fame, highest-paid men first. <b>Clifford Evans</b> comes first, after Hammer’s 1961 hit <i>Curse of the Werewolf</i>. This is a convention of all posters of the era, not just horror.'],
+  ['No tagline','The title stands alone with no text to explain it. This is unconventional, and makes the image do the work.'],
+  ['“In Eastman Color”','Colour was a <b>unique selling point</b>. The US spelling, “Color”, signals the lucrative <b>US market</b>.']]},
+ {t:'match',id:'ml',title:'Sign to meaning',prompt:'Match each sign on the poster to what it connotes.',pairs:[
+  ['The “wooden” title font','The coffin, or the stake used to kill a vampire'],
+  ['Blood dripping from the “V”','A fang, and the vampire’s thirst for blood'],
+  ['Red highlights in a grey palette','The eye is drawn to the bats, the vampire and the blood'],
+  ['Low-key, high-contrast lighting','Conflict, fear and tension'],
+  ['The “In Eastman Color” box','Colour as a unique selling point, aimed at the US market'],
+  ['Clifford Evans billed first','Fame and box-office pull, after Curse of the Werewolf']]}
+]},
+{id:'barthes',L:2,title:'Roland Barthes: semiotics and the five codes',walt:'To analyse the use of media language on the poster using theory.',blocks:[
+ {t:'text',h:`<p><span class="theory">Roland Barthes · Semiotics</span> Media texts can have <b>multiple meanings</b>. Audiences decode these meanings through <b>five codes</b>:</p>
+ <div class="grid2">
+ <div class="mini"><h4>1. Hermeneutic (enigma)</h4><p>An element of <b>mystery</b> that makes the audience want to know more. Unanswered enigmas can frustrate audiences.</p></div>
+ <div class="mini"><h4>2. Proairetic (action)</h4><p>Elements of <b>sequential action</b> that add suspense: what will happen next?</p></div>
+ <div class="mini"><h4>3. Semantic</h4><p>A part of the text with <b>additional meaning</b>: it connotes something beyond its literal meaning.</p></div>
+ <div class="mini"><h4>4. Symbolic</h4><p>Similar to semantic, but linked to <b>symbols</b> in the text that build tension, drama or character, often through opposites.</p></div>
+ <div class="mini"><h4>5. Referential</h4><p>Something that refers to an <b>external body of knowledge</b>: cultural, scientific or historical.</p></div></div>`},
+ {t:'match',id:'barthes',title:'Apply the five codes',prompt:'Match each code to where it appears on the Kiss of the Vampire poster.',pairs:[
+  ['Hermeneutic (enigma)','What is the relationship between the two vampires, and what will happen to their victims?'],
+  ['Proairetic (action)','The bat biting the woman’s raised wrist: an attack in progress'],
+  ['Semantic','The bats, conventionally associated with vampirism and horror'],
+  ['Symbolic','The moon, darkness and the male victim’s submissive gesture'],
+  ['Referential','The Universal logo, a call-back to its classic horror films']]},
+ {t:'row',imgs:[[S('bat-wrist'),'Proairetic: the attack in progress'],[S('moon-castle'),'Symbolic: moon and darkness'],[S('credits'),'Referential: the Universal logo']]},
+ {t:'reveal',label:'Why is the word “Kiss” an enigma?',h:`<p>“Kiss” implies a <b>romantic or sexual</b> sub-plot, which makes the audience question how it fits into the expected horror narrative. With <b>no tagline</b> to explain it, the title stands alone: whose kiss, and what does it do?</p>`},
+ {t:'mcq',id:'bq',title:'Quick check',items:[
+  {q:'The bats on the poster are best described by which code?',o:['Semantic: they connote vampirism and horror','Referential: they refer to a historical event','Proairetic: they explain the plot','None: they are decorative'],a:0,f:'The factsheet applies Barthes’ semantic code to the bats and their conventional association with vampirism.'},
+  {q:'The Universal logo works as which code?',o:['Referential','Hermeneutic','Symbolic','Proairetic'],a:0,f:'It refers to external knowledge: Universal’s own classic horror films, such as Frankenstein and Dracula.'},
+  {q:'Which creates suspense through the relationship between the male and female vampires?',o:['The hermeneutic (enigma) code','The referential code','Star billing','The colour process'],a:0,f:'The enigma of the two vampires, emphasised by “kiss”, and the fate of the victims.'}]}
+]},
+{id:'levi',L:2,title:'Claude Lévi-Strauss: structuralism',walt:'To analyse the use of media language on the poster using theory.',blocks:[
+ {t:'text',h:`<p><span class="theory">Claude Lévi-Strauss · Structuralism</span> (A Level only). Texts are constructed through <b>binary oppositions</b>: pairs of opposites that create meaning, and the way they are resolved can reveal ideological values.</p>
+ <p>On the poster, the clearest opposition is in the <b>title</b> itself: the <b>romantic</b> connotations of “Kiss” against the stereotypical monster of the “Vampire”. The poster also opposes the <b>vampires</b> and their <b>victims</b>.</p>`},
+ {t:'img',src:S('title'),cap:'“Kiss” versus “Vampire”'},
+ {t:'write',id:'w_binary',p:'List as many binary oppositions on the poster as you can, with evidence.',rows:4,model:`<ul><li><b>Love / death:</b> “Kiss” against “Vampire”.</li><li><b>Predator / prey:</b> the vampires against their victims.</li><li><b>Dominant / submissive:</b> standing figures against fainting and kneeling ones.</li><li><b>Light / dark:</b> the pale dresses and the moon against the night and the cape.</li><li><b>Male / female power:</b> reversed between the two pairs.</li><li><b>Human / monster</b> and <b>safety / danger</b> across the whole image.</li></ul>`}
+]},
+{id:'analysis',L:2,title:'Independent analysis: media language',walt:'To analyse the use of media language on the Kiss of the Vampire poster.',blocks:[
+ {t:'tip',h:'<b>10 minutes:</b> make your notes or add to your annotated poster. Use your factsheet and your student book.'},
+ {t:'write',id:'w_step1',p:'Step 1 · Media language: annotate the visual codes, technical codes and language of the poster.',rows:5},
+ {t:'write',id:'w_step2a',p:'Step 2a · How is the political and social context reflected in the poster, and the fears of society?',rows:4},
+ {t:'write',id:'w_step2b',p:'Step 2b · How does Neale’s genre theory fit the poster? Use your wider knowledge of monster-movie conventions.',rows:4},
+ {t:'reveal',label:'Show a model paragraph',h:`<p>Applying Neale, the bats, castle, full moon and chiaroscuro lighting satisfy the audience’s generic expectations of 1960s Gothic horror (<b>repetition</b>), while the Eastman Color banner and Hammer’s saturated style provide the <b>difference</b> that is “essential to the economy of the genre”. Barthes’ <b>hermeneutic code</b> is created by the relationship between the two vampires, emphasised by the “kiss” of the title, and by the unknown fate of their victims. The Universal logo works as a <b>referential code</b>, rewarding cine-literate audiences with a call-back to Universal’s own Frankenstein and Dracula. Together, these choices position the audience as knowing horror fans who will enjoy the familiar pleasures of the genre, with a twist.</p>`},
+ {t:'end',h:'<h3>End of Lesson 3</h3><p>You have analysed media language with Barthes, Lévi-Strauss and Neale. Next: representation.</p>'}
+]},
+
+/* ═════════ LESSON 4 ═════════ */
+{id:'starter-rep',L:3,title:'Starter: what changed for women in the 1960s?',walt:'To explore issues of representation in the Kiss of the Vampire poster.',blocks:[
+ {t:'write',id:'w_starter',p:'What were the social changes of the 1960s that relate to the Kiss of the Vampire poster? Discuss, then write them down.',rows:3,model:`<p>The start of <b>women’s sexual liberation</b>, helped by the <b>contraceptive pill</b> (1960). More women entering <b>paid work</b>. Feminists campaigning for <b>equal pay</b> (US legislation in 1963), an <b>end to sexual harassment</b> and greater equality. This means the poster can be read as showing both <b>older</b> stereotypes of women as passive victims, and more modern <b>“male fears”</b> of women challenging male dominance.</p>`},
+ {t:'text',h:`<h3>Success criteria</h3><ul><li>I can analyse the use of media language on the poster.</li><li>I can analyse issues of representation in the poster.</li></ul>
+ <p>Remember: the poster has <b>no protagonists</b>, only vampire <b>antagonists</b> and their <b>victims</b>.</p>`}
+]},
+{id:'selection',L:3,title:'Gender: selection and combination',walt:'To explore issues of representation in the Kiss of the Vampire poster.',blocks:[
+ {t:'row',tall:1,imgs:[[S('left-pair'),'The left pair'],[S('right-pair'),'The right pair']]},
+ {t:'cards',items:[
+  ['Dress codes','Both women wear <b>pale dresses</b> of light material, which reinforce their femininity by highlighting the curves of their bodies and revealing the flesh of their upper chests and arms: <b>vulnerability</b> and <b>sexualisation</b>.'],
+  ['The left pair: conventional','The blonde woman is the stereotypical <b>passive victim</b> of the monster. She is unconscious, and his power is shown by the fact that he holds her with <b>just one arm</b>.'],
+  ['The right pair: subversive','The dark-haired woman bares her teeth, her arm raised almost <b>fist-like</b> as the bat bites her. Her male “victim” kneels, head back, <b>throat exposed</b>, while she stands over him with her hand on his shoulder: a <b>non-stereotypically dominant</b> woman.'],
+  ['The male vampire','He seems uncharacteristically <b>fearful</b>, his arm thrown across his body in a <b>defensive</b> gesture, perhaps protecting himself from the female vampire.']]},
+ {t:'sort',id:'conform',title:'Conform or subvert?',prompt:'Does each feature conform to, or subvert, 1960s gender stereotypes?',b:['Conforms','Subverts'],items:[
+  ['The blonde woman fainting in the vampire’s grip',0],['Both women young, white, slim and in figure-hugging dresses',0],['Revealed flesh of the chest and arms',0],
+  ['The dark-haired woman standing over a kneeling man',1],['The man’s exposed throat and head thrown back',1],['The male vampire’s defensive, fearful gesture',1]]},
+ {t:'gallery',title:'Look closer',shots:[['blonde-victim','Passive victim'],['male-vampire','The male vampire'],['female-vampire','The female vampire'],['kneeling-man','The male “victim”']]}
+]},
+{id:'rep-theory',L:3,title:'Representation theory',walt:'To apply representation theory to the poster.',blocks:[
+ {t:'text',h:`<p>For each theory: <b>sum it up</b>, then make <b>notes on how it applies</b> to Kiss of the Vampire.</p>`},
+ {t:'cards',items:[
+  ['Stuart Hall · Representation','Representation is the production of meaning through language and signs, using a <b>“shared conceptual road map”</b>. The castle, bats, the vampire’s cape and dripping blood are part of this map, giving meaning to the “world” of the poster. The audience is encouraged to <b>decode</b> this familiar generic iconography. Hall also argues stereotypes reduce people to a few characteristics, often where there is an <b>inequality of power</b>.'],
+  ['David Gauntlett · Identity','The media provide <b>tools and role models</b> we use to construct our identities. Perhaps the <b>female vampire</b> acts as a role model for women struggling against male oppression, or wanting to be seen as men’s equals.'],
+  ['Liesbet van Zoonen · Feminist theory','(A Level only) Gender is <b>constructed</b> through discourse, and its meaning varies with cultural and historical context. By taking a <b>“co-antagonist”</b> role, the female vampire perhaps contributes to <b>social change</b> by showing women in non-traditional roles, though the passive victim <b>reinforces</b> the traditional ones.'],
+  ['Laura Mulvey (extension)','The <b>male gaze</b>: the camera, and the artist, position women as objects to be looked at. The revealing dresses and fainting pose invite this gaze.']]},
+ {t:'match',id:'rt',title:'Which theorist?',prompt:'Match each point about the poster to the theorist it applies.',pairs:[
+  ['The castle, bats and cape form a “shared conceptual road map”','Stuart Hall'],
+  ['The female vampire as a role model for women seeking equality','David Gauntlett'],
+  ['The co-antagonist role may contribute to social change','Liesbet van Zoonen'],
+  ['The women’s bodies are displayed for a male viewer','Laura Mulvey']]},
+ {t:'write',id:'w_rep',p:'Add representation theory to your annotations. Choose two theorists and apply each to a specific detail of the poster.',rows:5}
+]},
+{id:'audience-resp',L:3,title:'How would audiences respond?',walt:'To consider historical and contemporary audience readings of the poster.',blocks:[
+ {t:'text',h:`<p>How would audiences respond to and interpret the media language and representations? Consider <b>historical</b> (1963) and <b>contemporary</b> audiences, using Hall’s <span class="theory">Reception theory</span> and Gerbner’s <span class="theory">Cultivation theory</span>.</p>
+ <ul><li><b>Hall:</b> audiences may take a <b>preferred</b>, <b>negotiated</b> or <b>oppositional</b> reading.</li>
+ <li><b>Gerbner:</b> repeated exposure to the same representations, such as the sexualised female victim, can <b>cultivate</b> attitudes over time.</li></ul>`},
+ {t:'sort',id:'readings',title:'Which reading?',prompt:'Classify each possible audience response.',b:['Preferred','Negotiated','Oppositional'],items:[
+  ['A 1963 horror fan excited by the blood, monsters and glamorous victims',0],
+  ['A viewer who enjoys the Gothic style but finds the women’s poses dated',1],
+  ['A modern feminist who sees the fainting woman as an objectifying stereotype',2],
+  ['A 1960s woman who sees the female vampire as a thrilling, powerful figure',1]]},
+ {t:'write',id:'w_cult',p:'How might Gerbner’s cultivation theory apply to the many 1960s horror posters showing sexualised female victims?',rows:3,model:`<p>Because the image of the <b>helpless, sexualised woman</b> was repeated across so many monster-movie posters, audiences exposed to them could come to see women’s vulnerability, and their role as objects of male desire, as <b>natural</b>. Kiss of the Vampire partly reinforces this through the left pair, but also offers an alternative through the female vampire.</p>`}
+]},
+{id:'contexts-para',L:3,title:'How far do the representations relate to context?',walt:'To make judgements about representation and context.',blocks:[
+ {t:'statement',h:'How far do the representations in Kiss of the Vampire relate to relevant media contexts?'},
+ {t:'text',h:`<h3>Build your paragraph</h3><ul><li><b>Point:</b> the poster encodes two competing representations of women.</li><li><b>Evidence:</b> the passive blonde victim and the dominant female vampire.</li><li><b>Context:</b> 1960s women’s liberation, the pill, equal pay campaigns.</li><li><b>“How far”:</b> judge the balance. Is the subversion stronger, or the stereotype?</li><li><b>Theory:</b> van Zoonen or Gauntlett.</li></ul>`},
+ {t:'write',id:'w_howfar',p:'Write your paragraph independently.',rows:7,model:`<p>The representations relate <b>to a large extent</b> to their 1960s context, though in contradictory ways. The blonde woman, unconscious and held by one arm, reflects <b>older stereotypes</b> of women as passive victims of men, and her revealing dress reflects a male-dominated industry’s use of female sexuality to sell films. However, the dark-haired vampire, baring her teeth and dominating a kneeling man, reflects the <b>social changes</b> of the early 1960s: the contraceptive pill, women entering paid work and campaigns for equal pay. She can be read as an expression of <b>“male fears”</b> of women challenging male dominance. Applying <b>van Zoonen</b>, her “co-antagonist” role may contribute to social change, but the passive victim reinforces traditional roles, so the poster reflects a society <b>in transition</b> rather than one that had changed.</p>`},
+ {t:'end',h:'<h3>End of Lesson 4</h3><p>Homework: the Kiss of the Vampire recap questions (in the class folder). Next: comparison and exam practice.</p>'}
+]},
+
+/* ═════════ LESSON 5 ═════════ */
+{id:'recap-q',L:4,title:'Recap questions',walt:'To secure knowledge of the set product.',blocks:[
+ {t:'mcq',id:'rq',title:'Recap quiz',items:[
+  {q:'Who directed Kiss of the Vampire?',o:['Don Sharp','Christopher Lee','Clifford Evans','John Elder'],a:0,f:'Don Sharp directed it; John Elder wrote the screenplay.'},
+  {q:'What is “Gothic horror” in cinema?',o:['Films drawing strongly on Gothic literature, in both look and themes','Any horror film set in the present day','Horror films made in Germany','Comedies that parody horror'],a:0,f:'Gothic horror draws on Gothic literature aesthetically and thematically.'},
+  {q:'Which is NOT part of the shared conceptual map of classical vampires on the poster?',o:['A wooden stake being driven into a heart','Bats','A castle and full moon','Black capes and bloody fangs'],a:0,f:'The bats, capes, fangs, moon and castle are all shown; no stake appears, though the font hints at one.'},
+  {q:'Why is the lack of a tagline significant?',o:['It is unconventional and leaves the title to create the enigma','It was required by law','Taglines had not been invented','It shows the film was low budget'],a:0,f:'With no textual explanation, the title and image create the enigma.'},
+  {q:'Which social factor might explain the representation of the female vampire?',o:['The women’s liberation movement and second-wave feminism','The invention of television','The end of the Second World War','The launch of the internet'],a:0,f:'Women’s liberation may have influenced the poster, or it may express “male fear” of it.'}]},
+ {t:'tip',h:'<b>Extension:</b> compare the poster with the poster for <i>What We Do in the Shadows</i>, a parody of classic vampire films. What is similar and different, given the different genre and time period?'}
+]},
+{id:'masculinity',L:4,title:'Context comparison: masculinity in ads, 1960s vs today',walt:'To compare how representations reflect their historical contexts.',blocks:[
+ {t:'text',h:`<p>A MediaMag article by Helen Dugdale compares two adverts that show how far representations of gender have changed since the 1960s:</p>
+ <div class="grid2">
+ <div class="mini"><h4>Score Liquid Hair Groom (1967)</h4><p>A grinning man dressed as a hunter, held aloft on a tiger-skin by five women in sexualised costume who look up at him adoringly. The tagline “Get what you’ve always wanted” and copy about a “masculine scent”, “made by men”, celebrate <b>masculine supremacy</b> and a <b>patriarchal</b> society.</p></div>
+ <div class="mini"><h4>Maybelline “That Boss Life” (2017)</h4><p>Beauty vlogger Manny Gutierrez, Maybelline’s first male ambassador, with Shayla Mitchell. An upbeat, youthful mode of address (“Lash like a boss”) applauds the <b>breakdown of hyper-masculine culture</b> and challenges who wears make-up.</p></div></div>
+ <p>Using <b>Hall</b>: a dominant reading of the Score advert accepts that buying it brings power, control and sex appeal; an <b>oppositional</b> reading sees its macho ideas as damaging to men and presenting women as passive and decorative.</p>`},
+ {t:'write',id:'w_masc',p:'What links can you make between the Score advert (1967) and Kiss of the Vampire (1963)? Think about how women are positioned and what that says about the 1960s.',rows:4,model:`<p>Both products are from a <b>patriarchal</b> 1960s industry and use women’s bodies to sell: the Score women and the blonde victim are <b>decorative and sexualised</b>, there to be looked at (Mulvey). But Kiss of the Vampire is more <b>contradictory</b>: its female vampire takes power over a man, perhaps reflecting <b>anxieties</b> about women’s liberation that the Score advert simply ignores. Both show how representations are shaped by the <b>historical context</b> in which they were made.</p>`}
+]},
+{id:'comparative',L:4,title:'Comparative texts presentation',walt:'To compare the set poster with another horror poster.',blocks:[
+ {t:'text',h:`<h3>Presentation task</h3>
+ <p>Create a detailed presentation comparing Kiss of the Vampire with another horror poster that is either:</p>
+ <ul><li><b>Historical</b> (for example <i>The Evil of Frankenstein</i>, 1964, or <i>Blood from the Mummy’s Tomb</i>, 1971), or</li>
+ <li><b>Contemporary</b>, but using different codes and conventions (for example <i>Let Me In</i>, 2010, or <i>What We Do in the Shadows</i>, 2014).</li></ul>
+ <p>Discuss how <b>media language</b> creates meaning and how <b>representations</b> position audiences. Apply relevant media language and representation theorists. Use all your notes, your factsheet and your textbook (pages 66 to 67).</p>`},
+ {t:'cards',items:[
+  ['Slide 1 · The posters','Both posters, the films’ release dates, producers and genre.'],
+  ['Slide 2 · Media language','Title, typography, colour, image, composition: similarities and differences.'],
+  ['Slide 3 · Genre','Neale’s repetition and difference: what has stayed the same, what has changed?'],
+  ['Slide 4 · Representation','Gender, victims and monsters: conform or subvert?'],
+  ['Slide 5 · Context','How each poster reflects the time it was made.'],
+  ['Slide 6 · Theory and audience','Barthes, Lévi-Strauss, Hall, van Zoonen, Gauntlett; preferred and oppositional readings.']]},
+ {t:'write',id:'w_compare',p:'Plan your comparison: which poster have you chosen, and what are the three biggest differences from Kiss of the Vampire?',rows:5}
+]},
+{id:'exam-ml',L:4,title:'Exam practice: media language',walt:'To apply media language analysis to an unseen film poster.',blocks:[
+ {t:'statement',h:'Question 2 is based on an unseen film poster for Let Me In, released in 2010. Explore how codes and conventions create meaning in this film poster. [15]'},
+ {t:'tip',h:'<b>Find the poster:</b> your teacher will show you the <i>Let Me In</i> (2010) poster, or search for it online. Spend 5 minutes annotating before you write.'},
+ {t:'text',h:`<h3>Writing frame</h3><ul><li>Open with the genre and purpose of the poster.</li><li>Visual codes: the main image, costume, expression, setting, with connotations.</li><li>Technical codes: colour, lighting, composition.</li><li>Language: title, typography, tagline, billing.</li><li>Theory: Barthes (enigma, semantic codes), Neale (repetition and difference), Lévi-Strauss.</li><li>Conclude: how the codes combine to create meaning and appeal to the audience.</li></ul>`},
+ {t:'write',id:'w_letmein',p:'Plan or draft your answer here.',rows:8}
+]},
+{id:'exam-rep',L:4,title:'Exam practice: representation',walt:'To answer an extended question on representation.',blocks:[
+ {t:'statement',h:'Discuss the choices that have been made about representations of gender and genre in the Kiss of the Vampire film poster. [15]'},
+ {t:'text',h:`<p>In your answer, you must consider:</p><ul><li>how gender and genre are represented through processes of <b>selection and combination</b></li><li><b>reasons</b> for the choices made in the representation of gender</li><li><b>how far</b> the representations relate to relevant contexts.</li></ul>
+ <p class="saved">In the real exam, you would also be given an <b>unseen</b> text to compare. For now, start with the set product.</p>`},
+ {t:'write',id:'w_exam',p:'Write your answer (aim for 25 to 30 minutes).',rows:12},
+ {t:'reveal',label:'Show the indicative content',h:`<ul><li><b>Selection and combination:</b> pale, revealing dresses; the passive blonde victim held by one arm; the dominant dark-haired vampire with a kneeling man; the fearful male vampire; Gothic iconography of bats, castle and moon.</li><li><b>Genre:</b> the vampire and monster-movie conventions (repetition), plus the difference of a powerful female vampire and the romantic “kiss” (Neale).</li><li><b>Reasons:</b> to appeal to a 1960s audience through spectacle and sexuality; the male gaze of a male-dominated industry; the marketing value of a new twist.</li><li><b>Context:</b> women’s liberation, the pill (1960), equal pay legislation in the US (1963): older stereotypes and new “male fears” both encoded.</li><li><b>How far:</b> a judgement that the poster reflects a society in transition. The subversion is real, but contained within a horror narrative where the powerful woman is a monster.</li><li><b>Theory:</b> Hall (stereotypes, shared conceptual map), van Zoonen (co-antagonist and social change), Gauntlett (role models), Mulvey.</li></ul>
+ <p><b>Top band (13 to 15):</b> excellent, detailed analysis; perceptive judgements about how far representations relate to contexts, fully supported by specific detail from the poster.</p>`},
+ {t:'end',h:'<h3>End of the unit</h3><p>Well done. Screenshot your results card on the next step and post it on Google Classroom.</p>'}
+]},
+{id:'results',L:4,title:'Your results',walt:'',blocks:[
+ {t:'results'}]}
+];
+
+/* ───────── engine ───────── */
+const KEY='kotv-lessons-v1';
+let ST={cur:0,done:{},res:{},notes:{},scale:{}};
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)ST=Object.assign(ST,s)}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const $=s=>document.querySelector(s);
+const hashIdx=()=>{const h=(location.hash||'').slice(1);const i=STEPS.findIndex(s=>s.id===h);return i};
+
+function score(){let c=0,n=0;Object.values(ST.res).forEach(r=>{n++;if(r.c)c++});return [c,n]}
+function chips(){const [c,n]=score();$('#scoreChip').textContent='Score: '+c+' / '+n;
+  const d=STEPS.filter(s=>ST.done[s.id]).length;$('#progChip').textContent='Step '+(ST.cur+1)+' / '+STEPS.length+' · '+d+' done';}
+
+function renderMap(){
+  let h='<div class="map-prog"><i style="width:'+(100*STEPS.filter(s=>ST.done[s.id]).length/STEPS.length)+'%"></i></div>';
+  LESSONS.forEach((L,li)=>{h+='<h4>'+esc(L)+'</h4>';STEPS.forEach((s,i)=>{if(s.L!==li)return;
+    h+='<button type="button" data-go="'+i+'" class="'+(i===ST.cur?'on ':'')+(ST.done[s.id]?'done':'')+'"><span class="tick">'+(ST.done[s.id]?'✓':'')+'</span><span>'+esc(s.title)+'</span></button>'})});
+  h+='<button type="button" class="notes-btn" data-notes>⬇ Download my notes</button>';
+  $('#map').innerHTML=h;
+  $('#map').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{go(+b.dataset.go);if(innerWidth<=980){$('#map').classList.remove('open');$('#mapToggle').setAttribute('aria-expanded','false')}});
+  $('#map').querySelector('[data-notes]').onclick=downloadNotes;
+}
+
+function imgFig(src,cap,cls){return '<figure class="shot'+(cls?' '+cls:'')+'"><img src="'+src+'" alt="'+esc(cap||'')+'" loading="lazy">'+(cap?'<figcaption>'+esc(cap)+'</figcaption>':'')+'</figure>'}
+function row(imgs,tall){return '<div class="row'+(tall?' tall':'')+'">'+imgs.map(([s,c])=>'<figure><img src="'+s+'" alt="'+esc(c)+'" loading="lazy"><figcaption>'+esc(c)+'</figcaption></figure>').join('')+'</div>'}
+
+function block(b,si){
+  switch(b.t){
+  case 'text':return '<div class="card">'+b.h+'</div>';
+  case 'tip':return '<div class="tip">'+b.h+'</div>';
+  case 'statement':return '<div class="statement">'+b.h+'</div>';
+  case 'img':return imgFig(b.src,b.cap,b.narrow?'narrow':'');
+  case 'row':return row(b.imgs,b.tall);
+  case 'gallery':return '<div class="card"><h3>'+esc(b.title)+'</h3><p class="saved">Tap a screenshot to enlarge it.</p><div class="gal">'+b.shots.map(([n,c])=>'<figure><img src="'+S(n)+'" alt="'+esc(c)+'" loading="lazy"><figcaption>'+esc(c)+'</figcaption></figure>').join('')+'</div></div>';
+  case 'video':return '<div class="video" data-yt="'+b.id+'"><button type="button">▶ '+esc(b.label)+'</button><span class="vsub">Opens the video from YouTube</span></div>';
+  case 'end':return '<div class="lesson-end">'+b.h+'</div>';
+  case 'cards':return '<div class="grid2">'+b.items.map(([t,h])=>'<div class="mini"><h4>'+esc(t)+'</h4><p>'+h+'</p></div>').join('')+'</div>';
+  case 'reveal':return '<div class="act" style="border-left-color:var(--gold)"><button type="button" class="reveal-btn" data-reveal>'+esc(b.label)+'</button><div class="model">'+b.h+(b.imgs?row(b.imgs):'')+'</div></div>';
+  case 'mcq':return '<div class="act" data-mcq="'+b.id+'"><h3><span class="tag">Quiz</span>'+esc(b.title||'Quick check')+'</h3>'+b.items.map((it,i)=>{const id=b.id+'_'+i,r=ST.res[id];
+     const opts=shuf(it.o.map((o,k)=>({o,k})));
+     return '<div class="q" data-q="'+id+'">'+(it.img?'<img class="qimg" src="'+it.img+'" alt="" loading="lazy">':'')+'<p class="qt">'+esc(it.q)+'</p><div class="opts">'+opts.map(x=>{let cls='';if(r){if(x.k===it.a)cls='ok';else if(x.o===r.v)cls='no'}return '<button type="button" data-k="'+x.k+'" class="'+cls+'"'+(r?' disabled':'')+'>'+esc(x.o)+'</button>'}).join('')+'</div><div class="fb'+(r?(r.c?' y':' n'):'')+'">'+(r?(r.c?'✓ Correct. ':'✗ Not quite. ')+esc(it.f):'')+'</div></div>'}).join('')+'</div>';
+  case 'sort':return '<div class="act"><h3><span class="tag">Sort</span>'+esc(b.title)+'</h3><p class="prompt">'+esc(b.prompt)+'</p>'+b.items.map((it,i)=>{const id=b.id+'_'+i,r=ST.res[id];
+     return '<div class="sitem'+(r?(r.c?' ok':' no'):'')+'" data-s="'+id+'"><span>'+esc(it[0])+'</span>'+(r?'<span class="verdict">'+(r.c?'✓ ':'✗ → ')+esc(b.b[it[1]])+'</span>':'<span class="sbtns">'+b.b.map((bb,k)=>'<button type="button" data-k="'+k+'">'+esc(bb)+'</button>').join('')+'</span>')+'</div>'}).join('')+'</div>';
+  case 'match':{const rights=shuf(b.pairs.map(p=>p[1]));return '<div class="act"><h3><span class="tag">Match</span>'+esc(b.title)+'</h3><p class="prompt">'+esc(b.prompt)+'</p>'+b.pairs.map((p,i)=>{const id=b.id+'_'+i,r=ST.res[id];
+     return '<div class="mrow'+(r?(r.c?' ok':' no'):'')+'" data-m="'+id+'"><span><b>'+esc(p[0])+'</b></span><span>'+(r?(r.c?'✓ ':'✗ ')+esc(p[1]):'<select aria-label="Match for '+esc(p[0])+'"><option value="">Choose…</option>'+rights.map(x=>'<option>'+esc(x)+'</option>').join('')+'</select>')+'</span></div>'}).join('')+'</div>'}
+  case 'gaps':{let n=0;const html=b.text.replace(/\[\[(.+?)\]\]/g,(m,g)=>{const parts=g.split('|'),id=b.id+'_'+(n++),r=ST.res[id];
+     if(r)return '<b class="'+(r.c?'fb y':'fb n')+'">'+(r.c?'':'✗ ')+esc(parts[0])+'</b>';
+     return '<select data-g="'+id+'" data-a="'+esc(parts[0])+'"><option value="">…</option>'+shuf(parts).map(x=>'<option>'+esc(x)+'</option>').join('')+'</select>'});
+     return '<div class="act"><h3><span class="tag">Gaps</span>'+esc(b.title)+'</h3><div class="gaps">'+html+'</div></div>'}
+  case 'write':return '<div class="act" style="border-left-color:var(--ink)"><p class="wlabel">✎ '+esc(b.p)+'</p><textarea data-w="'+b.id+'" rows="'+(b.rows||3)+'" placeholder="Write your answer…">'+esc(ST.notes[b.id]||'')+'</textarea><span class="saved" data-saved="'+b.id+'">'+(ST.notes[b.id]?'Saved on this device':'')+'</span>'+(b.model?'<br><button type="button" class="reveal-btn" data-reveal>Show the model answer</button><div class="model">'+b.model+'</div>':'')+'</div>';
+  case 'scale':{const v=ST.scale[b.id];const L=['Strongly disagree','Disagree','Not sure','Agree','Strongly agree'];
+     return '<div class="act"><h3><span class="tag">Debate</span>Where do you stand?</h3><div class="statement">'+esc(b.s)+'</div><div class="scale" data-scale="'+b.id+'">'+L.map((l,k)=>'<button type="button" data-k="'+k+'" class="'+(v===k?'sel':'')+'">'+l+'</button>').join('')+'</div><p class="wlabel">✎ '+esc(b.p)+'</p><textarea data-w="'+b.id+'_why" rows="3" placeholder="Explain your view with examples…">'+esc(ST.notes[b.id+'_why']||'')+'</textarea></div>'}
+  case 'results':return resultsHTML();
+  }return '';
+}
+
+function resultsHTML(){
+  const [c,n]=score(),done=STEPS.filter(s=>ST.done[s.id]).length,wrote=Object.values(ST.notes).filter(x=>x&&x.trim()).length;
+  let miss='';STEPS.forEach(s=>s.blocks.forEach(b=>{
+    if(b.t==='mcq')b.items.forEach((it,i)=>{const r=ST.res[b.id+'_'+i];if(r&&!r.c)miss+='<div class="miss"><b>'+esc(it.q)+'</b><br>✓ '+esc(it.o[it.a])+'</div>'});
+    if(b.t==='sort')b.items.forEach((it,i)=>{const r=ST.res[b.id+'_'+i];if(r&&!r.c)miss+='<div class="miss"><b>'+esc(it[0])+'</b><br>✓ '+esc(b.b[it[1]])+'</div>'});
+    if(b.t==='match')b.pairs.forEach((p,i)=>{const r=ST.res[b.id+'_'+i];if(r&&!r.c)miss+='<div class="miss"><b>'+esc(p[0])+'</b><br>✓ '+esc(p[1])+'</div>'})}));
+  return '<div class="card" style="border:2px solid var(--gold)"><h3>Your Kiss of the Vampire results</h3><div class="res-big">'+c+' / '+n+'</div><p>Quiz, sort and match answers correct · '+done+' of '+STEPS.length+' steps complete · '+wrote+' written answers saved.</p><div class="tip"><b>Screenshot this card</b> and post it on Google Classroom.</div>'
+   +(miss?'<h3>Look at these again</h3>'+miss:(n?'<p style="color:var(--green);font-weight:700">Everything you attempted is correct.</p>':''))
+   +'<p><button type="button" class="btn" data-notes>⬇ Download my notes</button><a class="btn alt" href="kiss-of-the-vampire.html">Open the Kiss of the Vampire recap</a><a class="btn alt" href="index.html#questions">Now do the Apply step → Exam Questions</a></p>'
+   +'<p class="saved"><button type="button" class="reveal-btn" data-reset>Start again (clears this page’s answers)</button></p></div>';
+}
+
+function go(i){ST.cur=Math.max(0,Math.min(STEPS.length-1,i));save();
+  try{history.replaceState(null,'','#'+STEPS[ST.cur].id)}catch(e){}
+  render();window.scrollTo({top:0,behavior:'smooth'});}
+
+function render(){
+  const s=STEPS[ST.cur];
+  let h='<div class="step-head"><span class="step-kick">'+esc(LESSONS[s.L])+' · Step '+(STEPS.filter(x=>x.L===s.L).indexOf(s)+1)+' of '+STEPS.filter(x=>x.L===s.L).length+'</span></div><h2 class="step-title">'+esc(s.title)+'</h2>';
+  if(s.walt)h+='<div class="walt"><b>WALT</b>'+esc(s.walt)+'</div>';
+  h+=s.blocks.map(b=>block(b)).join('');
+  h+='<div class="stepnav">'+(ST.cur>0?'<button type="button" class="prev" data-prev>← Previous</button>':'')+(ST.cur<STEPS.length-1?'<button type="button" class="next" data-next>'+(ST.done[s.id]?'Next step →':'Done · next step →')+'</button>':'')+'</div>';
+  $('#step').innerHTML=h;document.querySelector('.hero').style.display=ST.cur===0?'':'none';bind();renderMap();chips();
+}
+
+function mark(id,c,v){ST.res[id]={c,v};save();chips()}
+function bind(){
+  const root=$('#step');
+  root.querySelectorAll('[data-prev]').forEach(b=>b.onclick=()=>go(ST.cur-1));
+  root.querySelectorAll('[data-next]').forEach(b=>b.onclick=()=>{ST.done[STEPS[ST.cur].id]=1;go(ST.cur+1)});
+  root.querySelectorAll('[data-reveal]').forEach(b=>b.onclick=()=>{const m=b.nextElementSibling;m.classList.toggle('show');b.textContent=m.classList.contains('show')?'Hide ▲':b.dataset.label});
+  root.querySelectorAll('[data-reveal]').forEach(b=>b.dataset.label=b.textContent);
+  root.querySelectorAll('.video').forEach(v=>v.querySelector('button').onclick=()=>{v.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+v.dataset.yt+'?autoplay=1&rel=0" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'});
+  // mcq
+  root.querySelectorAll('[data-q]').forEach(q=>{const [bid,i]=splitId(q.dataset.q);const it=findBlock(bid).items[i];
+    q.querySelectorAll('button').forEach(btn=>btn.onclick=()=>{const k=+btn.dataset.k,c=k===it.a;
+      q.querySelectorAll('button').forEach(x=>{x.disabled=true;if(+x.dataset.k===it.a)x.classList.add('ok')});if(!c)btn.classList.add('no');
+      const fb=q.querySelector('.fb');fb.className='fb '+(c?'y':'n');fb.textContent=(c?'✓ Correct. ':'✗ Not quite. ')+it.f;mark(q.dataset.q,c,it.o[k])})});
+  // sort
+  root.querySelectorAll('[data-s]').forEach(row=>{const [bid,i]=splitId(row.dataset.s);const b=findBlock(bid),it=b.items[i];
+    row.querySelectorAll('.sbtns button').forEach(btn=>btn.onclick=()=>{const k=+btn.dataset.k,c=k===it[1];
+      row.classList.add(c?'ok':'no');row.querySelector('.sbtns').outerHTML='<span class="verdict">'+(c?'✓ ':'✗ → ')+esc(b.b[it[1]])+'</span>';mark(row.dataset.s,c,k)})});
+  // match
+  root.querySelectorAll('[data-m]').forEach(row=>{const [bid,i]=splitId(row.dataset.m);const p=findBlock(bid).pairs[i];const sel=row.querySelector('select');if(!sel)return;
+    sel.onchange=()=>{if(!sel.value)return;const c=sel.value===p[1];row.classList.add(c?'ok':'no');sel.parentNode.innerHTML=(c?'✓ ':'✗ ')+esc(p[1]);mark(row.dataset.m,c,sel.value)}});
+  // gaps
+  root.querySelectorAll('[data-g]').forEach(sel=>sel.onchange=()=>{if(!sel.value)return;const c=sel.value===sel.dataset.a;const b=document.createElement('b');b.className='fb '+(c?'y':'n');b.textContent=(c?'':'✗ ')+sel.dataset.a;mark(sel.dataset.g,c,sel.value);sel.replaceWith(b)});
+  // writing
+  root.querySelectorAll('textarea[data-w]').forEach(t=>{let tm;t.oninput=()=>{ST.notes[t.dataset.w]=t.value;clearTimeout(tm);tm=setTimeout(()=>{save();const s=root.querySelector('[data-saved="'+t.dataset.w+'"]');if(s)s.textContent='Saved on this device'},400)}});
+  root.querySelectorAll('[data-scale]').forEach(sc=>sc.querySelectorAll('button').forEach(b=>b.onclick=()=>{ST.scale[sc.dataset.scale]=+b.dataset.k;save();sc.querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b))}));
+  root.querySelectorAll('[data-notes]').forEach(b=>b.onclick=downloadNotes);
+  root.querySelectorAll('[data-reset]').forEach(b=>b.onclick=()=>{if(confirm('Clear all your answers and notes on this page?')){ST={cur:0,done:{},res:{},notes:{},scale:{}};save();go(0)}});
+  // lightbox
+  root.querySelectorAll('figure img, img.qimg').forEach(im=>im.onclick=()=>{const d=document.createElement('div');d.className='lb';d.innerHTML='<div><img src="'+im.src+'" alt=""><p>'+esc(im.alt||'')+' · tap to close</p></div>';d.onclick=()=>d.remove();document.body.appendChild(d)});
+}
+function splitId(id){const k=id.lastIndexOf('_');return [id.slice(0,k),+id.slice(k+1)]}
+function findBlock(id){for(const s of STEPS)for(const b of s.blocks)if(b.id===id)return b}
+
+function downloadNotes(){
+  const L=['KISS OF THE VAMPIRE — MY LESSON NOTES','A Level Media Studies · Component 1','',''];
+  const SC=['Strongly disagree','Disagree','Not sure','Agree','Strongly agree'];
+  STEPS.forEach(s=>{const parts=[];s.blocks.forEach(b=>{
+    if(b.t==='write'&&ST.notes[b.id]&&ST.notes[b.id].trim())parts.push('Q: '+b.p+'\n'+ST.notes[b.id].trim());
+    if(b.t==='scale'&&(ST.scale[b.id]!=null||ST.notes[b.id+'_why']))parts.push('Statement: '+b.s+'\nMy view: '+(ST.scale[b.id]!=null?SC[ST.scale[b.id]]:'—')+'\n'+(ST.notes[b.id+'_why']||'').trim())});
+    if(parts.length)L.push('== '+LESSONS[s.L]+' · '+s.title+' ==','',parts.join('\n\n'),'','')});
+  if(L.length<=4)L.push('(No written answers yet.)');
+  const blob=new Blob([L.join('\n')],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='kiss-of-the-vampire-notes.txt';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+}
+
+$('#mapToggle').onclick=()=>{const m=$('#map');m.classList.toggle('open');$('#mapToggle').setAttribute('aria-expanded',m.classList.contains('open'))};
+window.addEventListener('hashchange',()=>{const i=hashIdx();if(i>=0&&i!==ST.cur){ST.cur=i;save();render()}});
+{const i=hashIdx();if(i>=0)ST.cur=i;}
+if(ST.cur>=STEPS.length)ST.cur=0;
+render();
+</script>
+</body>
+</html>
