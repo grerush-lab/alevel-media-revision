@@ -82,6 +82,7 @@
   /* activities */
   .act{background:#fbf6ec;border:1px solid var(--border);border-left:5px solid var(--accent);border-radius:12px;padding:.9rem 1.05rem;margin:1rem 0}
   .act>h3{font-family:'Syne',sans-serif;font-size:1rem;margin:.05rem 0 .55rem;color:var(--accent);display:flex;gap:.45rem;align-items:center}
+  .check>h3 .tag{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;background:var(--gold);color:#fff;border-radius:4px;padding:2px 6px;margin-right:.4rem}
   .act>h3 .tag{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;background:var(--accent);color:#fff;border-radius:4px;padding:2px 6px}
   .act .prompt{font-size:.93rem;margin:.1rem 0 .6rem}
   .q{margin:.6rem 0 1rem}.qt{font-weight:600;margin:0 0 .45rem;font-size:.94rem}
@@ -140,6 +141,24 @@
     .mrow{grid-template-columns:minmax(0,1fr)}
     header .crumb{display:none}
   }
+  .pdf-frame{width:100%;height:min(720px,80vh);border:1px solid var(--border);border-radius:10px;background:#fff;display:block}
+  .check{background:#fbf6ec;border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:12px;padding:.9rem 1.05rem;margin:1rem 0}
+  .check-prog{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--gold-d);font-weight:700;margin:.1rem 0 .6rem}
+  .cq{border-top:1px dashed var(--border);padding:.6rem 0}
+  .cq label{display:flex;gap:.6rem;align-items:flex-start;cursor:pointer;font-weight:600}
+  .cq input[type=checkbox]{width:20px;height:20px;flex-shrink:0;margin-top:2px;accent-color:var(--green)}
+  .cq .pg{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--muted);font-weight:500;margin-left:.3rem;white-space:nowrap}
+  .cq textarea{margin:.45rem 0 0 1.9rem;width:calc(100% - 1.9rem)}
+  .cq .chk{display:none;margin:.4rem 0 0 1.9rem;font-size:.86rem;color:#1b5e20;background:#e6f4ea;border-radius:8px;padding:.4rem .65rem}
+  .cq.ticked .chk{display:block}
+  .cq.ticked label{color:var(--green)}
+  .locked{border:2px dashed var(--border);border-radius:12px;padding:1rem;text-align:center;color:var(--muted);margin:1rem 0;font-weight:600}
+  .annot{border:2px solid var(--gold);border-radius:12px;padding:1rem 1.05rem;margin:1rem 0;background:#fff}
+  .annot-grid{display:grid;grid-template-columns:minmax(0,260px) 1fr;gap:1rem;align-items:start}
+  @media(max-width:700px){.annot-grid{grid-template-columns:1fr}}
+  .annot-grid figure img{width:100%;border-radius:8px;border:1px solid var(--border);cursor:zoom-in}
+  .annot ol{padding-left:1.2rem}.annot li{margin-bottom:.45rem;font-size:.92rem}
+  .annot li b{color:var(--gold-d)}
   @media print{header,nav.map,.map-toggle,.stepnav,.video{display:none!important}.layout{display:block}.model{display:block}}
 </style>
 </head>
@@ -249,8 +268,43 @@ const STEPS=[
  {t:'mcq',id:'hammer',title:'Quick check',items:[
   {q:'When and where was Hammer founded?',o:['1934, in London','1958, in Hollywood','1963, in Bristol','1920, in New York'],a:0,f:'Hammer was founded in November 1934, in London.'},
   {q:'Why did Hammer enjoy worldwide success?',o:['Partnerships with major US studios for distribution','It only made films for television','It was owned by the BBC','It made films in black and white only'],a:0,f:'US partners such as Universal and Warner Bros gave Hammer worldwide distribution.'},
-  {q:'What is Hammer best known for?',o:['British Gothic horror','Musicals','Westerns','Children’s cartoons'],a:0,f:'Hammer is synonymous with British horror: Dracula, Frankenstein, The Mummy.'}]},
- {t:'end',h:'<h3>End of Lesson 1</h3><p>You know the conventions of film posters and who Hammer were. Next: the context of the poster, genre theory and your own re-design.</p>'}
+  {q:'What is Hammer best known for?',o:['British Gothic horror','Musicals','Westerns','Children’s cartoons'],a:0,f:'Hammer is synonymous with British horror: Dracula, Frankenstein, The Mummy.'}]}
+]},
+{id:'reading',L:0,title:'Extended reading: Kiss of the Vampire in context',walt:'To use critical reading to deepen your analysis of the Kiss of the Vampire poster.',blocks:[
+ {t:'text',h:`<p>This article by <b>Jonathan Nunns</b> (Head of Media Studies, Collyer’s College) from <i>MediaMagazine</i> places the poster in the history of vampire films and of Hammer, then analyses its <span class="kw">media language</span> and <span class="kw">representation</span>. Read it all, then tick off the questions below.</p>
+ <p><a class="btn" href="factsheets/reading/MM_Extended_Reading_KoV.pdf" target="_blank" rel="noopener">Open the reading (PDF) ↗</a></p>`},
+ {t:'pdf',src:'factsheets/reading/MM_Extended_Reading_KoV.pdf',title:'MediaMagazine extended reading: Kiss of the Vampire'},
+ {t:'check',id:'kovread',title:'Tick through the reading',prompt:'Find each answer in the article and jot it down. Tick the box when you have it: you’ll see a quick check. Tick all of them to unlock the key details for your poster annotations.',
+  items:[
+   ['Who popularised the vampire, in which book and year? Which real person gave Dracula his name?','PDF p.2','Bram Stoker, <i>Dracula</i> (1897). Named after Vlad the Impaler (Vlad Dracula), a 15th-century Romanian knight.'],
+   ['How did the vampire change from <i>Nosferatu</i> (1922) to Universal’s <i>Dracula</i> (1931)?','PDF p.2','From a rat-like, inhuman, repulsive creature to a suave, exotic Eastern European Count, played by Bela Lugosi: sex appeal instead of bloodshed.'],
+   ['What did Christopher Lee’s Count in Hammer’s <i>Dracula</i> (1958) achieve?','PDF p.3','A tall, powerful, very British Count who defined the character for decades, made the antagonist the focal point and created a hugely successful franchise for Hammer.'],
+   ['<i>Kiss of the Vampire</i> is a Dracula sequel, yet never names him. What does the poster assume about its audience?','PDF p.3','That they are already familiar with the earlier Hammer vampire films, so the genre signifiers will be instantly recognised.'],
+   ['Which signifiers of the Gothic vampire sub-genre does the writer list (Neale)?','PDF p.3','Vampire bats, a remote castle, a full moon, and low-key, high-contrast chiaroscuro lighting.'],
+   ['What two meanings does the “wooden”, bloodied title font carry?','PDF p.3','Vampire lore: vampires feeding on blood, and the way to destroy them, a wooden stake through the heart.'],
+   ['What does the blood remind audiences about Hammer?','PDF p.3','That Hammer reinvented horror and was ground-breaking and controversial, pushing the limits of censorship and classification.'],
+   ['Why are the “Eastman Color” banner and its American spelling significant?','PDF p.3','The film is in vibrant, saturated colour when many films were still black and white. The US spelling shows this is a poster for the US market: Hammer had broken into the world’s most lucrative market.'],
+   ['What does the Universal logo tell the audience?','PDF p.3','Universal was the US distributor. It is also a call-back to Universal’s classic horror (<i>Frankenstein</i> and Lugosi’s <i>Dracula</i>, both 1931): “the two greatest studios in horror”.'],
+   ['Why is the poster painted rather than photographic?','PDF p.3','The technological limits of the early 1960s. Artistic rendering was the norm, and photo-real key art only came with modern computers and software.'],
+   ['How are the male vampire and the blonde victim represented?','PDF p.6','His one-handed grip shows strength. Her tight-fitting costume and exposed flesh offer male-gaze pleasure and conform to the sexist norms of the time.'],
+   ['Why is the female vampire’s representation “contradictory”? Link it to the 1960s and bell hooks.','PDF p.6','She is sexualised and on display, yet central and powerful: the male vampire recoils and her male victim is passive and faceless. As women mobilised for equality in the 1960s (bell hooks), Hammer shows female empowerment but frames feminism as a threat to patriarchal power.'],
+   ['Why does the writer say the poster matters more than the film?','PDF p.6','It is a “time capsule” of 1960s film marketing: it shows Hammer’s strengths and international success, and the shifting social norms of a time of rapid change.']
+  ],
+  unlock:{img:S('poster'),title:'Unlocked: key details to annotate on your poster',intro:'Briefly annotate your copy of the poster with these. Draw an arrow to each feature and add a few words.',items:[
+   ['Title font','“wooden” lettering + blood drip → vampire lore: drinking blood and the stake through the heart.'],
+   ['Bats, castle, full moon','Neale: repetition of Gothic vampire signifiers for an audience who knows the genre.'],
+   ['Lighting','low-key, high-contrast chiaroscuro → menace, Gothic sub-genre.'],
+   ['Blood + Hammer name','Hammer brand = most successful horror studio of the early 1960s; pushing censorship limits.'],
+   ['“Eastman Color” banner','colour as a USP; American spelling → made for the lucrative US market.'],
+   ['Universal logo','US distributor; intertextual nod to Universal’s 1931 <i>Frankenstein</i> and <i>Dracula</i>.'],
+   ['Painted artwork','technological limits of the early 1960s; illustration was the norm.'],
+   ['No protagonists','only vampire antagonists and their prey; heightened emotion = Hammer’s “rock and roll” USP.'],
+   ['Male vampire','one-handed grip = strength, but recoils from the female vampire → emasculated.'],
+   ['Blonde victim','tight costume, exposed flesh → male gaze, conventional gender norms of the time.'],
+   ['Female vampire','sexualised but central and powerful; she delivers the “kiss” → 1960s women’s liberation (bell hooks), feminism as a threat to patriarchy.'],
+   ['Male victim','head tipped back, faceless “everyman”, passive → male fears of empowered women.']
+  ]}},
+ {t:'end',h:'<h3>End of Lesson 1</h3><p>You know the conventions of film posters, who Hammer were, and the critical context of the poster. Next: the context of the poster, genre theory and your own re-design.</p>'}
 ]},
 
 /* ═════════ LESSONS 2–4 ═════════ */
@@ -549,7 +603,7 @@ const STEPS=[
 
 /* ───────── engine ───────── */
 const KEY='kotv-lessons-v2';
-let ST={cur:0,done:{},res:{},notes:{},scale:{}};
+let ST={cur:0,done:{},res:{},notes:{},scale:{},tick:{}};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)ST=Object.assign(ST,s)}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -600,10 +654,16 @@ function block(b,si){
   case 'write':return '<div class="act" style="border-left-color:var(--ink)"><p class="wlabel">✎ '+esc(b.p)+'</p><textarea data-w="'+b.id+'" rows="'+(b.rows||3)+'" placeholder="Write your answer…">'+esc(ST.notes[b.id]||'')+'</textarea><span class="saved" data-saved="'+b.id+'">'+(ST.notes[b.id]?'Saved on this device':'')+'</span>'+(b.model?'<br><button type="button" class="reveal-btn" data-reveal>Show the model answer</button><div class="model">'+b.model+'</div>':'')+'</div>';
   case 'scale':{const v=ST.scale[b.id];const L=['Strongly disagree','Disagree','Not sure','Agree','Strongly agree'];
      return '<div class="act"><h3><span class="tag">Debate</span>Where do you stand?</h3><div class="statement">'+esc(b.s)+'</div><div class="scale" data-scale="'+b.id+'">'+L.map((l,k)=>'<button type="button" data-k="'+k+'" class="'+(v===k?'sel':'')+'">'+l+'</button>').join('')+'</div><p class="wlabel">✎ '+esc(b.p)+'</p><textarea data-w="'+b.id+'_why" rows="3" placeholder="Explain your view with examples…">'+esc(ST.notes[b.id+'_why']||'')+'</textarea></div>'}
+  case 'pdf':return '<div class="card"><iframe class="pdf-frame" src="'+b.src+'#view=FitH" title="'+esc(b.title)+'" loading="lazy"></iframe><p class="saved">Can’t see the reading? <a href="'+b.src+'" target="_blank" rel="noopener">Open the PDF in a new tab</a>.</p></div>';
+  case 'check':{const T=ST.tick||{},n=b.items.filter((x,i)=>T[b.id+'_'+i]).length,all=n===b.items.length;
+     return '<div class="check" data-check="'+b.id+'"><h3><span class="tag">Read</span>'+esc(b.title)+'</h3><p class="prompt">'+esc(b.prompt)+'</p><div class="check-prog">'+n+' / '+b.items.length+' ticked</div>'
+      +b.items.map((it,i)=>{const id=b.id+'_'+i,t=T[id];return '<div class="cq'+(t?' ticked':'')+'" data-cq="'+id+'"><label><input type="checkbox"'+(t?' checked':'')+'><span>'+(i+1)+'. '+it[0]+'<span class="pg">'+esc(it[1])+'</span></span></label><textarea data-w="'+id+'" rows="2" placeholder="Your answer…">'+esc(ST.notes[id]||'')+'</textarea><div class="chk"><b>Check:</b> '+it[2]+'</div></div>'}).join('')
+      +'</div>'+(all?annotHTML(b.unlock):'<div class="locked">🔒 '+esc(b.unlock.title.replace('Unlocked: ',''))+': tick all '+b.items.length+' questions to reveal them.</div>');}
   case 'results':return resultsHTML();
   }return '';
 }
 
+function annotHTML(u){return '<div class="annot"><h3>'+esc(u.title)+'</h3><p>'+esc(u.intro)+'</p><div class="annot-grid"><figure><img src="'+u.img+'" alt="Kiss of the Vampire poster" loading="lazy"><figcaption>Tap to enlarge</figcaption></figure><ol>'+u.items.map(([k,v])=>'<li><b>'+esc(k)+':</b> '+v+'</li>').join('')+'</ol></div></div>'}
 function resultsHTML(){
   const [c,n]=score(),done=STEPS.filter(s=>ST.done[s.id]).length,wrote=Object.values(ST.notes).filter(x=>x&&x.trim()).length;
   let miss='';STEPS.forEach(s=>s.blocks.forEach(b=>{
@@ -654,8 +714,10 @@ function bind(){
   // writing
   root.querySelectorAll('textarea[data-w]').forEach(t=>{let tm;t.oninput=()=>{ST.notes[t.dataset.w]=t.value;clearTimeout(tm);tm=setTimeout(()=>{save();const s=root.querySelector('[data-saved="'+t.dataset.w+'"]');if(s)s.textContent='Saved on this device'},400)}});
   root.querySelectorAll('[data-scale]').forEach(sc=>sc.querySelectorAll('button').forEach(b=>b.onclick=()=>{ST.scale[sc.dataset.scale]=+b.dataset.k;save();sc.querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b))}));
+  root.querySelectorAll('[data-cq] input[type=checkbox]').forEach(cb=>cb.onchange=()=>{ST.tick=ST.tick||{};const id=cb.closest('[data-cq]').dataset.cq;if(cb.checked)ST.tick[id]=1;else delete ST.tick[id];save();
+    const y=scrollY;render();scrollTo(0,y)});
   root.querySelectorAll('[data-notes]').forEach(b=>b.onclick=downloadNotes);
-  root.querySelectorAll('[data-reset]').forEach(b=>b.onclick=()=>{if(confirm('Clear all your answers and notes on this page?')){ST={cur:0,done:{},res:{},notes:{},scale:{}};save();go(0)}});
+  root.querySelectorAll('[data-reset]').forEach(b=>b.onclick=()=>{if(confirm('Clear all your answers and notes on this page?')){ST={cur:0,done:{},res:{},notes:{},scale:{},tick:{}};save();go(0)}});
   // lightbox
   root.querySelectorAll('figure img, img.qimg').forEach(im=>im.onclick=()=>{const d=document.createElement('div');d.className='lb';d.innerHTML='<div><img src="'+im.src+'" alt=""><p>'+esc(im.alt||'')+' · tap to close</p></div>';d.onclick=()=>d.remove();document.body.appendChild(d)});
 }
@@ -667,6 +729,7 @@ function downloadNotes(){
   const SC=['Strongly disagree','Disagree','Not sure','Agree','Strongly agree'];
   STEPS.forEach(s=>{const parts=[];s.blocks.forEach(b=>{
     if(b.t==='write'&&ST.notes[b.id]&&ST.notes[b.id].trim())parts.push('Q: '+b.p+'\n'+ST.notes[b.id].trim());
+    if(b.t==='check')b.items.forEach((it,i)=>{const a=(ST.notes[b.id+'_'+i]||'').trim();if(a)parts.push('Q: '+it[0].replace(/<[^>]+>/g,'')+'\n'+a)});
     if(b.t==='scale'&&(ST.scale[b.id]!=null||ST.notes[b.id+'_why']))parts.push('Statement: '+b.s+'\nMy view: '+(ST.scale[b.id]!=null?SC[ST.scale[b.id]]:'—')+'\n'+(ST.notes[b.id+'_why']||'').trim())});
     if(parts.length)L.push('== '+LESSONS[s.L]+' · '+s.title+' ==','',parts.join('\n\n'),'','')});
   if(L.length<=4)L.push('(No written answers yet.)');
